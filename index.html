@@ -1112,6 +1112,7 @@ function avFetchRates(cb){fetch('https://api.exchangerate-api.com/v4/latest/USD'
           <button class="av-lang__opt active" data-lang="en">EN</button>
           <button class="av-lang__opt" data-lang="pt">PT</button>
           <button class="av-lang__opt" data-lang="es">ES</button>
+          <button class="av-lang__opt" data-lang="ar" onclick="window.location.href='/ar'">AR</button>
         </div>
       </div>
     </div>
@@ -1150,6 +1151,7 @@ function avFetchRates(cb){fetch('https://api.exchangerate-api.com/v4/latest/USD'
       <button class="av-mob__lang-btn active" data-lang="en" onclick="avLangSelect('en');document.getElementById('avM').classList.remove('open');">EN</button>
       <button class="av-mob__lang-btn" data-lang="pt" onclick="avLangSelect('pt');document.getElementById('avM').classList.remove('open');">PT</button>
       <button class="av-mob__lang-btn" data-lang="es" onclick="avLangSelect('es');document.getElementById('avM').classList.remove('open');">ES</button>
+      <button class="av-mob__lang-btn" data-lang="ar" onclick="window.location.href='/ar';">AR</button>
     </div>
   </div>
   <section class="av-hero">
@@ -1979,16 +1981,29 @@ if(lang==='pt'){
 setTimeout(function(){
   var lang=localStorage.getItem('av_lang')||'en';
   window.avApplyPricing(lang);
-  // Align Stud price with Ranch price (badge offset)
-  setTimeout(function(){
-    var badge=document.querySelector('.av-pricing__badge');
-    var stud=document.getElementById('avStudCard');
-    if(badge&&stud&&lang==='pt'){
-      var h=badge.offsetHeight+parseInt(getComputedStyle(badge).marginBottom||0);
-      stud.style.paddingTop=(parseInt(getComputedStyle(stud).paddingTop)+h)+'px';
-    }
-  },100);
+  setTimeout(function(){alignPTPrices(lang);},100);
 },500);
+
+function alignPTPrices(lang){
+  var cards=document.querySelectorAll('.av-pricing__card');
+  // Reset first
+  cards.forEach(function(c){c.style.paddingTop='';});
+  if(lang!=='pt')return;
+  // Find highest price top position
+  var prices=[];
+  cards.forEach(function(c){
+    var price=c.querySelector('.av-pricing__price');
+    if(price)prices.push({card:c,top:price.getBoundingClientRect().top});
+  });
+  var maxTop=Math.max.apply(null,prices.map(function(p){return p.top;}));
+  prices.forEach(function(p){
+    var diff=maxTop-p.top;
+    if(diff>0){
+      var cur=parseInt(getComputedStyle(p.card).paddingTop)||0;
+      p.card.style.paddingTop=(cur+diff)+'px';
+    }
+  });
+}
 // Apply PT pricing immediately on page load without waiting
 if((localStorage.getItem('av_lang')||'en')==='pt'){
   document.addEventListener('DOMContentLoaded',function(){applyPricing('pt');});
