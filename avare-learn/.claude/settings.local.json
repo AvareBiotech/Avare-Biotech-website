@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-Content *)",
+      "PowerShell(npx next build 2>&1 | Select-Object -Last 40)",
+      "PowerShell(npx next dev --port 3099 2>&1)",
+      "PowerShell(Start-Sleep -Seconds 5; curl -s -o $null -w \"%{http_code}\" \"http://localhost:3099/learn/semen-storage-handling\")",
+      "PowerShell(curl -s -o $null -w \"%{http_code}\" \"http://localhost:3000/learn/semen-storage-handling\")",
+      "PowerShell(@\\(\"temperature-conception-study\",\"pre-season-checklist\",\"semen-analysis-report\",\"ai-center-benchmark\",\"conception-rate-tracking\"\\) | ForEach-Object { $code = curl -s -o $null -w \"%{http_code}\" \"http://localhost:3000/learn/$_\"; Write-Output \"$_ = $code\" })",
+      "PowerShell(@\\(\"temperature-conception-study\",\"pre-season-checklist\",\"semen-analysis-report\",\"ai-center-benchmark\",\"conception-rate-tracking\"\\) | ForEach-Object { $resp = Invoke-WebRequest -Uri \"http://localhost:3000/learn/$_\" -UseBasicParsing; Write-Output \"$_ = $\\($resp.StatusCode\\)\" })",
+      "PowerShell(npx next build 2>&1 | Select-Object -Last 25)",
+      "PowerShell($html = \\(Invoke-WebRequest -Uri \"http://localhost:3000/learn/semen-storage-handling\" -UseBasicParsing\\).Content; @\\(\"learn-cover-img\", \"carousel-viewport\", \"carousel-track\", \"carousel-arrow\", \"carousel-header\"\\) | ForEach-Object { \"$_ = $\\($html.Contains\\($_\\)\\)\" })",
+      "PowerShell(npx next build 2>&1 | Select-Object -Last 20)",
+      "PowerShell($html = \\(Invoke-WebRequest -Uri \"http://localhost:3000/learn/semen-storage-handling\" -UseBasicParsing\\).Content; @\\(\"carousel-stage\", \"carousel-arrow-left\", \"carousel-arrow-right\", \"learn-card-dl\", \"Download\", \"learn-card-link\"\\) | ForEach-Object { \"$_ = $\\($html.Contains\\($_\\)\\)\" })",
+      "PowerShell($html = \\(Invoke-WebRequest -Uri \"http://localhost:3000/learn/semen-storage-handling\" -UseBasicParsing\\).Content; @\\(\"learn-card-dl\", \"DownloadModalDialog\", \"learn-modal-overlay\"\\) | ForEach-Object { \"$_ = $\\($html.Contains\\($_\\)\\)\" })"
+    ]
+  }
+}
