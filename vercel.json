@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/learn/:slug*", "destination": "https://avare-biotech-website-6e3d.vercel.app/learn/:slug*" },
     { "source": "/partner",           "destination": "/partner/index.html" },
     { "source": "/referal",           "destination": "/referal/index.html" },
     { "source": "/privacy-policy",    "destination": "/privacy-policy/index.html" },
