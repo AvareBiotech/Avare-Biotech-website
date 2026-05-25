@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    { "source": "/partner",           "destination": "/partner/index.html" },
+    { "source": "/referal",           "destination": "/referal/index.html" },
+    { "source": "/privacy-policy",    "destination": "/privacy-policy/index.html" },
+    { "source": "/terms-of-use",      "destination": "/terms-of-use/index.html" },
+    { "source": "/privacy-policy-ar", "destination": "/privacy-policy-ar/index.html" },
+    { "source": "/terms-of-use-ar",   "destination": "/terms-of-use-ar/index.html" },
+    { "source": "/ar",                "destination": "/ar/index.html" },
+    { "source": "/pvip",              "destination": "/pvip/index.html" },
+    { "source": "/pvip_policy",       "destination": "/privacy-policy-pvip/index.html" },
+    { "source": "/pvip_terms_of_use", "destination": "/terms-of-use-pvip/index.html" }
+  ]
+}

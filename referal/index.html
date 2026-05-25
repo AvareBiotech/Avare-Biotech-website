@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wi97i4lcbh");
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H6T6GPHFGS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-H6T6GPHFGS');
+</script>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/fav.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Access — Avare Biotech</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --font: 'Satoshi', sans-serif;
+      --bg: #0f0f0f;
+      --green: #A2A884;
+      --green-dark: #57624A;
+      --text: #F6F6F6;
+      --text-muted: rgba(246,246,246,0.5);
+      --border: rgba(255,255,255,0.08);
+      --card: rgba(255,255,255,0.03);
+    }
+    html { scroll-behavior: smooth; min-height: 100%; }
+    body {
+      font-family: var(--font); background: var(--bg); color: var(--text);
+      -webkit-font-smoothing: antialiased; min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 68px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 60px; background: rgba(15,15,15,0.85); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__logo img { height: 40px; width: auto; display: block; }
+    .nav__lang { position: relative; }
+    .nav__lang-btn {
+      font-family: var(--font); font-size: 13px; font-weight: 500;
+      color: #fff; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+      cursor: pointer; display: flex; align-items: center; gap: 5px;
+      padding: 6px 12px; border-radius: 6px; transition: background .2s;
+    }
+    .nav__lang-btn:hover { background: rgba(255,255,255,0.15); }
+    .nav__lang-menu {
+      display: none; position: absolute; top: calc(100% + 6px); right: 0;
+      background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 4px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      z-index: 9999; min-width: 64px;
+    }
+    .nav__lang-menu.open { display: block; }
+    .nav__lang-opt {
+      font-family: var(--font); font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,0.5); background: none; border: none; cursor: pointer;
+      width: 100%; text-align: center; padding: 7px 12px; border-radius: 6px;
+      display: block; transition: background .2s, color .2s;
+    }
+    .nav__lang-opt:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .nav__lang-opt.active { color: #fff; font-weight: 700; }
+
+    /* MAIN */
+    .main {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 100px 20px 40px; position: relative; overflow: hidden;
+    }
+    .main::before {
+      content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(162,168,132,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* CARD */
+    .card {
+      width: 100%; max-width: 680px; position: relative; z-index: 1;
+    }
+    .card__logo {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 32px;
+    }
+    .card__logo img { height: 36px; }
+    .card__title {
+      font-size: 50px; font-weight: 900; line-height: 1.1;
+      letter-spacing: -0.03em; margin-bottom: 8px; text-align: center;
+    }
+    .card__title .accent {
+      background: linear-gradient(90deg, #A2A884 0%, #57624A 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .card__sub {
+      font-size: 18px; color: var(--text-muted); margin-bottom: 36px; line-height: 1.5; text-align: center;
+    }
+
+    /* FORM */
+    .form { display: flex; flex-direction: column; gap: 12px; }
+    .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field__label {
+      font-size: 15px; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; color: rgba(246,246,246,0.35);
+    }
+    .field__input {
+      width: 100%; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+      color: var(--text); padding: 13px 16px;
+      font-family: var(--font); font-size: 15px; outline: none;
+      transition: border-color .2s, background .2s;
+      -webkit-appearance: none;
+    }
+    .field__input::placeholder { color: rgba(246,246,246,0.25); }
+    .field__input:focus { border-color: rgba(162,168,132,0.5); background: rgba(255,255,255,0.07); }
+    .field__input:-webkit-autofill,
+    .field__input:-webkit-autofill:focus {
+      -webkit-box-shadow: 0 0 0 1000px #1a1a1a inset !important;
+      -webkit-text-fill-color: #F6F6F6 !important;
+    }
+    select.field__input {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A2A884' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
+    }
+    select.field__input option { background: #1a1a1a; color: #F6F6F6; }
+
+    .submit {
+      font-family: var(--font); font-size: 15px; font-weight: 700;
+      color: #F6F6F6; background: linear-gradient(90deg, #A2A884 0%, #57624A 100%);
+      border: none; border-radius: 8px; padding: 15px 28px;
+      cursor: pointer; width: 100%; margin-top: 4px;
+      position: relative; transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(87,98,74,0.4);
+    }
+    .submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(87,98,74,0.5); }
+    .submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .submit::after {
+      content: "\2197"; position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; background: rgba(0,0,0,0.2); border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .form__note {
+      font-size: 15px; color: rgba(246,246,246,0.25); text-align: center; margin-top: 4px; line-height: 1.6;
+    }
+    .form__note a { color: var(--green); }
+
+    /* SUCCESS */
+    .success {
+      display: none; text-align: center; padding: 40px 0;
+    }
+    .success__icon {
+      width: 80px; height: 80px; background: linear-gradient(135deg, #A2A884, #57624A);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 28px; box-shadow: 0 0 0 12px rgba(162,168,132,0.1), 0 0 0 24px rgba(162,168,132,0.05);
+    }
+    .success__title {
+      font-size: 28px; font-weight: 900; letter-spacing: -0.02em; margin-bottom: 10px;
+    }
+    .success__text {
+      font-size: 15px; color: var(--text-muted); margin-bottom: 36px; line-height: 1.6;
+    }
+    .success__stores {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px;
+    }
+    .store-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #F6F6F6; color: #1B1B1B !important;
+      border-radius: 10px; padding: 12px 20px;
+      font-family: var(--font); font-size: 14px; font-weight: 700;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .store-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .store-btn svg, .store-btn img { width: 20px; height: 20px; flex-shrink: 0; }
+    .success__site {
+      font-size: 18px; color: var(--text-muted);
+    }
+    .success__site a { color: var(--green); font-weight: 600; }
+
+    /* FOOTER */
+    .footer {
+      padding: 20px 60px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .footer p { font-size: 15px; color: rgba(246,246,246,0.25); }
+
+    @media (max-width: 640px) {
+      .nav { padding: 0 20px; }
+      .main { padding: 88px 16px 32px; }
+      .card__title { font-size: 32px; }
+      .form__row { grid-template-columns: 1fr; }
+      .footer { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="https://avareit.com/" class="nav__logo">
+    <img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/49.png" alt="Avare Biotech">
+  </a>
+  <div class="nav__lang" id="langWrap">
+    <button class="nav__lang-btn" id="langBtn" onclick="toggleLang(event)">
+      EN <span style="font-size:9px;opacity:.5;">▼</span>
+    </button>
+    <div class="nav__lang-menu" id="langMenu">
+      <button class="nav__lang-opt active" onclick="setLang('en')">EN</button>
+      <button class="nav__lang-opt" onclick="setLang('pt')">PT</button>
+      <button class="nav__lang-opt" onclick="setLang('es')">ES</button>
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+  <div class="card">
+
+    <h1 class="card__title" id="formTitle">
+      Get access to the<br><span class="accent">Avare Biotech app</span>
+    </h1>
+    <p class="card__sub" id="formSub">Fill in the form below and we'll send you access to the app.</p>
+
+    <!-- FORM -->
+    <form class="form" id="accessForm">
+      <input type="hidden" name="referred_by" id="f_ref" value="">
+      <div style="position:absolute;left:-9999px;opacity:0;" aria-hidden="true">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" value="">
+      </div>
+
+      <div class="form__row">
+        <div class="field">
+          <label class="field__label" id="lbl_name">Full Name</label>
+          <input type="text" name="full_name" class="field__input" id="inp_name" placeholder="Michelle Broughton" required>
+        </div>
+        <div class="field">
+          <label class="field__label" id="lbl_email">Email</label>
+          <input type="email" name="email" class="field__input" id="inp_email" placeholder="michelle@example.com" required>
+        </div>
+      </div>
+
+      <div class="form__row">
+        <div class="field">
+          <label class="field__label" id="lbl_phone">Phone</label>
+          <input type="tel" name="phone" class="field__input" id="inp_phone" placeholder="+1 555 000 0000" required>
+        </div>
+        <div class="field">
+          <label class="field__label" id="lbl_country">Country</label>
+          <input type="text" name="country" class="field__input" id="inp_country" placeholder="South Africa" required>
+        </div>
+      </div>
+
+      <div class="form__row">
+        <div class="field">
+          <label class="field__label" id="lbl_company">Company</label>
+          <input type="text" name="company" class="field__input" id="inp_company" placeholder="Acme Farms" required>
+        </div>
+        <div class="field">
+          <label class="field__label" id="lbl_role">Role</label>
+          <input type="text" name="role" class="field__input" id="inp_role" placeholder="Veterinarian" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field__label" id="lbl_linkedin">LinkedIn Profile <span style="font-weight:400;opacity:.5;" id="lbl_optional">(optional)</span></label>
+        <input type="url" name="linkedin" class="field__input" id="inp_linkedin" placeholder="https://linkedin.com/in/yourprofile">
+      </div>
+
+      <button type="submit" class="submit" id="submitBtn">Get Access</button>
+
+      <p class="form__note" id="formNote">
+        By submitting, you agree to our
+        <a href="https://avareit.com/privacy-policy" target="_blank">Privacy Policy</a>
+        and <a href="https://avareit.com/terms-of-use" target="_blank">Terms of Use</a>.
+      </p>
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="success" id="successBlock">
+      <div class="success__icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="none"/><path d="M8 16.5l5.5 5.5 10.5-11" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="success__title" id="successTitle">You're in!</div>
+      <p class="success__text" id="successText">Thank you! Download the app and start your free trial.</p>
+      <div class="success__stores">
+        <a href="https://apps.apple.com/ae/app/avare-biotech/id6744607449" target="_blank" class="store-btn">
+          <svg viewBox="0 0 24 24" fill="#1B1B1B"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.biotech.app.android&hl=en" target="_blank" class="store-btn">
+          <img src="https://www.logo.wine/a/logo/Google_Play/Google_Play-Icon-Logo.wine.svg" alt="Google Play">
+          Google Play
+        </a>
+      </div>
+      <p class="success__site" id="successSite">
+        Visit our website <a href="https://avareit.com" target="_blank">www.avareit.com</a>
+      </p>
+      <button onclick="backToForm()" style="margin-top:24px;font-family:var(--font);font-size:15px;font-weight:500;color:rgba(246,246,246,0.5);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;margin-left:auto;margin-right:auto;transition:color .2s;" onmouseover="this.style.color='#F6F6F6'" onmouseout="this.style.color='rgba(246,246,246,0.5)'" id="backBtn">← Back to form</button>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <p id="footerCopy">© 2026 Avare Biotech. All rights reserved.</p>
+</footer>
+
+<script>
+// ── BACK TO FORM ─────────────────────────────────────────
+function backToForm() {
+  var f = document.getElementById('accessForm');
+  var s = document.getElementById('successBlock');
+  var btn = document.getElementById('submitBtn');
+  var lang = localStorage.getItem('access_lang') || 'en';
+  var labels = {en:'Get Access', pt:'Obter Acesso', es:'Obtener Acceso'};
+  s.style.display = 'none';
+  f.reset();
+  f.style.display = 'flex';
+  f.style.flexDirection = 'column';
+  btn.disabled = false;
+  btn.textContent = labels[lang] || 'Get Access';
+  document.getElementById('formTitle').style.display = 'block';
+  document.getElementById('formSub').style.display = 'block';
+}
+
+// ── TRANSLATIONS ──────────────────────────────────────────
+var T = {
+  en: {
+    formTitle: 'Get access to the<br><span class="accent">Avare Biotech app</span>',
+    formSub: 'Fill in the form below and we\'ll send you access to the app.',
+    lbl_name: 'Full Name', lbl_email: 'Email', lbl_phone: 'Phone',
+    lbl_country: 'Country', lbl_company: 'Company', lbl_role: 'Role',
+    lbl_linkedin: 'LinkedIn Profile', lbl_optional: '(optional)',
+    submitBtn: 'Get Access',
+    formNote: 'By submitting, you agree to our <a href="https://avareit.com/privacy-policy" target="_blank">Privacy Policy</a> and <a href="https://avareit.com/terms-of-use" target="_blank">Terms of Use</a>.',
+    successTitle: 'You\'re in!',
+    successText: 'Thank you! Download the app and start your free trial.',
+    successSite: 'Visit our website <a href="https://avareit.com" target="_blank">www.avareit.com</a>',
+    backBtn: '← Back to form',
+    footerCopy: '© 2026 Avare Biotech. All rights reserved.',
+    inp_name: 'Michelle Broughton', inp_email: 'michelle@example.com',
+    inp_phone: '+1 555 000 0000', inp_country: 'South Africa',
+    inp_company: 'Acme Farms', inp_role: 'Veterinarian',
+    inp_linkedin: 'https://linkedin.com/in/yourprofile'
+  },
+  pt: {
+    formTitle: 'Acesse o<br><span class="accent">app Avare Biotech</span>',
+    formSub: 'Preencha o formulário abaixo e enviaremos o acesso ao aplicativo.',
+    lbl_name: 'Nome Completo', lbl_email: 'E-mail', lbl_phone: 'Telefone',
+    lbl_country: 'País', lbl_company: 'Empresa', lbl_role: 'Cargo',
+    lbl_linkedin: 'Perfil no LinkedIn', lbl_optional: '(opcional)',
+    submitBtn: 'Obter Acesso',
+    formNote: 'Ao enviar, você concorda com nossa <a href="https://avareit.com/privacy-policy" target="_blank">Política de Privacidade</a> e <a href="https://avareit.com/terms-of-use" target="_blank">Termos de Uso</a>.',
+    successTitle: 'Tudo certo!',
+    successText: 'Obrigado! Baixe o aplicativo e comece seu período de teste gratuito.',
+    successSite: 'Visite nosso site <a href="https://avareit.com" target="_blank">www.avareit.com</a>',
+    backBtn: '← Voltar ao formulário',
+    footerCopy: '© 2026 Avare Biotech. Todos os direitos reservados.',
+    inp_name: 'Maria Silva', inp_email: 'maria@exemplo.com',
+    inp_phone: '+55 11 00000-0000', inp_country: 'Brasil',
+    inp_company: 'Fazenda Exemplo', inp_role: 'Veterinária',
+    inp_linkedin: 'https://linkedin.com/in/seuperfil'
+  },
+  es: {
+    formTitle: 'Accede a la<br><span class="accent">app Avare Biotech</span>',
+    formSub: 'Completa el formulario y te enviaremos el acceso a la aplicación.',
+    lbl_name: 'Nombre Completo', lbl_email: 'Correo electrónico', lbl_phone: 'Teléfono',
+    lbl_country: 'País', lbl_company: 'Empresa', lbl_role: 'Cargo',
+    lbl_linkedin: 'Perfil de LinkedIn', lbl_optional: '(opcional)',
+    submitBtn: 'Obtener Acceso',
+    formNote: 'Al enviar, acepta nuestra <a href="https://avareit.com/privacy-policy" target="_blank">Política de Privacidad</a> y <a href="https://avareit.com/terms-of-use" target="_blank">Términos de Uso</a>.',
+    successTitle: '¡Listo!',
+    successText: 'Gracias. Descarga la app y comienza tu prueba gratuita.',
+    successSite: 'Visita nuestro sitio <a href="https://avareit.com" target="_blank">www.avareit.com</a>',
+    backBtn: '← Volver al formulario',
+    footerCopy: '© 2026 Avare Biotech. Todos los derechos reservados.',
+    inp_name: 'María García', inp_email: 'maria@ejemplo.com',
+    inp_phone: '+52 55 0000 0000', inp_country: 'México',
+    inp_company: 'Granja Ejemplo', inp_role: 'Veterinaria',
+    inp_linkedin: 'https://linkedin.com/in/tuperfil'
+  }
+};
+
+// ── LANG SWITCHER ─────────────────────────────────────────
+function toggleLang(e) {
+  e.stopPropagation();
+  document.getElementById('langMenu').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  if (!document.getElementById('langWrap').contains(e.target))
+    document.getElementById('langMenu').classList.remove('open');
+});
+
+function setLang(lang) {
+  document.getElementById('langMenu').classList.remove('open');
+  document.getElementById('langBtn').innerHTML = lang.toUpperCase() + ' <span style="font-size:9px;opacity:.5;">▼</span>';
+  document.querySelectorAll('.nav__lang-opt').forEach(function(b) {
+    b.classList.toggle('active', b.textContent.trim() === lang.toUpperCase());
+  });
+  try {
+    if (lang === 'en') history.replaceState(null, '', window.location.pathname + window.location.search);
+    else history.replaceState(null, '', window.location.pathname + window.location.search + '#' + lang);
+  } catch(e) {}
+
+  var t = T[lang] || T.en;
+  document.getElementById('formTitle').innerHTML = t.formTitle;
+  document.getElementById('formSub').textContent = t.formSub;
+  document.getElementById('lbl_name').textContent = t.lbl_name;
+  document.getElementById('lbl_email').textContent = t.lbl_email;
+  document.getElementById('lbl_phone').textContent = t.lbl_phone;
+  document.getElementById('lbl_country').textContent = t.lbl_country;
+  document.getElementById('lbl_company').textContent = t.lbl_company;
+  document.getElementById('lbl_role').textContent = t.lbl_role;
+  document.getElementById('lbl_linkedin').innerHTML = t.lbl_linkedin + ' <span style="font-weight:400;opacity:.5;" id="lbl_optional">' + t.lbl_optional + '</span>';
+  document.getElementById('submitBtn').textContent = t.submitBtn;
+  document.getElementById('formNote').innerHTML = t.formNote;
+  document.getElementById('successTitle').textContent = t.successTitle;
+  document.getElementById('successText').textContent = t.successText;
+  document.getElementById('successSite').innerHTML = t.successSite;
+  var bb = document.getElementById('backBtn'); if (bb && t.backBtn) bb.textContent = t.backBtn;
+  document.getElementById('footerCopy').textContent = t.footerCopy;
+  document.getElementById('inp_name').placeholder = t.inp_name;
+  document.getElementById('inp_email').placeholder = t.inp_email;
+  document.getElementById('inp_phone').placeholder = t.inp_phone;
+  document.getElementById('inp_country').placeholder = t.inp_country;
+  document.getElementById('inp_company').placeholder = t.inp_company;
+  document.getElementById('inp_role').placeholder = t.inp_role;
+  document.getElementById('inp_linkedin').placeholder = t.inp_linkedin;
+  localStorage.setItem('access_lang', lang);
+}
+
+// ── REFERRAL ──────────────────────────────────────────────
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var ref = params.get('ref');
+  if (ref) document.cookie = 'access_ref=' + encodeURIComponent(ref) + ';max-age=7776000;path=/;SameSite=Lax';
+  function getCookie(name) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  var refVal = ref || getCookie('access_ref');
+  if (refVal) document.getElementById('f_ref').value = refVal;
+})();
+
+// ── FORM SUBMIT ───────────────────────────────────────────
+(function() {
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwuKsYVg_3x3RbBnxY0RUlFjE4tldmErUWRddqPDXg4xQxsOqqT19wTeGsxRqcW5jyK/exec';
+  var form = document.getElementById('accessForm');
+  var btn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    btn.textContent = '...';
+    btn.disabled = true;
+
+    var data = Object.fromEntries(new FormData(form));
+    delete data.website;
+    data.type = 'access_form';
+
+    var img = new Image();
+    img.onload = img.onerror = function() {
+      form.style.display = 'none';
+      document.getElementById('formTitle').style.display = 'none';
+      document.getElementById('formSub').style.display = 'none';
+      document.getElementById('successBlock').style.display = 'block';
+    };
+    img.src = SCRIPT_URL + '?' + Object.entries(data).map(function(kv) {
+      return encodeURIComponent(kv[0]) + '=' + encodeURIComponent(kv[1]);
+    }).join('&');
+  });
+})();
+
+// ── INIT ──────────────────────────────────────────────────
+(function() {
+  var hash = window.location.hash.replace('#', '');
+  var saved = localStorage.getItem('access_lang') || 'en';
+  var lang = (hash === 'pt' || hash === 'es') ? hash : saved;
+  if (lang !== 'en') setLang(lang);
+})();
+</script>
+
+</body>
+</html>
