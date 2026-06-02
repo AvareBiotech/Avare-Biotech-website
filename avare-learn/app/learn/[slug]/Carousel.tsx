@@ -1,16 +1,28 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import type { Material } from "@/app/data/materials";
 import { DownloadModalDialog, useSubscribed } from "./DownloadModal";
 
 export function Carousel({ items }: { items: Material[] }) {
-  const perPage = 3;
-  const totalPages = Math.ceil(items.length / perPage);
+  const [perPage, setPerPage] = useState(3);
   const [page, setPage] = useState(0);
   const [dlMaterial, setDlMaterial] = useState<Material | null>(null);
   const closeModal = useCallback(() => setDlMaterial(null), []);
   const subscribed = useSubscribed();
+
+  useEffect(() => {
+    function updatePerPage() {
+      if (window.innerWidth < 640) setPerPage(1);
+      else if (window.innerWidth < 960) setPerPage(2);
+      else setPerPage(3);
+    }
+    updatePerPage();
+    window.addEventListener("resize", updatePerPage);
+    return () => window.removeEventListener("resize", updatePerPage);
+  }, []);
+
+  const totalPages = Math.ceil(items.length / perPage);
 
   return (
     <div className="carousel">
@@ -31,9 +43,7 @@ export function Carousel({ items }: { items: Material[] }) {
         <div className="carousel-viewport">
           <div
             className="carousel-track"
-            style={{
-              transform: `translateX(calc(-${page} * (100% + 16px)))`,
-            }}
+            style={{ transform: `translateX(calc(-${page} * (100% + 16px)))` }}
           >
             {items.map((m) => (
               <div key={m.slug} className="learn-card">
@@ -41,18 +51,14 @@ export function Carousel({ items }: { items: Material[] }) {
                   <div className="learn-card-img">{m.emoji}</div>
                   <div className="learn-card-body">
                     <div className="learn-card-tags">
-                      <span className={`tag ${m.tagClass}`}>
-                        {m.categoryLabel}
-                      </span>
+                      <span className={`tag ${m.tagClass}`}>{m.categoryLabel}</span>
                     </div>
                     <div className="learn-card-title">{m.title}</div>
                     <div className="learn-card-desc">{m.description}</div>
                   </div>
                 </a>
                 <div className="learn-card-actions">
-                  <a href={`/learn/${m.slug}`} className="learn-card-read">
-                    Read
-                  </a>
+                  <a href={`/learn/${m.slug}`} className="learn-card-read">Read</a>
                   <button
                     className="learn-card-dl"
                     onClick={() => setDlMaterial(m)}
@@ -85,7 +91,7 @@ export function Carousel({ items }: { items: Material[] }) {
         title={dlMaterial?.downloadTitle ?? ""}
         description={dlMaterial?.downloadDescription ?? ""}
         buttonText={dlMaterial?.downloadButtonText ?? "Download PDF →"}
-        pdfUrl={dlMaterial?.coverImage}
+        pdfUrl={dlMaterial?.pdfUrl}
       />
     </div>
   );
