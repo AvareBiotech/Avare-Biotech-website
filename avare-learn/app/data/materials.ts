@@ -29,40 +29,54 @@ export const materials: Material[] = [
     tagClass: "tag-guide",
     emoji: "🧊",
     description:
-      "Temperature errors during thawing cost more than any equipment failure. Here’s what actually matters.",
+      "Temperature errors during thawing cost more than any equipment failure. Here's what actually matters.",
     downloadTitle: "Download: Semen Storage & Handling Checklist",
     downloadButtonText: "Download PDF →",
     downloadDescription:
       "Enter your email to download this checklist and get free access to new content with a subscription.",
     content: [
       {
-        heading: "The problem",
+        heading: "Some mistakes are visible right away",
         paragraph:
-          "Temperature variation above 1.5°C during handling damages the protein responsible for oocyte penetration. The sperm looks normal under microscope — but it can’t fertilize.",
+          "A straw dropped on the ground. A thaw bath not heated to the right temperature. Unsterilized equipment. These mistakes are easy to fix — because you can see them. But there is another category of mistakes. The ones you cannot see at all. The semen looks normal. It moves. It passes visual evaluation. And still does not fertilize.",
       },
       {
-        heading: "10 critical steps",
+        heading: "The experiment that should not have been necessary",
+        paragraph:
+          "Luciano Penteado is the owner of Firmasa Tecnologia Para Pecuaria, one of Brazil's leading companies in artificial insemination. At an inseminator training course he first heard about the sensitivity of sperm proteins to temperature fluctuations during the transfer from the nitrogen tank to the thaw bath. And he decided to test it in the field.\n\nThe conditions were tight: same semen, same protocol, same day, same inseminators. The only variable was the number of straws pulled at one time.\n\n→ Group A: 10 straws at a time. Temperature fluctuations exceeded 1.5°C.\n→ Group B: 3 straws at a time. Temperature fluctuations stayed within 1.5°C.\n\nResult: 44% versus 56% fertilization. A 12 percentage point difference from a single handling step.",
+      },
+      {
+        heading: "Why semen looks normal but does not work",
+        paragraph:
+          "Standard visual evaluation — motility, concentration, morphology — does not show this damage. When straws are pulled in large numbers, temperature in the tank neck rises sharply. Each fluctuation triggers a chain of molecular damage. Sublethal freezing damage inevitably leads to reduced fertility in vivo — including alterations to sperm proteins responsible for fertilization. Semen can be alive and incapable of fertilization at the same time. No visual inspection will show that.",
+      },
+      {
+        heading: "What science says about the cost of careless handling",
         items: [
-          "Remove canister from nitrogen tank, work below frost line — max 10 seconds",
-          "Use precooled tweezers, transfer straw to thaw bath in 5 seconds or less",
-          "Thaw at 95°F (35°C) for 45–60 seconds in temperature-controlled bath",
-          "Pull 3 straws at a time — never 10+",
-          "Pre-warm gun to prevent cold shock",
-          "Remove straw, dry with clean towel — do not touch with bare hands",
-          "Load straw in gun, plug end first",
-          "Cut straw at right angle at semen level",
-          "Use within 5 minutes of thawing",
-          "Record: date, cow, bull, technician",
+          "Most people who work daily with frozen semen — including veterinarians — have never received formal training in safe long-term storage and handling (Stroud, 2012)",
+          "To achieve maximum fertility in an AI program, overall quality of frozen-thawed semen must be controlled at every stage of handling and distribution",
+          "Even a 2–3 second difference in thawing time at the same temperature affects the final straw temperature — and non-return rates after insemination",
         ],
       },
       {
-        heading: "Storage rules",
-        items: [
-          "Keep canisters below frost line at all times",
-          "Check nitrogen level weekly, keep above 4 inches (10 cm)",
-          "Store tank raised off ground in dry environment",
-          "Update inventory every time semen enters or exits the tank",
-        ],
+        heading: "The economics of one mistake",
+        paragraph:
+          "A cow that fails to conceive at first insemination costs the operation an additional $622 per animal — covering repeated treatment, management, and losses from an extended calving interval. In cows requiring three or more inseminations per conception, profit drops by more than $205 per year per head.\n\nTake a herd of 500 cows. At 44% conception: 220 pregnant. At 56%: 280 pregnant. Difference: 60 cows. At $205 per head in additional losses — that is $12,300 per season in direct costs alone. Not counting the missed calf or the extended calving interval.",
+      },
+      {
+        heading: "The industry's invisible problem",
+        paragraph:
+          "Despite decades of refinement in cryopreservation protocols, post-thaw fertility remains unpredictable. Visual assessment of motility and morphology does not see acrosomal protein damage. It does not see DNA fragmentation. It does not see what happened to the cell between the nitrogen tank and the insemination gun. This is why handling errors remain invisible for so long — and why a standardized protocol is not a recommendation. It is a production standard.",
+      },
+      {
+        heading: "What this means for practice",
+        paragraph:
+          "Every time the tank neck rises above the frost line, every time a straw lingers in the hand for extra seconds, every time equipment is not pre-cooled — invisible damage occurs that cannot be corrected at the next step. That damage will not show up when you look through a microscope. It will show up 35 days later — as an empty uterus on ultrasound.",
+      },
+      {
+        heading: "Download the checklist",
+        paragraph:
+          "Download "Semen Storage & Handling: 10 Critical Steps" — specific steps that protect semen at every stage of handling, from the tank to the moment of insemination.",
       },
     ],
   },
