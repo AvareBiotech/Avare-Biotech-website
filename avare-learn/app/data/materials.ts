@@ -76,7 +76,6 @@ export const materials: Material[] = [
       {
         heading: "Download the checklist",
         paragraph:
-          paragraph:
   "Download the checklist \"Semen Storage & Handling: 10 Critical Steps\" - specific steps that protect semen at every stage of handling, from the tank to the moment of insemination.",
       },
     ],
