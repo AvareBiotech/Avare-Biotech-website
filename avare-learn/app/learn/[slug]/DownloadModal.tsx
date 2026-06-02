@@ -8,23 +8,48 @@ const LEARN_SCRIPT =
 const PDF_URL =
   "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/learn-pdf/semen-storage-handling.pdf";
 
+export function useSubscribed() {
+  const [subscribed, setSubscribed] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setSubscribed(localStorage.getItem("learn_subscribed") === "1");
+    }
+  }, []);
+  return subscribed;
+}
+
 export function DownloadModalDialog({
   open,
   onClose,
   title,
   description,
   buttonText,
+  pdfUrl,
 }: {
   open: boolean;
   onClose: () => void;
   title: string;
   description: string;
   buttonText: string;
+  pdfUrl?: string;
 }) {
   const [email, setEmail] = useState("");
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const downloadUrl = pdfUrl || PDF_URL;
+
+  useEffect(() => {
+    if (open && typeof window !== "undefined") {
+      if (localStorage.getItem("learn_subscribed") === "1") {
+        setDone(true);
+      }
+    }
+    if (!open) {
+      setEmail("");
+      setSending(false);
+    }
+  }, [open]);
 
   useEffect(() => {
     if (open) {
@@ -66,16 +91,27 @@ export function DownloadModalDialog({
       // silent
     }
     setTimeout(() => {
+      localStorage.setItem("learn_subscribed", "1");
       setDone(true);
       setSending(false);
       const a = document.createElement("a");
-      a.href = PDF_URL;
-      a.download = "semen-storage-handling.pdf";
+      a.href = downloadUrl;
+      a.download = downloadUrl.split("/").pop() || "download.pdf";
       a.target = "_blank";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
     }, 700);
+  }
+
+  function handleDirectDownload() {
+    const a = document.createElement("a");
+    a.href = downloadUrl;
+    a.download = downloadUrl.split("/").pop() || "download.pdf";
+    a.target = "_blank";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
 
   return (
@@ -96,10 +132,13 @@ export function DownloadModalDialog({
             {done ? (
               <>
                 <p className="learn-success-msg">&#10003; Subscribed!</p>
-                <p className="learn-success-detail">
+                <p className="learn-success-detail" style={{ marginBottom: "16px" }}>
                   Your PDF is downloading. If it did not start,{" "}
-                  <a href={PDF_URL} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)", textDecoration: "underline" }}>click here</a>.
+                  <a href={downloadUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)", textDecoration: "underline" }}>click here</a>.
                 </p>
+                <button className="learn-lock-submit" onClick={handleDirectDownload}>
+                  {buttonText}
+                </button>
               </>
             ) : (
               <>
@@ -136,10 +175,12 @@ export function DownloadModal({
   title,
   description,
   buttonText,
+  pdfUrl,
 }: {
   title: string;
   description: string;
   buttonText: string;
+  pdfUrl?: string;
 }) {
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
@@ -155,6 +196,7 @@ export function DownloadModal({
         title={title}
         description={description}
         buttonText={buttonText}
+        pdfUrl={pdfUrl}
       />
     </>
   );
