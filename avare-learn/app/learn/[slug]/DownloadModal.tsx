@@ -14,6 +14,11 @@ export function useSubscribed() {
     if (typeof window !== "undefined") {
       setSubscribed(localStorage.getItem("learn_subscribed") === "1");
     }
+    function onSubscribe() {
+      setSubscribed(true);
+    }
+    window.addEventListener("learn_subscribed", onSubscribe);
+    return () => window.removeEventListener("learn_subscribed", onSubscribe);
   }, []);
   return subscribed;
 }
@@ -92,6 +97,7 @@ export function DownloadModalDialog({
     }
     setTimeout(() => {
       localStorage.setItem("learn_subscribed", "1");
+      window.dispatchEvent(new Event("learn_subscribed"));
       setDone(true);
       setSending(false);
       const a = document.createElement("a");
@@ -183,12 +189,13 @@ export function DownloadModal({
   pdfUrl?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const subscribed = useSubscribed();
   const close = useCallback(() => setOpen(false), []);
 
   return (
     <>
       <button className="learn-download-btn" onClick={() => setOpen(true)}>
-        {buttonText}
+        {subscribed ? "⬇ " : "🔒 "}{buttonText}
       </button>
       <DownloadModalDialog
         open={open}
