@@ -38,45 +38,45 @@ export const materials: Material[] = [
       {
         heading: "Some mistakes are visible right away",
         paragraph:
-          "A straw dropped on the ground. A thaw bath not heated to the right temperature. Unsterilized equipment. These mistakes are easy to fix — because you can see them. But there is another category of mistakes. The ones you cannot see at all. The semen looks normal. It moves. It passes visual evaluation. And still does not fertilize.",
+          "A straw dropped on the ground. A thaw bath not heated to the right temperature. Unsterilized equipment. These mistakes are easy to fix — because you can see them. But there is another category of mistakes. The ones you cannot see at all. The semen looks normal. It moves. It passes visual evaluation. And still does not fertilize. This is what the story of Luciano Penteado is about — and the field trial on 280 cows that changed the understanding of what actually drives the outcome of artificial insemination.",
       },
       {
-        heading: "The experiment that should not have been necessary",
+        heading: "The Experiment That Should Not Have Been Necessary",
         paragraph:
-          "Luciano Penteado is the owner of Firmasa Tecnologia Para Pecuaria, one of Brazil's leading companies in artificial insemination. At an inseminator training course he first heard about the sensitivity of sperm proteins to temperature fluctuations during the transfer from the nitrogen tank to the thaw bath. And he decided to test it in the field.\n\nThe conditions were tight: same semen, same protocol, same day, same inseminators. The only variable was the number of straws pulled at one time.\n\n→ Group A: 10 straws at a time. Temperature fluctuations exceeded 1.5°C.\n→ Group B: 3 straws at a time. Temperature fluctuations stayed within 1.5°C.\n\nResult: 44% versus 56% fertilization. A 12 percentage point difference from a single handling step.",
+          "Luciano Penteado is the owner of Firmasa Tecnologia Para Pecuaria, one of Brazil's leading companies in artificial insemination. Not a student. Not a theorist. A practitioner with years of experience. But it was at an inseminator training course that he first heard about the sensitivity of sperm proteins to temperature fluctuations during the transfer from the nitrogen tank to the thaw bath. And he decided to test it in the field. The experimental conditions were deliberately tight: the same semen, the same protocol, the same day, the same inseminators. The only variable was the number of straws pulled at one time.",
       },
       {
-        heading: "Why semen looks normal but does not work",
-        paragraph:
-          "Standard visual evaluation — motility, concentration, morphology — does not show this damage. When straws are pulled in large numbers, temperature in the tank neck rises sharply. Each fluctuation triggers a chain of molecular damage. Sublethal freezing damage inevitably leads to reduced fertility in vivo — including alterations to sperm proteins responsible for fertilization. Semen can be alive and incapable of fertilization at the same time. No visual inspection will show that.",
-      },
-      {
-        heading: "What science says about the cost of careless handling",
+        heading: "The test",
         items: [
-          "Most people who work daily with frozen semen — including veterinarians — have never received formal training in safe long-term storage and handling (Stroud, 2012)",
-          "To achieve maximum fertility in an AI program, overall quality of frozen-thawed semen must be controlled at every stage of handling and distribution",
-          "Even a 2–3 second difference in thawing time at the same temperature affects the final straw temperature — and non-return rates after insemination",
+          "Group A: 10 straws at a time. Temperature fluctuations exceeded 1.5 degrees C.",
+          "Group B: 3 straws at a time. Temperature fluctuations stayed within 1.5 degrees C.",
+          "Result: 44% versus 56% fertilization. A 12 percentage point difference from a single handling step.",
         ],
       },
       {
-        heading: "The economics of one mistake",
+        heading: "Why Semen Looks Normal but Does Not Work",
         paragraph:
-          "A cow that fails to conceive at first insemination costs the operation an additional $622 per animal — covering repeated treatment, management, and losses from an extended calving interval. In cows requiring three or more inseminations per conception, profit drops by more than $205 per year per head.\n\nTake a herd of 500 cows. At 44% conception: 220 pregnant. At 56%: 280 pregnant. Difference: 60 cows. At $205 per head in additional losses — that is $12,300 per season in direct costs alone. Not counting the missed calf or the extended calving interval.",
+          "This is the most uncomfortable part. Because standard visual evaluation - motility, concentration, morphology - does not show the damage being described here. When straws are pulled from the nitrogen tank in large numbers, the temperature in the neck of the vessel rises sharply. Each fluctuation triggers a chain of molecular damage. The stages of cooling, freezing, and thawing harm sperm quality and cause dramatic changes in the cells. The formation of intracellular ice crystals, osmotic injury, and structural damage from oxidative stress reduce sperm viability and motility by up to 50%, while acrosome damage directly contributes to reduced fertility. Sublethal freezing damage remains an important limitation of the cryopreservation process, inevitably leading to reduced fertility in vivo. In other words: semen can be alive and incapable of fertilization at the same time. And no visual inspection will show that.",
       },
       {
-        heading: "The industry's invisible problem",
+        heading: "What Science Says About the Cost of Careless Handling",
         paragraph:
-          "Despite decades of refinement in cryopreservation protocols, post-thaw fertility remains unpredictable. Visual assessment of motility and morphology does not see acrosomal protein damage. It does not see DNA fragmentation. It does not see what happened to the cell between the nitrogen tank and the insemination gun. This is why handling errors remain invisible for so long — and why a standardized protocol is not a recommendation. It is a production standard.",
+          "Penteado's study should not be seen as an isolated case. The scientific body of evidence accumulated over the past two decades tells the same story. Experts in bovine embryo transfer indicate that improper semen handling is likely a common cause of unfertilized ova collected from donor cows. Most people who work daily with frozen semen - including veterinarians - have never received formal training in safe long-term storage and handling. Research on Brahman bulls showed that to achieve the maximum fertility rate in an AI program, the overall quality of frozen-thawed semen in all aspects is critical. Studies show that even a 2-3 second difference in thawing time at the same temperature affects the final temperature of the straw - and this is reflected in non-return rates of cows after insemination. This is not about theoretical risks. It is about money already lost.",
       },
       {
-        heading: "What this means for practice",
+        heading: "The Economics of One Mistake",
         paragraph:
-          "Every time the tank neck rises above the frost line, every time a straw lingers in the hand for extra seconds, every time equipment is not pre-cooled — invisible damage occurs that cannot be corrected at the next step. That damage will not show up when you look through a microscope. It will show up 35 days later — as an empty uterus on ultrasound.",
+          "A 12 percentage point difference is an abstraction until you start counting money. Research shows that a cow that fails to conceive at first insemination costs the operation an additional $622 per animal - covering expenses for repeated treatment, management, and losses from an extended calving interval. Another study found that in cows requiring three or more inseminations per conception, profit drops by more than $205 per year per head. Take a herd of 500 cows. With a 44% conception rate you get 220 pregnant cows. At 56% you get 280. The difference: 60 cows that did not conceive in this cycle. At $205 per head in additional losses - that is $12,300 per season in direct costs alone, not counting the missed calf or the extended calving interval. None of those cows will come back with an obviously empty result. Some simply will not become pregnant - and that will be written off as a bad cycle, stress, or the weather. Anything but a temperature spike during straw extraction.",
       },
       {
-        heading: "Download the checklist",
+        heading: "The Industry's Invisible Problem",
         paragraph:
-  "Download the checklist \"Semen Storage & Handling: 10 Critical Steps\" - specific steps that protect semen at every stage of handling, from the tank to the moment of insemination.",
+          "The most uncomfortable thing about this topic is that the problem is systemic. Not because people are irresponsible. But because standard semen evaluation does not show functional protein damage. Despite decades of refinement in cryopreservation protocols, extenders, and additives, post-thaw fertility remains unpredictable. The molecular mechanisms driving sperm cell damage and survival during freezing and thawing are still not fully understood. Visual assessment of motility and morphology does not see acrosomal protein damage. It does not see DNA fragmentation. It does not see what happened to the cell between the nitrogen tank and the insemination gun. This is exactly why handling errors remain invisible for so long. And this is exactly why Penteado's experiment is so valuable: it translated molecular biology into concrete numbers, measured in the field, on real animals, under real conditions.",
+      },
+      {
+        heading: "What This Means for Practice",
+        paragraph:
+          "The conclusion from everything above is simple, but requires discipline. Semen is not just a liquid in a straw. It is a complex biological system sensitive to temperature changes even within 1-2 degrees. Every time the tank neck rises above the frost line, every time a straw lingers in the hand for extra seconds, every time equipment is not pre-cooled - invisible damage occurs that cannot be corrected at the next step. And that damage will not show up when you look through a microscope. It will show up 35 days later - as an empty uterus on ultrasound. A semen handling protocol is not a set of nice-to-have recommendations. It is a production standard that directly determines the financial outcome of every insemination cycle. Download the checklist below and implement it in your team's protocol today.",
       },
     ],
   },
@@ -97,7 +97,7 @@ export const materials: Material[] = [
       {
         heading: "Background",
         paragraph:
-          "Luciano Penteado, owner of Firmasa Tecnologia Para Pecuaria — one of Brazil’s leading FTAI specialists — ran a field test on 280 cows. Same semen. Same protocol. Same day. Two groups differing only in straw handling.",
+          "Luciano Penteado, owner of Firmasa Tecnologia Para Pecuaria — one of Brazil's leading FTAI specialists — ran a field test on 280 cows. Same semen. Same protocol. Same day. Two groups differing only in straw handling.",
       },
       {
         heading: "The test",
@@ -194,7 +194,7 @@ export const materials: Material[] = [
         items: [
           "Re-test with a fresh straw from the same batch before rejecting",
           "Check thawing protocol — temperature errors cause false-low motility",
-          "Compare against the bull’s historical baseline if available",
+          "Compare against the bull's historical baseline if available",
           "Consider dose adjustment rather than full batch rejection",
         ],
       },
