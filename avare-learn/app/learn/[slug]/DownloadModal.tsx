@@ -5,6 +5,9 @@ import { useState, useRef, useCallback, useEffect } from "react";
 const LEARN_SCRIPT =
   "https://script.google.com/macros/s/AKfycbwuKsYVg_3x3RbBnxY0RUlFjE4tldmErUWRddqPDXg4xQxsOqqT19wTeGsxRqcW5jyK/exec";
 
+const PDF_URL =
+  "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/learn-pdf/semen-storage-handling.pdf";
+
 export function DownloadModalDialog({
   open,
   onClose,
@@ -65,6 +68,14 @@ export function DownloadModalDialog({
     setTimeout(() => {
       setDone(true);
       setSending(false);
+      // Auto-download PDF
+      const a = document.createElement("a");
+      a.href = PDF_URL;
+      a.download = "semen-storage-handling.pdf";
+      a.target = "_blank";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }, 700);
   }
 
@@ -87,16 +98,17 @@ export function DownloadModalDialog({
               <>
                 <p className="learn-success-msg">&#10003; Subscribed!</p>
                 <p className="learn-success-detail">
-                  Download link sent to{" "}
-                  <strong style={{ color: "var(--text)" }}>{email}</strong>
+                  Your PDF is downloading. If it didn&apos;t start,{" "}
+                  
+                    href={PDF_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "var(--accent)", textDecoration: "underline" }}
+                  >
+                    click here
+                  </a>
+                  .
                 </p>
-                <button
-                  className="learn-download-btn"
-                  style={{ marginTop: 16 }}
-                  onClick={() => alert("PDF download — link coming soon")}
-                >
-                  {buttonText}
-                </button>
               </>
             ) : (
               <>
