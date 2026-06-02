@@ -1,45 +1,30 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import type { Material } from "@/app/data/materials";
 import { DownloadModalDialog, useSubscribed } from "./DownloadModal";
 
 export function Carousel({ items }: { items: Material[] }) {
-  const [perPage, setPerPage] = useState(3);
   const [page, setPage] = useState(0);
   const [dlMaterial, setDlMaterial] = useState<Material | null>(null);
   const closeModal = useCallback(() => setDlMaterial(null), []);
   const subscribed = useSubscribed();
-
-  useEffect(() => {
-    function updatePerPage() {
-      if (window.innerWidth < 640) setPerPage(1);
-      else if (window.innerWidth < 960) setPerPage(2);
-      else setPerPage(3);
-    }
-    updatePerPage();
-    window.addEventListener("resize", updatePerPage);
-    return () => window.removeEventListener("resize", updatePerPage);
-  }, []);
-
-  const totalPages = Math.ceil(items.length / perPage);
+  const totalPages = items.length;
 
   return (
     <div className="carousel">
       <div className="learn-others-title">More from the Knowledge Base</div>
       <div className="carousel-stage">
-        {totalPages > 1 && (
-          <button
-            className="carousel-arrow carousel-arrow-left"
-            disabled={page === 0}
-            onClick={() => setPage(page - 1)}
-            aria-label="Previous"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-        )}
+        <button
+          className="carousel-arrow carousel-arrow-left"
+          disabled={page === 0}
+          onClick={() => setPage(page - 1)}
+          aria-label="Previous"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
         <div className="carousel-viewport">
           <div
             className="carousel-track"
@@ -71,18 +56,16 @@ export function Carousel({ items }: { items: Material[] }) {
             ))}
           </div>
         </div>
-        {totalPages > 1 && (
-          <button
-            className="carousel-arrow carousel-arrow-right"
-            disabled={page === totalPages - 1}
-            onClick={() => setPage(page + 1)}
-            aria-label="Next"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        )}
+        <button
+          className="carousel-arrow carousel-arrow-right"
+          disabled={page === totalPages - 1}
+          onClick={() => setPage(page + 1)}
+          aria-label="Next"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
       </div>
 
       <DownloadModalDialog
