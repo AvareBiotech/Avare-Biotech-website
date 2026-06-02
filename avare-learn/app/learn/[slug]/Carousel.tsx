@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import type { Material } from "@/app/data/materials";
-import { DownloadModalDialog } from "./DownloadModal";
+import { DownloadModalDialog, useSubscribed } from "./DownloadModal";
 
 export function Carousel({ items }: { items: Material[] }) {
   const perPage = 3;
@@ -10,6 +10,7 @@ export function Carousel({ items }: { items: Material[] }) {
   const [page, setPage] = useState(0);
   const [dlMaterial, setDlMaterial] = useState<Material | null>(null);
   const closeModal = useCallback(() => setDlMaterial(null), []);
+  const subscribed = useSubscribed();
 
   return (
     <div className="carousel">
@@ -55,8 +56,9 @@ export function Carousel({ items }: { items: Material[] }) {
                   <button
                     className="learn-card-dl"
                     onClick={() => setDlMaterial(m)}
+                    style={subscribed ? { opacity: 1, color: "var(--text)" } : {}}
                   >
-                    &#x1F512; Download
+                    {subscribed ? "⬇ Download" : "🔒 Download"}
                   </button>
                 </div>
               </div>
@@ -83,6 +85,7 @@ export function Carousel({ items }: { items: Material[] }) {
         title={dlMaterial?.downloadTitle ?? ""}
         description={dlMaterial?.downloadDescription ?? ""}
         buttonText={dlMaterial?.downloadButtonText ?? "Download PDF →"}
+        pdfUrl={dlMaterial?.coverImage}
       />
     </div>
   );
