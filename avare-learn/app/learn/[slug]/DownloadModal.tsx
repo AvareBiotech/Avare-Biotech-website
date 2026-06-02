@@ -98,15 +98,7 @@ export function DownloadModalDialog({
                 <p className="learn-success-msg">&#10003; Subscribed!</p>
                 <p className="learn-success-detail">
                   Your PDF is downloading. If it did not start,{" "}
-                  
-                    href={PDF_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "var(--accent)", textDecoration: "underline" }}
-                  >
-                    click here
-                  </a>
-                  .
+                  <a href={PDF_URL} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)", textDecoration: "underline" }}>click here</a>.
                 </p>
               </>
             ) : (
