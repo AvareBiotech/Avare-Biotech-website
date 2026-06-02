@@ -72,7 +72,17 @@ export default async function MaterialPage({
 
       {/* COVER IMAGE */}
       <div className="learn-cover">
-        <div className="learn-cover-img">{material.emoji}</div>
+        <div className="learn-cover-img">
+          {material.coverImage ? (
+            <img
+              src={material.coverImage}
+              alt={material.title}
+              style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "12px" }}
+            />
+          ) : (
+            material.emoji
+          )}
+        </div>
       </div>
 
       {/* CONTENT */}
@@ -80,7 +90,6 @@ export default async function MaterialPage({
         {material.content.map((section, i) => (
           <div key={i}>
             <h2>{section.heading}</h2>
-            {section.paragraph && <p>{section.paragraph}</p>}
             {section.items && (
               <ul>
                 {section.items.map((item, j) => (
@@ -88,6 +97,7 @@ export default async function MaterialPage({
                 ))}
               </ul>
             )}
+            {section.paragraph && <p>{section.paragraph}</p>}
           </div>
         ))}
 

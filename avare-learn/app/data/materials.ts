@@ -13,6 +13,7 @@ export interface Material {
   categoryLabel: string;
   tagClass: string;
   emoji: string;
+  coverImage?: string;
   description: string;
   downloadTitle: string;
   downloadButtonText: string;
@@ -28,6 +29,7 @@ export const materials: Material[] = [
     categoryLabel: "Guide",
     tagClass: "tag-guide",
     emoji: "🧊",
+    coverImage: "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/Semen%20Storage%20%26%20Handling%3A%2010%20Critical%20Steps.png",
     description:
       "Temperature errors during thawing cost more than any equipment failure. Here's what actually matters.",
     downloadTitle: "Download: Semen Storage & Handling Checklist",
@@ -52,6 +54,8 @@ export const materials: Material[] = [
           "Group B: 3 straws at a time. Temperature fluctuations stayed within 1.5 degrees C.",
           "Result: 44% versus 56% fertilization. A 12 percentage point difference from a single handling step.",
         ],
+        paragraph:
+          "If you want to make sure your team is not losing results at this stage — download the practical checklist PDF \"Semen Storage & Handling: 10 Critical Steps\". It covers every step of semen handling from the tank to the moment of insemination.",
       },
       {
         heading: "Why Semen Looks Normal but Does Not Work",
@@ -76,7 +80,12 @@ export const materials: Material[] = [
       {
         heading: "What This Means for Practice",
         paragraph:
-          "The conclusion from everything above is simple, but requires discipline. Semen is not just a liquid in a straw. It is a complex biological system sensitive to temperature changes even within 1-2 degrees. Every time the tank neck rises above the frost line, every time a straw lingers in the hand for extra seconds, every time equipment is not pre-cooled - invisible damage occurs that cannot be corrected at the next step. And that damage will not show up when you look through a microscope. It will show up 35 days later - as an empty uterus on ultrasound. A semen handling protocol is not a set of nice-to-have recommendations. It is a production standard that directly determines the financial outcome of every insemination cycle. Download the checklist below and implement it in your team's protocol today.",
+          "The conclusion from everything above is simple, but requires discipline. Semen is not just a liquid in a straw. It is a complex biological system sensitive to temperature changes even within 1-2 degrees. Every time the tank neck rises above the frost line, every time a straw lingers in the hand for extra seconds, every time equipment is not pre-cooled - invisible damage occurs that cannot be corrected at the next step. And that damage will not show up when you look through a microscope. It will show up 35 days later - as an empty uterus on ultrasound. A semen handling protocol is not a set of nice-to-have recommendations. It is a production standard that directly determines the financial outcome of every insemination cycle.",
+      },
+      {
+        heading: "Download the checklist",
+        paragraph:
+          "Download the practical checklist PDF \"Semen Storage & Handling: 10 Critical Steps\" — specific steps that protect semen at every stage of handling, from the tank to the moment of insemination. Implement it in your team's protocol today.",
       },
     ],
   },

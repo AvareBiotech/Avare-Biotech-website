@@ -161,6 +161,13 @@
   border: 1px solid var(--border);
   border-radius: 12px;
   background: linear-gradient(135deg, #111 0%, #1e1e1e 100%);
+  overflow: hidden;
+}
+.learn-cover-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 /* CONTENT */
@@ -172,9 +179,9 @@
 .learn-content h2 {
   font-size: 21px;
   font-weight: 700;
-  letter-spacing: 0px;
-  text-transform: none;
-  color: var(--text);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
   margin: 40px 0 12px;
 }
 .learn-content h2:first-child {
