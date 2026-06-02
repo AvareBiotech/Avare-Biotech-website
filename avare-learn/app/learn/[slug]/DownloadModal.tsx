@@ -68,7 +68,6 @@ export function DownloadModalDialog({
     setTimeout(() => {
       setDone(true);
       setSending(false);
-      // Auto-download PDF
       const a = document.createElement("a");
       a.href = PDF_URL;
       a.download = "semen-storage-handling.pdf";
@@ -98,7 +97,7 @@ export function DownloadModalDialog({
               <>
                 <p className="learn-success-msg">&#10003; Subscribed!</p>
                 <p className="learn-success-detail">
-                  Your PDF is downloading. If it didn&apos;t start,{" "}
+                  Your PDF is downloading. If it did not start,{" "}
                   
                     href={PDF_URL}
                     target="_blank"
