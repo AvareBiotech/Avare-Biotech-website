@@ -532,7 +532,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
       <div class="card-title">Semen Storage & Handling: 10 Critical Steps</div>
       <div class="card-desc">Temperature errors during thawing cost more than any equipment failure. Here's what actually matters.</div>
       <div class="card-actions">
-        <button class="btn-read" onclick="openModal('modal1')">Read</button>
+        <a class="btn-read" href="/learn/semen-storage-handling">Read</a>
         <button class="btn-dl btn-locked" onclick="openModal('modal1lock')">🔒 Download</button>
       </div>
     </div>
@@ -549,7 +549,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
       <div class="card-title">How 1.5°C Cost 12 Conception Points</div>
       <div class="card-desc">280 cows, same semen, same protocol, same day. One handling variable changed everything.</div>
       <div class="card-actions">
-        <button class="btn-read" onclick="openModal('modal2')">Read</button>
+        <a class="btn-read" href="/learn/temperature-conception-study">Read</a>
         <button class="btn-dl btn-locked" onclick="openModal('modal2lock')">🔒 Download</button>
       </div>
     </div>
@@ -566,7 +566,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
       <div class="card-title">Pre-Season Semen Quality Checklist</div>
       <div class="card-desc">What to verify before the season starts. Equipment, storage, team readiness — one page, printable.</div>
       <div class="card-actions">
-        <button class="btn-read" onclick="openModal('modal3')">Read</button>
+        <a class="btn-read" href="/learn/pre-season-checklist">Read</a>
         <button class="btn-dl btn-locked" onclick="openModal('modal3lock')">🔒 Download</button>
       </div>
     </div>
@@ -583,7 +583,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
       <div class="card-title">Reading a Semen Analysis Report: What the Numbers Actually Mean</div>
       <div class="card-desc">Motility, morphology, concentration — how to interpret results and what to do when numbers are borderline.</div>
       <div class="card-actions">
-        <button class="btn-read" onclick="openModal('modal4')">Read</button>
+        <a class="btn-read" href="/learn/semen-analysis-report">Read</a>
         <button class="btn-dl btn-locked" onclick="openModal('modal4lock')">🔒 Download</button>
       </div>
     </div>
@@ -600,7 +600,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
       <div class="card-title">AI Center Benchmark: 3 Technicians, Same Bull, Different Results</div>
       <div class="card-desc">Why conception rates varied 18 points between technicians handling identical semen on the same day.</div>
       <div class="card-actions">
-        <button class="btn-read" onclick="openModal('modal5')">Read</button>
+        <a class="btn-read" href="/learn/ai-center-benchmark">Read</a>
         <button class="btn-dl btn-locked" onclick="openModal('modal5lock')">🔒 Download</button>
       </div>
     </div>
@@ -617,7 +617,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
       <div class="card-title">Seasonal Conception Rate Tracking Template</div>
       <div class="card-desc">Spreadsheet template for tracking conception rates by bull, technician, and date. Includes benchmarks.</div>
       <div class="card-actions">
-        <button class="btn-read" onclick="openModal('modal6')">Read</button>
+        <a class="btn-read" href="/learn/conception-rate-tracking">Read</a>
         <button class="btn-dl btn-locked" onclick="openModal('modal6lock')">🔒 Download</button>
       </div>
     </div>
@@ -980,13 +980,25 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 </footer>
 
 <script>
+var LEARN_SCRIPT='https://script.google.com/macros/s/AKfycbwuKsYVg_3x3RbBnxY0RUlFjE4tldmErUWRddqPDXg4xQxsOqqT19wTeGsxRqcW5jyK/exec';
+var PDF_URL='https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/learn-pdf/semen-storage-handling.pdf';
+
+// On page load: check localStorage and listen for cross-page unlock event
+document.addEventListener('DOMContentLoaded',function(){
+  if(localStorage.getItem('learn_subscribed')==='1'){
+    unlockAllDownloads();
+  }
+});
+window.addEventListener('learn_subscribed',function(){
+  unlockAllDownloads();
+});
+
 function toggleMenu(){
   var burger=document.querySelector('.burger');
   var pill=document.getElementById('navPill');
   burger.classList.toggle('open');
   pill.classList.toggle('mobile-open');
 }
-// Close menu on link click
 document.querySelectorAll('.nav-pill a').forEach(function(a){
   a.addEventListener('click',function(){
     document.querySelector('.burger').classList.remove('open');
@@ -1014,6 +1026,31 @@ function filterCards(type,btn){
     card.style.display=(type==='all'||card.dataset.type===type)?'':'none';
   });
 }
+function downloadPDF(){
+  var a=document.createElement('a');
+  a.href=PDF_URL;
+  a.download='semen-storage-handling.pdf';
+  a.target='_blank';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+function unlockAllDownloads(){
+  document.querySelectorAll('.btn-dl.btn-locked').forEach(function(dlBtn){
+    dlBtn.classList.remove('btn-locked');
+    dlBtn.innerHTML='&#8595; Download';
+    dlBtn.setAttribute('onclick','downloadPDF()');
+  });
+  document.querySelectorAll('.modal-dl-btn').forEach(function(btn){
+    btn.setAttribute('onclick','downloadPDF()');
+  });
+}
+function saveAndUnlock(email){
+  localStorage.setItem('learn_subscribed','1');
+  window.dispatchEvent(new Event('learn_subscribed'));
+  unlockAllDownloads();
+  downloadPDF();
+}
 function unlockForm(formId,btn){
   var form=document.getElementById(formId);
   var email=form.querySelector('input[type="email"]').value.trim();
@@ -1021,30 +1058,30 @@ function unlockForm(formId,btn){
   btn.textContent='Sending...';btn.disabled=true;
   fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'}).catch(function(){});
   setTimeout(function(){
-    // Unlock ALL locked download buttons on the page
-    document.querySelectorAll('.btn-dl.btn-locked').forEach(function(dlBtn){
-      dlBtn.classList.remove('btn-locked');
-      dlBtn.innerHTML='↓ Download';
-      dlBtn.setAttribute('onclick',"alert('PDF download — link coming soon')");
-    });
-    // Show success in form
-    form.innerHTML='<p style="color:var(--accent);font-weight:700;font-size:15px;margin-bottom:10px;">&#10003; Subscribed!</p><p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:16px;">Download link sent to <strong style="color:var(--text)">' + email + '</strong></p><button class="modal-dl-btn" onclick="window.pdfComingSoon()">Download PDF →</button>';
-    // Close lock modal after 1.5s
+    saveAndUnlock(email);
+    form.innerHTML='<p style="color:var(--accent);font-weight:700;font-size:15px;margin-bottom:10px;">&#10003; Subscribed!</p><p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:16px;">Your PDF is downloading. If it did not start, <a href="'+PDF_URL+'" target="_blank" style="color:var(--accent);text-decoration:underline;">click here</a>.</p><button class="modal-dl-btn" onclick="downloadPDF()">Download PDF →</button>';
     setTimeout(function(){
-      var lockModalId='modal'+num+'lock';
-      closeModal(lockModalId);
+      document.querySelectorAll('.modal-overlay.open').forEach(function(m){closeModal(m.id);});
     },1500);
   },700);
 }
-var LEARN_SCRIPT='https://script.google.com/macros/s/AKfycbwuKsYVg_3x3RbBnxY0RUlFjE4tldmErUWRddqPDXg4xQxsOqqT19wTeGsxRqcW5jyK/exec';
-async function sendLearnEmail(email, btn, successText){
-  try{
-    await fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'});
-  }catch(e){}
-  btn.textContent=successText;btn.disabled=true;
+function handleSubscribe(btn){
+  var input=btn.previousElementSibling;
+  var email=input.value.trim();
+  if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
+  input.value='';
+  btn.textContent='Sending...';btn.disabled=true;
+  fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'})
+    .catch(function(){})
+    .finally(function(){
+      saveAndUnlock(email);
+      var subscribe=btn.closest('.subscribe');
+      if(subscribe){
+        subscribe.innerHTML="<p style='font-size:15px;font-weight:600;color:var(--accent);padding:13px 20px;margin:0;'>&#10003; Subscribed! We will be in touch at "+email+"</p>";
+      }
+    });
 }
 function handleSubscribeBottom(btn){
-  unlockAllDownloads();
   var input=document.getElementById('bottom-email');
   var email=input.value.trim();
   if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
@@ -1053,41 +1090,10 @@ function handleSubscribeBottom(btn){
   fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'})
     .catch(function(){})
     .finally(function(){
-      var subscribe=btn.closest('.subscribe');
+      saveAndUnlock(email);
       var section=btn.closest('.bottom-subscribe');
       if(section){
-        section.innerHTML="<p style='font-size:15px;font-weight:600;color:var(--accent);margin:0;'>&#10003; Subscribed!</p><p style='font-size:14px;color:var(--muted);margin:8px 0 0;line-height:1.7;'>We will send new resources to <strong style='color:var(--text)'>" + email + "</strong></p>";
-      }
-    });
-}
-window.pdfComingSoon=function(){alert("PDF download — link coming soon");};
-function unlockAllDownloads(){
-  document.querySelectorAll('.btn-dl.btn-locked').forEach(function(dlBtn){
-    dlBtn.classList.remove('btn-locked');
-    dlBtn.innerHTML='↓ Download';
-    dlBtn.setAttribute('onclick',"alert('PDF download — link coming soon')");
-  });
-  // Update download buttons inside read modals
-  document.querySelectorAll('.modal-dl-btn').forEach(function(btn){
-    btn.textContent='↓ Download PDF →';
-    btn.setAttribute('onclick',"alert('PDF download — link coming soon')");
-  });
-}
-function handleSubscribe(btn){
-  var input=btn.previousElementSibling;
-  var email=input.value.trim();
-  if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
-  input.value='';
-  btn.textContent='Sending...';btn.disabled=true;
-  unlockAllDownloads();
-  var SCRIPT_URL=LEARN_SCRIPT;
-  fetch(SCRIPT_URL+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'})
-    .catch(function(){})
-    .finally(function(){
-      var wrap=btn.closest('div[style]')||btn.parentElement;
-      var subscribe=btn.closest('.subscribe');
-      if(subscribe){
-        subscribe.innerHTML="<p style='font-size:15px;font-weight:600;color:var(--accent);padding:13px 20px;margin:0;'>&#10003; Subscribed! We will be in touch at " + email + "</p>";
+        section.innerHTML="<p style='font-size:15px;font-weight:600;color:var(--accent);margin:0;'>&#10003; Subscribed!</p><p style='font-size:14px;color:var(--muted);margin:8px 0 0;line-height:1.7;'>We will send new resources to <strong style='color:var(--text)'>"+email+"</strong></p>";
       }
     });
 }
