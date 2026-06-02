@@ -29,9 +29,7 @@ export const materials: Material[] = [
     categoryLabel: "Guide",
     tagClass: "tag-guide",
     emoji: "🧊",
-    coverImage: "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/Semen%20Storage%20%26%20Handling%3A%2010%20Critical%20Steps.png",
-    description:
-      "Temperature errors during thawing cost more than any equipment failure. Here's what actually matters.",
+    coverImage: "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/semen-storage-handling.png",
     downloadTitle: "Download: Semen Storage & Handling Checklist",
     downloadButtonText: "Download PDF →",
     downloadDescription:
