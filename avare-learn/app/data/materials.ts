@@ -103,7 +103,7 @@ export const materials: Material[] = [
     description:
       "This protocol confirms that Avare App reads motility and concentration as accurately as CASA and manual count — and works where no lab system is within reach.",
     downloadTitle: "Download: Avare App QA Protocol",
-    downloadButtonText: "Download PDF →",
+    downloadButtonText: "Download PDF",
     downloadDescription:
       "Enter your email to download this protocol and get free access to new content with a subscription.",
     pdfs: [
