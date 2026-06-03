@@ -1,7 +1,7 @@
 export type MaterialCategory = "guide" | "case" | "protocol";
 
 export interface ContentSection {
-  heading: string;
+  heading?: string;
   paragraph?: string;
   items?: string[];
 }
@@ -18,6 +18,7 @@ export interface Material {
   downloadTitle: string;
   downloadButtonText: string;
   downloadDescription: string;
+  pdfs?: { label: string; url: string }[];
   content: ContentSection[];
 }
 
@@ -90,213 +91,107 @@ export const materials: Material[] = [
     ],
   },
   {
-    slug: "temperature-conception-study",
-    title: "How 1.5°C Cost 12 Conception Points",
-    category: "case",
-    categoryLabel: "Case Study",
-    tagClass: "tag-case",
-    emoji: "📊",
-    description:
-      "280 cows, same semen, same protocol, same day. One handling variable changed everything.",
-    downloadTitle: "Download: How 1.5°C Cost 12 Conception Points",
-    downloadButtonText: "Download PDF →",
-    downloadDescription:
-      "Enter your email to download this case study and get free access to new content with a subscription.",
-    content: [
-      {
-        heading: "Background",
-        paragraph:
-          "Luciano Penteado, owner of Firmasa Tecnologia Para Pecuaria — one of Brazil's leading FTAI specialists — ran a field test on 280 cows. Same semen. Same protocol. Same day. Two groups differing only in straw handling.",
-      },
-      {
-        heading: "The test",
-        items: [
-          "Group A: pulled 10 straws at a time — temperature variation above 1.5°C",
-          "Group B: pulled 3 straws at a time — variation kept below 1.5°C",
-        ],
-      },
-      {
-        heading: "Result",
-        paragraph:
-          "44% vs 56% conception. 12 percentage points. From one handling step. The sperm looked normal — it would pass a visual assessment — but a specific protein responsible for oocyte penetration was damaged during the temperature drop.",
-      },
-      {
-        heading: "Practical checklist",
-        items: [
-          "Pull straws 3 at a time — never 10+",
-          "Transfer from tank to bath in under 5 seconds",
-          "Thaw at 35–37°C for minimum 30 seconds (45–60 best)",
-          "Use within 5 minutes of thawing",
-          "Check one straw from the batch before committing the rest",
-        ],
-      },
-    ],
-  },
-  {
-    slug: "pre-season-checklist",
-    title: "Pre-Season Semen Quality Checklist",
+    slug: "semen-quality-analysis",
+    title:
+      "Check Avare App for Yourself: A Field QA Protocol vs CASA and Manual Count",
     category: "protocol",
     categoryLabel: "Protocol",
     tagClass: "tag-protocol",
-    emoji: "📋",
-    description:
-      "What to verify before the season starts. Equipment, storage, team readiness — one page, printable.",
-    downloadTitle: "Download Pre-Season Semen Quality Checklist",
-    downloadButtonText: "Download PDF →",
-    downloadDescription:
-      "Enter your email to download this checklist and get free access to new content with a subscription.",
-    content: [
-      {
-        heading: "Equipment",
-        items: [
-          "Thawing bath calibrated to 35–37°C",
-          "Tweezers precooled in nitrogen vapor",
-          "Insemination guns cleaned and warmed",
-          "Thermometer calibrated and working",
-          "Clean dry towels available at station",
-        ],
-      },
-      {
-        heading: "Storage",
-        items: [
-          "Nitrogen level above 4 inches (10 cm)",
-          "Tank inventory updated and verified",
-          "Canister positions documented",
-          "Tank stored off ground, dry environment",
-        ],
-      },
-      {
-        heading: "Team",
-        items: [
-          "All technicians briefed on 5-second transfer rule",
-          "Recording sheets ready (date / cow / bull / tech)",
-          "Backup equipment available on-site",
-        ],
-      },
-    ],
-  },
-  {
-    slug: "semen-analysis-report",
-    title: "Reading a Semen Analysis Report: What the Numbers Actually Mean",
-    category: "guide",
-    categoryLabel: "Guide",
-    tagClass: "tag-guide",
     emoji: "🔬",
+    coverImage:
+      "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/Article-semen-quality-analysis.png",
     description:
-      "Motility, morphology, concentration — how to interpret results and what to do when numbers are borderline.",
-    downloadTitle: "Download: Reading a Semen Analysis Report",
+      "This protocol confirms that Avare App reads motility and concentration as accurately as CASA and manual count — and works where no lab system is within reach.",
+    downloadTitle: "Download: Avare App QA Protocol",
     downloadButtonText: "Download PDF →",
     downloadDescription:
-      "Enter your email to download this guide and get free access to new content with a subscription.",
-    content: [
+      "Enter your email to download this protocol and get free access to new content with a subscription.",
+    pdfs: [
       {
-        heading: "Understanding the numbers",
-        items: [
-          "Total motility: percentage of all moving sperm — minimum 50% for approval",
-          "Progressive motility: sperm moving forward in a straight line — minimum 30%",
-          "Concentration: sperm cells per ml — varies by species and dose requirements",
-          "Morphology: percentage of normal-shaped sperm — minimum 70% normal",
-        ],
+        label: "English",
+        url: "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf",
       },
       {
-        heading: "Borderline results — what to do",
-        items: [
-          "Re-test with a fresh straw from the same batch before rejecting",
-          "Check thawing protocol — temperature errors cause false-low motility",
-          "Compare against the bull's historical baseline if available",
-          "Consider dose adjustment rather than full batch rejection",
-        ],
+        label: "Português",
+        url: "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf",
       },
       {
-        heading: "MAKSA vs CASA correlation",
-        paragraph:
-          "MAKSA correlates with CASA systems at r > 0.90, meaning results are statistically equivalent for field use. Minor differences in absolute values are normal — use consistent methodology for trend tracking.",
+        label: "العربية",
+        url: "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/03_QA_Protocol_Avare_Biotech_ar.pdf",
       },
     ],
-  },
-  {
-    slug: "ai-center-benchmark",
-    title: "AI Center Benchmark: 3 Technicians, Same Bull, Different Results",
-    category: "case",
-    categoryLabel: "Case Study",
-    tagClass: "tag-case",
-    emoji: "🐄",
-    description:
-      "Why conception rates varied 18 points between technicians handling identical semen on the same day.",
-    downloadTitle: "Download: AI Center Benchmark Case Study",
-    downloadButtonText: "Download PDF →",
-    downloadDescription:
-      "Enter your email to download this case study and get free access to new content with a subscription.",
     content: [
       {
-        heading: "Background",
+        heading: "A wrong number does not look wrong",
         paragraph:
-          "An internal audit at a large AI center compared conception rates across 3 technicians handling identical semen batches from the same bull on the same day.",
+          "Every insemination starts with three numbers: total motility, progressive motility, concentration. Those numbers decide whether a straw goes into a cow or into the bin. They decide whether a bull stays in the catalog. They decide how a dose is split. And here is the uncomfortable part — when one of those numbers is wrong, nothing on your screen tells you so. A motility reading that is 20% too high looks exactly like a motility reading that is correct. You do not find out at the microscope. You find out 35 days later, as an empty uterus on ultrasound, and by then it is written off as a bad cycle, stress, or the weather.",
       },
       {
-        heading: "The findings",
-        items: [
-          "Technician A: 61% conception rate",
-          "Technician B: 54% conception rate",
-          "Technician C: 43% conception rate",
-        ],
-        paragraph: "An 18-point gap. Same bull. Same semen. Same day.",
-      },
-      {
-        heading: "Root causes identified",
-        items: [
-          "Differences in straw exposure time during canister retrieval (3 sec vs 11 sec)",
-          "Inconsistent thawing bath temperature maintenance between straws",
-          "Variation in gun pre-warming practice",
-          "Different straw handling — one technician used bare hands",
-        ],
-      },
-      {
-        heading: "What changed after the audit",
-        items: [
-          "Standardized handling protocol posted at every insemination station",
-          "Pre-season semen quality checks introduced for all technicians",
-          "Conception rate gap narrowed to 4 points within one season",
-        ],
-      },
-    ],
-  },
-  {
-    slug: "conception-rate-tracking",
-    title: "Seasonal Conception Rate Tracking Template",
-    category: "protocol",
-    categoryLabel: "Protocol",
-    tagClass: "tag-protocol",
-    emoji: "📈",
-    description:
-      "Spreadsheet template for tracking conception rates by bull, technician, and date. Includes benchmarks.",
-    downloadTitle: "Download: Conception Rate Tracking Template",
-    downloadButtonText: "Download Excel →",
-    downloadDescription:
-      "Enter your email to download this template and get free access to new content with a subscription.",
-    content: [
-      {
-        heading: "Overview",
         paragraph:
-          "Track conception rates by bull, technician, date, and season. Identify underperformers early and benchmark against your historical baseline.",
+          "You put enormous effort into handling semen correctly — pulling three straws at a time, keeping the thaw bath in range, using the dose within minutes. Then you hand the final judgment to a measurement method and assume it is right. That assumption is worth checking. This is exactly what a QA protocol is for: to confirm that Avare App puts a number you can trust behind every insemination — especially where no lab system is within reach.",
       },
       {
-        heading: "What the template includes",
+        heading: "Avare App works where CASA can't reach",
+        paragraph:
+          "Avare App (MAKSA technology) puts semen analysis in your smartphone: total motility, progressive motility, and concentration — next to every inseminator, in the field, with no tie to a lab bench. This is not an attempt to replace CASA. CASA is an excellent reference where it exists: precise, repeatable, a deserved gold standard. But it is expensive, fixed to the lab, and physically absent from most field stations and farms. That is exactly the gap Avare App fills — a reliable read at the point where insemination actually happens and where there is no CASA.",
+      },
+      {
+        paragraph:
+          "In studies, MAKSA correlates with CASA systems at r > 0.90 — meaning results are statistically equivalent for field use. The QA protocol lets you see that on your own samples: cross-check Avare App's readings against recognized references and confirm the numbers line up in your conditions. There are two references:",
+      },
+      {
         items: [
-          "Monthly conception rate by bull and technician",
-          "Season-over-season comparison columns",
-          "Automatic average calculation per bull and per technician",
-          "Industry benchmark reference: 50–60% for cattle, 65–75% for sheep",
-          "Notes column for protocol changes and environmental factors",
+          "CASA — a precise, repeatable reference where the system is available on site. The ideal second pair of eyes for the cross-check.",
+          "Manual counting — a reference available almost everywhere. But it is only as steady as the hand and eye behind it: an internal audit at one AI center found an 18-point conception gap between three technicians handling identical semen from the same bull on the same day. If technique varies that much on the floor, it varies at the counting chamber too.",
         ],
       },
       {
-        heading: "How to use it",
+        paragraph:
+          "The point of the protocol is to make your semen analysis more accurate and more reliable. You compare Avare App's readings against other systems on the same sample, on the same day, in your conditions, and confirm the numbers agree. Confirmed agreement means one thing: the app's result can be trusted, and the quality of your analysis stays steady from straw to straw.",
+      },
+      {
+        heading: "How the protocol works: one sample, cross-checked",
+        paragraph:
+          "You take 3–5 frozen–thawed straws from different animals. For each straw you take a reading in Avare App, then run the same sample through the references — CASA (if available on site) and a manual count under the microscope. You record total motility, progressive motility, and concentration for every method, side by side, and see how far the app's readings sit from the references.",
+      },
+      {
+        paragraph:
+          "That is the entire logic. The discipline is in the execution: thaw the straw correctly (37 °C, 30–45 seconds), pre-warm the slide to 37–38 °C, and — this matters more than people expect — match the loaded volume to your cover-slip size. Too much or too little sample under the glass changes the depth of the field, and a wrong depth quietly biases concentration and motility for every method at once. The full protocol includes the cover-slip-to-volume table, the recording sheet, and the step-by-step so the comparison is fair.",
+      },
+      {
+        heading: "The number that tells you whether to trust the number",
+        paragraph:
+          "This is where the validation protocol stops being a suggestion and becomes a standard. The acceptance criterion is simple:",
+      },
+      {
         items: [
-          "Enter results within 24 hours of each insemination session",
-          "Review weekly with your team — flag any technician below 45%",
-          "Use the season summary tab for annual reporting",
+          "±10–15% difference between Avare App and the references = acceptable. The app agrees with CASA and the manual count. Trust the number.",
+          "More than 15% deviation = investigate. Attach photo or video evidence, and repeat with a fresh slide.",
         ],
+      },
+      {
+        paragraph:
+          "A spread above 15% is not a rounding error — it is the method telling you something is off: loading volume, slide temperature, an air bubble, or a real discrepancy worth chasing before it reaches a cow. Most \"the app and CASA disagree\" complaints disappear the moment volume is matched to cover-slip size and the slide is properly warmed. The threshold turns a vague worry into a clear pass/fail you can put in a report.",
+      },
+      {
+        heading: "You don't have to waste the straw",
+        paragraph:
+          "The most common objection to validation is that it burns inventory. It doesn't. Pulling 10 µL from a 0.25–0.5 mL straw does not prevent insemination if it is done immediately. Best practice at AI stations is to take a single drop from the straw for the Avare analysis and inseminate the remaining ~90% right away. You validate your method and breed the cow from the same straw. There is no trade-off to manage.",
+      },
+      {
+        heading: "Why a 15% error is not a 15% problem",
+        paragraph:
+          "A measurement error does not stay inside the spreadsheet. It walks straight into your conception rate. Reject a good batch on a falsely low motility read and you have discarded paid-for genetics. Approve a weak batch on a falsely high read and you have inseminated cows that will come back open. The cost is the same one that runs through every article on this site: a cow that fails to conceive at first service costs roughly $622 in repeat treatment, management, and a stretched calving interval, and cows needing three or more services cost over $205 per head per year. Across a 500-cow herd, the gap between a 44% and a 56% conception rate is 60 open cows. A measurement you cannot trust is not cheaper than a good one — it is the most expensive instrument in the station, because it bills you 35 days after the mistake, with interest.",
+      },
+      {
+        heading: "What this means for practice",
+        paragraph:
+          "Validating your analysis method is not a research exercise — it is a production control, the same way pre-cooling tweezers and timing the thaw are production controls. Run the QA protocol at the start of each season, after any equipment or software change, and any time a method gives you a result you would not have expected from that bull. Three to five straws and one afternoon buy you a season of numbers you can actually act on. Everything else you do — handling, storage, dose math — assumes the analysis is right. This is how you stop assuming and start knowing.",
+      },
+      {
+        heading: "Download the protocol",
+        paragraph:
+          "Download the full Avare App QA Protocol PDF — the complete step-by-step, the cover-slip-to-volume table, the example recording sheet, and the ±15% validation thresholds. Run Avare App against CASA and manual count this season, confirm it for yourself, and put a trusted number behind every insemination.",
       },
     ],
   },

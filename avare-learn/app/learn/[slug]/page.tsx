@@ -89,7 +89,7 @@ export default async function MaterialPage({
       <article className="learn-content">
         {material.content.map((section, i) => (
           <div key={i}>
-            <h2>{section.heading}</h2>
+            {section.heading && <h2>{section.heading}</h2>}
             {section.items && (
               <ul>
                 {section.items.map((item, j) => (
@@ -105,6 +105,7 @@ export default async function MaterialPage({
           title={material.downloadTitle}
           description={material.downloadDescription}
           buttonText={material.downloadButtonText}
+          pdfs={material.pdfs}
         />
       </article>
 

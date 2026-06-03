@@ -74,7 +74,7 @@ export function Carousel({ items }: { items: Material[] }) {
         title={dlMaterial?.downloadTitle ?? ""}
         description={dlMaterial?.downloadDescription ?? ""}
         buttonText={dlMaterial?.downloadButtonText ?? "Download PDF →"}
-        pdfUrl={dlMaterial?.coverImage}
+        pdfs={dlMaterial?.pdfs}
       />
     </div>
   );

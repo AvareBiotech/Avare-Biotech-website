@@ -30,6 +30,7 @@ export function DownloadModalDialog({
   description,
   buttonText,
   pdfUrl,
+  pdfs,
 }: {
   open: boolean;
   onClose: () => void;
@@ -37,12 +38,14 @@ export function DownloadModalDialog({
   description: string;
   buttonText: string;
   pdfUrl?: string;
+  pdfs?: { label: string; url: string }[];
 }) {
   const [email, setEmail] = useState("");
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const downloadUrl = pdfUrl || PDF_URL;
+  const langs = pdfs && pdfs.length > 0 ? pdfs : null;
+  const downloadUrl = pdfUrl || (langs ? langs[0].url : PDF_URL);
 
   useEffect(() => {
     if (open && typeof window !== "undefined") {
@@ -100,24 +103,24 @@ export function DownloadModalDialog({
       window.dispatchEvent(new Event("learn_subscribed"));
       setDone(true);
       setSending(false);
-      const a = document.createElement("a");
-      a.href = downloadUrl;
-      a.download = downloadUrl.split("/").pop() || "download.pdf";
-      a.target = "_blank";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      if (!langs) {
+        downloadFrom(downloadUrl);
+      }
     }, 700);
   }
 
-  function handleDirectDownload() {
+  function downloadFrom(url: string) {
     const a = document.createElement("a");
-    a.href = downloadUrl;
-    a.download = downloadUrl.split("/").pop() || "download.pdf";
+    a.href = url;
+    a.download = url.split("/").pop() || "download.pdf";
     a.target = "_blank";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+  }
+
+  function handleDirectDownload() {
+    downloadFrom(downloadUrl);
   }
 
   return (
@@ -138,13 +141,36 @@ export function DownloadModalDialog({
             {done ? (
               <>
                 <p className="learn-success-msg">&#10003; Subscribed!</p>
-                <p className="learn-success-detail" style={{ marginBottom: "16px" }}>
-                  Your PDF is downloading. If it did not start,{" "}
-                  <a href={downloadUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)", textDecoration: "underline" }}>click here</a>.
-                </p>
-                <button className="learn-lock-submit" onClick={handleDirectDownload}>
-                  {buttonText}
-                </button>
+                {langs ? (
+                  <>
+                    <p
+                      className="learn-success-detail"
+                      style={{ marginBottom: "12px" }}
+                    >
+                      Choose your language:
+                    </p>
+                    {langs.map((p) => (
+                      <button
+                        key={p.url}
+                        className="learn-lock-submit"
+                        style={{ marginBottom: "8px" }}
+                        onClick={() => downloadFrom(p.url)}
+                      >
+                        &darr; {p.label}
+                      </button>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    <p className="learn-success-detail" style={{ marginBottom: "16px" }}>
+                      Your PDF is downloading. If it did not start,{" "}
+                      <a href={downloadUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)", textDecoration: "underline" }}>click here</a>.
+                    </p>
+                    <button className="learn-lock-submit" onClick={handleDirectDownload}>
+                      {buttonText}
+                    </button>
+                  </>
+                )}
               </>
             ) : (
               <>
@@ -182,11 +208,13 @@ export function DownloadModal({
   description,
   buttonText,
   pdfUrl,
+  pdfs,
 }: {
   title: string;
   description: string;
   buttonText: string;
   pdfUrl?: string;
+  pdfs?: { label: string; url: string }[];
 }) {
   const [open, setOpen] = useState(false);
   const subscribed = useSubscribed();
@@ -204,6 +232,7 @@ export function DownloadModal({
         description={description}
         buttonText={buttonText}
         pdfUrl={pdfUrl}
+        pdfs={pdfs}
       />
     </>
   );
