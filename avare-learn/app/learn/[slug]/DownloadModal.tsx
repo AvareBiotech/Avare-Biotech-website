@@ -195,7 +195,7 @@ export function DownloadModal({
   return (
     <>
       <button className="learn-download-btn" onClick={() => setOpen(true)}>
-        {subscribed ? "⬇ " : "🔒 "}{buttonText}
+        {subscribed ? "↓ " : "🔒 "}{buttonText}
       </button>
       <DownloadModalDialog
         open={open}

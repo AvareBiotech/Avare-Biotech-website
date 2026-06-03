@@ -49,7 +49,7 @@ export function Carousel({ items }: { items: Material[] }) {
                     onClick={() => setDlMaterial(m)}
                     style={subscribed ? { opacity: 1, color: "var(--text)" } : {}}
                   >
-                    {subscribed ? "⬇ Download" : "🔒 Download"}
+                    {subscribed ? "↓ Download" : "🔒 Download"}
                   </button>
                 </div>
               </div>
