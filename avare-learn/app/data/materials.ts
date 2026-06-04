@@ -34,7 +34,7 @@ export const materials: Material[] = [
     description:
       "Temperature errors during thawing cost more than any equipment failure. Here's what actually matters.",
     downloadTitle: "Download: Semen Storage & Handling Checklist",
-    downloadButtonText: "Download PDF →",
+    downloadButtonText: "Download PDF",
     downloadDescription:
       "Enter your email to download this checklist and get free access to new content with a subscription.",
     content: [
