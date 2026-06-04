@@ -21,7 +21,58 @@ export const translations: Record<string, Record<string, LocalizedMaterial>> = {
       downloadTitle: "Baixar: Checklist de Armazenamento e Manuseio de Sêmen",
       downloadDescription:
         "Informe seu e-mail para baixar este checklist e ter acesso gratuito a novos conteúdos com a inscrição.",
-      // corpo do artigo: tradução PT na etapa 2
+      content: [
+        {
+          heading: "Alguns erros são visíveis na hora",
+          paragraph:
+            "Uma palheta derrubada no chão. Um banho de descongelamento não aquecido à temperatura certa. Equipamento não esterilizado. Esses erros são fáceis de corrigir — porque você os vê. Mas existe outra categoria de erros. Os que você não vê de jeito nenhum. O sêmen parece normal. Tem movimento. Passa na avaliação visual. E mesmo assim não fecunda. É disso que trata a história de Luciano Penteado — e o ensaio de campo em 280 vacas que mudou o entendimento do que realmente determina o resultado da inseminação artificial.",
+        },
+        {
+          heading: "O experimento que não deveria ter sido necessário",
+          paragraph:
+            "Luciano Penteado é dono da Firmasa Tecnologia Para Pecuária, uma das principais empresas de inseminação artificial do Brasil. Não é estudante. Não é teórico. É um profissional com anos de experiência. Mas foi em um curso de treinamento de inseminadores que ele ouviu pela primeira vez sobre a sensibilidade das proteínas do espermatozoide às flutuações de temperatura durante a transferência do botijão de nitrogênio para o banho de descongelamento. E decidiu testar isso no campo. As condições do experimento foram propositalmente rígidas: o mesmo sêmen, o mesmo protocolo, o mesmo dia, os mesmos inseminadores. A única variável era a quantidade de palhetas retiradas de uma vez.",
+        },
+        {
+          heading: "O teste",
+          items: [
+            "Grupo A: 10 palhetas por vez. As flutuações de temperatura ultrapassaram 1,5 °C.",
+            "Grupo B: 3 palhetas por vez. As flutuações de temperatura ficaram dentro de 1,5 °C.",
+            "Resultado: 44% contra 56% de fecundação. Uma diferença de 12 pontos percentuais a partir de uma única etapa de manuseio.",
+          ],
+          paragraph:
+            "Se você quer ter certeza de que sua equipe não está perdendo resultados nesta etapa — baixe o checklist prático em PDF 'Armazenamento e Manuseio de Sêmen: 10 Passos Críticos'. Ele cobre cada etapa do manuseio do sêmen, do botijão até o momento da inseminação.",
+        },
+        {
+          heading: "Por que o sêmen parece normal mas não funciona",
+          paragraph:
+            "Esta é a parte mais incômoda. Porque a avaliação visual padrão — motilidade, concentração, morfologia — não mostra o dano descrito aqui. Quando as palhetas são retiradas do botijão de nitrogênio em grande quantidade, a temperatura no gargalo do recipiente sobe bruscamente. Cada flutuação dispara uma cadeia de danos moleculares. As etapas de resfriamento, congelamento e descongelamento prejudicam a qualidade do sêmen e causam mudanças drásticas nas células. A formação de cristais de gelo intracelulares, a lesão osmótica e o dano estrutural pelo estresse oxidativo reduzem a viabilidade e a motilidade dos espermatozoides em até 50%, enquanto o dano ao acrossomo contribui diretamente para a queda de fertilidade. O dano subletal do congelamento continua sendo uma limitação importante do processo de criopreservação, levando inevitavelmente à redução da fertilidade in vivo. Em outras palavras: o sêmen pode estar vivo e incapaz de fecundar ao mesmo tempo. E nenhuma inspeção visual vai mostrar isso.",
+        },
+        {
+          heading: "O que a ciência diz sobre o custo do manuseio descuidado",
+          paragraph:
+            "O estudo de Penteado não deve ser visto como um caso isolado. O conjunto de evidências científicas acumulado nas últimas duas décadas conta a mesma história. Especialistas em transferência de embriões bovinos indicam que o manuseio inadequado do sêmen é provavelmente uma causa comum de óvulos não fecundados coletados de vacas doadoras. A maioria das pessoas que trabalham diariamente com sêmen congelado — incluindo veterinários — nunca recebeu treinamento formal em armazenamento e manuseio seguros de longo prazo. Pesquisas com touros Brahman mostraram que, para alcançar a taxa máxima de fertilidade em um programa de IA, a qualidade geral do sêmen congelado-descongelado em todos os aspectos é crítica. Estudos mostram que mesmo uma diferença de 2 a 3 segundos no tempo de descongelamento à mesma temperatura afeta a temperatura final da palheta — e isso se reflete nas taxas de não-retorno das vacas após a inseminação. Não se trata de riscos teóricos. Trata-se de dinheiro já perdido.",
+        },
+        {
+          heading: "A economia de um único erro",
+          paragraph:
+            "Uma diferença de 12 pontos percentuais é uma abstração até você começar a contar dinheiro. Pesquisas mostram que uma vaca que não emprenha na primeira inseminação custa à operação US$ 622 adicionais por animal — cobrindo despesas com tratamento repetido, manejo e perdas por um intervalo entre partos prolongado. Outro estudo constatou que, em vacas que precisam de três ou mais inseminações por concepção, o lucro cai mais de US$ 205 por ano por cabeça. Pegue um rebanho de 500 vacas. Com uma taxa de concepção de 44% você tem 220 vacas prenhes. A 56%, você tem 280. A diferença: 60 vacas que não conceberam neste ciclo. A US$ 205 por cabeça em perdas adicionais — são US$ 12.300 por estação só em custos diretos, sem contar o bezerro perdido ou o intervalo entre partos prolongado. Nenhuma dessas vacas voltará com um resultado obviamente vazio. Algumas simplesmente não emprenham — e isso será atribuído a um ciclo ruim, estresse ou ao clima. Qualquer coisa, menos um pico de temperatura durante a retirada da palheta.",
+        },
+        {
+          heading: "O problema invisível do setor",
+          paragraph:
+            "O mais incômodo neste tema é que o problema é sistêmico. Não porque as pessoas sejam irresponsáveis. Mas porque a avaliação padrão do sêmen não mostra o dano funcional às proteínas. Apesar de décadas de aprimoramento dos protocolos de criopreservação, diluentes e aditivos, a fertilidade pós-descongelamento continua imprevisível. Os mecanismos moleculares que governam o dano e a sobrevivência das células espermáticas durante o congelamento e o descongelamento ainda não são totalmente compreendidos. A avaliação visual da motilidade e da morfologia não enxerga o dano às proteínas do acrossomo. Não enxerga a fragmentação do DNA. Não enxerga o que aconteceu com a célula entre o botijão de nitrogênio e a pistola de inseminação. É exatamente por isso que os erros de manuseio permanecem invisíveis por tanto tempo. E é exatamente por isso que o experimento de Penteado é tão valioso: ele traduziu a biologia molecular em números concretos, medidos no campo, em animais reais, em condições reais.",
+        },
+        {
+          heading: "O que isso significa na prática",
+          paragraph:
+            "A conclusão de tudo acima é simples, mas exige disciplina. O sêmen não é apenas um líquido dentro de uma palheta. É um sistema biológico complexo, sensível a variações de temperatura mesmo dentro de 1 a 2 graus. Toda vez que o gargalo do botijão sobe acima da linha de geada, toda vez que uma palheta demora segundos a mais na mão, toda vez que o equipamento não é pré-resfriado — ocorre um dano invisível que não pode ser corrigido na etapa seguinte. E esse dano não vai aparecer quando você olhar pelo microscópio. Vai aparecer 35 dias depois — como um útero vazio no ultrassom. Um protocolo de manuseio de sêmen não é um conjunto de recomendações desejáveis. É um padrão de produção que determina diretamente o resultado financeiro de cada ciclo de inseminação.",
+        },
+        {
+          heading: "Baixe o checklist",
+          paragraph:
+            "Baixe o checklist prático em PDF 'Armazenamento e Manuseio de Sêmen: 10 Passos Críticos' — passos específicos que protegem o sêmen em cada etapa do manuseio, do botijão até o momento da inseminação. Implemente-o no protocolo da sua equipe hoje.",
+        },
+      ],
     },
     "semen-quality-analysis": {
       title:
@@ -117,7 +168,58 @@ export const translations: Record<string, Record<string, LocalizedMaterial>> = {
       downloadTitle: "Descargar: Lista de Almacenamiento y Manejo de Semen",
       downloadDescription:
         "Ingresa tu correo para descargar esta lista y obtener acceso gratuito a nuevo contenido con la suscripción.",
-      // cuerpo del artículo: traducción ES en la etapa 2
+      content: [
+        {
+          heading: "Algunos errores se ven al instante",
+          paragraph:
+            "Una pajilla que cae al suelo. Un baño de descongelación no calentado a la temperatura correcta. Equipo sin esterilizar. Esos errores son fáciles de corregir — porque los ves. Pero hay otra categoría de errores. Los que no ves en absoluto. El semen se ve normal. Se mueve. Pasa la evaluación visual. Y aun así no fecunda. De eso trata la historia de Luciano Penteado — y el ensayo de campo en 280 vacas que cambió la comprensión de lo que realmente determina el resultado de la inseminación artificial.",
+        },
+        {
+          heading: "El experimento que no debería haber hecho falta",
+          paragraph:
+            "Luciano Penteado es dueño de Firmasa Tecnologia Para Pecuária, una de las principales empresas de inseminación artificial de Brasil. No es estudiante. No es teórico. Es un profesional con años de experiencia. Pero fue en un curso de capacitación de inseminadores donde escuchó por primera vez sobre la sensibilidad de las proteínas del espermatozoide a las fluctuaciones de temperatura durante el traslado del termo de nitrógeno al baño de descongelación. Y decidió probarlo en el campo. Las condiciones del experimento fueron deliberadamente estrictas: el mismo semen, el mismo protocolo, el mismo día, los mismos inseminadores. La única variable era la cantidad de pajillas sacadas a la vez.",
+        },
+        {
+          heading: "La prueba",
+          items: [
+            "Grupo A: 10 pajillas a la vez. Las fluctuaciones de temperatura superaron 1,5 °C.",
+            "Grupo B: 3 pajillas a la vez. Las fluctuaciones de temperatura se mantuvieron dentro de 1,5 °C.",
+            "Resultado: 44% frente a 56% de fecundación. Una diferencia de 12 puntos porcentuales a partir de un solo paso de manejo.",
+          ],
+          paragraph:
+            "Si quieres asegurarte de que tu equipo no está perdiendo resultados en esta etapa — descarga la lista práctica en PDF 'Almacenamiento y Manejo de Semen: 10 Pasos Críticos'. Cubre cada paso del manejo del semen, desde el termo hasta el momento de la inseminación.",
+        },
+        {
+          heading: "Por qué el semen se ve normal pero no funciona",
+          paragraph:
+            "Esta es la parte más incómoda. Porque la evaluación visual estándar — motilidad, concentración, morfología — no muestra el daño que se describe aquí. Cuando se sacan muchas pajillas del termo de nitrógeno a la vez, la temperatura en el cuello del recipiente sube bruscamente. Cada fluctuación desencadena una cadena de daño molecular. Las etapas de enfriamiento, congelación y descongelación perjudican la calidad del semen y provocan cambios drásticos en las células. La formación de cristales de hielo intracelulares, la lesión osmótica y el daño estructural por estrés oxidativo reducen la viabilidad y la motilidad de los espermatozoides hasta en un 50%, mientras que el daño al acrosoma contribuye directamente a la baja fertilidad. El daño subletal de la congelación sigue siendo una limitación importante del proceso de criopreservación, lo que lleva inevitablemente a una menor fertilidad in vivo. En otras palabras: el semen puede estar vivo e incapaz de fecundar al mismo tiempo. Y ninguna inspección visual lo mostrará.",
+        },
+        {
+          heading: "Lo que dice la ciencia sobre el costo del manejo descuidado",
+          paragraph:
+            "El estudio de Penteado no debe verse como un caso aislado. El cuerpo de evidencia científica acumulado en las últimas dos décadas cuenta la misma historia. Los expertos en transferencia de embriones bovinos señalan que el manejo inadecuado del semen es probablemente una causa común de óvulos no fecundados recolectados de vacas donantes. La mayoría de las personas que trabajan a diario con semen congelado — incluidos los veterinarios — nunca recibieron capacitación formal en almacenamiento y manejo seguros a largo plazo. Investigaciones con toros Brahman mostraron que, para alcanzar la tasa máxima de fertilidad en un programa de IA, la calidad general del semen congelado-descongelado en todos los aspectos es crítica. Los estudios muestran que incluso una diferencia de 2 a 3 segundos en el tiempo de descongelación a la misma temperatura afecta la temperatura final de la pajilla — y eso se refleja en las tasas de no retorno de las vacas tras la inseminación. No se trata de riesgos teóricos. Se trata de dinero ya perdido.",
+        },
+        {
+          heading: "La economía de un solo error",
+          paragraph:
+            "Una diferencia de 12 puntos porcentuales es una abstracción hasta que empiezas a contar dinero. Las investigaciones muestran que una vaca que no concibe en la primera inseminación le cuesta a la operación US$ 622 adicionales por animal — cubriendo gastos de tratamiento repetido, manejo y pérdidas por un intervalo entre partos prolongado. Otro estudio halló que, en vacas que requieren tres o más inseminaciones por concepción, la ganancia cae más de US$ 205 al año por cabeza. Toma un hato de 500 vacas. Con una tasa de concepción del 44% obtienes 220 vacas preñadas. Al 56%, obtienes 280. La diferencia: 60 vacas que no concibieron en este ciclo. A US$ 205 por cabeza en pérdidas adicionales — son US$ 12.300 por temporada solo en costos directos, sin contar el ternero perdido ni el intervalo entre partos prolongado. Ninguna de esas vacas volverá con un resultado obviamente vacío. Algunas simplemente no quedarán preñadas — y eso se atribuirá a un mal ciclo, al estrés o al clima. Cualquier cosa menos un pico de temperatura durante la extracción de la pajilla.",
+        },
+        {
+          heading: "El problema invisible del sector",
+          paragraph:
+            "Lo más incómodo de este tema es que el problema es sistémico. No porque la gente sea irresponsable. Sino porque la evaluación estándar del semen no muestra el daño funcional a las proteínas. A pesar de décadas de perfeccionamiento de los protocolos de criopreservación, diluyentes y aditivos, la fertilidad posdescongelación sigue siendo impredecible. Los mecanismos moleculares que rigen el daño y la supervivencia de las células espermáticas durante la congelación y la descongelación aún no se comprenden por completo. La evaluación visual de la motilidad y la morfología no ve el daño a las proteínas del acrosoma. No ve la fragmentación del ADN. No ve lo que le pasó a la célula entre el termo de nitrógeno y la pistola de inseminación. Es exactamente por eso que los errores de manejo permanecen invisibles tanto tiempo. Y es exactamente por eso que el experimento de Penteado es tan valioso: tradujo la biología molecular en números concretos, medidos en el campo, en animales reales, en condiciones reales.",
+        },
+        {
+          heading: "Qué significa esto en la práctica",
+          paragraph:
+            "La conclusión de todo lo anterior es simple, pero exige disciplina. El semen no es solo un líquido dentro de una pajilla. Es un sistema biológico complejo, sensible a los cambios de temperatura incluso dentro de 1 a 2 grados. Cada vez que el cuello del termo sube por encima de la línea de escarcha, cada vez que una pajilla se demora segundos de más en la mano, cada vez que el equipo no se preenfría — se produce un daño invisible que no se puede corregir en el paso siguiente. Y ese daño no aparecerá cuando mires por el microscopio. Aparecerá 35 días después — como un útero vacío en la ecografía. Un protocolo de manejo del semen no es un conjunto de recomendaciones deseables. Es un estándar de producción que determina directamente el resultado financiero de cada ciclo de inseminación.",
+        },
+        {
+          heading: "Descarga la lista",
+          paragraph:
+            "Descarga la lista práctica en PDF 'Almacenamiento y Manejo de Semen: 10 Pasos Críticos' — pasos específicos que protegen el semen en cada etapa del manejo, desde el termo hasta el momento de la inseminación. Impleméntala en el protocolo de tu equipo hoy.",
+        },
+      ],
     },
     "semen-quality-analysis": {
       title:
