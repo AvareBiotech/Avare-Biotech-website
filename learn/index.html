@@ -1160,7 +1160,7 @@ function learnApplyLang(lang){
   document.querySelectorAll('.av-lang__opt').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===lang);});
   document.querySelectorAll('.nav-lang-mob button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===lang);});
 }
-function learnSetLang(lang){ if(!LEARN_I18N[lang])return; localStorage.setItem('av_lang',lang); learnApplyLang(lang); var w=document.getElementById('avLang'); if(w)w.classList.remove('open'); }
+function learnSetLang(lang){ if(!LEARN_I18N[lang])return; localStorage.setItem('av_lang',lang); learnApplyLang(lang); try{history.replaceState(null,'',lang==='en'?location.pathname+location.search:'#'+lang);}catch(e){} var w=document.getElementById('avLang'); if(w)w.classList.remove('open'); }
 function pickLang(l){ learnSetLang(l); var p=document.getElementById('navPill'); if(p)p.classList.remove('mobile-open'); var bb=document.querySelector('.burger'); if(bb)bb.classList.remove('open'); }
 document.addEventListener('click',function(e){
   var wrap=document.getElementById('avLang'); if(!wrap)return;
@@ -1169,8 +1169,15 @@ document.addEventListener('click',function(e){
   if(opt){learnSetLang(opt.getAttribute('data-lang')); return;}
   if(!wrap.contains(e.target)) wrap.classList.remove('open');
 });
-(function(){ learnApplyLang(_learnLang());
-  var last=_learnLang();
+(function(){
+  var sup=['en','pt','es'];
+  var h=location.hash.replace('#','').toLowerCase();
+  var lang=(sup.indexOf(h)!==-1?h:null)||(localStorage.getItem('av_lang')||'en');
+  if(!LEARN_I18N[lang]) lang='en';
+  localStorage.setItem('av_lang',lang);
+  learnApplyLang(lang);
+  try{history.replaceState(null,'',lang==='en'?location.pathname+location.search:'#'+lang);}catch(e){}
+  var last=lang;
   setInterval(function(){var l=_learnLang(); if(l!==last){last=l; learnApplyLang(l);}},400);
 })();
 </script>
