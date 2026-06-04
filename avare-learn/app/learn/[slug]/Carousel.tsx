@@ -33,7 +33,17 @@ export function Carousel({ items }: { items: Material[] }) {
             {items.map((m) => (
               <div key={m.slug} className="learn-card">
                 <a href={`/learn/${m.slug}`} className="learn-card-link">
-                  <div className="learn-card-img">{m.emoji}</div>
+                  <div className="learn-card-img" style={m.coverImage ? { padding: 0 } : undefined}>
+                    {m.coverImage ? (
+                      <img
+                        src={m.coverImage}
+                        alt={m.title}
+                        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                      />
+                    ) : (
+                      m.emoji
+                    )}
+                  </div>
                   <div className="learn-card-body">
                     <div className="learn-card-tags">
                       <span className={`tag ${m.tagClass}`}>{m.categoryLabel}</span>
