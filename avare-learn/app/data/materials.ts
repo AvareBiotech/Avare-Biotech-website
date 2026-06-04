@@ -14,6 +14,7 @@ export interface Material {
   tagClass: string;
   emoji: string;
   coverImage?: string;
+  datePublished?: string;
   description: string;
   downloadTitle: string;
   downloadButtonText: string;
@@ -31,6 +32,7 @@ export const materials: Material[] = [
     tagClass: "tag-guide",
     emoji: "🧊",
     coverImage: "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/semen-storage-handling.png",
+    datePublished: "2026-06-04",
     description:
       "Temperature errors during thawing cost more than any equipment failure. Here's what actually matters.",
     downloadTitle: "Download: Semen Storage & Handling Checklist",
@@ -100,6 +102,7 @@ export const materials: Material[] = [
     emoji: "🔬",
     coverImage:
       "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/Article-semen-quality-analysis.png",
+    datePublished: "2026-06-04",
     description:
       "This protocol confirms that Avare App reads motility and concentration as accurately as CASA and manual count — and works where no lab system is within reach.",
     downloadTitle: "Download: Avare App QA Protocol",

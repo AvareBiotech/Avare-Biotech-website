@@ -76,20 +76,16 @@
       {
         "@type": "ListItem",
         "position": 1,
+        "url": "https://avareit.com/learn/semen-storage-handling",
         "name": "Semen Storage & Handling: 10 Critical Steps",
         "description": "Temperature errors during thawing cost more than any equipment failure. A practical guide to semen storage and handling."
       },
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "How 1.5°C Cost 12 Conception Points",
-        "description": "Field study on 280 cows showing how straw handling temperature variation impacts conception rates."
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Frozen-thawed/Fresh semen quality analysis (en/pt/ar)",
-        "description": "Complete checklist for equipment, storage, and team readiness before the breeding season."
+        "url": "https://avareit.com/learn/semen-quality-analysis",
+        "name": "Frozen-thawed/Fresh semen quality analysis",
+        "description": "A field QA protocol confirming that Avare App reads motility and concentration as accurately as CASA and manual count — and works where no lab system is within reach."
       }
     ]
   }
@@ -488,6 +484,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 .av-lang__opt{font-family:var(--font);font-size:14px;font-weight:500;color:#888;background:none;border:none;padding:8px 14px;width:100%;text-align:left;cursor:pointer;white-space:nowrap;}
 .av-lang__opt:hover,.av-lang__opt.active{color:#fff;background:rgba(255,255,255,0.06);}
 .nav-pill .sep{width:1px;height:20px;background:rgba(255,255,255,0.15);margin:0 4px;flex-shrink:0;display:inline-block;align-self:center;}
+.card-date{font-size:13px;font-weight:500;letter-spacing:.03em;color:var(--muted);margin:8px 0 0;}
 .nav-lang-mob{display:none;gap:8px;width:100%;margin-top:4px;}
 .nav-lang-mob button{flex:1;font-family:var(--font);font-size:15px;font-weight:600;color:#aaa;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px 0;cursor:pointer;}
 .nav-lang-mob button.active{color:#020202;background:#fff;border-color:#fff;}
@@ -554,6 +551,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
     <div class="card-img" style="padding:0;"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/Semen%20Storage%20%26%20Handling.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
     <div class="card-body">
       <div class="card-tags"><span class="tag tag-guide" data-i18n="tag.guide">Guide</span></div>
+      <div class="card-date" data-date="2026-06-04"></div>
       <div class="card-title" data-i18n="card1.title">Semen Storage &amp; Handling: 10 Critical Steps</div>
       <div class="card-desc" data-i18n="card1.desc">Temperature errors during thawing cost more than any equipment failure. Here&#39;s what actually matters.</div>
       <div class="card-actions">
@@ -568,6 +566,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
     <div class="card-img" style="padding:0;"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/Cover-semen-quality-analysis.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
     <div class="card-body">
       <div class="card-tags"><span class="tag tag-protocol" data-i18n="tag.protocol">Protocol</span></div>
+      <div class="card-date" data-date="2026-06-04"></div>
       <div class="card-title" data-i18n="card2.title">Frozen-thawed/Fresh semen quality analysis (en/pt/ar)</div>
       <div class="card-desc" data-i18n="card2.desc">This protocol confirms that Avare App reads motility and concentration as accurately as CASA and manual count — and works where no lab system is within reach.</div>
       <div class="card-actions">
@@ -1146,6 +1145,8 @@ window.LEARN_I18N = {
 };
 function _learnLang(){var l=localStorage.getItem('av_lang')||'en';return LEARN_I18N[l]?l:'en';}
 function learnT(k){var l=_learnLang();var d=LEARN_I18N[l]||LEARN_I18N.en;return (d&&d[k])||LEARN_I18N.en[k]||'';}
+var LEARN_LOCALE={en:'en-US',pt:'pt-BR',es:'es-ES'};
+function formatDates(lang){var loc=LEARN_LOCALE[lang]||'en-US';document.querySelectorAll('.card-date[data-date]').forEach(function(el){var iso=el.getAttribute('data-date');if(!iso)return;var p=iso.split('-');var dt=new Date(Date.UTC(+p[0],+p[1]-1,+p[2]));try{el.textContent=new Intl.DateTimeFormat(loc,{year:'numeric',month:'long',day:'numeric',timeZone:'UTC'}).format(dt);}catch(e){el.textContent=iso;}});}
 function learnApplyLang(lang){
   if(!LEARN_I18N[lang]) lang='en';
   document.querySelectorAll('[data-i18n]').forEach(function(el){
@@ -1159,6 +1160,7 @@ function learnApplyLang(lang){
   var tog=document.getElementById('avLangToggle'); if(tog) tog.innerHTML=lang.toUpperCase()+' <span class="av-lang__arrow">&#9660;</span>';
   document.querySelectorAll('.av-lang__opt').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===lang);});
   document.querySelectorAll('.nav-lang-mob button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===lang);});
+  formatDates(lang);
 }
 function learnSetLang(lang){ if(!LEARN_I18N[lang])return; localStorage.setItem('av_lang',lang); learnApplyLang(lang); try{history.replaceState(null,'',lang==='en'?location.pathname+location.search:'#'+lang);}catch(e){} var w=document.getElementById('avLang'); if(w)w.classList.remove('open'); }
 function pickLang(l){ learnSetLang(l); var p=document.getElementById('navPill'); if(p)p.classList.remove('mobile-open'); var bb=document.querySelector('.burger'); if(bb)bb.classList.remove('open'); }

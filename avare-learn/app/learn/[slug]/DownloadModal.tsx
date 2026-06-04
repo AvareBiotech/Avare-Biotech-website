@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import { useUI } from "./i18n";
 
 const LEARN_SCRIPT =
   "https://script.google.com/macros/s/AKfycbwuKsYVg_3x3RbBnxY0RUlFjE4tldmErUWRddqPDXg4xQxsOqqT19wTeGsxRqcW5jyK/exec";
@@ -40,6 +41,7 @@ export function DownloadModalDialog({
   pdfUrl?: string;
   pdfs?: { label: string; url: string }[];
 }) {
+  const t = useUI();
   const [email, setEmail] = useState("");
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
@@ -84,7 +86,7 @@ export function DownloadModalDialog({
 
   async function handleSubmit() {
     if (!email || !email.includes("@")) {
-      alert("Please enter a valid email.");
+      alert(t("invalidEmail"));
       return;
     }
     setSending(true);
@@ -140,14 +142,14 @@ export function DownloadModalDialog({
           <div className="learn-lock-form">
             {done ? (
               <>
-                <p className="learn-success-msg">&#10003; Subscribed!</p>
+                <p className="learn-success-msg">&#10003; {t("subscribedMsg")}</p>
                 {langs ? (
                   <>
                     <p
                       className="learn-success-detail"
                       style={{ marginBottom: "12px" }}
                     >
-                      Choose your language:
+                      {t("chooseLanguage")}
                     </p>
                     {langs.map((p) => (
                       <button
@@ -163,8 +165,8 @@ export function DownloadModalDialog({
                 ) : (
                   <>
                     <p className="learn-success-detail" style={{ marginBottom: "16px" }}>
-                      Your PDF is downloading. If it did not start,{" "}
-                      <a href={downloadUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)", textDecoration: "underline" }}>click here</a>.
+                      {t("downloadingMsg")}{" "}
+                      <a href={downloadUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)", textDecoration: "underline" }}>{t("clickHere")}</a>.
                     </p>
                     <button className="learn-lock-submit" onClick={handleDirectDownload}>
                       {buttonText}
@@ -174,13 +176,11 @@ export function DownloadModalDialog({
               </>
             ) : (
               <>
-                <div className="learn-lock-label">
-                  &darr; Download — enter your email
-                </div>
+                <div className="learn-lock-label">{t("enterEmailLabel")}</div>
                 <p>{description}</p>
                 <input
                   type="email"
-                  placeholder="Email address"
+                  placeholder={t("emailPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   onKeyDown={(e) => {
@@ -192,7 +192,7 @@ export function DownloadModalDialog({
                   onClick={handleSubmit}
                   disabled={sending}
                 >
-                  {sending ? "Sending..." : buttonText}
+                  {sending ? t("sending") : buttonText}
                 </button>
               </>
             )}

@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useUI, LangSwitcher } from "./i18n";
 
 export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const t = useUI();
 
   return (
     <nav className="learn-nav">
@@ -32,18 +34,19 @@ export function Nav() {
           <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
             <path d="M12 2.1L1 12h3v9h7v-6h2v6h7v-9h3L12 2.1z" />
           </svg>
-          Home
+          {t("navHome")}
         </a>
         <a href="/learn" className="nav-kb">
-          Knowledge Base
+          {t("navKb")}
         </a>
         <a
           href="https://avareit.com/#contacts"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Contacts
+          {t("navContacts")}
         </a>
+        <LangSwitcher />
       </div>
     </nav>
   );

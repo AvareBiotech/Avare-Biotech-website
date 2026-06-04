@@ -5,10 +5,14 @@ import {
   getMaterialBySlug,
   getOtherMaterials,
 } from "@/app/data/materials";
-import { DownloadModal } from "./DownloadModal";
 import { Carousel } from "./Carousel";
 import { Nav } from "./Nav";
+import { LangProvider } from "./i18n";
+import { ArticleBody, LearnFooter } from "./ArticleClient";
 import "./learn.css";
+
+// Дата сборки (= день деплоя) как дефолт для статей без явной даты
+const BUILD_DATE = new Date().toISOString().slice(0, 10);
 
 export async function generateStaticParams() {
   return materials.map((m) => ({ slug: m.slug }));
@@ -22,13 +26,26 @@ export async function generateMetadata({
   const { slug } = await params;
   const material = getMaterialBySlug(slug);
   if (!material) return {};
+  const url = `https://avareit.com/learn/${slug}`;
+  const images = material.coverImage ? [material.coverImage] : undefined;
   return {
-    title: `${material.title} — Avare Biotech`,
+    title: material.title,
     description: material.description,
+    alternates: { canonical: url },
     openGraph: {
+      type: "article",
+      url,
       title: material.title,
       description: material.description,
       siteName: "Avare Biotech",
+      images,
+      publishedTime: material.datePublished || BUILD_DATE,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: material.title,
+      description: material.description,
+      images,
     },
   };
 }
@@ -43,83 +60,76 @@ export default async function MaterialPage({
   if (!material) notFound();
 
   const others = getOtherMaterials(slug);
+  const published = material.datePublished || BUILD_DATE;
+  const pageUrl = `https://avareit.com/learn/${slug}`;
+  const LOGO =
+    "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/fav.png";
+  const publisher = {
+    "@type": "Organization",
+    name: "Avare Biotech Inc.",
+    url: "https://avareit.com",
+    logo: { "@type": "ImageObject", url: LOGO },
+  };
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      headline: material.title,
+      description: material.description,
+      image: material.coverImage ? [material.coverImage] : undefined,
+      inLanguage: "en",
+      datePublished: published,
+      dateModified: published,
+      author: publisher,
+      publisher,
+      mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://avareit.com" },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Knowledge Base",
+          item: "https://avareit.com/learn",
+        },
+        { "@type": "ListItem", position: 3, name: material.title, item: pageUrl },
+      ],
+    },
+  ];
 
   return (
-    <div className="learn-page">
-      <link
-        rel="preconnect"
-        href="https://api.fontshare.com"
-      />
-      <link
-        href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        href="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/fav.png"
-      />
-
-      <Nav />
-
-      {/* HERO */}
-      <section className="learn-hero">
-        <div className="learn-hero-inner">
-          <span className="tag">{material.categoryLabel}</span>
-          <h1>{material.title}</h1>
-        </div>
-      </section>
-
-      {/* COVER IMAGE */}
-      <div className="learn-cover">
-        <div className="learn-cover-img">
-          {material.coverImage ? (
-            <img
-              src={material.coverImage}
-              alt={material.title}
-              style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "12px" }}
-            />
-          ) : (
-            material.emoji
-          )}
-        </div>
-      </div>
-
-      {/* CONTENT */}
-      <article className="learn-content">
-        {material.content.map((section, i) => (
-          <div key={i}>
-            {section.heading && <h2>{section.heading}</h2>}
-            {section.items && (
-              <ul>
-                {section.items.map((item, j) => (
-                  <li key={j}>{item}</li>
-                ))}
-              </ul>
-            )}
-            {section.paragraph && <p>{section.paragraph}</p>}
-          </div>
-        ))}
-
-        <DownloadModal
-          title={material.downloadTitle}
-          description={material.downloadDescription}
-          buttonText={material.downloadButtonText}
-          pdfs={material.pdfs}
+    <LangProvider>
+      <div className="learn-page">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </article>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          href="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/fav.png"
+        />
 
-      <hr className="learn-divider" />
+        <Nav />
 
-      {/* OTHER MATERIALS */}
-      <section className="learn-others">
-        <Carousel items={others} />
-      </section>
+        <ArticleBody material={material} published={published} />
 
-      {/* FOOTER */}
-      <footer className="learn-footer">
-        <span>&copy; 2026 Avare Biotech. All rights reserved.</span>
-      </footer>
-    </div>
+        <hr className="learn-divider" />
+
+        <section className="learn-others">
+          <Carousel items={others} />
+        </section>
+
+        <LearnFooter />
+      </div>
+    </LangProvider>
   );
 }

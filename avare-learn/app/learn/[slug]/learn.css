@@ -647,3 +647,27 @@
     padding: 24px 16px;
   }
 }
+/* Дата публикации статьи */
+.learn-date {
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* LANG SWITCHER (article) */
+.av-lang { position: relative; flex-shrink: 0; }
+.av-lang__toggle { font-family: inherit; font-size: 15px; font-weight: 500; color: #fff; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.av-lang__arrow { font-size: 11px; color: rgba(255,255,255,0.5); }
+.av-lang__dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden; min-width: 80px; z-index: 10000; }
+.av-lang__opt { font-family: inherit; font-size: 14px; font-weight: 500; color: #888; background: none; border: none; padding: 8px 14px; width: 100%; text-align: left; cursor: pointer; white-space: nowrap; }
+.av-lang__opt:hover, .av-lang__opt.active { color: #fff; background: rgba(255,255,255,0.06); }
+.nav-lang-mob { display: none; gap: 8px; width: 100%; margin-top: 4px; }
+.nav-lang-mob button { flex: 1; font-family: inherit; font-size: 15px; font-weight: 600; color: #aaa; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 10px 0; cursor: pointer; }
+.nav-lang-mob button.active { color: #020202; background: #fff; border-color: #fff; }
+@media (max-width: 640px) {
+  .learn-nav-pill.mobile-open .av-lang { display: none; }
+  .learn-nav-pill.mobile-open .nav-lang-mob { display: flex; }
+  .learn-nav-pill.mobile-open .sep { display: none; }
+}
