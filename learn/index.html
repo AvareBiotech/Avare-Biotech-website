@@ -477,6 +477,21 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
   .subscribe button{border-radius:0 0 10px 10px;}
 }
 
+
+/* LANG SWITCHER */
+.av-lang{position:relative;flex-shrink:0;}
+.av-lang__toggle{font-family:var(--font);font-size:15px;font-weight:500;color:#fff;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:6px 10px;cursor:pointer;display:flex;align-items:center;gap:6px;}
+.av-lang__arrow{font-size:11px;color:rgba(255,255,255,0.5);transition:transform .2s;}
+.av-lang.open .av-lang__arrow{transform:rotate(180deg);}
+.av-lang__dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);border-radius:8px;overflow:hidden;min-width:80px;z-index:10000;}
+.av-lang.open .av-lang__dropdown{display:block;}
+.av-lang__opt{font-family:var(--font);font-size:14px;font-weight:500;color:#888;background:none;border:none;padding:8px 14px;width:100%;text-align:left;cursor:pointer;white-space:nowrap;}
+.av-lang__opt:hover,.av-lang__opt.active{color:#fff;background:rgba(255,255,255,0.06);}
+.nav-pill .sep{width:1px;height:20px;background:rgba(255,255,255,0.15);margin:0 4px;flex-shrink:0;display:inline-block;align-self:center;}
+.nav-lang-mob{display:none;gap:8px;width:100%;margin-top:4px;}
+.nav-lang-mob button{flex:1;font-family:var(--font);font-size:15px;font-weight:600;color:#aaa;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px 0;cursor:pointer;}
+.nav-lang-mob button.active{color:#020202;background:#fff;border-color:#fff;}
+@media(max-width:640px){.nav-pill.mobile-open .av-lang{display:none;}.nav-pill.mobile-open .nav-lang-mob{display:flex;}.nav-pill.mobile-open .sep{display:none;}}
 </style>
 </head>
 <body>
@@ -488,34 +503,48 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
   </a>
   <button class="burger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav-pill" id="navPill">
-    <a href="https://avareit.com" target="_blank">
+    <a href="https://avareit.com" target="_blank" data-i18n="nav.home">
       <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2.1L1 12h3v9h7v-6h2v6h7v-9h3L12 2.1z"/></svg>
       Home
     </a>
-    <a href="#" class="nav-kb">Knowledge Base</a>
-    <a href="https://avareit.com/#contacts" target="_blank">Contacts</a>
+    <a href="#" class="nav-kb" data-i18n="nav.kb">Knowledge Base</a>
+    <a href="https://avareit.com/#contacts" target="_blank" data-i18n="nav.contacts">Contacts</a>
+    <span class="sep"></span>
+    <div class="av-lang" id="avLang">
+      <button class="av-lang__toggle" id="avLangToggle">EN <span class="av-lang__arrow">&#9660;</span></button>
+      <div class="av-lang__dropdown">
+        <button class="av-lang__opt active" data-lang="en">EN</button>
+        <button class="av-lang__opt" data-lang="pt">PT</button>
+        <button class="av-lang__opt" data-lang="es">ES</button>
+      </div>
+    </div>
+    <div class="nav-lang-mob">
+      <button data-lang="en" onclick="pickLang('en')">EN</button>
+      <button data-lang="pt" onclick="pickLang('pt')">PT</button>
+      <button data-lang="es" onclick="pickLang('es')">ES</button>
+    </div>
   </div>
 </nav>
 
 <div class="hero">
 <div class="hero-inner">
-  <div class="hero-tag">Knowledge Base</div>
-  <h1>Field Knowledge.<br/>Built for <em>Practitioners.</em></h1>
+  <div class="hero-tag" data-i18n="hero.tag">Knowledge Base</div>
+  <h1 id="heroTitle" data-i18n-html="hero.title">Field Knowledge.<br/>Built for <em>Practitioners.</em></h1>
   <div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
-  <p class="hero-sub" style="margin:0;">Guides, protocols, and case studies — for vets, AI technicians, and farm managers.</p>
+  <p class="hero-sub" style="margin:0;" data-i18n="hero.sub">Guides, protocols, and case studies — for vets, AI technicians, and farm managers.</p>
   <div class="subscribe">
-    <input type="email" placeholder="Your email"/>
-    <button onclick="handleSubscribe(this)">Subscribe →</button>
+    <input type="email" placeholder="Your email" data-i18n-ph="form.email"/>
+    <button onclick="handleSubscribe(this)" data-i18n="btn.subscribe">Subscribe →</button>
   </div>
-  <p style="font-size:15px;color:var(--muted);margin:0;line-height:1.7;max-width:480px;text-align:center;">Unlock the rest of our helpful resources and get free access to new content with a subscription</p>
+  <p style="font-size:15px;color:var(--muted);margin:0;line-height:1.7;max-width:480px;text-align:center;" data-i18n="cta.unlock">Unlock the rest of our helpful resources and get free access to new content with a subscription</p>
   </div>
 </div>
 </div>
 
 <div class="filters-wrap">
-  <button class="filter-btn active" onclick="filterCards('all',this)">All materials</button>
-  <button class="filter-btn" onclick="filterCards('guide',this)">Guides</button>
-  <button class="filter-btn" onclick="filterCards('protocol',this)">Protocols</button>
+  <button class="filter-btn active" onclick="filterCards('all',this)" data-i18n="filter.all">All materials</button>
+  <button class="filter-btn" onclick="filterCards('guide',this)" data-i18n="filter.guides">Guides</button>
+  <button class="filter-btn" onclick="filterCards('protocol',this)" data-i18n="filter.protocols">Protocols</button>
 </div>
 
 <div class="cards-grid" id="grid">
@@ -524,12 +553,12 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
   <div class="card" data-type="guide">
     <div class="card-img" style="padding:0;"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/Semen%20Storage%20%26%20Handling.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
     <div class="card-body">
-      <div class="card-tags"><span class="tag tag-guide">Guide</span></div>
-      <div class="card-title">Semen Storage &amp; Handling: 10 Critical Steps</div>
-      <div class="card-desc">Temperature errors during thawing cost more than any equipment failure. Here&#39;s what actually matters.</div>
+      <div class="card-tags"><span class="tag tag-guide" data-i18n="tag.guide">Guide</span></div>
+      <div class="card-title" data-i18n="card1.title">Semen Storage &amp; Handling: 10 Critical Steps</div>
+      <div class="card-desc" data-i18n="card1.desc">Temperature errors during thawing cost more than any equipment failure. Here&#39;s what actually matters.</div>
       <div class="card-actions">
-        <a class="btn-read" href="/learn/semen-storage-handling">Read</a>
-        <button class="btn-dl btn-locked" onclick="openModal('modal1lock')">🔒 Download</button>
+        <a class="btn-read" href="/learn/semen-storage-handling" data-i18n="btn.read">Read</a>
+        <button class="btn-dl btn-locked" onclick="openModal('modal1lock')" data-i18n="btn.download">🔒 Download</button>
       </div>
     </div>
   </div>
@@ -538,12 +567,12 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
   <div class="card" data-type="protocol">
     <div class="card-img" style="padding:0;"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/Cover-semen-quality-analysis.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
     <div class="card-body">
-      <div class="card-tags"><span class="tag tag-protocol">Protocol</span></div>
-      <div class="card-title">Frozen-thawed/Fresh semen quality analysis (en/pt/ar)</div>
-      <div class="card-desc">This protocol confirms that Avare App reads motility and concentration as accurately as CASA and manual count — and works where no lab system is within reach.</div>
+      <div class="card-tags"><span class="tag tag-protocol" data-i18n="tag.protocol">Protocol</span></div>
+      <div class="card-title" data-i18n="card2.title">Frozen-thawed/Fresh semen quality analysis (en/pt/ar)</div>
+      <div class="card-desc" data-i18n="card2.desc">This protocol confirms that Avare App reads motility and concentration as accurately as CASA and manual count — and works where no lab system is within reach.</div>
       <div class="card-actions">
-        <a class="btn-read" href="/learn/semen-quality-analysis">Read</a>
-        <button class="btn-dl btn-locked" onclick="openModal('modal3lock')">🔒 Download</button>
+        <a class="btn-read" href="/learn/semen-quality-analysis" data-i18n="btn.read">Read</a>
+        <button class="btn-dl btn-locked" onclick="openModal('modal3lock')" data-i18n="btn.download">🔒 Download</button>
       </div>
     </div>
   </div>
@@ -778,14 +807,14 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 
 
 <div style="text-align:center;padding:40px 48px;">
-  <button class="load-more-btn" id="loadMoreBtn" style="opacity:0.4;cursor:default;pointer-events:none;">Load more →</button>
+  <button class="load-more-btn" id="loadMoreBtn" style="opacity:0.4;cursor:default;pointer-events:none;" data-i18n="btn.loadmore">Load more →</button>
 </div>
 
 <div class="bottom-subscribe">
-  <p class="bottom-subscribe-text">Unlock the rest of our helpful resources and get free access to new content with a subscription</p>
+  <p class="bottom-subscribe-text" data-i18n="cta.unlock">Unlock the rest of our helpful resources and get free access to new content with a subscription</p>
   <div class="subscribe">
-    <input type="email" id="bottom-email" placeholder="Your email"/>
-    <button onclick="handleSubscribeBottom(this)">Subscribe →</button>
+    <input type="email" id="bottom-email" placeholder="Your email" data-i18n-ph="form.email"/>
+    <button onclick="handleSubscribeBottom(this)" data-i18n="btn.subscribe">Subscribe →</button>
   </div>
 </div>
 
@@ -794,16 +823,16 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 <div class="modal-overlay" id="modal1lock" onclick="closeOnOverlay(event,this)">
   <div class="modal">
     <div class="modal-header">
-      <div><div class="modal-tags"><span class="tag tag-guide">Guide</span></div>
-      <div class="modal-title">Download: Semen Storage & Handling Checklist</div></div>
+      <div><div class="modal-tags"><span class="tag tag-guide" data-i18n="tag.guide">Guide</span></div>
+      <div class="modal-title" data-i18n="dl1.title">Download: Semen Storage & Handling Checklist</div></div>
       <button class="modal-close" onclick="closeModal('modal1lock')">✕</button>
     </div>
     <div class="modal-body">
       <div class="lock-form" id="lf1lock">
-        <div class="lock-label">↓ Download — enter your email</div>
-        <p>Enter your email to download this checklist and get free access to new content with a subscription.</p>
-        <div class="lock-form-fields"><input type="email" placeholder="Email address"/></div>
-        <button class="lock-form-btn" onclick="unlockForm('lf1lock',this)">Download PDF →</button>
+        <div class="lock-label" data-i18n="dl.label">↓ Download — enter your email</div>
+        <p data-i18n="dl.desc">Enter your email to download this checklist and get free access to new content with a subscription.</p>
+        <div class="lock-form-fields"><input type="email" placeholder="Email address" data-i18n-ph="form.emailaddr"/></div>
+        <button class="lock-form-btn" onclick="unlockForm('lf1lock',this)" data-i18n="btn.dlpdf">Download PDF →</button>
       </div>
     </div>
   </div>
@@ -818,9 +847,9 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
     </div>
     <div class="modal-body">
       <div class="lock-form" id="lf2lock">
-        <div class="lock-label">↓ Download — enter your email</div>
+        <div class="lock-label" data-i18n="dl.label">↓ Download — enter your email</div>
         <p>Enter your email to download this case study and get free access to new content with a subscription.</p>
-        <div class="lock-form-fields"><input type="email" placeholder="Email address"/></div>
+        <div class="lock-form-fields"><input type="email" placeholder="Email address" data-i18n-ph="form.emailaddr"/></div>
         <button class="lock-form-btn" onclick="unlockForm('lf2lock',this)">Download PDF →</button>
       </div>
     </div>
@@ -831,16 +860,16 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 <div class="modal-overlay" id="modal3lock" onclick="closeOnOverlay(event,this)">
   <div class="modal">
     <div class="modal-header">
-      <div><div class="modal-tags"><span class="tag tag-protocol">Protocol</span></div>
-      <div class="modal-title">Download Frozen-thawed/Fresh semen quality analysis (en/pt/ar)</div></div>
+      <div><div class="modal-tags"><span class="tag tag-protocol" data-i18n="tag.protocol">Protocol</span></div>
+      <div class="modal-title" data-i18n="dl3.title">Download Frozen-thawed/Fresh semen quality analysis (en/pt/ar)</div></div>
       <button class="modal-close" onclick="closeModal('modal3lock')">✕</button>
     </div>
     <div class="modal-body">
       <div class="lock-form" id="lf3lock">
-        <div class="lock-label">↓ Download — enter your email</div>
-        <p>Enter your email to download this checklist and get free access to new content with a subscription.</p>
-        <div class="lock-form-fields"><input type="email" placeholder="Email address"/></div>
-        <button class="lock-form-btn" onclick="unlockForm('lf3lock',this)">Download PDF →</button>
+        <div class="lock-label" data-i18n="dl.label">↓ Download — enter your email</div>
+        <p data-i18n="dl.desc">Enter your email to download this checklist and get free access to new content with a subscription.</p>
+        <div class="lock-form-fields"><input type="email" placeholder="Email address" data-i18n-ph="form.emailaddr"/></div>
+        <button class="lock-form-btn" onclick="unlockForm('lf3lock',this)" data-i18n="btn.dlpdf">Download PDF →</button>
       </div>
     </div>
   </div>
@@ -855,9 +884,9 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
     </div>
     <div class="modal-body">
       <div class="lock-form" id="lf4lock">
-        <div class="lock-label">↓ Download — enter your email</div>
+        <div class="lock-label" data-i18n="dl.label">↓ Download — enter your email</div>
         <p>Enter your email to download this guide and get free access to new content with a subscription.</p>
-        <div class="lock-form-fields"><input type="email" placeholder="Email address"/></div>
+        <div class="lock-form-fields"><input type="email" placeholder="Email address" data-i18n-ph="form.emailaddr"/></div>
         <button class="lock-form-btn" onclick="unlockForm('lf4lock',this)">Download PDF →</button>
       </div>
     </div>
@@ -873,9 +902,9 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
     </div>
     <div class="modal-body">
       <div class="lock-form" id="lf5lock">
-        <div class="lock-label">↓ Download — enter your email</div>
+        <div class="lock-label" data-i18n="dl.label">↓ Download — enter your email</div>
         <p>Enter your email to download this case study and get free access to new content with a subscription.</p>
-        <div class="lock-form-fields"><input type="email" placeholder="Email address"/></div>
+        <div class="lock-form-fields"><input type="email" placeholder="Email address" data-i18n-ph="form.emailaddr"/></div>
         <button class="lock-form-btn" onclick="unlockForm('lf5lock',this)">Download PDF →</button>
       </div>
     </div>
@@ -891,9 +920,9 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
     </div>
     <div class="modal-body">
       <div class="lock-form" id="lf6lock">
-        <div class="lock-label">↓ Download — enter your email</div>
+        <div class="lock-label" data-i18n="dl.label">↓ Download — enter your email</div>
         <p>Enter your email to download this template and get free access to new content with a subscription.</p>
-        <div class="lock-form-fields"><input type="email" placeholder="Email address"/></div>
+        <div class="lock-form-fields"><input type="email" placeholder="Email address" data-i18n-ph="form.emailaddr"/></div>
         <button class="lock-form-btn" onclick="unlockForm('lf6lock',this)">Download Excel →</button>
       </div>
     </div>
@@ -901,7 +930,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 </div>
 
 <footer class="footer">
-  <span>© 2026 Avare Biotech. All rights reserved.</span>
+  <span data-i18n="footer.copy">© 2026 Avare Biotech. All rights reserved.</span>
 </footer>
 
 <script>
@@ -972,7 +1001,7 @@ function downloadPDF(modalId){
 function unlockAllDownloads(){
   document.querySelectorAll('.btn-dl.btn-locked').forEach(function(dlBtn){
     dlBtn.classList.remove('btn-locked');
-    dlBtn.innerHTML='&#8595; Download';
+    dlBtn.textContent=learnT('btn.downloaded');
     var oc=dlBtn.getAttribute('onclick')||'';
     var match=oc.match(/modal\d+lock/);
     var mid=match?match[0]:'modal1lock';
@@ -993,7 +1022,7 @@ function unlockForm(formId,btn){
   var form=document.getElementById(formId);
   var email=form.querySelector('input[type="email"]').value.trim();
   if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
-  btn.textContent='Sending...';btn.disabled=true;
+  btn.textContent=learnT('toast.sending');btn.disabled=true;
   fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'}).catch(function(){});
   setTimeout(function(){
     saveAndUnlock();
@@ -1003,9 +1032,9 @@ function unlockForm(formId,btn){
     if(url){
       var a=document.createElement('a');a.href=url;a.download=url.split('/').pop();a.target='_blank';
       document.body.appendChild(a);a.click();document.body.removeChild(a);
-      form.innerHTML='<p style="color:var(--accent);font-weight:700;font-size:15px;margin-bottom:10px;">&#10003; Subscribed!</p><p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:16px;">Your PDF is downloading. If it did not start, <a href="'+url+'" target="_blank" style="color:var(--accent);text-decoration:underline;">click here</a>.</p><button class="modal-dl-btn" onclick="downloadPDF(&quot;'+mid+'&quot;)">Download PDF &rarr;</button>';
+      form.innerHTML='<p style="color:var(--accent);font-weight:700;font-size:15px;margin-bottom:10px;">&#10003; <span data-i18n="toast.subscribed">Subscribed!</span></p><p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:16px;"><span data-i18n="toast.dling">Your PDF is downloading. If it did not start,</span> <a href="'+url+'" target="_blank" style="color:var(--accent);text-decoration:underline;"><span data-i18n="toast.clickhere">click here</span></a>.</p><button class="modal-dl-btn" data-i18n="btn.dlpdf" onclick="downloadPDF(&quot;'+mid+'&quot;)">Download PDF &rarr;</button>';learnApplyLang(_learnLang());
     }else{
-      form.innerHTML='<p style="color:var(--accent);font-weight:700;font-size:15px;margin-bottom:10px;">&#10003; Subscribed!</p><p style="color:var(--muted);font-size:14px;line-height:1.8;">PDF coming soon.</p>';
+      form.innerHTML='<p style="color:var(--accent);font-weight:700;font-size:15px;margin-bottom:10px;">&#10003; <span data-i18n="toast.subscribed">Subscribed!</span></p><p style="color:var(--muted);font-size:14px;line-height:1.8;"><span data-i18n="toast.coming">PDF coming soon.</span></p>';learnApplyLang(_learnLang());
     }
     setTimeout(function(){
       document.querySelectorAll('.modal-overlay.open').forEach(function(m){closeModal(m.id);});
@@ -1017,14 +1046,14 @@ function handleSubscribe(btn){
   var email=input.value.trim();
   if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
   input.value='';
-  btn.textContent='Sending...';btn.disabled=true;
+  btn.textContent=learnT('toast.sending');btn.disabled=true;
   fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'})
     .catch(function(){})
     .finally(function(){
       saveAndUnlock();
       var subscribe=btn.closest('.subscribe');
       if(subscribe){
-        subscribe.innerHTML="<p style='font-size:15px;font-weight:600;color:var(--accent);padding:13px 20px;margin:0;'>&#10003; Subscribed! We will be in touch at "+email+"</p>";
+        subscribe.innerHTML="<p style='font-size:15px;font-weight:600;color:var(--accent);padding:13px 20px;margin:0;'>&#10003; <span data-i18n='toast.subscribed'>Subscribed!</span> <span data-i18n='toast.intouch'>We will be in touch at</span> "+email+"</p>";learnApplyLang(_learnLang());
       }
     });
 }
@@ -1033,17 +1062,118 @@ function handleSubscribeBottom(btn){
   var email=input.value.trim();
   if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
   input.value='';
-  btn.textContent='Sending...';btn.disabled=true;
+  btn.textContent=learnT('toast.sending');btn.disabled=true;
   fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'})
     .catch(function(){})
     .finally(function(){
       saveAndUnlock();
       var section=btn.closest('.bottom-subscribe');
       if(section){
-        section.innerHTML="<p style='font-size:15px;font-weight:600;color:var(--accent);margin:0;'>&#10003; Subscribed!</p><p style='font-size:14px;color:var(--muted);margin:8px 0 0;line-height:1.7;'>We will send new resources to <strong style='color:var(--text)'>"+email+"</strong></p>";
+        section.innerHTML="<p style='font-size:15px;font-weight:600;color:var(--accent);margin:0;'>&#10003; <span data-i18n='toast.subscribed'>Subscribed!</span></p><p style='font-size:14px;color:var(--muted);margin:8px 0 0;line-height:1.7;'><span data-i18n='toast.newres'>We will send new resources to</span>  <strong style='color:var(--text)'>"+email+"</strong></p>";learnApplyLang(_learnLang());
       }
     });
 }
 </script>
+
+<script>
+window.LEARN_I18N = {
+ en:{
+  "nav.home":"Home","nav.kb":"Knowledge Base","nav.contacts":"Contacts",
+  "hero.tag":"Knowledge Base","hero.title":"Field Knowledge.<br/>Built for <em>Practitioners.</em>",
+  "hero.sub":"Guides, protocols, and case studies — for vets, AI technicians, and farm managers.",
+  "form.email":"Your email","form.emailaddr":"Email address",
+  "btn.subscribe":"Subscribe →","cta.unlock":"Unlock the rest of our helpful resources and get free access to new content with a subscription",
+  "filter.all":"All materials","filter.guides":"Guides","filter.protocols":"Protocols",
+  "tag.guide":"Guide","tag.protocol":"Protocol",
+  "card1.title":"Semen Storage & Handling: 10 Critical Steps",
+  "card1.desc":"Temperature errors during thawing cost more than any equipment failure. Here's what actually matters.",
+  "card2.title":"Frozen-thawed/Fresh semen quality analysis (en/pt/ar)",
+  "card2.desc":"This protocol confirms that Avare App reads motility and concentration as accurately as CASA and manual count — and works where no lab system is within reach.",
+  "btn.read":"Read","btn.download":"🔒 Download","btn.downloaded":"↓ Download","btn.loadmore":"Load more →",
+  "footer.copy":"© 2026 Avare Biotech. All rights reserved.",
+  "dl1.title":"Download: Semen Storage & Handling Checklist",
+  "dl3.title":"Download Frozen-thawed/Fresh semen quality analysis (en/pt/ar)",
+  "dl.label":"↓ Download — enter your email",
+  "dl.desc":"Enter your email to download and get free access to new content with a subscription.",
+  "btn.dlpdf":"Download PDF →",
+  "toast.subscribed":"Subscribed!","toast.intouch":"We will be in touch at","toast.newres":"We will send new resources to",
+  "toast.dling":"Your PDF is downloading. If it did not start,","toast.clickhere":"click here","toast.coming":"PDF coming soon.","toast.sending":"Sending..."
+ },
+ pt:{
+  "nav.home":"Início","nav.kb":"Base de Conhecimento","nav.contacts":"Contatos",
+  "hero.tag":"Base de Conhecimento","hero.title":"Conhecimento de Campo.<br/>Feito para <em>Profissionais.</em>",
+  "hero.sub":"Guias, protocolos e estudos de caso — para veterinários, inseminadores e gestores de fazenda.",
+  "form.email":"Seu e-mail","form.emailaddr":"Endereço de e-mail",
+  "btn.subscribe":"Inscrever-se →","cta.unlock":"Desbloqueie o restante dos nossos recursos e tenha acesso gratuito a novos conteúdos com a inscrição.",
+  "filter.all":"Todos os materiais","filter.guides":"Guias","filter.protocols":"Protocolos",
+  "tag.guide":"Guia","tag.protocol":"Protocolo",
+  "card1.title":"Armazenamento e Manuseio de Sêmen: 10 Passos Críticos",
+  "card1.desc":"Erros de temperatura durante o descongelamento custam mais do que qualquer falha de equipamento. Veja o que realmente importa.",
+  "card2.title":"Análise de qualidade de sêmen congelado-descongelado/fresco (en/pt/ar)",
+  "card2.desc":"Este protocolo confirma que o Avare App lê motilidade e concentração com a mesma precisão que o CASA e a contagem manual — e funciona onde nenhum sistema de laboratório está ao alcance.",
+  "btn.read":"Ler","btn.download":"🔒 Baixar","btn.downloaded":"↓ Baixar","btn.loadmore":"Carregar mais →",
+  "footer.copy":"© 2026 Avare Biotech. Todos os direitos reservados.",
+  "dl1.title":"Baixar: Checklist de Armazenamento e Manuseio de Sêmen",
+  "dl3.title":"Baixar Análise de qualidade de sêmen congelado-descongelado/fresco (en/pt/ar)",
+  "dl.label":"↓ Baixar — informe seu e-mail",
+  "dl.desc":"Informe seu e-mail para baixar e tenha acesso gratuito a novos conteúdos com a inscrição.",
+  "btn.dlpdf":"Baixar PDF →",
+  "toast.subscribed":"Inscrito!","toast.intouch":"Entraremos em contato em","toast.newres":"Enviaremos novos recursos para",
+  "toast.dling":"Seu PDF está sendo baixado. Se não começou,","toast.clickhere":"clique aqui","toast.coming":"PDF em breve.","toast.sending":"Enviando..."
+ },
+ es:{
+  "nav.home":"Inicio","nav.kb":"Base de Conocimiento","nav.contacts":"Contactos",
+  "hero.tag":"Base de Conocimiento","hero.title":"Conocimiento de Campo.<br/>Hecho para <em>Profesionales.</em>",
+  "hero.sub":"Guías, protocolos y estudios de caso — para veterinarios, técnicos de IA y gestores de granja.",
+  "form.email":"Tu correo","form.emailaddr":"Correo electrónico",
+  "btn.subscribe":"Suscribirse →","cta.unlock":"Desbloquea el resto de nuestros recursos y obtén acceso gratuito a nuevo contenido con la suscripción.",
+  "filter.all":"Todos los materiales","filter.guides":"Guías","filter.protocols":"Protocolos",
+  "tag.guide":"Guía","tag.protocol":"Protocolo",
+  "card1.title":"Almacenamiento y Manejo de Semen: 10 Pasos Críticos",
+  "card1.desc":"Los errores de temperatura durante la descongelación cuestan más que cualquier falla de equipo. Esto es lo que realmente importa.",
+  "card2.title":"Análisis de calidad de semen congelado-descongelado/fresco (en/pt/ar)",
+  "card2.desc":"Este protocolo confirma que la app Avare lee la motilidad y la concentración con la misma precisión que CASA y el conteo manual — y funciona donde ningún sistema de laboratorio está al alcance.",
+  "btn.read":"Leer","btn.download":"🔒 Descargar","btn.downloaded":"↓ Descargar","btn.loadmore":"Cargar más →",
+  "footer.copy":"© 2026 Avare Biotech. Todos los derechos reservados.",
+  "dl1.title":"Descargar: Lista de Almacenamiento y Manejo de Semen",
+  "dl3.title":"Descargar Análisis de calidad de semen congelado-descongelado/fresco (en/pt/ar)",
+  "dl.label":"↓ Descargar — ingresa tu correo",
+  "dl.desc":"Ingresa tu correo para descargar y obtén acceso gratuito a nuevo contenido con la suscripción.",
+  "btn.dlpdf":"Descargar PDF →",
+  "toast.subscribed":"¡Suscrito!","toast.intouch":"Nos pondremos en contacto en","toast.newres":"Te enviaremos nuevos recursos a",
+  "toast.dling":"Tu PDF se está descargando. Si no comenzó,","toast.clickhere":"haz clic aquí","toast.coming":"PDF próximamente.","toast.sending":"Enviando..."
+ }
+};
+function _learnLang(){var l=localStorage.getItem('av_lang')||'en';return LEARN_I18N[l]?l:'en';}
+function learnT(k){var l=_learnLang();var d=LEARN_I18N[l]||LEARN_I18N.en;return (d&&d[k])||LEARN_I18N.en[k]||'';}
+function learnApplyLang(lang){
+  if(!LEARN_I18N[lang]) lang='en';
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k=el.getAttribute('data-i18n');
+    if(k==='nav.home'){ var svg=el.querySelector('svg'); el.textContent=''; if(svg) el.appendChild(svg); el.appendChild(document.createTextNode(' '+learnT('nav.home'))); return; }
+    if(k==='btn.download'){ el.textContent = el.classList.contains('btn-locked') ? learnT('btn.download') : learnT('btn.downloaded'); return; }
+    var v=learnT(k); if(v) el.textContent=v;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){var v=learnT(el.getAttribute('data-i18n-html'));if(v)el.innerHTML=v;});
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){var v=learnT(el.getAttribute('data-i18n-ph'));if(v)el.setAttribute('placeholder',v);});
+  var tog=document.getElementById('avLangToggle'); if(tog) tog.innerHTML=lang.toUpperCase()+' <span class="av-lang__arrow">&#9660;</span>';
+  document.querySelectorAll('.av-lang__opt').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===lang);});
+  document.querySelectorAll('.nav-lang-mob button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===lang);});
+}
+function learnSetLang(lang){ if(!LEARN_I18N[lang])return; localStorage.setItem('av_lang',lang); learnApplyLang(lang); var w=document.getElementById('avLang'); if(w)w.classList.remove('open'); }
+function pickLang(l){ learnSetLang(l); var p=document.getElementById('navPill'); if(p)p.classList.remove('mobile-open'); var bb=document.querySelector('.burger'); if(bb)bb.classList.remove('open'); }
+document.addEventListener('click',function(e){
+  var wrap=document.getElementById('avLang'); if(!wrap)return;
+  var tog=e.target.closest('#avLangToggle'); var opt=e.target.closest('.av-lang__opt');
+  if(tog){e.stopPropagation(); wrap.classList.toggle('open'); return;}
+  if(opt){learnSetLang(opt.getAttribute('data-lang')); return;}
+  if(!wrap.contains(e.target)) wrap.classList.remove('open');
+});
+(function(){ learnApplyLang(_learnLang());
+  var last=_learnLang();
+  setInterval(function(){var l=_learnLang(); if(l!==last){last=l; learnApplyLang(l);}},400);
+})();
+</script>
+
 </body>
 </html>
