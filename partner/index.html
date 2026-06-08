@@ -42,6 +42,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --font: 'Satoshi', sans-serif;
+  --fs-body: clamp(13px, 0.4vw + 12px, 15px);
   --dark: #1B1B1B;
   --bg: #F6F6F6;
   --green: #A2A884;
@@ -49,7 +50,7 @@
   --green-mid: #636F54;
 }
 html { scroll-behavior: smooth; overflow-x: hidden; overflow-y: scroll; }
-body { font-family: var(--font); background: var(--bg); color: var(--dark); overflow-x: hidden; -webkit-font-smoothing: antialiased; max-width: 100%; zoom: 1.3; }
+body { font-family: var(--font); background: var(--bg); color: var(--dark); overflow-x: hidden; -webkit-font-smoothing: antialiased; max-width: 100%;  }
 * { max-width: 100%; }
 img, video, iframe { max-width: 100%; }
 a { text-decoration: none; color: inherit; }
@@ -57,334 +58,393 @@ img { max-width: 100%; display: block; }
 
 .p-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
-  height: 80px; display: flex; align-items: center; justify-content: space-between;
-  padding: 0 80px; background: #262626;
+  height: 104px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 104px; background: #262626;
   border-bottom: none;
   overflow: visible;
 }
-.p-nav__logo { display: flex; align-items: center; gap: 9px; text-decoration: none; flex-shrink: 0; }
-.p-nav__logo img { height: 47px; width: auto; display: block; }
-.p-nav__right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
-.p-nav__back,.p-nav__back:link,.p-nav__back:visited { font-size: 13px !important; font-weight: 500 !important; color: rgba(246,246,246,0.6) !important; -webkit-text-fill-color: rgba(246,246,246,0.6) !important; display: flex; align-items: center; gap: 5px; transition: color .2s; text-decoration: none !important; }
+.p-nav__logo { display: flex; align-items: center; gap: 11.7px; text-decoration: none; flex-shrink: 0; }
+.p-nav__logo img { height: 61.1px; width: auto; display: block; }
+.p-nav__right { display: flex; align-items: center; gap: 20.8px; flex-shrink: 0; }
+.p-nav__back,.p-nav__back:link,.p-nav__back:visited { font-size: 16.9px !important; font-weight: 500 !important; color: rgba(246,246,246,0.6) !important; -webkit-text-fill-color: rgba(246,246,246,0.6) !important; display: flex; align-items: center; gap: 6.5px; transition: color .2s; text-decoration: none !important; }
 .p-nav__back:hover { color: #F6F6F6 !important; -webkit-text-fill-color: #F6F6F6 !important; }
 .p-nav__btn {
-  font-family: var(--font); font-size: 13px; font-weight: 600;
+  font-family: var(--font); font-size: 16.9px; font-weight: 600;
   color: #1B1B1B !important; background: #F6F6F6;
-  border: none; border-radius: 8px; padding: 6px 8px 6px 24px;
-  height: 44px; text-decoration: none !important;
-  display: inline-flex; align-items: center; gap: 8px;
+  border: none; border-radius: 10.4px; padding: 7.8px 10.4px 7.8px 31.2px;
+  height: 57.2px; text-decoration: none !important;
+  display: inline-flex; align-items: center; gap: 10.4px;
   transition: box-shadow .2s, transform .2s; cursor: pointer;
 }
 .p-nav__btn::after {
   content: "\2197"; display: inline-flex; align-items: center; justify-content: center;
-  width: 30px; height: 30px; background: #1B1B1B; border-radius: 4px;
-  color: #fff; font-size: 14px; font-weight: 300;
+  width: 39px; height: 39px; background: #1B1B1B; border-radius: 5.2px;
+  color: #fff; font-size: 18.2px; font-weight: 300;
 }
-.p-nav__btn:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.18); transform: translateY(-2px); }
+.p-nav__btn:hover { box-shadow: 0 10.4px 31.2px rgba(0,0,0,0.18); transform: translateY(-2.6px); }
 
-.p-hero { background: #262626; padding-top: 80px; }
+.p-hero { background: #262626; padding-top: 104px; }
 .p-hero__card {
   background: linear-gradient(to bottom, #262626 0%, #020202 100%);
   border-radius: 0;
-  padding: 56px 80px 0px; position: relative; overflow: hidden;
+  padding: 72.8px 104px 0px; position: relative; overflow: hidden;
 }
 .p-hero__tag {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(162,168,132,0.12); border: 1px solid rgba(162,168,132,0.25);
-  border-radius: 6px; padding: 6px 14px;
-  font-size: 11px; font-weight: 600; color: var(--green);
-  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px;
+  display: inline-flex; align-items: center; gap: 10.4px;
+  background: rgba(162,168,132,0.12); border: 1.3px solid rgba(162,168,132,0.25);
+  border-radius: 7.8px; padding: 7.8px 18.2px;
+  font-size: 14.3px; font-weight: 600; color: var(--green);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 31.2px;
 }
 .p-hero__title {
-  font-size: 58px; font-weight: 900; line-height: 1.05;
-  letter-spacing: -0.035em; color: #F6F6F6; margin-bottom: 24px; max-width: 760px;
+  font-size: 75.4px; font-weight: 900; line-height: 1.05;
+  letter-spacing: -0.035em; color: #F6F6F6; margin-bottom: 31.2px; max-width: 988px;
 }
 .p-hero__title .accent {
   background: linear-gradient(90deg, #A2A884 0%, #57624A 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 .p-hero__desc {
-  font-size: 20px; font-weight: 400; color: rgba(246,246,246,0.5);
-  line-height: 1.5; max-width: 820px; margin-bottom: 40px;
+  font-size: 26px; font-weight: 400; color: rgba(246,246,246,0.5);
+  line-height: 1.5; max-width: 1066px; margin-bottom: 52px;
 }
-.p-hero__btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.p-hero__btns { display: flex; gap: 15.6px; flex-wrap: wrap; }
 .p-btn-primary {
-  font-family: var(--font); font-size: 15px; font-weight: 600;
+  font-family: var(--font); font-size: 19.5px; font-weight: 600;
   color: #F6F6F6 !important; background: linear-gradient(90deg, #A2A884 0%, #57624A 100%);
-  border: none; border-radius: 8px; padding: 14px 28px;
-  text-decoration: none !important; display: inline-flex; align-items: center; gap: 8px;
+  border: none; border-radius: 10.4px; padding: 18.2px 36.4px;
+  text-decoration: none !important; display: inline-flex; align-items: center; gap: 10.4px;
   transition: transform .2s, box-shadow .2s; cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 5.2px 20.8px rgba(0,0,0,0.2);
 }
-.p-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+.p-btn-primary:hover { transform: translateY(-2.6px); box-shadow: 0 10.4px 31.2px rgba(0,0,0,0.35); }
 .p-btn-secondary {
-  font-family: var(--font); font-size: 15px; font-weight: 600;
+  font-family: var(--font); font-size: 19.5px; font-weight: 600;
   color: rgba(246,246,246,0.7) !important;
-  background: rgba(246,246,246,0.08); border: 1px solid rgba(246,246,246,0.12);
-  border-radius: 8px; padding: 14px 28px;
+  background: rgba(246,246,246,0.08); border: 1.3px solid rgba(246,246,246,0.12);
+  border-radius: 10.4px; padding: 18.2px 36.4px;
   text-decoration: none !important; display: inline-flex; align-items: center;
   transition: box-shadow .2s, transform .2s;
 }
-.p-btn-secondary:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.3); transform: translateY(-2px); }
+.p-btn-secondary:hover { box-shadow: 0 10.4px 31.2px rgba(0,0,0,0.3); transform: translateY(-2.6px); }
 
-.p-stats { background: linear-gradient(to bottom, #020202 0%, #141414 100%); margin-top: -1px; margin-bottom: -1px; }
+.p-stats { background: linear-gradient(to bottom, #020202 0%, #141414 100%); margin-top: -1.3px; margin-bottom: -1.3px; }
 .p-stats__grid {
   display: flex; width: 100%; justify-content: space-between; align-items: center;
-  padding: 0 80px;
+  padding: 0 104px;
 }
 .p-stats__item {
-  display: flex; flex-direction: column; gap: 4px; align-items: center; text-align: center;
-  padding: 48px 0 0;
+  display: flex; flex-direction: column; gap: 5.2px; align-items: center; text-align: center;
+  padding: 62.4px 0 0;
 }
 .p-stats__num {
-  font-size: 58px; font-weight: 100; font-family: 'Geist', var(--font);
+  font-size: 75.4px; font-weight: 100; font-family: 'Geist', var(--font);
   color: #F6F6F6; letter-spacing: -0.04em; line-height: 1;
 }
-.p-stats__label { font-size: 15px; font-weight: 400; color: rgba(246,246,246,0.5); }
-.p-sep { width: 1px; height: 40px; background: rgba(246,246,246,0.15); flex-shrink: 0; align-self: center; margin-top: 24px; }
+.p-stats__label { font-size: 19.5px; font-weight: 400; color: rgba(246,246,246,0.5); }
+.p-sep { width: 1.3px; height: 52px; background: rgba(246,246,246,0.15); flex-shrink: 0; align-self: center; margin-top: 31.2px; }
 
 .p-dark { background: linear-gradient(to bottom, #141414 0%, #1a1a1a 40%, #141414 100%); overflow: hidden; }
-.p-section { padding: 100px 80px 0; font-family: var(--font); }
-.p-section--light { background: var(--bg); padding: 100px 80px 0; }
+.p-section { padding: 130px 104px 0; font-family: var(--font); }
+.p-section--light { background: var(--bg); padding: 130px 104px 0; }
 .p-section--bottom { padding-bottom: 0; }
 
-.p-section__header { display: flex; align-items: flex-start; gap: 24px; margin-bottom: 32px; }
-.p-section__desc { align-self: flex-start; padding-top: 30px; }
+.p-section__header { display: flex; align-items: flex-start; gap: 31.2px; margin-bottom: 41.6px; }
+.p-section__desc { align-self: flex-start; padding-top: 39px; }
 .p-section__title {
-  font-size: 32px; font-weight: 300; text-transform: uppercase; line-height: 1.1;
+  font-size: 41.6px; font-weight: 300; text-transform: uppercase; line-height: 1.1;
   flex-shrink: 0; background: linear-gradient(90deg, #3a3a3a 0%, #F9F8F8 25%, #F9F8F8 45%, #3a3a3a 100%);
-  background-size: 600px 100%; background-repeat: no-repeat;
+  background-size: 780px 100%; background-repeat: no-repeat;
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.p-section__title--dark { color: var(--dark); -webkit-text-fill-color: var(--dark); background: none; font-weight: 300; font-size: 32px; text-transform: uppercase; }
-.p-section__desc { font-size: 13px; color: rgba(246,246,246,0.45); line-height: 1.6; width: 50%; margin-left: auto; }
+.p-section__title--dark { color: var(--dark); -webkit-text-fill-color: var(--dark); background: none; font-weight: 300; font-size: 41.6px; text-transform: uppercase; }
+.p-section__desc { font-size: 16.9px; color: rgba(246,246,246,0.45); line-height: 1.6; width: 50%; margin-left: auto; }
 .p-section__desc--dark { color: rgba(27,27,27,0.55); }
 
-.p-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.p-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 20.8px; }
 .p-card {
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px; padding: 32px 28px; display: flex; flex-direction: column; gap: 16px;
+  background: rgba(255,255,255,0.04); border: 1.3px solid rgba(255,255,255,0.08);
+  border-radius: 15.6px; padding: 41.6px 36.4px; display: flex; flex-direction: column; gap: 20.8px;
   transition: box-shadow .2s, transform .2s;
 }
-.p-card:hover { box-shadow: 0 8px 48px rgba(0,0,0,0.2); transform: translateY(-2px); }
-.p-card__num { font-size: 13px; font-weight: 600; color: var(--green); letter-spacing: 0.1em; }
-.p-card__title { font-size: 15px; font-weight: 700; color: #F6F6F6; line-height: 1.3; text-transform: uppercase; letter-spacing: 0.3px; }
-.p-card__text { font-size: 13px; color: rgba(246,246,246,0.55); line-height: 1.7; flex: 1; }
-.p-card__tag { display: inline-block; background: rgba(162,168,132,0.12); border: 1px solid rgba(162,168,132,0.25); border-radius: 6px; font-size: 11px; font-weight: 600; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; width: fit-content; }
+.p-card:hover { box-shadow: 0 10.4px 62.4px rgba(0,0,0,0.2); transform: translateY(-2.6px); }
+.p-card__num { font-size: 16.9px; font-weight: 600; color: var(--green); letter-spacing: 0.1em; }
+.p-card__title { font-size: 19.5px; font-weight: 700; color: #F6F6F6; line-height: 1.3; text-transform: uppercase; letter-spacing: 0.39px; }
+.p-card__text { font-size: 16.9px; color: rgba(246,246,246,0.55); line-height: 1.7; flex: 1; }
+.p-card__tag { display: inline-block; background: rgba(162,168,132,0.12); border: 1.3px solid rgba(162,168,132,0.25); border-radius: 7.8px; font-size: 14.3px; font-weight: 600; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; padding: 6.5px 15.6px; width: fit-content; }
 
-.p-calc { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
-.p-calc__panel { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 28px; }
-.p-calc__label { font-size: 11px; font-weight: 600; color: rgba(246,246,246,0.35); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
-.p-toggle { display: flex; gap: 6px; background: rgba(255,255,255,0.04); border-radius: 10px; padding: 4px; margin-bottom: 28px; }
-.p-toggle-btn { flex: 1; padding: 10px 8px 9px; border-radius: 8px; border: none; cursor: pointer; background: transparent; transition: all .25s; font-family: var(--font); }
+.p-calc { display: grid; grid-template-columns: 1fr 1fr; gap: 20.8px; align-items: start; }
+.p-calc__panel { background: rgba(255,255,255,0.04); border: 1.3px solid rgba(255,255,255,0.08); border-radius: 15.6px; padding: 36.4px; }
+.p-calc__label { font-size: 14.3px; font-weight: 600; color: rgba(246,246,246,0.35); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 15.6px; }
+.p-toggle { display: flex; gap: 7.8px; background: rgba(255,255,255,0.04); border-radius: 13px; padding: 5.2px; margin-bottom: 36.4px; }
+.p-toggle-btn { flex: 1; padding: 13px 10.4px 11.7px; border-radius: 10.4px; border: none; cursor: pointer; background: transparent; transition: all .25s; font-family: var(--font); }
 .p-toggle-btn.active { background: rgba(162,168,132,0.15); }
-.p-toggle-btn .tl { font-size: 12px; font-weight: 600; color: rgba(246,246,246,0.4); }
+.p-toggle-btn .tl { font-size: 15.6px; font-weight: 600; color: rgba(246,246,246,0.4); }
 .p-toggle-btn.active .tl { color: var(--green); }
-.p-toggle-btn .ts { font-size: 10px; color: rgba(246,246,246,0.25); margin-top: 2px; }
+.p-toggle-btn .ts { font-size: 13px; color: rgba(246,246,246,0.25); margin-top: 2.6px; }
 .p-toggle-btn.active .ts { color: rgba(162,168,132,0.6); }
-.p-slider-wrap { margin-bottom: 24px; }
-.p-slider-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
-.p-slider-lbl { font-size: 11px; font-weight: 600; color: rgba(246,246,246,0.4); text-transform: uppercase; letter-spacing: 0.05em; }
-.p-slider-val { font-size: 24px; font-weight: 700; color: var(--green); line-height: 1; }
-.p-slider-val.sm { font-size: 18px; }
-input.p-range { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 2px; outline: none; cursor: pointer; }
-input.p-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.35); border: 2.5px solid #262626; }
-input.p-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); cursor: pointer; border: 2.5px solid #262626; }
-.p-range-labels { display: flex; justify-content: space-between; font-size: 10px; color: rgba(246,246,246,0.25); margin-top: 4px; }
-.p-tier-bar { display: flex; gap: 2px; border-radius: 6px; overflow: hidden; height: 24px; margin-top: 12px; margin-bottom: 6px; }
+.p-slider-wrap { margin-bottom: 31.2px; }
+.p-slider-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10.4px; }
+.p-slider-lbl { font-size: 14.3px; font-weight: 600; color: rgba(246,246,246,0.4); text-transform: uppercase; letter-spacing: 0.05em; }
+.p-slider-val { font-size: 31.2px; font-weight: 700; color: var(--green); line-height: 1; }
+.p-slider-val.sm { font-size: 23.4px; }
+input.p-range { -webkit-appearance: none; appearance: none; width: 100%; height: 5.2px; border-radius: 2.6px; outline: none; cursor: pointer; }
+input.p-range::-webkit-slider-thumb { -webkit-appearance: none; width: 23.4px; height: 23.4px; border-radius: 50%; background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); cursor: pointer; box-shadow: 0 2.6px 7.8px rgba(0,0,0,0.35); border: 3.25px solid #262626; }
+input.p-range::-moz-range-thumb { width: 23.4px; height: 23.4px; border-radius: 50%; background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); cursor: pointer; border: 3.25px solid #262626; }
+.p-range-labels { display: flex; justify-content: space-between; font-size: 13px; color: rgba(246,246,246,0.25); margin-top: 5.2px; }
+.p-tier-bar { display: flex; gap: 2.6px; border-radius: 7.8px; overflow: hidden; height: 31.2px; margin-top: 15.6px; margin-bottom: 7.8px; }
 .p-tier-seg { display: flex; align-items: center; justify-content: center; transition: all .4s; }
-.p-tier-seg span { font-size: 10px; }
+.p-tier-seg span { font-size: 13px; }
 .p-tier-seg.active { background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); }
 .p-tier-seg.active span { font-weight: 700; color: #fff; }
 .p-tier-seg.past { background: rgba(162,168,132,0.3); }
 .p-tier-seg.past span { font-weight: 500; color: rgba(246,246,246,0.7); }
 .p-tier-seg.future { background: rgba(255,255,255,0.06); }
 .p-tier-seg.future span { color: rgba(246,246,246,0.3); }
-.p-rate-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-.p-rate-card { background: rgba(162,168,132,0.08); border: 1px solid rgba(162,168,132,0.15); border-radius: 10px; padding: 14px 16px; }
-.p-rate-card .rc-label { font-size: 10px; color: rgba(246,246,246,0.35); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
-.p-rate-card .rc-value { font-size: 28px; font-weight: 800; color: var(--green); }
-.p-rate-card .rc-note { font-size: 10px; color: rgba(162,168,132,0.6); margin-top: 2px; }
-.p-rate-card .rc-next { font-size: 10px; color: var(--green); font-weight: 600; margin-top: 6px; }
-.p-year-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-.p-year-card { border-radius: 10px; padding: 16px 10px; text-align: center; }
-.p-year-card.y1 { background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
-.p-year-card.y25 { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
-.p-year-card.total { background: rgba(27,27,27,0.8); border: 1px solid rgba(255,255,255,0.08); }
-.p-year-card .yc-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+.p-rate-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin-bottom: 20.8px; }
+.p-rate-card { background: rgba(162,168,132,0.08); border: 1.3px solid rgba(162,168,132,0.15); border-radius: 13px; padding: 18.2px 20.8px; }
+.p-rate-card .rc-label { font-size: 13px; color: rgba(246,246,246,0.35); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5.2px; }
+.p-rate-card .rc-value { font-size: 36.4px; font-weight: 800; color: var(--green); }
+.p-rate-card .rc-note { font-size: 13px; color: rgba(162,168,132,0.6); margin-top: 2.6px; }
+.p-rate-card .rc-next { font-size: 13px; color: var(--green); font-weight: 600; margin-top: 7.8px; }
+.p-year-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 13px; margin-bottom: 15.6px; }
+.p-year-card { border-radius: 13px; padding: 20.8px 13px; text-align: center; }
+.p-year-card.y1 { background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); box-shadow: 0 5.2px 20.8px rgba(0,0,0,0.2); }
+.p-year-card.y25 { background: rgba(255,255,255,0.04); border: 1.3px solid rgba(255,255,255,0.08); }
+.p-year-card.total { background: rgba(27,27,27,0.8); border: 1.3px solid rgba(255,255,255,0.08); }
+.p-year-card .yc-label { font-size: 11.7px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3.9px; }
 .p-year-card.y1 .yc-label, .p-year-card.total .yc-label { color: rgba(255,255,255,0.55); }
 .p-year-card.y25 .yc-label { color: rgba(246,246,246,0.4); }
-.p-year-card .yc-rate { font-size: 10px; margin-bottom: 5px; }
+.p-year-card .yc-rate { font-size: 13px; margin-bottom: 6.5px; }
 .p-year-card.y1 .yc-rate { color: rgba(255,255,255,0.5); }
 .p-year-card.y25 .yc-rate, .p-year-card.total .yc-rate { color: rgba(246,246,246,0.35); }
-.p-year-card .yc-value { font-size: 20px; font-weight: 800; line-height: 1.2; word-break: break-word; }
+.p-year-card .yc-value { font-size: 26px; font-weight: 800; line-height: 1.2; word-break: break-word; }
 .p-year-card.y1 .yc-value { color: #fff; }
 .p-year-card.y25 .yc-value { color: var(--green); }
 .p-year-card.total .yc-value { color: #F6F6F6; }
-.p-comparison { background: rgba(162,168,132,0.08); border: 1px solid rgba(162,168,132,0.15); border-radius: 8px; padding: 12px 14px; font-size: 12px; color: rgba(246,246,246,0.55); text-align: center; line-height: 1.5; margin-bottom: 10px; }
+.p-comparison { background: rgba(162,168,132,0.08); border: 1.3px solid rgba(162,168,132,0.15); border-radius: 10.4px; padding: 15.6px 18.2px; font-size: 15.6px; color: rgba(246,246,246,0.55); text-align: center; line-height: 1.5; margin-bottom: 13px; }
 .p-comparison strong { color: var(--green); }
-.p-nudge { background: rgba(162,168,132,0.06); border: 1px dashed rgba(162,168,132,0.25); border-radius: 8px; padding: 12px 14px; font-size: 12px; color: var(--green); text-align: center; line-height: 1.5; margin-bottom: 10px; display: none; }
+.p-nudge { background: rgba(162,168,132,0.06); border: 1.3px dashed rgba(162,168,132,0.25); border-radius: 10.4px; padding: 15.6px 18.2px; font-size: 15.6px; color: var(--green); text-align: center; line-height: 1.5; margin-bottom: 13px; display: none; }
 .p-nudge strong { color: #F6F6F6; }
-.p-payment { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 12px 14px; font-size: 11px; color: rgba(246,246,246,0.4); text-align: center; line-height: 1.6; }
+.p-payment { background: rgba(255,255,255,0.03); border: 1.3px solid rgba(255,255,255,0.06); border-radius: 10.4px; padding: 15.6px 18.2px; font-size: 14.3px; color: rgba(246,246,246,0.4); text-align: center; line-height: 1.6; }
 .p-payment strong { color: rgba(246,246,246,0.6); }
-.p-calc-cta { margin-top: 20px; text-align: center; }
-.p-calc-cta-btn { font-family: var(--font); font-size: 15px; font-weight: 600; color: #F6F6F6 !important; background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); border: none; border-radius: 8px; padding: 14px 28px; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: inline-block; text-decoration: none !important; transition: transform .2s, box-shadow .2s; }
-.p-calc-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-.p-footnote { font-size: 11px; color: rgba(246,246,246,0.3); margin-top: 8px; }
-.p-benefits { display: grid; grid-template-columns: repeat(2,1fr); gap: 0; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; }
-.p-benefit { padding: 28px 24px; border-right: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; gap: 14px; align-items: flex-start; transition: background .2s; }
+.p-calc-cta { margin-top: 26px; text-align: center; }
+.p-calc-cta-btn { font-family: var(--font); font-size: 19.5px; font-weight: 600; color: #F6F6F6 !important; background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); border: none; border-radius: 10.4px; padding: 18.2px 36.4px; cursor: pointer; box-shadow: 0 5.2px 20.8px rgba(0,0,0,0.2); display: inline-block; text-decoration: none !important; transition: transform .2s, box-shadow .2s; }
+.p-calc-cta-btn:hover { transform: translateY(-2.6px); box-shadow: 0 10.4px 31.2px rgba(0,0,0,0.35); }
+.p-footnote { font-size: 14.3px; color: rgba(246,246,246,0.3); margin-top: 10.4px; }
+.p-benefits { display: grid; grid-template-columns: repeat(2,1fr); gap: 0; background: rgba(255,255,255,0.04); border: 1.3px solid rgba(255,255,255,0.08); border-radius: 15.6px; overflow: hidden; }
+.p-benefit { padding: 36.4px 31.2px; border-right: 1.3px solid rgba(255,255,255,0.06); border-bottom: 1.3px solid rgba(255,255,255,0.06); display: flex; gap: 18.2px; align-items: flex-start; transition: background .2s; }
 .p-benefit:hover { background: rgba(255,255,255,0.03); }
 .p-benefit:nth-child(2n) { border-right: none; }
 .p-benefit:nth-child(5), .p-benefit:nth-child(6) { border-bottom: none; }
-.p-benefit__icon { font-size: 20px; flex-shrink: 0; width: 40px; height: 40px; background: rgba(162,168,132,0.1); border: 1px solid rgba(162,168,132,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-.p-benefit__title { font-size: 13px; font-weight: 700; color: #F6F6F6; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
-.p-benefit__text { font-size: 12px; color: rgba(246,246,246,0.5); line-height: 1.7; }
-.p-global-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; gap: 40px; }
-.p-countries { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
-.p-country { display: inline-flex; align-items: center; gap: 6px; padding: 7px 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); font-size: 12px; font-weight: 500; color: rgba(246,246,246,0.5); background: rgba(255,255,255,0.04); cursor: default; transition: border-color .2s, color .2s; }
+.p-benefit__icon { font-size: 26px; flex-shrink: 0; width: 52px; height: 52px; background: rgba(162,168,132,0.1); border: 1.3px solid rgba(162,168,132,0.2); border-radius: 10.4px; display: flex; align-items: center; justify-content: center; }
+.p-benefit__title { font-size: 16.9px; font-weight: 700; color: #F6F6F6; margin-bottom: 7.8px; text-transform: uppercase; letter-spacing: 0.39px; }
+.p-benefit__text { font-size: 15.6px; color: rgba(246,246,246,0.5); line-height: 1.7; }
+.p-global-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36.4px; gap: 52px; }
+.p-countries { display: flex; flex-wrap: wrap; gap: 10.4px; margin-bottom: 62.4px; }
+.p-country { display: inline-flex; align-items: center; gap: 7.8px; padding: 9.1px 19.5px; border-radius: 10.4px; border: 1.3px solid rgba(255,255,255,0.08); font-size: 15.6px; font-weight: 500; color: rgba(246,246,246,0.5); background: rgba(255,255,255,0.04); cursor: default; transition: border-color .2s, color .2s; }
 .p-country.active { border-color: rgba(162,168,132,0.4); color: var(--green); background: rgba(162,168,132,0.08); font-weight: 700; }
 .p-country:hover { border-color: rgba(162,168,132,0.3); color: rgba(162,168,132,0.8); }
-.p-testimonials { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 32px; }
-.p-testimonial { background: rgba(99,111,84,0.25); border: 1px solid rgba(99,111,84,0.35); border-radius: 10px; padding: 28px; display: flex; flex-direction: column; gap: 6px; transition: box-shadow .2s, transform .2s; }
-.p-testimonial:hover { box-shadow: 0 8px 48px rgba(0,0,0,0.2); transform: translateY(-2px); }
-.p-test__name-row { display: flex; align-items: center; gap: 8px; }
-.p-test__name { font-size: 15px; font-weight: 600; color: #F6F6F6; }
-.p-test__flag { width: 20px; height: 15px; border-radius: 2px; overflow: hidden; display: flex; flex-shrink: 0; }
+.p-testimonials { display: grid; grid-template-columns: repeat(3,1fr); gap: 20.8px; margin-bottom: 41.6px; }
+.p-testimonial { background: rgba(99,111,84,0.25); border: 1.3px solid rgba(99,111,84,0.35); border-radius: 13px; padding: 36.4px; display: flex; flex-direction: column; gap: 7.8px; transition: box-shadow .2s, transform .2s; }
+.p-testimonial:hover { box-shadow: 0 10.4px 62.4px rgba(0,0,0,0.2); transform: translateY(-2.6px); }
+.p-test__name-row { display: flex; align-items: center; gap: 10.4px; }
+.p-test__name { font-size: 19.5px; font-weight: 600; color: #F6F6F6; }
+.p-test__flag { width: 26px; height: 19.5px; border-radius: 2.6px; overflow: hidden; display: flex; flex-shrink: 0; }
 .p-test__flag svg { width: 100%; height: 100%; display: block; }
-.p-test__role { font-size: 12px; color: rgba(246,246,246,0.5); line-height: 1.4; margin-bottom: 6px; }
-.p-test__quote { font-size: 13px; color: rgba(246,246,246,0.65); line-height: 1.4; font-style: italic; }
-.p-resources { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
-.p-resource-link { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); color: rgba(246,246,246,0.7) !important; font-size: 13px; font-weight: 600; background: rgba(255,255,255,0.06); box-shadow: none; transition: background .2s, transform .2s, box-shadow .2s; }
-.p-resource-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.p-test__role { font-size: 15.6px; color: rgba(246,246,246,0.5); line-height: 1.4; margin-bottom: 7.8px; }
+.p-test__quote { font-size: 16.9px; color: rgba(246,246,246,0.65); line-height: 1.4; font-style: italic; }
+.p-resources { display: flex; gap: 15.6px; flex-wrap: wrap; justify-content: center; margin-top: 10.4px; }
+.p-resource-link { display: inline-flex; align-items: center; gap: 10.4px; padding: 15.6px 31.2px; border-radius: 10.4px; border: 1.3px solid rgba(255,255,255,0.12); color: rgba(246,246,246,0.7) !important; font-size: 16.9px; font-weight: 600; background: rgba(255,255,255,0.06); box-shadow: none; transition: background .2s, transform .2s, box-shadow .2s; }
+.p-resource-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2.6px); box-shadow: 0 10.4px 31.2px rgba(0,0,0,0.3); }
 .p-resource-link--green { background: rgba(162,168,132,0.12) !important; border-color: rgba(162,168,132,0.25) !important; color: var(--green) !important; -webkit-text-fill-color: var(--green) !important; }
 .p-resource-link--green:hover { background: rgba(162,168,132,0.2) !important; }
-.p-form-wrap { max-width: 700px; }
-.p-form-head { text-align: center; margin-bottom: 40px; }
+.p-form-wrap { max-width: 910px; }
+.p-form-head { text-align: center; margin-bottom: 52px; }
 .p-form-head .p-section__title { display: inline-block; flex-shrink: unset; }
-.p-form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.p-form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15.6px; margin-bottom: 15.6px; }
 .p-form__full { grid-column: 1/-1; }
-.p-field-label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,246,246,0.35); margin-bottom: 6px; }
-.p-field-input { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; color: #F6F6F6; padding: 14px 18px; font-family: var(--font); font-size: 14px; outline: none; transition: border-color .2s; -webkit-appearance: none; }
+.p-field-label { display: block; font-size: 14.3px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,246,246,0.35); margin-bottom: 7.8px; }
+.p-field-input { width: 100%; background: rgba(255,255,255,0.06); border: 1.3px solid rgba(255,255,255,0.12); border-radius: 7.8px; color: #F6F6F6; padding: 18.2px 23.4px; font-family: var(--font); font-size: 18.2px; outline: none; transition: border-color .2s; -webkit-appearance: none; }
 .p-field-input::placeholder { color: rgba(246,246,246,0.3); }
 .p-field-input:focus { border-color: rgba(162,168,132,0.6); }
-.p-field-input:-webkit-autofill, .p-field-input:-webkit-autofill:hover, .p-field-input:-webkit-autofill:focus, .p-field-input:-webkit-autofill:active { -webkit-box-shadow: 0 0 0 1000px #1e1e1e inset !important; -webkit-text-fill-color: #F6F6F6 !important; caret-color: #F6F6F6 !important; transition: background-color 5000s ease-in-out 0s; }
-select.p-field-input { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A2A884' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 15px center; padding-right: 38px; }
+.p-field-input:-webkit-autofill, .p-field-input:-webkit-autofill:hover, .p-field-input:-webkit-autofill:focus, .p-field-input:-webkit-autofill:active { -webkit-box-shadow: 0 0 0 1300px #1e1e1e inset !important; -webkit-text-fill-color: #F6F6F6 !important; caret-color: #F6F6F6 !important; transition: background-color 5000s ease-in-out 0s; }
+select.p-field-input { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A2A884' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 19.5px center; padding-right: 49.4px; }
 select.p-field-input option { background: #262626; color: #F6F6F6; }
-textarea.p-field-input { resize: vertical; min-height: 96px; }
-.p-checkbox-wrap { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; margin-top: 4px; }
-.p-checkbox { display: flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(246,246,246,0.45); cursor: pointer; flex-wrap: nowrap; }
-.p-checkbox input { accent-color: var(--green); width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
+textarea.p-field-input { resize: vertical; min-height: 124.8px; }
+.p-checkbox-wrap { display: flex; flex-direction: column; gap: 10.4px; margin-bottom: 15.6px; margin-top: 5.2px; }
+.p-checkbox { display: flex; align-items: center; gap: 13px; font-size: 16.9px; color: rgba(246,246,246,0.45); cursor: pointer; flex-wrap: nowrap; }
+.p-checkbox input { accent-color: var(--green); width: 19.5px; height: 19.5px; cursor: pointer; flex-shrink: 0; }
 .p-checkbox a { color: var(--green) !important; }
 .p-checkbox a:hover { text-decoration: underline; }
-.p-submit { font-family: var(--font); font-size: 15px; font-weight: 600; color: #F6F6F6; background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); border: none; border-radius: 8px; padding: 14px 28px; cursor: pointer; width: 100%; display: block; position: relative; min-width: 280px; transition: transform .2s, box-shadow .2s; margin-top: 8px; text-align: center; }
-.p-submit::after { content: "\2197"; position: absolute; right: 7px; top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #1B1B1B; border-radius: 4px; color: #F6F6F6; font-size: 16px; font-weight: 300; }
-.p-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-.p-form-success { display: none; text-align: center; padding: 40px; background: rgba(255,255,255,0.04); border: 1px solid rgba(162,168,132,0.25); border-radius: 12px; margin-top: 20px; }
-.p-form-success__icon { font-size: 40px; margin-bottom: 12px; display: block; }
-.p-form-success__title { font-size: 20px; font-weight: 700; color: #F6F6F6; text-transform: uppercase; margin-bottom: 8px; }
-.p-form-success__text { font-size: 14px; color: rgba(246,246,246,0.55); line-height: 1.7; }
-.p-form-note { font-size: 13px; color: rgba(246,246,246,0.35); margin-top: 20px; line-height: 1.7; }
-.p-footer { background: linear-gradient(to bottom, #1a1a1a 0%, #262626 100%); border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 80px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-.p-footer__logo { font-family: var(--font); font-size: 15px; font-weight: 500; color: #F6F6F6; }
+.p-submit { font-family: var(--font); font-size: 19.5px; font-weight: 600; color: #F6F6F6; background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); border: none; border-radius: 10.4px; padding: 18.2px 36.4px; cursor: pointer; width: 100%; display: block; position: relative; min-width: 364px; transition: transform .2s, box-shadow .2s; margin-top: 10.4px; text-align: center; }
+.p-submit::after { content: "\2197"; position: absolute; right: 9.1px; top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; justify-content: center; width: 41.6px; height: 41.6px; background: #1B1B1B; border-radius: 5.2px; color: #F6F6F6; font-size: 20.8px; font-weight: 300; }
+.p-submit:hover { transform: translateY(-2.6px); box-shadow: 0 10.4px 31.2px rgba(0,0,0,0.3); }
+.p-form-success { display: none; text-align: center; padding: 52px; background: rgba(255,255,255,0.04); border: 1.3px solid rgba(162,168,132,0.25); border-radius: 15.6px; margin-top: 26px; }
+.p-form-success__icon { font-size: 52px; margin-bottom: 15.6px; display: block; }
+.p-form-success__title { font-size: 26px; font-weight: 700; color: #F6F6F6; text-transform: uppercase; margin-bottom: 10.4px; }
+.p-form-success__text { font-size: 18.2px; color: rgba(246,246,246,0.55); line-height: 1.7; }
+.p-form-note { font-size: 16.9px; color: rgba(246,246,246,0.35); margin-top: 26px; line-height: 1.7; }
+.p-footer { background: linear-gradient(to bottom, #1a1a1a 0%, #262626 100%); border-top: 1.3px solid rgba(255,255,255,0.06); padding: 31.2px 104px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15.6px; }
+.p-footer__logo { font-family: var(--font); font-size: 19.5px; font-weight: 500; color: #F6F6F6; }
 .p-footer__logo span { color: #F6F6F6; }
 .p-footer__logo span:first-child { color: var(--green); }
-.p-footer p { font-size: 13px; color: rgba(246,246,246,0.35); }
-.p-label { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; -webkit-text-fill-color: var(--green); }
-.p-label::before { content: ''; display: inline-block; width: 28px; height: 1.5px; background: var(--green); flex-shrink: 0; }
-.p-lang { position:relative; flex-shrink:0; margin:0 8px; z-index:10001; }
-.p-lang__toggle { font-family:var(--font); font-size:13px; font-weight:500; color:var(--dark); background:rgba(27,27,27,0.08); border:1px solid rgba(27,27,27,0.15); cursor:pointer; display:flex; align-items:center; gap:4px; padding:5px 10px; border-radius:6px; transition:background .2s; }
-.p-lang__dropdown { display:none; position:fixed; background:#fff; border:1px solid rgba(0,0,0,0.1); border-radius:10px; padding:4px; box-shadow:0 4px 16px rgba(0,0,0,0.1); width:56px; z-index:2147483647; }
+.p-footer p { font-size: 16.9px; color: rgba(246,246,246,0.35); }
+.p-label { display: flex; align-items: center; gap: 13px; font-size: 14.3px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 18.2px; -webkit-text-fill-color: var(--green); }
+.p-label::before { content: ''; display: inline-block; width: 36.4px; height: 1.95px; background: var(--green); flex-shrink: 0; }
+.p-lang { position:relative; flex-shrink:0; margin:0 10.4px; z-index:10001; }
+.p-lang__toggle { font-family:var(--font); font-size:16.9px; font-weight:500; color:var(--dark); background:rgba(27,27,27,0.08); border:1.3px solid rgba(27,27,27,0.15); cursor:pointer; display:flex; align-items:center; gap:5.2px; padding:6.5px 13px; border-radius:7.8px; transition:background .2s; }
+.p-lang__dropdown { display:none; position:fixed; background:#fff; border:1.3px solid rgba(0,0,0,0.1); border-radius:13px; padding:5.2px; box-shadow:0 5.2px 20.8px rgba(0,0,0,0.1); width:72.8px; z-index:2147483647; }
 .p-lang.open .p-lang__dropdown { display:block; }
-.p-lang__opt { font-family:var(--font); font-size:13px; font-weight:500; color:#888; background:none; border:none; cursor:pointer; width:100%; text-align:left; padding:6px 12px; border-radius:6px; transition:background .2s,color .2s; }
+.p-lang__opt { font-family:var(--font); font-size:16.9px; font-weight:500; color:#888; background:none; border:none; cursor:pointer; width:100%; text-align:left; padding:7.8px 15.6px; border-radius:7.8px; transition:background .2s,color .2s; }
 .p-lang__opt:hover { background:#f5f5f5; color:#1B1B1B; }
 .p-lang__opt.active { color:#1B1B1B; font-weight:700; }
-.p-burger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; flex-shrink:0; background:none; border:none; }
-.p-burger span { display:block; width:22px; height:2px; background:#F6F6F6; border-radius:2px; }
-.p-mob { display:none; position:fixed; top:60px; left:0; right:0; background:rgba(246,246,246,1); padding:12px 24px 24px; z-index:9999; flex-direction:column; max-height:calc(100vh - 60px); overflow-y:auto; border-bottom:1px solid rgba(0,0,0,0.07); box-shadow:0 8px 32px rgba(0,0,0,0.1); }
+.p-burger { display:none; flex-direction:column; gap:6.5px; cursor:pointer; padding:5.2px; flex-shrink:0; background:none; border:none; }
+.p-burger span { display:block; width:28.6px; height:2.6px; background:#F6F6F6; border-radius:2.6px; }
+.p-mob { display:none; position:fixed; top:78px; left:0; right:0; background:rgba(2,2,2,0.97); backdrop-filter:blur(12px); padding:15.6px 31.2px 31.2px; z-index:9999; flex-direction:column; max-height:calc(130vh - 78px); overflow-y:auto; border-bottom:1.3px solid rgba(255,255,255,0.08); box-shadow:0 10.4px 41.6px rgba(0,0,0,0.4); }
 .p-mob.open { display:flex; }
-.p-mob__lang { display:flex; gap:8px; padding:12px 0; border-bottom:1px solid rgba(0,0,0,0.06); }
-.p-mob__lang-btn { font-family:var(--font); font-size:14px; font-weight:500; color:#888; background:none; border:1px solid rgba(0,0,0,0.1); border-radius:6px; padding:6px 16px; cursor:pointer; transition:all .2s; }
-.p-mob__lang-btn.active { color:#1B1B1B; font-weight:700; border-color:#1B1B1B; }
+.p-mob__lang { display:flex; gap:10.4px; padding:15.6px 0; border-bottom:1.3px solid rgba(255,255,255,0.08); }
+.p-mob__lang-btn { flex:1; text-align:center; font-family:var(--font); font-size:18.2px; font-weight:600; color:#aaa; background:rgba(255,255,255,0.06); border:1.3px solid rgba(255,255,255,0.15); border-radius:7.8px; padding:13px 0; cursor:pointer; transition:all .2s; }
+.p-mob__lang-btn.active { color:#020202; background:#fff; font-weight:700; border-color:#fff; }
 
 @media (max-width: 1200px) {
-  .p-nav { padding: 0 40px; }
-  .p-hero__card { padding: 56px 40px 0px; }
-  .p-section { padding-left: 40px !important; padding-right: 40px !important; }
-  .p-stats__grid { padding: 0 40px; }
-  .p-footer { padding: 24px 40px; }
+  .p-nav { padding: 0 52px; }
+  .p-hero__card { padding: 72.8px 52px 0px; }
+  .p-section { padding-left: 52px !important; padding-right: 52px !important; }
+  .p-stats__grid { padding: 0 52px; }
+  .p-footer { padding: 31.2px 52px; }
 }
 @media (max-width: 960px) {
-  .p-hero__title { font-size: 44px; }
+  .p-hero__title { font-size: 57.2px; }
   .p-hero__desc { max-width: 100%; }
-  .p-cards { grid-template-columns: 1fr !important; gap: 12px !important; }
-  .p-calc { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .p-cards { grid-template-columns: 1fr !important; gap: 15.6px !important; }
+  .p-calc { grid-template-columns: 1fr !important; gap: 20.8px !important; }
   .p-benefits { grid-template-columns: 1fr !important; }
   .p-benefit { border-right: none !important; }
-  .p-benefit:nth-child(5) { border-bottom: 1px solid rgba(255,255,255,0.06) !important; }
-  .p-testimonials { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .p-benefit:nth-child(5) { border-bottom: 1.3px solid rgba(255,255,255,0.06) !important; }
+  .p-testimonials { grid-template-columns: 1fr !important; gap: 15.6px !important; }
   .p-global-top { flex-direction: column !important; align-items: flex-start !important; }
   .p-stats__grid { display: grid !important; grid-template-columns: repeat(2,1fr) !important; }
-  .p-stats__item { padding: 28px 16px !important; }
+  .p-stats__item { padding: 36.4px 20.8px !important; }
   .p-sep { display: none !important; }
   .p-rate-cards { grid-template-columns: 1fr !important; }
-  .p-section__header { flex-direction: column !important; gap: 12px !important; }
+  .p-section__header { flex-direction: column !important; gap: 15.6px !important; }
   .p-section__desc { width: 100% !important; margin-left: 0 !important; padding-top: 0 !important; }
   .p-year-grid { grid-template-columns: 1fr 1fr 1fr !important; }
 }
 @media (max-width: 640px) {
-  .p-nav { padding: 0 20px; height: 60px; background: #262626; }
-  .p-nav__logo img { height: 34px; }
+  .p-nav { padding: 0 26px; height: 78px; background: #262626; }
+  .p-nav__logo img { height: 44.2px; }
   .p-nav__btn { display: none !important; }
   .p-nav__back { display: none !important; }
   #pLangWrap { display: none !important; }
   .p-burger { display: flex !important; }
   #pNavHome { display: flex !important; margin: 0 auto; }
-  .p-hero { padding-top: 60px; }
-  .p-hero__card { padding: 36px 20px 0px; border-radius: 8px 8px 0 0; }
-  .p-hero__tag { font-size: 10px; padding: 4px 10px; }
-  .p-hero__title { font-size: 32px; letter-spacing: -0.02em; }
-  .p-hero__desc { font-size: 15px; max-width: 100%; }
-  .p-hero__btns { flex-direction: column; gap: 10px; }
+  .p-hero { padding-top: 78px; }
+  .p-hero__card { padding: 46.8px 26px 0px; border-radius: 10.4px 10.4px 0 0; }
+  .p-hero__tag { font-size: 13px; padding: 5.2px 13px; }
+  .p-hero__title { font-size: 41.6px; letter-spacing: -0.02em; }
+  .p-hero__desc { font-size: 19.5px; max-width: 100%; }
+  .p-hero__btns { flex-direction: column; gap: 13px; }
   .p-btn-primary, .p-btn-secondary { width: 100%; justify-content: center; box-sizing: border-box; }
-  .p-section { padding: 60px 20px 0 !important; }
-  .p-section__title { font-size: 24px !important; }
-  .p-stats { padding-top: 40px !important; }
+  .p-section { padding: 78px 26px 0 !important; }
+  .p-section__title { font-size: 31.2px !important; }
+  .p-stats { padding-top: 52px !important; }
   .p-stats__grid { padding: 0 !important; display: flex !important; flex-direction: column !important; }
   .p-sep { display: none !important; }
-  .p-stats__item { padding: 20px 8px !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important; width: 100% !important; }
+  .p-stats__item { padding: 26px 10.4px !important; border-bottom: 1.3px solid rgba(255,255,255,0.08) !important; width: 100% !important; }
   .p-stats__item:last-child { border-bottom: none !important; }
-  .p-stats__num { font-size: 36px !important; }
-  .p-stats__label { font-size: 12px !important; }
-  .p-section__header { flex-direction: column !important; gap: 8px !important; }
+  .p-stats__num { font-size: 46.8px !important; }
+  .p-stats__label { font-size: 15.6px !important; }
+  .p-section__header { flex-direction: column !important; gap: 10.4px !important; }
   .p-section__desc { width: 100% !important; margin-left: 0 !important; padding-top: 0 !important; white-space: normal !important; }
-  .p-calc__panel { padding: 20px 16px !important; }
-  .p-year-grid { grid-template-columns: 1fr 1fr 1fr !important; gap: 6px !important; }
-  .p-year-card .yc-value { font-size: 14px !important; }
-  .p-year-card { padding: 12px 6px !important; }
-  .p-benefits { border-radius: 8px !important; }
-  .p-benefit { padding: 20px 16px !important; }
+  .p-calc__panel { padding: 26px 20.8px !important; }
+  .p-year-grid { grid-template-columns: 1fr 1fr 1fr !important; gap: 7.8px !important; }
+  .p-year-card .yc-value { font-size: 18.2px !important; }
+  .p-year-card { padding: 15.6px 7.8px !important; }
+  .p-benefits { border-radius: 10.4px !important; }
+  .p-benefit { padding: 26px 20.8px !important; }
   .p-testimonials { grid-template-columns: 1fr !important; }
-  .p-countries { gap: 6px !important; }
-  .p-country { font-size: 11px !important; padding: 5px 10px !important; }
+  .p-countries { gap: 7.8px !important; }
+  .p-country { font-size: 14.3px !important; padding: 6.5px 13px !important; }
   .p-form__grid { grid-template-columns: 1fr !important; }
   .p-form-wrap { padding: 0 !important; }
   .p-submit { min-width: 0 !important; width: 100% !important; }
   .p-submit-row { flex-direction: column !important; align-items: stretch !important; }
   .p-resources { flex-direction: column; }
-  .wa-btn { font-size: 13px !important; }
+  .wa-btn { font-size: 16.9px !important; }
   .p-resource-link { justify-content: center; width: 100%; box-sizing: border-box; }
-  .p-footer { flex-direction: column; align-items: flex-start; padding: 20px; }
+  .p-footer { flex-direction: column; align-items: flex-start; padding: 26px; }
   .p-global-top { flex-direction: column !important; }
 }
 @media (max-width: 480px) {
-  .p-hero__title { font-size: 28px !important; }
-  .p-section__title { font-size: 22px !important; }
+  .p-hero__title { font-size: 36.4px !important; }
+  .p-section__title { font-size: 28.6px !important; }
   .p-stats__grid { grid-template-columns: 1fr 1fr !important; }
-  .p-stats__num { font-size: 32px !important; }
+  .p-stats__num { font-size: 41.6px !important; }
   .p-toggle { flex-direction: column; }
   .p-rate-cards { grid-template-columns: 1fr !important; }
 }
 #pCasesGrid{grid-template-columns:1fr!important;}
+
+  /* ── FOOTER (перенесён с основного сайта) ── */
+  .av-footer-main { font-family: var(--font); background:#141414; padding: clamp(30px, 4vw, 60px) clamp(16px, 5vw, 80px) 40px; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+  .av-footer-main__grid { display: flex; justify-content: flex-start; gap: clamp(24px, 5vw, 80px); max-width: 50%; align-items: stretch; position: relative; z-index: 1; }
+  .av-footer-main__map { position: absolute; left: 50%; right: 0; top: 0; bottom: 0; pointer-events: none; display: flex; align-items: center; justify-content: center; }
+  .av-footer-main__map img { width: 100%; height: 100%; display: block; max-height: none; object-fit: contain; object-position: center center; }
+  .av-footer-main__col { display: flex; flex-direction: column; gap: 12px; }
+  .av-footer-main__stores { display: flex; flex-direction: column; gap: 8px; }
+  .av-footer-main__store-btn { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font); font-size: var(--fs-body); font-weight: 500; color: #F6F6F6 !important; background: rgba(246,246,246,0.08); border: 1px solid rgba(246,246,246,0.15); border-radius: 8px; padding: 10px 18px; text-decoration: none !important; transition: background .2s; white-space: nowrap; justify-content: center; }
+  .av-footer-main__store-btn:hover { background: rgba(246,246,246,0.12); }
+  .av-footer-main__store-btn img { width: 18px; height: 18px; object-fit: contain; flex-shrink: 0; }
+  .av-footer-main__title { font-size: clamp(14px, 1.2vw, 16px); font-weight: 600; color: #F6F6F6; margin-bottom: 4px; white-space: nowrap; }
+  .av-footer-main__links { display: flex; flex-direction: column; gap: 10px; }
+  .av-footer-main__link { font-size: var(--fs-body); color: rgba(246,246,246,0.5) !important; text-decoration: none !important; transition: color .2s; white-space: nowrap; }
+  .av-footer-main__link:hover { color: rgba(246,246,246,0.8) !important; }
+  .av-footer { font-family: var(--font); background:#141414; padding: 24px clamp(16px, 5vw, 80px); border-top: 1px solid rgba(255,255,255,0.06); text-align: center; }
+  .av-footer__copy { font-size: var(--fs-body); color: rgba(246,246,246,0.35); }
+  @media (max-width: 768px){ .av-footer-main__map{ display:none; } .av-footer-main__grid{ flex-direction:column; max-width:100%; gap:28px; } }
+
+  /* ── FAQ popup (перенесён с основного) ── */
+  .av-faq-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 99999; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+  .av-faq-overlay.open { display: flex; }
+  .av-faq-popup { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: clamp(16px, 2vw, 32px); position: relative; max-width: 1000px; width: 92%; max-height: 88vh; overflow-y: auto; overscroll-behavior: contain; }
+  .av-faq-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.08); border: none; color: #fff; font-size: var(--fs-body); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .av-faq-title { font-family: var(--font); font-size: clamp(15px, 1.3vw, 18px); font-weight: 600; color: #F6F6F6; margin-bottom: 24px; }
+  .av-faq-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+  .av-faq-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; }
+  .av-faq-question { font-family: var(--font); font-size: var(--fs-body); font-weight: 500; color: #F6F6F6; padding: 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .av-faq-question:hover { background: rgba(255,255,255,0.06); }
+  .av-faq-arrow { font-size: var(--fs-body); color: rgba(246,246,246,0.5); transition: transform .2s; flex-shrink: 0; }
+  .av-faq-item.open .av-faq-arrow { transform: rotate(180deg); }
+  .av-faq-answer { font-family: var(--font); font-size: var(--fs-body); color: rgba(246,246,246,0.6); line-height: 1.6; padding: 0 16px 16px; display: none; }
+  .av-faq-item.open .av-faq-answer { display: block; }
+  @media (max-width: 768px){ .av-faq-list{ grid-template-columns: 1fr; } }
+
+  /* ── VIDEO / PROTOCOL popups (перенесены) ── */
+  .av-video-overlay, .av-protocol-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:99999; align-items:center; justify-content:center; backdrop-filter:blur(8px); }
+  .av-video-overlay.open, .av-protocol-overlay.open { display:flex; }
+  .av-video-popup, .av-protocol-popup { background:#1a1a1a; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:clamp(16px,2vw,32px); position:relative; max-width:500px; width:92%; max-height:88vh; overflow-y:auto; }
+  .av-video-close, .av-protocol-close { position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:8px; background:rgba(255,255,255,0.08); border:none; color:#fff; font-size:var(--fs-body); cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; }
+  .av-video-title, .av-protocol-title { font-family:var(--font); font-size:clamp(15px,1.3vw,18px); font-weight:600; color:#F6F6F6; margin-bottom:24px; }
+  .av-protocol-popup { max-width: 650px; width: 92%; }
+  .av-video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .av-video-item { display: flex; flex-direction: column; gap: 10px; }
+  .av-video-label { font-family: var(--font); font-size: var(--fs-body); font-weight: 500; color: #F6F6F6; text-align: center; }
+  .av-video-thumb { position: relative; border-radius: 8px; overflow: hidden; cursor: pointer; aspect-ratio: 9/16; }
+  .av-video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .2s; }
+  .av-video-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); }
+  .av-video-play svg { width: 48px; height: 48px; color: #fff; }
+  .av-video-player-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 999999; align-items: center; justify-content: center; }
+  .av-video-player-overlay.open { display: flex; }
+  .av-video-player-wrap { position: relative; width: 340px; max-width: 90%; aspect-ratio: 9/16; }
+  .av-video-player-wrap iframe { width: 100%; height: 100%; border-radius: 12px; }
+  .av-protocol-files { display: flex; flex-direction: column; gap: 12px; }
+  .av-protocol-file { display: flex; flex-direction: column; gap: 8px; padding: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; transition: background .2s, border-color .2s; }
+  .av-protocol-file-badge { display: inline-block; font-family: var(--font); font-size: 13px; font-weight: 700; color: #FFFFFF; padding: 2px 8px; border-radius: 4px; width: fit-content; background: #D32F2F; }
+  .av-protocol-file-name { font-family: var(--font); font-size: 13px; color: rgba(246,246,246,0.7); line-height: 1.4; }
+  .av-protocol-file-actions { display: flex; gap: 8px; margin-top: 4px; }
+  .av-protocol-file-btn { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font); font-size: var(--fs-body); font-weight: 500; color: rgba(246,246,246,0.7) !important; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 12px; text-decoration: none !important; cursor: pointer; transition: background .2s; }
 </style>
 </head>
 <body>
@@ -397,7 +457,7 @@ textarea.p-field-input { resize: vertical; min-height: 96px; }
   <a href="https://avareit.com/" class="p-nav__back" id="pNavHome">← Home</a>
   <div class="p-nav__right">
     <div style="position:relative;display:inline-block;" id="pLangWrap">
-      <button id="pLangBtn" onclick="showLangDD(this,event)" style="font-family:var(--font);font-size:13px;font-weight:500;color:#fff;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);cursor:pointer;display:flex;align-items:center;gap:4px;padding:5px 10px;border-radius:6px;">EN <span style="font-size:9px;color:rgba(255,255,255,0.5);">▼</span></button>
+      <button id="pLangBtn" onclick="showLangDD(this,event)" style="font-family:var(--font);font-size:16.9px;font-weight:500;color:#fff;background:rgba(255,255,255,0.12);border:1.3px solid rgba(255,255,255,0.2);cursor:pointer;display:flex;align-items:center;gap:5.2px;padding:6.5px 13px;border-radius:7.8px;">EN <span style="font-size:11.7px;color:rgba(255,255,255,0.5);">▼</span></button>
     </div>
     <a href="#apply" class="p-nav__btn">Apply Now</a>
     <button class="p-burger" id="pBurger" onclick="var m=document.getElementById('pMob');m.style.display=m.style.display==='flex'?'none':'flex';">
@@ -411,7 +471,7 @@ textarea.p-field-input { resize: vertical; min-height: 96px; }
     <button class="p-mob__lang-btn" data-plang="pt" onclick="pLangSelect('pt');document.getElementById('pMob').style.display='none';">PT</button>
     <button class="p-mob__lang-btn" data-plang="es" onclick="pLangSelect('es');document.getElementById('pMob').style.display='none';">ES</button>
   </div>
-  <a href="#apply" onclick="document.getElementById('pMob').style.display='none';" style="margin-top:16px;font-family:var(--font);font-size:13px;font-weight:600;color:#F6F6F6!important;background:var(--dark);border-radius:8px;padding:6px;text-decoration:none!important;display:flex;align-items:center;box-sizing:border-box;" data-i18n-mob="apply"><span style="width:30px;flex-shrink:0;"></span><span style="flex:1;text-align:center;">Apply Now</span><span style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;background:rgba(255,255,255,0.15);border-radius:4px;font-size:14px;font-weight:300;flex-shrink:0;">↗</span></a>
+  <a href="#apply" onclick="document.getElementById('pMob').style.display='none';" style="margin-top:20.8px;font-family:var(--font);font-size:16.9px;font-weight:600;color:#020202!important;background:#F6F6F6;border-radius:10.4px;padding:7.8px;text-decoration:none!important;display:flex;align-items:center;box-sizing:border-box;" data-i18n-mob="apply"><span style="width:39px;flex-shrink:0;"></span><span style="flex:1;text-align:center;">Apply Now</span><span style="display:inline-flex;align-items:center;justify-content:center;width:39px;height:39px;background:rgba(0,0,0,0.08);border-radius:5.2px;font-size:18.2px;font-weight:300;flex-shrink:0;">↗</span></a>
 </div>
 
 <section class="p-hero"><div class="p-hero__card">
@@ -604,18 +664,18 @@ textarea.p-field-input { resize: vertical; min-height: 96px; }
   </div>
 </div>
 
-<div id="apply" style="position:relative;top:-80px;visibility:hidden;pointer-events:none;"></div>
+<div id="apply" style="position:relative;top:-104px;visibility:hidden;pointer-events:none;"></div>
 <div class="p-dark">
   <div class="p-section p-section--bottom">
     <div id="apply-inner">
-      <div class="p-section__header" style="margin-bottom:32px;">
+      <div class="p-section__header" style="margin-bottom:41.6px;">
         <h2 class="p-section__title" style="flex-shrink:0;"><span class="p-label" data-i18n="form.label">Apply Now</span><span data-i18n="form.title">Ready to build<br>your territory?</span></h2>
         <p class="p-section__desc" data-i18n="form.desc">Fill in the form below. We'll review your application and schedule a 20-minute call within 2 business days.</p>
       </div>
       <form id="partnerForm" action="https://script.google.com/macros/s/AKfycbwuKsYVg_3x3RbBnxY0RUlFjE4tldmErUWRddqPDXg4xQxsOqqT19wTeGsxRqcW5jyK/exec">
         <input type="hidden" name="_replyto" value="m.mershiev@avareit.com">
         <input type="hidden" name="_subject" value="New MAKSA Partner Application">
-        <div style="position:absolute;left:-9999px;top:-9999px;opacity:0;pointer-events:none;" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" value=""></div>
+        <div style="position:absolute;left:-12998.7px;top:-12998.7px;opacity:0;pointer-events:none;" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" value=""></div>
         <div class="p-form__grid">
           <div><label class="p-field-label" for="f_first" data-i18n="form.first_name">First Name</label><input type="text" id="f_first" name="first_name" class="p-field-input" placeholder="Michelle" required></div>
           <div><label class="p-field-label" for="f_last" data-i18n="form.last_name">Last Name</label><input type="text" id="f_last" name="last_name" class="p-field-input" placeholder="Broughton" required></div>
@@ -625,12 +685,12 @@ textarea.p-field-input { resize: vertical; min-height: 96px; }
           <div><label class="p-field-label" for="f_size" data-i18n="form.network_size">Network Size (Approx. Clients)</label><select id="f_size" name="network_size" class="p-field-input"><option value="" disabled selected data-i18n="form.size_placeholder">Select range</option><option>1–10</option><option>10–50</option><option>50–200</option><option>200+</option></select></div>
           <div class="p-form__full"><label class="p-field-label" for="f_network" data-i18n="form.network_info">Tell Us About Your Network</label><textarea id="f_network" name="network_info" class="p-field-input" placeholder="Briefly describe your contacts, how you currently work with vets / farms, and why you're interested in MAKSA…"></textarea></div>
         </div>
-        <div class="p-submit-row" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <div class="p-submit-row" style="display:flex;align-items:center;gap:31.2px;flex-wrap:wrap;">
           <div class="p-checkbox-wrap" style="flex:1;min-width:0;">
             <label class="p-checkbox"><input type="checkbox" name="agree_privacy" checked required><span style="white-space:nowrap;"><span data-i18n="form.agree_privacy">I agree with </span><a href="https://avareit.com/privacy-policy" target="_blank" data-i18n="form.privacy_link">Privacy Policy</a></span></label>
             <label class="p-checkbox"><input type="checkbox" name="agree_terms" checked required><span style="white-space:nowrap;"><span data-i18n="form.agree_terms">I agree with </span><a href="https://avareit.com/terms-of-use" target="_blank" data-i18n="form.terms_link">Terms of Use</a></span></label>
           </div>
-          <button type="submit" class="p-submit" id="submitBtn" style="width:auto;min-width:0;flex-shrink:0;padding-right:56px;" data-i18n="form.submit">Submit Application</button>
+          <button type="submit" class="p-submit" id="submitBtn" style="width:auto;min-width:0;flex-shrink:0;padding-right:72.8px;" data-i18n="form.submit">Submit Application</button>
         </div>
       </form>
       <div class="p-form-success" id="formSuccess">
@@ -639,42 +699,126 @@ textarea.p-field-input { resize: vertical; min-height: 96px; }
         <p class="p-form-success__text">Thank you! We'll review your application and get back to you within 2 business days.</p>
       </div>
       <p class="p-form-note"><span data-i18n="form.note">We review all applications personally. You'll hear from us within 2 business days.<br>No commitment required at this stage.</span></p>
-      <div style="margin-top:32px;margin-bottom:24px;">
-        <a href="https://chat.whatsapp.com/LN4bAkbbZyABIK6ZoKua4h?mode=gi_t" target="_blank" style="font-family:var(--font);font-size:15px;font-weight:600;color:#fff!important;background:#25D366;border-radius:8px;padding:14px 28px;text-decoration:none!important;display:inline-flex;align-items:center;justify-content:center;gap:10px;" class="wa-btn" ><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg><span data-i18n="wa.btn">Join Our WhatsApp Community</span></a>
+      <div style="margin-top:41.6px;margin-bottom:31.2px;">
+        <a href="https://chat.whatsapp.com/LN4bAkbbZyABIK6ZoKua4h?mode=gi_t" target="_blank" style="font-family:var(--font);font-size:19.5px;font-weight:600;color:#fff!important;background:#25D366;border-radius:10.4px;padding:18.2px 36.4px;text-decoration:none!important;display:inline-flex;align-items:center;justify-content:center;gap:13px;" class="wa-btn" ><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg><span data-i18n="wa.btn">Join Our WhatsApp Community</span></a>
       </div>
-      <div style="display:flex;gap:12px;margin-top:24px;padding-bottom:100px;flex-wrap:wrap;">
-        <a href="https://www.youtube.com/@Avareit" target="_blank" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(246,246,246,0.7)"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#1a1a1a"/></svg></a>
-        <a href="https://www.instagram.com/avare_biotech/" target="_blank" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(246,246,246,0.7)"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="#1a1a1a"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#1a1a1a" stroke-width="2"/></svg></a>
-        <a href="https://x.com/AvareBiotech" target="_blank" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(246,246,246,0.7)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L2.25 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a href="https://www.facebook.com/profile.php?id=61557760892303" target="_blank" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(246,246,246,0.7)"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-        <a href="https://www.linkedin.com/in/maksimmershiev/" target="_blank" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(246,246,246,0.7)"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-        <a href="https://substack.com/@maksimmershiev/notes" target="_blank" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(246,246,246,0.7)"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg></a>
+      <div style="display:flex;gap:15.6px;margin-top:31.2px;padding-bottom:130px;flex-wrap:wrap;">
+        <a href="https://www.youtube.com/@Avareit" target="_blank" style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.06);border:1.3px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(246,246,246,0.7)"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#1a1a1a"/></svg></a>
+        <a href="https://www.instagram.com/avare_biotech/" target="_blank" style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.06);border:1.3px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(246,246,246,0.7)"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="#1a1a1a"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#1a1a1a" stroke-width="2"/></svg></a>
+        <a href="https://x.com/AvareBiotech" target="_blank" style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.06);border:1.3px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(246,246,246,0.7)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L2.25 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=61557760892303" target="_blank" style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.06);border:1.3px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(246,246,246,0.7)"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.linkedin.com/in/maksimmershiev/" target="_blank" style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.06);border:1.3px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(246,246,246,0.7)"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://substack.com/@maksimmershiev/notes" target="_blank" style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.06);border:1.3px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(246,246,246,0.7)"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg></a>
       </div>
     </div>
   </div>
 </div>
 
-<footer class="p-footer">
-  <div class="p-footer__logo"><span>MAKSA</span> — <span data-i18n="footer.partner">Partner</span></div>
-  <p data-i18n="footer.copy">© 2026 Avare Biotech. All rights reserved.</p>
-  <a href="https://www.dmca.com/Protection/Status.aspx?ID=3963ddec-0c0e-4e42-b3ff-b103a94c151c" title="DMCA.com Protection Status" class="dmca-badge"><img src="https://images.dmca.com/Badges/dmca_protected_sml_120n.png?ID=3963ddec-0c0e-4e42-b3ff-b103a94c151c" alt="DMCA.com Protection Status" /></a>
-  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
+<div class="av-video-overlay" id="avVideoOverlay">
+  <div class="av-video-popup">
+    <button class="av-video-close" id="avVideoClose">&#10005;</button>
+    <div class="av-video-title" id="avVideoTitle" data-i18n="video.title">Video Instruction</div>
+    <div class="av-video-grid">
+      <div class="av-video-item"><div class="av-video-thumb" data-video="https://www.youtube.com/embed/CdFFHB0CZUg?autoplay=1"><img src="https://img.youtube.com/vi/CdFFHB0CZUg/hqdefault.jpg" alt="English"><div class="av-video-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div></div><span class="av-video-label">English</span></div>
+      <div class="av-video-item"><div class="av-video-thumb" data-video="https://www.youtube.com/embed/B8y8rR0Y4Xw?autoplay=1"><img src="https://img.youtube.com/vi/B8y8rR0Y4Xw/hqdefault.jpg" alt="Portugu&ecirc;s"><div class="av-video-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div></div><span class="av-video-label">Portugu&ecirc;s</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="av-video-player-overlay" id="avVideoPlayerOverlay">
+  <div class="av-video-player-wrap">
+    <button class="av-video-close" id="avVideoPlayerClose">&#10005;</button>
+    <iframe id="avVideoFrame" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+</div>
+
+<div class="av-protocol-overlay" id="avProtocolOverlay">
+  <div class="av-protocol-popup">
+    <button class="av-protocol-close" id="avProtocolClose">&#10005;</button>
+    <div class="av-protocol-title" id="avProtocolTitle" data-i18n="protocol.title">Semen QA Protocol</div>
+    <div class="av-protocol-files">
+      <div class="av-protocol-file"><span class="av-protocol-file-badge">PDF</span><span class="av-protocol-file-name">Semen QA Protocol (English)</span><div class="av-protocol-file-actions"><button class="av-protocol-file-btn av-protocol-view-btn" data-view="https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf&embedded=true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> <span data-i18n="protocol.view">View</span></button><a href="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf" download class="av-protocol-file-btn av-protocol-download-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span data-i18n="protocol.download">Download</span></a></div></div>
+      <div class="av-protocol-file"><span class="av-protocol-file-badge">PDF</span><span class="av-protocol-file-name">Protocolo QA Semen (Portugu&ecirc;s)</span><div class="av-protocol-file-actions"><button class="av-protocol-file-btn av-protocol-view-btn" data-view="https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf&embedded=true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> <span data-i18n="protocol.view">View</span></button><a href="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf" download class="av-protocol-file-btn av-protocol-download-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span data-i18n="protocol.download">Download</span></a></div></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  window.pOpenVideo=function(){var o=document.getElementById('avVideoOverlay');if(o)o.classList.add('open');};
+  window.pOpenProtocol=function(){var o=document.getElementById('avProtocolOverlay');if(o)o.classList.add('open');};
+  function cl(id){var o=document.getElementById(id);if(o)o.classList.remove('open');}
+  document.addEventListener('click',function(e){
+    var th=e.target.closest('.av-video-thumb[data-video]');
+    if(th){var fr=document.getElementById('avVideoFrame');if(fr)fr.src=th.getAttribute('data-video');var pv=document.getElementById('avVideoPlayerOverlay');if(pv)pv.classList.add('open');return;}
+    if(e.target.closest('#avVideoClose')||e.target.id==='avVideoOverlay'){cl('avVideoOverlay');}
+    if(e.target.closest('#avVideoPlayerClose')||e.target.id==='avVideoPlayerOverlay'){var fr=document.getElementById('avVideoFrame');if(fr)fr.src='';cl('avVideoPlayerOverlay');}
+    if(e.target.closest('#avProtocolClose')||e.target.id==='avProtocolOverlay'){cl('avProtocolOverlay');}
+    var vb=e.target.closest('.av-protocol-view-btn[data-view]');
+    if(vb){e.preventDefault();if(window.pOpenPdf){window.pOpenPdf(vb.getAttribute('data-view'));}else{window.open(vb.getAttribute('data-view'),'_blank');}return;}
+  });
+})();
+</script>
+<div class="av-faq-overlay" id="pFaqOverlay">
+  <div class="av-faq-popup">
+    <button class="av-faq-close" id="pFaqClose">&#10005;</button>
+    <div class="av-faq-title">Frequently Asked Questions</div>
+    <div class="av-faq-list">
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q1">What is MAKSA?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a1">MAKSA (Mobile Assisted Key Semen Analysis) is a smartphone app that analyzes livestock semen quality using AI. It measures total motility, progressive motility, and concentration without expensive CASA equipment.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q2">How accurate is MAKSA compared to CASA?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a2">MAKSA achieves a correlation of r &gt; 0.90 with traditional CASA systems, validated across 500K+ labeled cells over 3 years of R&amp;D.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q3">What equipment do I need?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer"><span data-i18n="faq.a3">You only need a smartphone and a basic microscope.</span></div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q4">Which species are supported?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a4">MAKSA is validated for 5 species: cattle, horses, sheep, goats, and camels.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q5">Is there a free trial?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a5">Yes, we offer 10 free tests to get started.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q6">Which microscopes are compatible with MAKSA?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a6">Any standard bright-field microscope at 100&ndash;200x magnification. Phase contrast microscopes are not compatible.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q7">What affects the accuracy of results?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a7">Video quality is the key factor.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q8">Can MAKSA be used for post-thaw semen checks?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a8">Yes, MAKSA delivers results in 30&ndash;60 seconds right in the field.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q9">I already evaluate semen under a microscope &mdash; why do I need MAKSA?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a9">MAKSA generates a timestamped PDF report &mdash; an objective document that protects you in any dispute.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q10">How accurate is concentration measurement?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a10">Motility is the primary indicator &mdash; MAKSA measures it with r &gt; 0.90 correlation vs CASA.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q11">We already have CASA &mdash; why would we need this?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a11">MAKSA goes where CASA can&rsquo;t &mdash; into the field, onto the farm.</div></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var ov=document.getElementById('pFaqOverlay'); if(!ov) return;
+  ov.querySelectorAll('.av-faq-question').forEach(function(q){ q.addEventListener('click',function(){ q.parentElement.classList.toggle('open'); }); });
+  var cl=document.getElementById('pFaqClose'); if(cl) cl.addEventListener('click',function(){ ov.classList.remove('open'); });
+  ov.addEventListener('click',function(e){ if(e.target===ov) ov.classList.remove('open'); });
+})();
+window.pFaqOpen=function(){ var o=document.getElementById('pFaqOverlay'); if(o) o.classList.add('open'); };
+</script>
+<footer>
+  <div class="av-footer-main">
+    <div class="av-footer-main__map"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/premium_dotted_world_map_avare%203.svg" alt=""></div>
+    <div class="av-footer-main__grid">
+      <div class="av-footer-main__col"><div class="av-footer-main__title">Download the App</div><div class="av-footer-main__stores"><a href="https://apps.apple.com/ae/app/avare-biotech/id6744607449" target="_blank" rel="noopener" class="av-footer-main__store-btn"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/apple-white.svg" alt=""> App Store</a><a href="https://play.google.com/store/apps/details?id=com.biotech.app.android&hl=en" target="_blank" rel="noopener" class="av-footer-main__store-btn"><img src="https://www.logo.wine/a/logo/Google_Play/Google_Play-Icon-Logo.wine.svg" alt="" style="width:18px;height:18px;"> Google Play</a></div></div>
+      <div class="av-footer-main__col"><div class="av-footer-main__title">Product</div><div class="av-footer-main__links"><a href="https://avareit.com/#maksa" class="av-footer-main__link">MAKSA</a><a href="https://avareit.com/learn" target="_blank" rel="noopener" class="av-footer-main__link">Blog</a><a href="https://avareit.com/#pricing" class="av-footer-main__link">Pricing</a><a href="#" onclick="pCasesOpen();return false;" class="av-footer-main__link">Case Studies</a><a href="#" onclick="pOpenVideo();return false;" class="av-footer-main__link">Video Instruction</a><a href="#" onclick="pOpenProtocol();return false;" class="av-footer-main__link">Protocol</a><a href="#" onclick="pFaqOpen();return false;" class="av-footer-main__link">FAQ</a></div></div>
+      <div class="av-footer-main__col"><div class="av-footer-main__title">Legal</div><div class="av-footer-main__links"><a href="https://avareit.com/privacy-policy" target="_blank" class="av-footer-main__link">Privacy Policy</a><a href="https://avareit.com/terms-of-use" target="_blank" class="av-footer-main__link">Terms of Use</a></div></div>
+      <div class="av-footer-main__col"><div class="av-footer-main__title">Support</div><div class="av-footer-main__links"><a href="https://api.whatsapp.com/send/?phone=971506412775&text&type=phone_number&app_absent=0" target="_blank" class="av-footer-main__link">Contact Support</a></div></div>
+    </div>
+  </div>
+  <div class="av-footer"><span class="av-footer__copy">&copy; 2026 Avare Biotech. All rights reserved.</span><br><br><a href="https://www.dmca.com/Protection/Status.aspx?ID=3963ddec-0c0e-4e42-b3ff-b103a94c151c" title="DMCA.com Protection Status" class="dmca-badge"><img src="https://images.dmca.com/Badges/dmca_protected_sml_120n.png?ID=3963ddec-0c0e-4e42-b3ff-b103a94c151c" alt="DMCA.com Protection Status" /></a><script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script></div>
 </footer>
 
 <script>var pI18n = {
   en: {
+    'video.title':'Video Instruction','protocol.title':'Semen QA Protocol','protocol.view':'View','protocol.download':'Download',
+    'faq.q1':'What is MAKSA?','faq.a1':'MAKSA (Mobile Assisted Key Semen Analysis) is a smartphone app that analyzes livestock semen quality using AI. It measures total motility, progressive motility, and concentration without expensive CASA equipment.','faq.q2':'How accurate is MAKSA compared to CASA?','faq.a2':'MAKSA achieves a correlation of r > 0.90 with traditional CASA systems, validated across 500K+ labeled cells over 3 years of R&D.','faq.q3':'What equipment do I need?','faq.a3':'You only need a smartphone and a basic microscope. No servers, no expensive hardware, no consumables required.','faq.q4':'Which species are supported?','faq.a4':'MAKSA is validated for 5 species: cattle, horses, sheep, goats, and camels.','faq.q5':'Is there a free trial?','faq.a5':'Yes, we offer 10 free tests to get started. Contact us for a demo and early adopter discounts of up to 50% off.','faq.q6':'Which microscopes are compatible with MAKSA?','faq.a6':'Any standard bright-field microscope at 100–200x magnification. Phase contrast microscopes are not compatible.','faq.q7':'What affects the accuracy of results?','faq.a7':'Video quality is the key factor. Unstable footage, incorrect magnification, or wrong dilution factor reduce accuracy.','faq.q8':'Can MAKSA be used for post-thaw semen checks?','faq.a8':"Yes, MAKSA delivers results in 30–60 seconds right in the field.",'faq.q9':'I already evaluate semen under a microscope — why do I need MAKSA?','faq.a9':'Subjective evaluation is not reproducible. MAKSA generates a timestamped PDF report that protects you in any dispute.','faq.q10':'How accurate is concentration measurement?','faq.a10':'Motility is the primary indicator — MAKSA measures it with r > 0.90 correlation vs CASA.','faq.q11':'We already have CASA — why would we need this?','faq.a11':"MAKSA goes where CASA can't — into the field, onto the farm, to technicians without lab infrastructure.",
     'hero.tag': '🤝 Distributor Program','hero.title1': 'Grow your territory.','hero.title2': 'Earn recurring revenue.','hero.desc': 'Partner with MAKSA — the AI-powered livestock semen analysis platform trusted by 120+ veterinary professionals in 10+ countries. Build a sustainable business distributing the technology that\'s replacing $30,000 lab equipment.','hero.btn1': 'Become a Distributor','hero.btn2': 'See How It Works','stats.label1': 'Veterinary professionals','stats.label2': 'Countries active','stats.label3': 'Accuracy vs. lab standard','stats.label4': 'Species supported','calc.label': 'Revenue Calculator','calc.title': 'See your potential<br>earnings','calc.track': 'Partnership Track','calc.referral': 'Referral Partner','calc.referral_sub': '10–20% Year 1 · 5% Years 2–5','calc.distributor': 'Distribution Partner','calc.distributor_sub': '20–35% Year 1 · 12–16% Years 2–5','calc.clients': 'Number of Clients','calc.price': 'Annual License Price','calc.y1_label': 'Year 1 Commission','calc.y1_note': 'on your entire portfolio','calc.y25_label': 'Years 2–5 Royalty','calc.year1': 'Year 1','calc.years25': 'Years 2–5','calc.total': '5-Year Total','calc.combined': 'combined','calc.footnote': '120+ veterinary professionals in 10+ countries already use MAKSA','calc.cta': 'Apply to Become a Partner','calc.note': '* Indicative figures. Actual terms discussed during onboarding call.','model.label': 'Partnership Model','model.title': 'How the distributor<br>model works','model.desc': 'Simple, transparent, and built for long-term recurring income — not one-time commissions.','model.card1_title': 'You own your territory','model.card1_text': 'Get exclusive rights to represent MAKSA in your country or region. You control the relationships, the pricing strategy, and the pipeline.','model.card2_title': 'Earn on every active subscription','model.card2_text': 'Every vet or farm that subscribes through you generates monthly recurring revenue — not a one-time referral fee.','model.card3_title': 'We support your growth','model.card3_text': 'Full onboarding, ready-made marketing materials in your language, technical training, and dedicated partner support from the MAKSA team.','benefits.label': 'Partner Benefits','benefits.title': 'Everything you need<br>to succeed','benefits.desc': 'All the tools, materials and support to start selling from day one.','global.label': 'Global Presence','global.title': 'Already trusted<br>across 10+ countries','global.note': 'Most markets still have open distributor slots. First movers get the best territories.','form.label': 'Apply Now','form.title': 'Ready to build<br>your territory?','form.desc': 'Fill in the form below. We\'ll review your application and schedule a 20-minute call within 2 business days.','form.first_name': 'First Name','form.last_name': 'Last Name','form.email': 'Email','form.country': 'Country / Territory','form.industry': 'Your Industry / Network','form.network_size': 'Network Size (Approx. Clients)','form.network_info': 'Tell Us About Your Network','form.submit': 'Submit Application','form.success_title': 'Application Sent!','form.note': 'We review all applications personally. You\'ll hear from us within 2 business days. No commitment required at this stage.',
     'form.industry_placeholder': 'Select your background','form.size_placeholder': 'Select range','form.industry_opt1': 'Veterinary Practice','form.industry_opt2': 'Agri-input Distribution','form.industry_opt3': 'Research / University','form.industry_opt4': 'Farm Management','form.industry_opt5': 'Other',
     'country.africa': 'Africa','country.brazil': 'Brazil','country.pakistan': 'Pakistan','country.uae': 'UAE','country.usa': 'USA','country.india': 'India','country.argentina': 'Argentina','country.turkey': 'Turkey','country.europe': 'Europe','country.saudi': 'Saudi Arabia','country.canada': 'Canada',
     'footer.partner': 'Partner','footer.copy': '© 2026 Avare Biotech. All rights reserved.','wa.btn': 'Join Our WhatsApp Community','cases.title': 'Case Studies','cases.docs': 'Reports','ben1.title': 'Ready-made sales kit','ben1.text': 'Pitch decks, product brochures, comparison sheets vs. CASA equipment — all localized for your market.','ben2.title': 'Full product training','ben2.text': 'Onboarding sessions, demo scripts, and ongoing webinars so you can answer every client question confidently.','ben3.title': 'Exclusive territory rights','ben3.text': 'We protect your market. No other distributor competes in your approved region while you are active.','ben4.title': 'Partner dashboard','ben4.text': 'Real-time view of your active clients, subscription renewals, and commission earnings — full transparency.','ben5.title': 'Co-marketing support','ben5.text': 'Joint press releases, conference presence, and social amplification when you close significant deals.','ben6.title': 'Fast onboarding','ben6.text': 'From signed agreement to first demo in under 2 weeks. We move fast so you can start earning fast.','calc.y25_note': 'tiered by client count','calc.payment_title': 'Payment terms:','model.tag1': 'Exclusive Region','model.tag2': 'Recurring Income','model.tag3': 'Full Support','global.cases_btn': '📄 View Case Studies & Video Reviews','form.agree_privacy': 'I agree with ','form.privacy_link': 'Privacy Policy','form.agree_terms': 'I agree with ','form.terms_link': 'Terms of Use','calc.flat_rate': 'flat rate for all referrals','calc.comparison': 'Over 5 years, that\'s <strong>{pct}%</strong> of a traditional CASA system sale — from recurring revenue alone.','calc.max_tier': 'Max tier reached!','calc.client_s': 'client','calc.clients_pl': 'clients','calc.payment_text': 'Annual license → commission paid within 10 business days of client payment.<br>Monthly plan → commission paid monthly as the client pays.','nudge.text': 'As a Distribution Partner with {n} clients, you\'d earn {diff} more over Years 2–5 ({rate} vs 5%). Ready to upgrade?','test1.role': 'Owner, Timbercreek Veterinary Hospital, USA','test1.quote': '"The smartphone-based MAKSA technology proved to be simple and intuitive to use for both fresh and frozen-thawed equine semen samples, allowing rapid on-site evaluation. Demonstrating strong potential for routine field use."','test2.role': 'Scientific Director / Specialist Embryo Transfer, UAE','test2.quote': '"Avare Biotech App works reliably, usability proven in the field. App was installed, registered, and used in minutes by staff. Five videos were processed within minutes, with stable feature detection."','test3.role': 'Sex Semen Technologist, Pakistan','test3.quote': '"Smartphone-based MAKSA technology demonstrated ease of use in the analysis of frozen–thawed bull semen — reliable, consistent results for routine quality assessment. A cost-effective, portable alternative to CASA systems."'
   },
   pt: {
+    'video.title':'Instrução em Vídeo','protocol.title':'Protocolo QA Sêmen','protocol.view':'Ver','protocol.download':'Baixar',
+    'faq.q1':'O que é o MAKSA?','faq.a1':'MAKSA (Mobile Assisted Key Semen Analysis) é um aplicativo de smartphone que analisa a qualidade do sêmen de animais usando IA. Mede motilidade total, motilidade progressiva e concentração sem equipamento CASA caro.','faq.q2':'Qual a precisão do MAKSA comparado ao CASA?','faq.a2':'O MAKSA alcança uma correlação de r > 0.90 com sistemas CASA tradicionais, validado em 500K+ células rotuladas ao longo de 3 anos de P&D.','faq.q3':'Que equipamento eu preciso?','faq.a3':'Você só precisa de um smartphone e um microscópio básico. Sem servidores, sem hardware caro, sem consumíveis.','faq.q4':'Quais espécies são suportadas?','faq.a4':'O MAKSA é validado para 5 espécies: bovinos, equinos, ovinos, caprinos e camelos.','faq.q5':'Existe teste gratuito?','faq.a5':'Sim, oferecemos 10 testes gratuitos para começar. Entre em contato para uma demonstração e descontos para early adopters de até 50%.','faq.q6':'Quais microscópios são compatíveis com o MAKSA?','faq.a6':'Qualquer microscópio padrão de campo claro a 100–200x de ampliação. Microscópios de contraste de fase não são compatíveis.','faq.q7':'O que afeta a precisão dos resultados?','faq.a7':'A qualidade do vídeo é o fator principal. Imagens instáveis, ampliação incorreta ou fator de diluição errado reduzem a precisão.','faq.q8':'O MAKSA pode ser usado para verificação pós-descongelamento?','faq.a8':'Sim, é exatamente para isso que o MAKSA foi feito. O MAKSA entrega resultados em 30–60 segundos no campo.','faq.q9':'Já avalia o sêmen sob microscópio — por que preciso do MAKSA?','faq.a9':'A avaliação subjetiva não é reproduzível. O MAKSA gera um relatório PDF com data e hora que protege você em qualquer disputa.','faq.q10':'Quão precisa é a medição de concentração?','faq.a10':'Motilidade é o principal indicador — o MAKSA a mede com correlação r > 0,90 vs CASA.','faq.q11':'Já temos CASA — por que precisaríamos disso?','faq.a11':'O MAKSA vai onde o CASA não pode — ao campo, à fazenda, a técnicos sem infraestrutura de laboratório.',
     'hero.tag': '🤝 Programa de Distribuidores','hero.title1': 'Expanda seu território.','hero.title2': 'Ganhe receita recorrente.','hero.desc': 'Parceiro da MAKSA — a plataforma de análise de sêmen animal com IA, confiada por mais de 120 profissionais veterinários em 10+ países.','hero.btn1': 'Torne-se um Distribuidor','hero.btn2': 'Veja Como Funciona','stats.label1': 'Profissionais veterinários','stats.label2': 'Países ativos','stats.label3': 'Precisão vs. padrão lab','stats.label4': 'Espécies suportadas','calc.label': 'Calculadora de Receita','calc.title': 'Veja seu potencial<br>de ganhos','calc.track': 'Tipo de Parceria','calc.referral': 'Parceiro de Indicação','calc.referral_sub': '10–20% Ano 1 · 5% Anos 2–5','calc.distributor': 'Parceiro Distribuidor','calc.distributor_sub': '20–35% Ano 1 · 12–16% Anos 2–5','calc.clients': 'Número de Clientes','calc.price': 'Preço da Licença Anual','calc.y1_label': 'Comissão Ano 1','calc.y1_note': 'sobre todo o seu portfólio','calc.y25_label': 'Royalty Anos 2–5','calc.year1': 'Ano 1','calc.years25': 'Anos 2–5','calc.total': 'Total 5 Anos','calc.combined': 'combinado','calc.footnote': 'Mais de 120 profissionais veterinários em 10+ países já usam a MAKSA','calc.cta': 'Candidatar-se como Parceiro','model.label': 'Modelo de Parceria','model.title': 'Como funciona o modelo<br>de distribuidor','model.desc': 'Simples, transparente e construído para renda recorrente de longo prazo.','model.card1_title': 'Você é dono do seu território','model.card1_text': 'Obtenha direitos exclusivos para representar a MAKSA no seu país ou região.','model.card2_title': 'Ganhe em cada assinatura ativa','model.card2_text': 'Cada veterinário ou fazenda que assina por você gera receita recorrente mensal.','model.card3_title': 'Apoiamos seu crescimento','model.card3_text': 'Integração completa, materiais de marketing prontos no seu idioma, treinamento técnico e suporte dedicado.','benefits.label': 'Benefícios do Parceiro','benefits.title': 'Tudo que você precisa<br>para ter sucesso','benefits.desc': 'Todas as ferramentas, materiais e suporte para começar a vender desde o primeiro dia.','global.label': 'Presença Global','global.title': 'Já confiada em<br>mais de 10 países','global.note': 'A maioria dos mercados ainda tem vagas abertas para distribuidores.','form.label': 'Candidatar-se Agora','form.title': 'Pronto para construir<br>seu território?','form.desc': 'Preencha o formulário abaixo. Analisaremos sua candidatura e agendaremos uma chamada de 20 minutos em até 2 dias úteis.','form.first_name': 'Nome','form.last_name': 'Sobrenome','form.email': 'E-mail','form.country': 'País / Território','form.industry': 'Seu Setor / Rede','form.network_size': 'Tamanho da Rede','form.network_info': 'Fale Sobre Sua Rede','form.submit': 'Enviar Candidatura','form.success_title': 'Candidatura Enviada!','form.note': 'Analisamos todas as candidaturas pessoalmente.',
     'form.industry_placeholder': 'Selecione seu setor','form.size_placeholder': 'Selecione o intervalo','form.industry_opt1': 'Clínica Veterinária','form.industry_opt2': 'Distribuição Agropecuária','form.industry_opt3': 'Pesquisa / Universidade','form.industry_opt4': 'Gestão de Fazenda','form.industry_opt5': 'Outro',
     'country.africa': 'África','country.brazil': 'Brasil','country.pakistan': 'Paquistão','country.uae': 'EAU','country.usa': 'EUA','country.india': 'Índia','country.argentina': 'Argentina','country.turkey': 'Turquia','country.europe': 'Europa','country.saudi': 'Arábia Saudita','country.canada': 'Canadá',
     'footer.partner': 'Parceiro','footer.copy': '© 2026 Avare Biotech. Todos os direitos reservados.','wa.btn': 'Junte-se à Nossa Comunidade no WhatsApp','cases.title': 'Estudos de Caso','cases.docs': 'Relatórios','ben1.title': 'Kit de vendas pronto','ben1.text': 'Apresentações, brochuras de produto, planilhas comparativas vs. CASA — tudo localizado para o seu mercado.','ben2.title': 'Treinamento completo do produto','ben2.text': 'Sessões de integração, scripts de demonstração e webinars contínuos.','ben3.title': 'Direitos exclusivos de território','ben3.text': 'Protegemos o seu mercado. Nenhum outro distribuidor compete na sua região aprovada.','ben4.title': 'Painel do parceiro','ben4.text': 'Visualização em tempo real dos seus clientes ativos, renovações e ganhos — total transparência.','ben5.title': 'Suporte de co-marketing','ben5.text': 'Press releases conjuntos, presença em conferências e amplificação em redes sociais.','ben6.title': 'Integração rápida','ben6.text': 'Do acordo assinado à primeira demonstração em menos de 2 semanas.','calc.y25_note': 'escalonado por número de clientes','calc.payment_title': 'Termos de pagamento:','model.tag1': 'Região Exclusiva','model.tag2': 'Receita Recorrente','model.tag3': 'Suporte Completo','global.cases_btn': '📄 Ver Estudos de Caso e Vídeos','form.agree_privacy': 'Concordo com a ','form.privacy_link': 'Política de Privacidade','form.agree_terms': 'Concordo com os ','form.terms_link': 'Termos de Uso','calc.flat_rate': 'taxa fixa para todas as indicações','calc.comparison': 'Em 5 anos, isso é <strong>{pct}%</strong> de uma venda de sistema CASA tradicional.','calc.max_tier': 'Nível máximo atingido!','calc.client_s': 'cliente','calc.clients_pl': 'clientes','calc.payment_text': 'Licença anual → comissão paga em até 10 dias úteis.<br>Plano mensal → comissão paga mensalmente.','test1.role': 'Proprietário, Timbercreek Veterinary Hospital, EUA','test1.quote': '"A tecnologia MAKSA baseada em smartphone mostrou-se simples e intuitiva para amostras de sêmen equino frescas e descongeladas."','test2.role': 'Diretora Científica / Especialista em Transferência de Embrião, EAU','test2.quote': '"O App Avare Biotech funciona de forma confiável, usabilidade comprovada em campo."','test3.role': 'Tecnólogo em Sêmen, Paquistão','test3.quote': '"A tecnologia MAKSA baseada em smartphone demonstrou facilidade de uso na análise de sêmen bovino descongelado."','nudge.text': 'Como Parceiro Distribuidor com {n} clientes, você ganharia {diff} a mais nos Anos 2–5 ({rate} vs 5%).'
   },
   es: {
+    'video.title':'Instrucción en Video','protocol.title':'Protocolo QA Semen','protocol.view':'Ver','protocol.download':'Descargar',
+    'faq.q1':'¿Qué es MAKSA?','faq.a1':'MAKSA (Mobile Assisted Key Semen Analysis) es una aplicación de smartphone que analiza la calidad del semen de animales usando IA. Mide la motilidad total, la motilidad progresiva y la concentración sin equipos CASA costosos.','faq.q2':'¿Qué tan preciso es MAKSA comparado con CASA?','faq.a2':'MAKSA logra una correlación de r > 0.90 con sistemas CASA tradicionales, validado en 500K+ células etiquetadas durante 3 años de I+D.','faq.q3':'¿Qué equipo necesito?','faq.a3':'Solo necesitas un smartphone y un microscopio básico. Sin servidores, sin hardware costoso, sin consumibles.','faq.q4':'¿Qué especies son compatibles?','faq.a4':'MAKSA está validado para 5 especies: bovinos, equinos, ovinos, caprinos y camellos.','faq.q5':'¿Hay prueba gratuita?','faq.a5':'Sí, ofrecemos 10 pruebas gratuitas para comenzar. Contáctanos para una demostración y descuentos para early adopters de hasta 50%.','faq.q6':'¿Qué microscopios son compatibles con MAKSA?','faq.a6':'Cualquier microscopio estándar de campo brillante a 100–200x de ampliación. Los microscopios de contraste de fase no son compatibles.','faq.q7':'¿Qué afecta la precisión de los resultados?','faq.a7':'La calidad del video es el factor clave. Imágenes inestables, una ampliación incorrecta o un factor de dilución equivocado reducen la precisión.','faq.q8':'¿Se puede usar MAKSA para verificación post-descongelación?','faq.a8':'Sí, para eso está hecho MAKSA exactamente. MAKSA entrega resultados en 30–60 segundos directamente en el campo.','faq.q9':'Ya evalúo semen bajo microscopio — ¿por qué necesito MAKSA?','faq.a9':'La evaluación subjetiva no es reproducible. MAKSA genera un informe PDF con marca de tiempo que te protege en cualquier disputa.','faq.q10':'¿Qué tan precisa es la medición de concentración?','faq.a10':'La motilidad es el principal indicador — MAKSA la mide con correlación r > 0.90 vs CASA.','faq.q11':'Ya tenemos CASA — ¿por qué necesitaríamos esto?','faq.a11':'MAKSA va donde CASA no puede — al campo, a la granja, a técnicos sin infraestructura de laboratorio.',
     'hero.tag': '🤝 Programa de Distribuidores','hero.title1': 'Expande tu territorio.','hero.title2': 'Gana ingresos recurrentes.','hero.desc': 'Asóciate con MAKSA — la plataforma de análisis de semen animal con IA, de confianza para más de 120 profesionales veterinarios en 10+ países.','hero.btn1': 'Conviértete en Distribuidor','hero.btn2': 'Ver Cómo Funciona','stats.label1': 'Profesionales veterinarios','stats.label2': 'Países activos','stats.label3': 'Precisión vs. estándar lab','stats.label4': 'Especies compatibles','calc.label': 'Calculadora de Ingresos','calc.title': 'Ve tu potencial<br>de ganancias','calc.track': 'Tipo de Asociación','calc.referral': 'Socio de Referidos','calc.referral_sub': '10–20% Año 1 · 5% Años 2–5','calc.distributor': 'Socio Distribuidor','calc.distributor_sub': '20–35% Año 1 · 12–16% Años 2–5','calc.clients': 'Número de Clientes','calc.price': 'Precio de Licencia Anual','calc.y1_label': 'Comisión Año 1','calc.y1_note': 'sobre todo tu portafolio','calc.y25_label': 'Regalía Años 2–5','calc.year1': 'Año 1','calc.years25': 'Años 2–5','calc.total': 'Total 5 Años','calc.combined': 'combinado','calc.footnote': 'Más de 120 profesionales veterinarios en 10+ países ya usan MAKSA','calc.cta': 'Aplicar para ser Socio','model.label': 'Modelo de Asociación','model.title': 'Cómo funciona el modelo<br>de distribuidor','model.desc': 'Simple, transparente y construido para ingresos recurrentes a largo plazo.','model.card1_title': 'Tú eres dueño de tu territorio','model.card1_text': 'Obtén derechos exclusivos para representar a MAKSA en tu país o región.','model.card2_title': 'Gana en cada suscripción activa','model.card2_text': 'Cada veterinario o granja que se suscribe a través de ti genera ingresos recurrentes mensuales.','model.card3_title': 'Apoyamos tu crecimiento','model.card3_text': 'Incorporación completa, materiales de marketing listos en tu idioma, capacitación técnica y soporte dedicado.','benefits.label': 'Beneficios del Socio','benefits.title': 'Todo lo que necesitas<br>para tener éxito','benefits.desc': 'Todas las herramientas, materiales y soporte para comenzar a vender desde el primer día.','global.label': 'Presencia Global','global.title': 'Ya de confianza en<br>más de 10 países','global.note': 'La mayoría de los mercados aún tienen plazas abiertas para distribuidores.','form.label': 'Aplicar Ahora','form.title': 'Listo para construir<br>tu territorio?','form.desc': 'Completa el formulario. Revisaremos tu solicitud y programaremos una llamada de 20 minutos en 2 días hábiles.','form.first_name': 'Nombre','form.last_name': 'Apellido','form.email': 'Correo electrónico','form.country': 'País / Territorio','form.industry': 'Tu Sector / Red','form.network_size': 'Tamaño de Red','form.network_info': 'Cuéntanos sobre tu red','form.submit': 'Enviar Solicitud','form.success_title': '¡Solicitud Enviada!','form.note': 'Revisamos todas las solicitudes personalmente.',
     'form.industry_placeholder': 'Selecciona tu sector','form.size_placeholder': 'Selecciona el rango','form.industry_opt1': 'Práctica Veterinaria','form.industry_opt2': 'Distribución Agro-insumos','form.industry_opt3': 'Investigación / Universidad','form.industry_opt4': 'Gestión de Granja','form.industry_opt5': 'Otro',
     'country.africa': 'África','country.brazil': 'Brasil','country.pakistan': 'Pakistán','country.uae': 'EAU','country.usa': 'EE.UU.','country.india': 'India','country.argentina': 'Argentina','country.turkey': 'Turquía','country.europe': 'Europa','country.saudi': 'Arabia Saudita','country.canada': 'Canadá',
@@ -715,16 +859,17 @@ function pApplyLang(lang){var t=pI18n[lang]||pI18n.en;document.querySelectorAll(
 
 (function(){var saved=localStorage.getItem('p_lang')||'en';if(saved!=='en')pLangSelect(saved);document.addEventListener('click',function(e){var menu=document.getElementById('pLangMenu');var wrap=document.getElementById('pLangWrap');if(menu&&wrap&&!wrap.contains(e.target))menu.style.display='none';});})();
 
-document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(!a)return;var href=a.getAttribute('href');if(href==='#apply'){e.preventDefault();var applyEl=document.getElementById('apply-inner');if(applyEl){var nav=document.querySelector('.p-nav');var navH=nav?nav.offsetHeight:80;window.scrollTo({top:applyEl.getBoundingClientRect().top+window.pageYOffset-navH-20,behavior:'smooth'});}return;}var t=document.querySelector(href);if(!t)return;e.preventDefault();var nav=document.querySelector('.p-nav');var navH=nav?nav.offsetHeight:80;window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-navH-6,behavior:'smooth'});});
+document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(!a)return;var href=a.getAttribute('href');if(href==='#apply'){e.preventDefault();var applyEl=document.getElementById('apply-inner');if(applyEl){var nav=document.querySelector('.p-nav');var navH=nav?nav.offsetHeight:80;window.scrollTo({top:applyEl.getBoundingClientRect().top+window.pageYOffset-navH-20,behavior:'smooth'});}return;}if(href==='#'||href.length<2){return;}var t;try{t=document.querySelector(href);}catch(_e){return;}if(!t)return;e.preventDefault();var nav=document.querySelector('.p-nav');var navH=nav?nav.offsetHeight:80;window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-navH-6,behavior:'smooth'});});
 </script>
 
 <script>
 (function(){
   var files=[{n:'20_MAKSA Brazil CaseStudy Willian EN',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/20_MAKSA%20Brazil%20CaseStudy%20Willian%20EN.pdf&embedded=true'},{n:'19_Awais Case study',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/19_Awais%20Case%20study..pdf&embedded=true'},{n:'18_Field case study — Fresh bovine, Misbah',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/18_Field%20case%20study%20report%20for%20Fresh%20bovine%20Semen-3_Misbah.pdf&embedded=true'},{n:'17_Revised report Validation — Dr. Ejaz',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/17_Revised%20report%20Validation%20of%20MAKSA%20by%20Dr.%20Ejaz.pdf&embedded=true'},{n:'16_Validation MAKSA — Dr. Ejaz',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/16_Validation%20MAKSA%20Dr.%20Ejaz.pdf&embedded=true'},{n:'15_Awais Case study',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/15_Awais%20Case%20study.pdf&embedded=true'},{n:'14_Signed Field Case Study — Carlos, Spain',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/14_v0102%20signed%20Field%20Case%20Study%20of%20MAKSA%20by%20Carlos%20from%20Spain.pdf&embedded=true'},{n:'13_Signed Field Case Study — Ameer Hamza, PK',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/13_v0202_signed_Field_Case_Study_of_MAKSA_by_M_Ameer_Hamza_from_Pakistan.pdf&embedded=true'},{n:'12_MAKSA Field Case Studies — Canada, Dog',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/12_v2701%20MAKSA_Field_CASE_STUDIES_Canada_dog_Rasa_clean.pdf&embedded=true'},{n:'11_MAKSA Case Studies — Okara, Pakistan',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/11_v1001_MAKSA_Case_Studies_Okara_Pakistan_made_by_Faseeh.pdf&embedded=true'},{n:'10_Signed Field Case Study — Hussnain Raza, PK',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/10_Signed_v03101_Field_Case_Study_of_MAKSA_by_M_Hussnain_Raza_from.pdf&embedded=true'},{n:'09_Case Study MAKSA — Umut, Turkey',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/09_v1111_Case_Study_MAKSA_with_Umut_Turkey%20signed.docx.pdf&embedded=true'},{n:'08_MAKSA Performance Report — Kaustubh, India',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/08_signed_v2612_MAKSA_Perfomance_Report_1st__India_by_Kaustubh_.pdf&embedded=true'},{n:'07_Signed — Abdulrauf, Nigeria',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/07_Signed_v1612_Abdulrauf_MAKSA_CASE_STUDIES_Sokoto_Nigeria_clean.pdf&embedded=true'},{n:'06_Signed MAKSA Pilot — Equine, Australia',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/06_Signed%20MAKSA%20pilot%2C%20Equine%2C%20Australia%20Afshin%20Seifi-1.pdf&embedded=true'},{n:'05_MAKSA Field Case Studies — Texas, Horses',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/05_v2711_MAKSA_Field_CASE_STUDIES_TEXAS_horses_Gregg_Kylee_clean.pdf&embedded=true'},{n:'04_Case Study MAKSA — Andres, Fujairah',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/04_v1411%20Casy%20Study%20MAKSA%20with%20Andres%20Fujairah.docx.pdf&embedded=true'},{n:'03_Signed Case Study MAKSA — Dr. Ammar, Nigeria',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/03_v1112_Case_Study_signed_MAKSA_with_Dr_Ammar_NAPRI_Nigeria_pdf.pdf&embedded=true'},{n:'02_Signed Case Study — Camels, LULU',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/02_Complete_with_Docusign_v2011_Casy_Study_camels_LULU.pdf&embedded=true'},{n:'01_Field Case Studies Texas — Russel, Cattle',t:'pdf',url:'https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/casestudy/01_Field%20CASE%20STUDIES%20TEXAS%20Russel%20v%202910%20cattle%20draft.pdf&embedded=true'}];
-  var pdfOv=document.createElement('div');pdfOv.style.cssText='display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;align-items:center;justify-content:center;zoom:0.833;';var pdfInner=document.createElement('div');pdfInner.style.cssText='position:relative;';var pdfClose=document.createElement('button');pdfClose.style.cssText='position:absolute;top:8px;right:8px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.6);border:none;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;';pdfClose.textContent='✕';var pdfFrame=document.createElement('iframe');pdfFrame.setAttribute('allowfullscreen','');pdfFrame.style.cssText='width:100%;height:100%;border:none;border-radius:12px;display:block;';pdfInner.appendChild(pdfClose);pdfInner.appendChild(pdfFrame);pdfOv.appendChild(pdfInner);document.body.appendChild(pdfOv);
+  var pdfOv=document.createElement('div');pdfOv.style.cssText='display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999999;align-items:center;justify-content:center;zoom:1.0829;';var pdfInner=document.createElement('div');pdfInner.style.cssText='position:relative;';var pdfClose=document.createElement('button');pdfClose.style.cssText='position:absolute;top:8px;right:8px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.6);border:none;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;';pdfClose.textContent='✕';var pdfFrame=document.createElement('iframe');pdfFrame.setAttribute('allowfullscreen','');pdfFrame.style.cssText='width:100%;height:100%;border:none;border-radius:12px;display:block;';pdfInner.appendChild(pdfClose);pdfInner.appendChild(pdfFrame);pdfOv.appendChild(pdfInner);document.body.appendChild(pdfOv);
+  window.pOpenPdf=openPdf;
   function openPdf(url){if(window.innerWidth<=640){pdfInner.style.width='calc(100vw - 24px)';pdfInner.style.height='calc(100vh - 80px)';}else{pdfInner.style.width='716px';pdfInner.style.height='75vh';}pdfFrame.src=url;pdfOv.style.display='flex';}
   pdfClose.onclick=function(){pdfOv.style.display='none';pdfFrame.src='';};pdfOv.onclick=function(e){if(e.target===pdfOv){pdfOv.style.display='none';pdfFrame.src='';}};
-  var ov=document.createElement('div');ov.style.cssText='display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:99999;align-items:center;justify-content:center;backdrop-filter:blur(4px);zoom:0.7692;';var box=document.createElement('div');box.style.cssText='background:linear-gradient(135deg,#1e1e1e,#2a2a2a);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:32px;width:1100px;max-width:calc(100vw - 80px);position:relative;font-family:Satoshi,sans-serif;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;';var ccb=document.createElement('button');ccb.style.cssText='position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);border:none;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;';ccb.textContent='✕';var ttl=document.createElement('div');ttl.style.cssText='font-size:20px;font-weight:700;color:#F6F6F6;margin-bottom:8px;';ttl.id='pCasesTitleEl';ttl.textContent='Case Studies';var scroll=document.createElement('div');scroll.style.cssText='overflow-y:auto;overflow-x:hidden;flex:1;display:flex;flex-direction:column;gap:24px;';var docsLbl=document.createElement('div');docsLbl.style.cssText='font-size:13px;font-weight:600;color:#A2A884;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;';docsLbl.id='pCasesDocsEl';docsLbl.textContent='Reports';var grid=document.createElement('div');grid.style.cssText='display:grid;grid-template-columns:repeat(2,1fr);gap:8px;';files.forEach(function(f){var card=document.createElement('div');card.style.cssText='background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:8px 10px;cursor:pointer;display:flex;flex-direction:column;gap:4px;transition:background .2s,border-color .2s;min-width:0;overflow:hidden;';card.onmouseover=function(){this.style.background='rgba(162,168,132,0.1)';this.style.borderColor='rgba(162,168,132,0.3)';};card.onmouseout=function(){this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(255,255,255,0.08)';};var badge=document.createElement('span');badge.style.cssText='display:inline-block;font-size:13px;font-weight:700;color:#FFFFFF;padding:1px 6px;border-radius:3px;width:fit-content;background:'+(f.t==='pdf'?'#D32F2F':'#8fa0b0')+';flex-shrink:0;';badge.textContent=f.t.toUpperCase();var lbl=document.createElement('span');lbl.style.cssText='font-size:13px;color:rgba(246,246,246,0.7);line-height:1.3;overflow:hidden;text-overflow:ellipsis;';lbl.textContent=f.n;card.appendChild(badge);card.appendChild(lbl);card.onclick=function(){openPdf(f.url);};grid.appendChild(card);});var docsSection=document.createElement('div');docsSection.appendChild(docsLbl);docsSection.appendChild(grid);scroll.appendChild(docsSection);box.appendChild(ccb);box.appendChild(ttl);box.appendChild(scroll);ov.appendChild(box);document.body.appendChild(ov);ccb.onclick=function(){ov.style.display='none';};ov.onclick=function(e){if(e.target===ov)ov.style.display='none';};
+  var ov=document.createElement('div');ov.style.cssText='display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:99999;align-items:center;justify-content:center;backdrop-filter:blur(4px);';var box=document.createElement('div');box.style.cssText='background:linear-gradient(135deg,#1e1e1e,#2a2a2a);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:32px;width:1100px;max-width:calc(100vw - 80px);position:relative;font-family:Satoshi,sans-serif;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;';var ccb=document.createElement('button');ccb.style.cssText='position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);border:none;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;';ccb.textContent='✕';var ttl=document.createElement('div');ttl.style.cssText='font-size:20px;font-weight:700;color:#F6F6F6;margin-bottom:8px;';ttl.id='pCasesTitleEl';ttl.textContent='Case Studies';var scroll=document.createElement('div');scroll.style.cssText='overflow-y:auto;overflow-x:hidden;flex:1;display:flex;flex-direction:column;gap:24px;';var docsLbl=document.createElement('div');docsLbl.style.cssText='font-size:13px;font-weight:600;color:#A2A884;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;';docsLbl.id='pCasesDocsEl';docsLbl.textContent='Reports';var grid=document.createElement('div');grid.style.cssText='display:grid;grid-template-columns:repeat(2,1fr);gap:8px;';files.forEach(function(f){var card=document.createElement('div');card.style.cssText='background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:8px 10px;cursor:pointer;display:flex;flex-direction:column;gap:4px;transition:background .2s,border-color .2s;min-width:0;overflow:hidden;';card.onmouseover=function(){this.style.background='rgba(162,168,132,0.1)';this.style.borderColor='rgba(162,168,132,0.3)';};card.onmouseout=function(){this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(255,255,255,0.08)';};var badge=document.createElement('span');badge.style.cssText='display:inline-block;font-size:13px;font-weight:700;color:#FFFFFF;padding:1px 6px;border-radius:3px;width:fit-content;background:'+(f.t==='pdf'?'#D32F2F':'#8fa0b0')+';flex-shrink:0;';badge.textContent=f.t.toUpperCase();var lbl=document.createElement('span');lbl.style.cssText='font-size:13px;color:rgba(246,246,246,0.7);line-height:1.3;overflow:hidden;text-overflow:ellipsis;';lbl.textContent=f.n;card.appendChild(badge);card.appendChild(lbl);card.onclick=function(){openPdf(f.url);};grid.appendChild(card);});var docsSection=document.createElement('div');docsSection.appendChild(docsLbl);docsSection.appendChild(grid);scroll.appendChild(docsSection);box.appendChild(ccb);box.appendChild(ttl);box.appendChild(scroll);ov.appendChild(box);document.body.appendChild(ov);ccb.onclick=function(){ov.style.display='none';};ov.onclick=function(e){if(e.target===ov)ov.style.display='none';};
   window.pCasesOpen=function(){ov.style.display='flex';};window.pCasesClose=function(){ov.style.display='none';};
 })();
 </script>
