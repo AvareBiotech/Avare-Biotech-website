@@ -90,9 +90,10 @@ export function LearnFooter() {
   const [protocolOpen, setProtocolOpen] = useState(false);
   const [playerSrc, setPlayerSrc] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [pdfSrc, setPdfSrc] = useState("");
 
   const openView = (file: string) =>
-    window.open("https://docs.google.com/gview?url=" + file + "&embedded=true", "_blank");
+    setPdfSrc("https://docs.google.com/gview?url=" + file + "&embedded=true");
 
   return (
     <>
@@ -204,6 +205,14 @@ export function LearnFooter() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* PDF preview (встроенный просмотр протокола) */}
+      <div className={"av-pdf-overlay" + (pdfSrc ? " open" : "")} onClick={(e) => { if (e.target === e.currentTarget) setPdfSrc(""); }}>
+        <div className="av-pdf-wrap">
+          <button className="av-pdf-close" onClick={() => setPdfSrc("")}>&#10005;</button>
+          <iframe src={pdfSrc} frameBorder={0}></iframe>
         </div>
       </div>
     </>
