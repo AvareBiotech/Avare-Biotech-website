@@ -671,3 +671,65 @@
   .learn-nav-pill.mobile-open .nav-lang-mob { display: flex; }
   .learn-nav-pill.mobile-open .sep { display: none; }
 }
+
+
+/* ===== FOOTER + POPUPS (FAQ / Video / Protocol) — ported from main site ===== */
+  /* ── FOOTER (перенесён с основного сайта) ── */
+  .av-footer-main { font-family: 'Satoshi', sans-serif; background:var(--bg); padding: clamp(30px, 4vw, 60px) clamp(16px, 5vw, 80px) 40px; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+  .av-footer-main__grid { display: flex; justify-content: flex-start; gap: clamp(22px, 2vw, 34px) clamp(20px, 2.4vw, 40px); max-width: 50%; align-items: flex-start; position: relative; z-index: 1; }
+  .av-footer-main__map { position: absolute; left: 50%; right: 0; top: 0; bottom: 0; pointer-events: none; display: flex; align-items: center; justify-content: center; }
+  .av-footer-main__map img { width: 100%; height: 100%; display: block; max-height: none; object-fit: contain; object-position: center center; }
+  .av-footer-main__col { display: flex; flex-direction: column; gap: 12px; }
+  .av-footer-main__stores { display: flex; flex-direction: column; gap: 8px; }
+  .av-footer-main__store-btn { display: inline-flex; align-items: center; gap: 6px; font-family: 'Satoshi', sans-serif; font-size: clamp(13px, 0.4vw + 12px, 15px); font-weight: 500; color: #F6F6F6 !important; background: rgba(246,246,246,0.08); border: 1px solid rgba(246,246,246,0.15); border-radius: 8px; padding: 10px 18px; text-decoration: none !important; transition: background .2s; white-space: nowrap; justify-content: center; }
+  .av-footer-main__store-btn:hover { background: rgba(246,246,246,0.12); }
+  .av-footer-main__store-btn img { width: 18px; height: 18px; object-fit: contain; flex-shrink: 0; }
+  .av-footer-main__title { font-size: clamp(14px, 1.2vw, 16px); font-weight: 600; color: #F6F6F6; margin-bottom: 4px; white-space: nowrap; }
+  .av-footer-main__links { display: flex; flex-direction: column; gap: 10px; }
+  .av-footer-main__link { font-size: clamp(13px, 0.4vw + 12px, 15px); color: rgba(246,246,246,0.5) !important; text-decoration: none !important; transition: color .2s; white-space: nowrap; }
+  .av-footer-main__link:hover { color: rgba(246,246,246,0.8) !important; }
+  .av-footer { font-family: 'Satoshi', sans-serif; background:var(--bg); padding: 24px clamp(16px, 5vw, 80px); border-top: 1px solid rgba(255,255,255,0.06); text-align: center; }
+  .av-footer__copy { font-size: clamp(13px, 0.4vw + 12px, 15px); color: rgba(246,246,246,0.35); }
+  @media (max-width: 1200px){ .av-footer-main__map{ display:none; } .av-footer-main__grid{ max-width:100%; flex-wrap:wrap; } }
+  @media (max-width: 600px){ .av-footer-main__grid{ flex-direction:column; gap:28px; } }
+
+  /* ── FAQ popup (перенесён с основного) ── */
+  .av-faq-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 99999; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+  .av-faq-overlay.open { display: flex; }
+  .av-faq-popup { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: clamp(16px, 2vw, 32px); position: relative; max-width: 1000px; width: 92%; max-height: 88vh; overflow-y: auto; overscroll-behavior: contain; }
+  .av-faq-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.08); border: none; color: #fff; font-size: clamp(13px, 0.4vw + 12px, 15px); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .av-faq-title { font-family: 'Satoshi', sans-serif; font-size: clamp(15px, 1.3vw, 18px); font-weight: 600; color: #F6F6F6; margin-bottom: 24px; }
+  .av-faq-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+  .av-faq-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; }
+  .av-faq-question { font-family: 'Satoshi', sans-serif; font-size: clamp(13px, 0.4vw + 12px, 15px); font-weight: 500; color: #F6F6F6; padding: 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .av-faq-question:hover { background: rgba(255,255,255,0.06); }
+  .av-faq-arrow { font-size: clamp(13px, 0.4vw + 12px, 15px); color: rgba(246,246,246,0.5); transition: transform .2s; flex-shrink: 0; }
+  .av-faq-item.open .av-faq-arrow { transform: rotate(180deg); }
+  .av-faq-answer { font-family: 'Satoshi', sans-serif; font-size: clamp(13px, 0.4vw + 12px, 15px); color: rgba(246,246,246,0.6); line-height: 1.6; padding: 0 16px 16px; display: none; }
+  .av-faq-item.open .av-faq-answer { display: block; }
+  @media (max-width: 768px){ .av-faq-list{ grid-template-columns: 1fr; } }
+
+  /* ── VIDEO / PROTOCOL popups (перенесены) ── */
+  .av-video-overlay, .av-protocol-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:99999; align-items:center; justify-content:center; backdrop-filter:blur(8px); }
+  .av-video-overlay.open, .av-protocol-overlay.open { display:flex; }
+  .av-video-popup, .av-protocol-popup { background:#1a1a1a; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:clamp(16px,2vw,32px); position:relative; max-width:500px; width:92%; max-height:88vh; overflow-y:auto; }
+  .av-video-close, .av-protocol-close { position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:8px; background:rgba(255,255,255,0.08); border:none; color:#fff; font-size:clamp(13px, 0.4vw + 12px, 15px); cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; }
+  .av-video-title, .av-protocol-title { font-family:'Satoshi', sans-serif; font-size:clamp(15px,1.3vw,18px); font-weight:600; color:#F6F6F6; margin-bottom:24px; }
+  .av-protocol-popup { max-width: 650px; width: 92%; }
+  .av-video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .av-video-item { display: flex; flex-direction: column; gap: 10px; }
+  .av-video-label { font-family: 'Satoshi', sans-serif; font-size: clamp(13px, 0.4vw + 12px, 15px); font-weight: 500; color: #F6F6F6; text-align: center; }
+  .av-video-thumb { position: relative; border-radius: 8px; overflow: hidden; cursor: pointer; aspect-ratio: 9/16; }
+  .av-video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .2s; }
+  .av-video-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); }
+  .av-video-play svg { width: 48px; height: 48px; color: #fff; }
+  .av-video-player-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 999999; align-items: center; justify-content: center; }
+  .av-video-player-overlay.open { display: flex; }
+  .av-video-player-wrap { position: relative; width: 340px; max-width: 90%; aspect-ratio: 9/16; }
+  .av-video-player-wrap iframe { width: 100%; height: 100%; border-radius: 12px; }
+  .av-protocol-files { display: flex; flex-direction: column; gap: 12px; }
+  .av-protocol-file { display: flex; flex-direction: column; gap: 8px; padding: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; transition: background .2s, border-color .2s; }
+  .av-protocol-file-badge { display: inline-block; font-family: 'Satoshi', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; padding: 2px 8px; border-radius: 4px; width: fit-content; background: #D32F2F; }
+  .av-protocol-file-name { font-family: 'Satoshi', sans-serif; font-size: 13px; color: rgba(246,246,246,0.7); line-height: 1.4; }
+  .av-protocol-file-actions { display: flex; gap: 8px; margin-top: 4px; }
+  .av-protocol-file-btn { display: inline-flex; align-items: center; gap: 6px; font-family: 'Satoshi', sans-serif; font-size: clamp(13px, 0.4vw + 12px, 15px); font-weight: 500; color: rgba(246,246,246,0.7) !important; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 12px; text-decoration: none !important; cursor: pointer; transition: background .2s; }

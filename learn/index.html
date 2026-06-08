@@ -108,6 +108,7 @@
   --muted:#888;
   --muted2:#555;
   --font:'Satoshi',sans-serif;
+   --fs-body: clamp(13px, 0.4vw + 12px, 15px);
 }
 *,*::before,*::after{box-sizing:border-box;}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden;max-width:100%;}
@@ -489,6 +490,67 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 .nav-lang-mob button{flex:1;font-family:var(--font);font-size:15px;font-weight:600;color:#aaa;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px 0;cursor:pointer;}
 .nav-lang-mob button.active{color:#020202;background:#fff;border-color:#fff;}
 @media(max-width:640px){.nav-pill.mobile-open .av-lang{display:none;}.nav-pill.mobile-open .nav-lang-mob{display:flex;}.nav-pill.mobile-open .sep{display:none;}}
+
+  /* ===== FOOTER + POPUPS ===== */
+  /* ── FOOTER (перенесён с основного сайта) ── */
+  .av-footer-main { font-family: var(--font); background:var(--bg); padding: clamp(30px, 4vw, 60px) clamp(16px, 5vw, 80px) 40px; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+  .av-footer-main__grid { display: flex; justify-content: flex-start; gap: clamp(22px, 2vw, 34px) clamp(20px, 2.4vw, 40px); max-width: 50%; align-items: flex-start; position: relative; z-index: 1; }
+  .av-footer-main__map { position: absolute; left: 50%; right: 0; top: 0; bottom: 0; pointer-events: none; display: flex; align-items: center; justify-content: center; }
+  .av-footer-main__map img { width: 100%; height: 100%; display: block; max-height: none; object-fit: contain; object-position: center center; }
+  .av-footer-main__col { display: flex; flex-direction: column; gap: 12px; }
+  .av-footer-main__stores { display: flex; flex-direction: column; gap: 8px; }
+  .av-footer-main__store-btn { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font); font-size: var(--fs-body); font-weight: 500; color: #F6F6F6 !important; background: rgba(246,246,246,0.08); border: 1px solid rgba(246,246,246,0.15); border-radius: 8px; padding: 10px 18px; text-decoration: none !important; transition: background .2s; white-space: nowrap; justify-content: center; }
+  .av-footer-main__store-btn:hover { background: rgba(246,246,246,0.12); }
+  .av-footer-main__store-btn img { width: 18px; height: 18px; object-fit: contain; flex-shrink: 0; }
+  .av-footer-main__title { font-size: clamp(14px, 1.2vw, 16px); font-weight: 600; color: #F6F6F6; margin-bottom: 4px; white-space: nowrap; }
+  .av-footer-main__links { display: flex; flex-direction: column; gap: 10px; }
+  .av-footer-main__link { font-size: var(--fs-body); color: rgba(246,246,246,0.5) !important; text-decoration: none !important; transition: color .2s; white-space: nowrap; }
+  .av-footer-main__link:hover { color: rgba(246,246,246,0.8) !important; }
+  .av-footer { font-family: var(--font); background:var(--bg); padding: 24px clamp(16px, 5vw, 80px); border-top: 1px solid rgba(255,255,255,0.06); text-align: center; }
+  .av-footer__copy { font-size: var(--fs-body); color: rgba(246,246,246,0.35); }
+  @media (max-width: 1200px){ .av-footer-main__map{ display:none; } .av-footer-main__grid{ max-width:100%; flex-wrap:wrap; } }
+  @media (max-width: 600px){ .av-footer-main__grid{ flex-direction:column; gap:28px; } }
+
+  /* ── FAQ popup (перенесён с основного) ── */
+  .av-faq-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 99999; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+  .av-faq-overlay.open { display: flex; }
+  .av-faq-popup { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: clamp(16px, 2vw, 32px); position: relative; max-width: 1000px; width: 92%; max-height: 88vh; overflow-y: auto; overscroll-behavior: contain; }
+  .av-faq-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.08); border: none; color: #fff; font-size: var(--fs-body); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .av-faq-title { font-family: var(--font); font-size: clamp(15px, 1.3vw, 18px); font-weight: 600; color: #F6F6F6; margin-bottom: 24px; }
+  .av-faq-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+  .av-faq-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; }
+  .av-faq-question { font-family: var(--font); font-size: var(--fs-body); font-weight: 500; color: #F6F6F6; padding: 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .av-faq-question:hover { background: rgba(255,255,255,0.06); }
+  .av-faq-arrow { font-size: var(--fs-body); color: rgba(246,246,246,0.5); transition: transform .2s; flex-shrink: 0; }
+  .av-faq-item.open .av-faq-arrow { transform: rotate(180deg); }
+  .av-faq-answer { font-family: var(--font); font-size: var(--fs-body); color: rgba(246,246,246,0.6); line-height: 1.6; padding: 0 16px 16px; display: none; }
+  .av-faq-item.open .av-faq-answer { display: block; }
+  @media (max-width: 768px){ .av-faq-list{ grid-template-columns: 1fr; } }
+
+  /* ── VIDEO / PROTOCOL popups (перенесены) ── */
+  .av-video-overlay, .av-protocol-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:99999; align-items:center; justify-content:center; backdrop-filter:blur(8px); }
+  .av-video-overlay.open, .av-protocol-overlay.open { display:flex; }
+  .av-video-popup, .av-protocol-popup { background:#1a1a1a; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:clamp(16px,2vw,32px); position:relative; max-width:500px; width:92%; max-height:88vh; overflow-y:auto; }
+  .av-video-close, .av-protocol-close { position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:8px; background:rgba(255,255,255,0.08); border:none; color:#fff; font-size:var(--fs-body); cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; }
+  .av-video-title, .av-protocol-title { font-family:var(--font); font-size:clamp(15px,1.3vw,18px); font-weight:600; color:#F6F6F6; margin-bottom:24px; }
+  .av-protocol-popup { max-width: 650px; width: 92%; }
+  .av-video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .av-video-item { display: flex; flex-direction: column; gap: 10px; }
+  .av-video-label { font-family: var(--font); font-size: var(--fs-body); font-weight: 500; color: #F6F6F6; text-align: center; }
+  .av-video-thumb { position: relative; border-radius: 8px; overflow: hidden; cursor: pointer; aspect-ratio: 9/16; }
+  .av-video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .2s; }
+  .av-video-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); }
+  .av-video-play svg { width: 48px; height: 48px; color: #fff; }
+  .av-video-player-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 999999; align-items: center; justify-content: center; }
+  .av-video-player-overlay.open { display: flex; }
+  .av-video-player-wrap { position: relative; width: 340px; max-width: 90%; aspect-ratio: 9/16; }
+  .av-video-player-wrap iframe { width: 100%; height: 100%; border-radius: 12px; }
+  .av-protocol-files { display: flex; flex-direction: column; gap: 12px; }
+  .av-protocol-file { display: flex; flex-direction: column; gap: 8px; padding: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; transition: background .2s, border-color .2s; }
+  .av-protocol-file-badge { display: inline-block; font-family: var(--font); font-size: 13px; font-weight: 700; color: #FFFFFF; padding: 2px 8px; border-radius: 4px; width: fit-content; background: #D32F2F; }
+  .av-protocol-file-name { font-family: var(--font); font-size: 13px; color: rgba(246,246,246,0.7); line-height: 1.4; }
+  .av-protocol-file-actions { display: flex; gap: 8px; margin-top: 4px; }
+  .av-protocol-file-btn { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font); font-size: var(--fs-body); font-weight: 500; color: rgba(246,246,246,0.7) !important; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 12px; text-decoration: none !important; cursor: pointer; transition: background .2s; }
 </style>
 </head>
 <body>
@@ -928,8 +990,17 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
   </div>
 </div>
 
-<footer class="footer">
-  <span data-i18n="footer.copy">© 2026 Avare Biotech. All rights reserved.</span>
+<footer>
+  <div class="av-footer-main">
+    <div class="av-footer-main__map"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/premium_dotted_world_map_avare%203.svg" alt=""></div>
+    <div class="av-footer-main__grid">
+      <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.download">Download the App</div><div class="av-footer-main__stores"><a href="https://apps.apple.com/ae/app/avare-biotech/id6744607449" target="_blank" rel="noopener" class="av-footer-main__store-btn"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/apple-white.svg" alt=""> App Store</a><a href="https://play.google.com/store/apps/details?id=com.biotech.app.android&hl=en" target="_blank" rel="noopener" class="av-footer-main__store-btn"><img src="https://www.logo.wine/a/logo/Google_Play/Google_Play-Icon-Logo.wine.svg" alt="" style="width:18px;height:18px;"> Google Play</a></div></div>
+      <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.product">Product</div><div class="av-footer-main__links"><a href="https://avareit.com/#maksa" class="av-footer-main__link">MAKSA</a><a href="https://avareit.com/learn" target="_blank" rel="noopener" class="av-footer-main__link">Blog</a><a href="https://avareit.com/#pricing" data-i18n="footer.pricing" class="av-footer-main__link">Pricing</a><a href="https://avareit.com/" target="_blank" rel="noopener" data-i18n="footer.cases" class="av-footer-main__link">Case Studies</a><a href="#" onclick="pOpenVideo();return false;" data-i18n="footer.video" class="av-footer-main__link">Video Instruction</a><a href="#" onclick="pOpenProtocol();return false;" data-i18n="footer.protocol" class="av-footer-main__link">Protocol</a><a href="#" onclick="pFaqOpen();return false;" data-i18n="footer.faq" class="av-footer-main__link">FAQ</a></div></div>
+      <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.legal">Legal</div><div class="av-footer-main__links"><a href="https://avareit.com/privacy-policy" target="_blank" data-i18n="footer.privacy" class="av-footer-main__link">Privacy Policy</a><a href="https://avareit.com/terms-of-use" target="_blank" data-i18n="footer.terms" class="av-footer-main__link">Terms of Use</a></div></div>
+      <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.support">Support</div><div class="av-footer-main__links"><a href="https://api.whatsapp.com/send/?phone=971506412775&text&type=phone_number&app_absent=0" target="_blank" data-i18n="footer.contact" class="av-footer-main__link">Contact Support</a></div></div>
+    </div>
+  </div>
+  <div class="av-footer"><span class="av-footer__copy" data-i18n="footer.copy">&copy; 2026 Avare Biotech. All rights reserved.</span><br><br><a href="https://www.dmca.com/Protection/Status.aspx?ID=3963ddec-0c0e-4e42-b3ff-b103a94c151c" title="DMCA.com Protection Status" class="dmca-badge"><img src="https://images.dmca.com/Badges/dmca_protected_sml_120n.png?ID=3963ddec-0c0e-4e42-b3ff-b103a94c151c" alt="DMCA.com Protection Status" /></a><script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script></div>
 </footer>
 
 <script>
@@ -1077,6 +1148,8 @@ function handleSubscribeBottom(btn){
 <script>
 window.LEARN_I18N = {
  en:{
+   'video.title':'Video Instruction','protocol.title':'Semen QA Protocol','protocol.view':'View','protocol.download':'Download',
+    'faq.q1':'What is MAKSA?','faq.a1':'MAKSA (Mobile Assisted Key Semen Analysis) is a smartphone app that analyzes livestock semen quality using AI. It measures total motility, progressive motility, and concentration without expensive CASA equipment.','faq.q2':'How accurate is MAKSA compared to CASA?','faq.a2':'MAKSA achieves a correlation of r > 0.90 with traditional CASA systems, validated across 500K+ labeled cells over 3 years of R&D.','faq.q3':'What equipment do I need?','faq.a3':'You only need a smartphone and a basic microscope. No servers, no expensive hardware, no consumables required.','faq.q4':'Which species are supported?','faq.a4':'MAKSA is validated for 5 species: cattle, horses, sheep, goats, and camels.','faq.q5':'Is there a free trial?','faq.a5':'Yes, we offer 10 free tests to get started. Contact us for a demo and early adopter discounts of up to 50% off.','faq.q6':'Which microscopes are compatible with MAKSA?','faq.a6':'Any standard bright-field microscope at 100–200x magnification. Phase contrast microscopes are not compatible.','faq.q7':'What affects the accuracy of results?','faq.a7':'Video quality is the key factor. Unstable footage, incorrect magnification, or wrong dilution factor reduce accuracy.','faq.q8':'Can MAKSA be used for post-thaw semen checks?','faq.a8':"Yes, MAKSA delivers results in 30–60 seconds right in the field.",'faq.q9':'I already evaluate semen under a microscope — why do I need MAKSA?','faq.a9':'Subjective evaluation is not reproducible. MAKSA generates a timestamped PDF report that protects you in any dispute.','faq.q10':'How accurate is concentration measurement?','faq.a10':'Motility is the primary indicator — MAKSA measures it with r > 0.90 correlation vs CASA.','faq.q11':'We already have CASA — why would we need this?','faq.a11':"MAKSA goes where CASA can't — into the field, onto the farm, to technicians without lab infrastructure.",'footer.download':"Download the App",'footer.product':"Product",'footer.pricing':"Pricing",'footer.cases':"Case Studies",'footer.video':"Video Instruction",'footer.protocol':"Protocol",'footer.faq':"FAQ",'footer.legal':"Legal",'footer.privacy':"Privacy Policy",'footer.terms':"Terms of Use",'footer.support':"Support",'footer.contact':"Contact Support",
   "nav.home":"Home","nav.kb":"Knowledge Base","nav.contacts":"Contacts",
   "hero.tag":"Knowledge Base","hero.title":"Field Knowledge.<br/>Built for <em>Practitioners.</em>",
   "hero.sub":"Guides, protocols, and case studies — for vets, AI technicians, and farm managers.",
@@ -1099,6 +1172,8 @@ window.LEARN_I18N = {
   "toast.dling":"Your PDF is downloading. If it did not start,","toast.clickhere":"click here","toast.coming":"PDF coming soon.","toast.sending":"Sending..."
  },
  pt:{
+   'video.title':'Instrução em Vídeo','protocol.title':'Protocolo QA Sêmen','protocol.view':'Ver','protocol.download':'Baixar',
+    'faq.q1':'O que é o MAKSA?','faq.a1':'MAKSA (Mobile Assisted Key Semen Analysis) é um aplicativo de smartphone que analisa a qualidade do sêmen de animais usando IA. Mede motilidade total, motilidade progressiva e concentração sem equipamento CASA caro.','faq.q2':'Qual a precisão do MAKSA comparado ao CASA?','faq.a2':'O MAKSA alcança uma correlação de r > 0.90 com sistemas CASA tradicionais, validado em 500K+ células rotuladas ao longo de 3 anos de P&D.','faq.q3':'Que equipamento eu preciso?','faq.a3':'Você só precisa de um smartphone e um microscópio básico. Sem servidores, sem hardware caro, sem consumíveis.','faq.q4':'Quais espécies são suportadas?','faq.a4':'O MAKSA é validado para 5 espécies: bovinos, equinos, ovinos, caprinos e camelos.','faq.q5':'Existe teste gratuito?','faq.a5':'Sim, oferecemos 10 testes gratuitos para começar. Entre em contato para uma demonstração e descontos para early adopters de até 50%.','faq.q6':'Quais microscópios são compatíveis com o MAKSA?','faq.a6':'Qualquer microscópio padrão de campo claro a 100–200x de ampliação. Microscópios de contraste de fase não são compatíveis.','faq.q7':'O que afeta a precisão dos resultados?','faq.a7':'A qualidade do vídeo é o fator principal. Imagens instáveis, ampliação incorreta ou fator de diluição errado reduzem a precisão.','faq.q8':'O MAKSA pode ser usado para verificação pós-descongelamento?','faq.a8':'Sim, é exatamente para isso que o MAKSA foi feito. O MAKSA entrega resultados em 30–60 segundos no campo.','faq.q9':'Já avalia o sêmen sob microscópio — por que preciso do MAKSA?','faq.a9':'A avaliação subjetiva não é reproduzível. O MAKSA gera um relatório PDF com data e hora que protege você em qualquer disputa.','faq.q10':'Quão precisa é a medição de concentração?','faq.a10':'Motilidade é o principal indicador — o MAKSA a mede com correlação r > 0,90 vs CASA.','faq.q11':'Já temos CASA — por que precisaríamos disso?','faq.a11':'O MAKSA vai onde o CASA não pode — ao campo, à fazenda, a técnicos sem infraestrutura de laboratório.','footer.download':"Baixar o App",'footer.product':"Produto",'footer.pricing':"Preços",'footer.cases':"Estudos de Caso",'footer.video':"Instrução em Vídeo",'footer.protocol':"Protocolo",'footer.faq':"FAQ",'footer.legal':"Legal",'footer.privacy':"Política de Privacidade",'footer.terms':"Termos de Uso",'footer.support':"Suporte",'footer.contact':"Contatar Suporte",
   "nav.home":"Início","nav.kb":"Base de Conhecimento","nav.contacts":"Contatos",
   "hero.tag":"Base de Conhecimento","hero.title":"Conhecimento de Campo.<br/>Feito para <em>Profissionais.</em>",
   "hero.sub":"Guias, protocolos e estudos de caso — para veterinários, inseminadores e gestores de fazenda.",
@@ -1121,6 +1196,8 @@ window.LEARN_I18N = {
   "toast.dling":"Seu PDF está sendo baixado. Se não começou,","toast.clickhere":"clique aqui","toast.coming":"PDF em breve.","toast.sending":"Enviando..."
  },
  es:{
+   'video.title':'Instrucción en Video','protocol.title':'Protocolo QA Semen','protocol.view':'Ver','protocol.download':'Descargar',
+    'faq.q1':'¿Qué es MAKSA?','faq.a1':'MAKSA (Mobile Assisted Key Semen Analysis) es una aplicación de smartphone que analiza la calidad del semen de animales usando IA. Mide la motilidad total, la motilidad progresiva y la concentración sin equipos CASA costosos.','faq.q2':'¿Qué tan preciso es MAKSA comparado con CASA?','faq.a2':'MAKSA logra una correlación de r > 0.90 con sistemas CASA tradicionales, validado en 500K+ células etiquetadas durante 3 años de I+D.','faq.q3':'¿Qué equipo necesito?','faq.a3':'Solo necesitas un smartphone y un microscopio básico. Sin servidores, sin hardware costoso, sin consumibles.','faq.q4':'¿Qué especies son compatibles?','faq.a4':'MAKSA está validado para 5 especies: bovinos, equinos, ovinos, caprinos y camellos.','faq.q5':'¿Hay prueba gratuita?','faq.a5':'Sí, ofrecemos 10 pruebas gratuitas para comenzar. Contáctanos para una demostración y descuentos para early adopters de hasta 50%.','faq.q6':'¿Qué microscopios son compatibles con MAKSA?','faq.a6':'Cualquier microscopio estándar de campo brillante a 100–200x de ampliación. Los microscopios de contraste de fase no son compatibles.','faq.q7':'¿Qué afecta la precisión de los resultados?','faq.a7':'La calidad del video es el factor clave. Imágenes inestables, una ampliación incorrecta o un factor de dilución equivocado reducen la precisión.','faq.q8':'¿Se puede usar MAKSA para verificación post-descongelación?','faq.a8':'Sí, para eso está hecho MAKSA exactamente. MAKSA entrega resultados en 30–60 segundos directamente en el campo.','faq.q9':'Ya evalúo semen bajo microscopio — ¿por qué necesito MAKSA?','faq.a9':'La evaluación subjetiva no es reproducible. MAKSA genera un informe PDF con marca de tiempo que te protege en cualquier disputa.','faq.q10':'¿Qué tan precisa es la medición de concentración?','faq.a10':'La motilidad es el principal indicador — MAKSA la mide con correlación r > 0.90 vs CASA.','faq.q11':'Ya tenemos CASA — ¿por qué necesitaríamos esto?','faq.a11':'MAKSA va donde CASA no puede — al campo, a la granja, a técnicos sin infraestructura de laboratorio.','footer.download':"Descargar la App",'footer.product':"Producto",'footer.pricing':"Precios",'footer.cases':"Casos de Estudio",'footer.video':"Instrucción en Video",'footer.protocol':"Protocolo",'footer.faq':"FAQ",'footer.legal':"Legal",'footer.privacy':"Política de Privacidad",'footer.terms':"Términos de Uso",'footer.support':"Soporte",'footer.contact':"Contactar Soporte",
   "nav.home":"Inicio","nav.kb":"Base de Conocimiento","nav.contacts":"Contactos",
   "hero.tag":"Base de Conocimiento","hero.title":"Conocimiento de Campo.<br/>Hecho para <em>Profesionales.</em>",
   "hero.sub":"Guías, protocolos y estudios de caso — para veterinarios, técnicos de IA y gestores de granja.",
@@ -1184,5 +1261,77 @@ document.addEventListener('click',function(e){
 })();
 </script>
 
+<div class="av-video-overlay" id="avVideoOverlay">
+  <div class="av-video-popup">
+    <button class="av-video-close" id="avVideoClose">&#10005;</button>
+    <div class="av-video-title" id="avVideoTitle" data-i18n="video.title">Video Instruction</div>
+    <div class="av-video-grid">
+      <div class="av-video-item"><div class="av-video-thumb" data-video="https://www.youtube.com/embed/CdFFHB0CZUg?autoplay=1"><img src="https://img.youtube.com/vi/CdFFHB0CZUg/hqdefault.jpg" alt="English"><div class="av-video-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div></div><span class="av-video-label">English</span></div>
+      <div class="av-video-item"><div class="av-video-thumb" data-video="https://www.youtube.com/embed/B8y8rR0Y4Xw?autoplay=1"><img src="https://img.youtube.com/vi/B8y8rR0Y4Xw/hqdefault.jpg" alt="Portugu&ecirc;s"><div class="av-video-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div></div><span class="av-video-label">Portugu&ecirc;s</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="av-video-player-overlay" id="avVideoPlayerOverlay">
+  <div class="av-video-player-wrap">
+    <button class="av-video-close" id="avVideoPlayerClose">&#10005;</button>
+    <iframe id="avVideoFrame" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+</div>
+
+<div class="av-protocol-overlay" id="avProtocolOverlay">
+  <div class="av-protocol-popup">
+    <button class="av-protocol-close" id="avProtocolClose">&#10005;</button>
+    <div class="av-protocol-title" id="avProtocolTitle" data-i18n="protocol.title">Semen QA Protocol</div>
+    <div class="av-protocol-files">
+      <div class="av-protocol-file"><span class="av-protocol-file-badge">PDF</span><span class="av-protocol-file-name">Semen QA Protocol (English)</span><div class="av-protocol-file-actions"><button class="av-protocol-file-btn av-protocol-view-btn" data-view="https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf&embedded=true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> <span data-i18n="protocol.view">View</span></button><a href="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf" download class="av-protocol-file-btn av-protocol-download-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span data-i18n="protocol.download">Download</span></a></div></div>
+      <div class="av-protocol-file"><span class="av-protocol-file-badge">PDF</span><span class="av-protocol-file-name">Protocolo QA Semen (Portugu&ecirc;s)</span><div class="av-protocol-file-actions"><button class="av-protocol-file-btn av-protocol-view-btn" data-view="https://docs.google.com/gview?url=https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf&embedded=true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> <span data-i18n="protocol.view">View</span></button><a href="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf" download class="av-protocol-file-btn av-protocol-download-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span data-i18n="protocol.download">Download</span></a></div></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  window.pOpenVideo=function(){var o=document.getElementById('avVideoOverlay');if(o)o.classList.add('open');};
+  window.pOpenProtocol=function(){var o=document.getElementById('avProtocolOverlay');if(o)o.classList.add('open');};
+  function cl(id){var o=document.getElementById(id);if(o)o.classList.remove('open');}
+  document.addEventListener('click',function(e){
+    var th=e.target.closest('.av-video-thumb[data-video]');
+    if(th){var fr=document.getElementById('avVideoFrame');if(fr)fr.src=th.getAttribute('data-video');var pv=document.getElementById('avVideoPlayerOverlay');if(pv)pv.classList.add('open');return;}
+    if(e.target.closest('#avVideoClose')||e.target.id==='avVideoOverlay'){cl('avVideoOverlay');}
+    if(e.target.closest('#avVideoPlayerClose')||e.target.id==='avVideoPlayerOverlay'){var fr=document.getElementById('avVideoFrame');if(fr)fr.src='';cl('avVideoPlayerOverlay');}
+    if(e.target.closest('#avProtocolClose')||e.target.id==='avProtocolOverlay'){cl('avProtocolOverlay');}
+    var vb=e.target.closest('.av-protocol-view-btn[data-view]');
+    if(vb){e.preventDefault();if(window.pOpenPdf){window.pOpenPdf(vb.getAttribute('data-view'));}else{window.open(vb.getAttribute('data-view'),'_blank');}return;}
+  });
+})();
+</script>
+<div class="av-faq-overlay" id="pFaqOverlay">
+  <div class="av-faq-popup">
+    <button class="av-faq-close" id="pFaqClose">&#10005;</button>
+    <div class="av-faq-title">Frequently Asked Questions</div>
+    <div class="av-faq-list">
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q1">What is MAKSA?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a1">MAKSA (Mobile Assisted Key Semen Analysis) is a smartphone app that analyzes livestock semen quality using AI. It measures total motility, progressive motility, and concentration without expensive CASA equipment.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q2">How accurate is MAKSA compared to CASA?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a2">MAKSA achieves a correlation of r &gt; 0.90 with traditional CASA systems, validated across 500K+ labeled cells over 3 years of R&amp;D.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q3">What equipment do I need?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer"><span data-i18n="faq.a3">You only need a smartphone and a basic microscope.</span></div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q4">Which species are supported?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a4">MAKSA is validated for 5 species: cattle, horses, sheep, goats, and camels.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q5">Is there a free trial?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a5">Yes, we offer 10 free tests to get started.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q6">Which microscopes are compatible with MAKSA?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a6">Any standard bright-field microscope at 100&ndash;200x magnification. Phase contrast microscopes are not compatible.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q7">What affects the accuracy of results?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a7">Video quality is the key factor.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q8">Can MAKSA be used for post-thaw semen checks?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a8">Yes, MAKSA delivers results in 30&ndash;60 seconds right in the field.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q9">I already evaluate semen under a microscope &mdash; why do I need MAKSA?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a9">MAKSA generates a timestamped PDF report &mdash; an objective document that protects you in any dispute.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q10">How accurate is concentration measurement?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a10">Motility is the primary indicator &mdash; MAKSA measures it with r &gt; 0.90 correlation vs CASA.</div></div>
+      <div class="av-faq-item"><div class="av-faq-question"><span data-i18n="faq.q11">We already have CASA &mdash; why would we need this?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer" data-i18n="faq.a11">MAKSA goes where CASA can&rsquo;t &mdash; into the field, onto the farm.</div></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var ov=document.getElementById('pFaqOverlay'); if(!ov) return;
+  ov.querySelectorAll('.av-faq-question').forEach(function(q){ q.addEventListener('click',function(){ q.parentElement.classList.toggle('open'); }); });
+  var cl=document.getElementById('pFaqClose'); if(cl) cl.addEventListener('click',function(){ ov.classList.remove('open'); });
+  ov.addEventListener('click',function(e){ if(e.target===ov) ov.classList.remove('open'); });
+})();
+window.pFaqOpen=function(){ var o=document.getElementById('pFaqOverlay'); if(o) o.classList.add('open'); };
+</script>
 </body>
 </html>
