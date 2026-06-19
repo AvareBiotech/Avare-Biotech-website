@@ -1263,8 +1263,9 @@ function avCasesOpen() {
   var i18n = window.avI18n&&window.avI18n[lang];
   var ttlEl = document.getElementById('avCasesTtl');
   var docsEl = document.getElementById('avCasesDocsLbl');
-  var _ct=document.getElementById('avCasesTtlSrc');if(ttlEl) ttlEl.textContent = (_ct&&_ct.textContent.trim())||(i18n&&i18n['cases.title'])||'Case Studies';
-  var _cd=document.getElementById('avCasesDocsSrc');if(docsEl) docsEl.textContent = (_cd&&_cd.textContent.trim())||(i18n&&i18n['cases.docs'])||'Reports';
+  var _nl=(typeof naydaLang==='function')?naydaLang():lang;var _cov=({it:{t:'Casi di studio',d:'Rapporti'}})[_nl]||{};
+  var _ct=document.getElementById('avCasesTtlSrc');if(ttlEl) ttlEl.textContent = _cov.t||(_ct&&_ct.textContent.trim())||(i18n&&i18n['cases.title'])||'Case Studies';
+  var _cd=document.getElementById('avCasesDocsSrc');if(docsEl) docsEl.textContent = _cov.d||(_cd&&_cd.textContent.trim())||(i18n&&i18n['cases.docs'])||'Reports';
   var zoom=parseFloat(document.body.style.zoom)||1;
   var box=o.querySelector('div');
   if(box){
@@ -1688,8 +1689,8 @@ var testI18n={en:[
 {role:'Especialistas en Reproducci\u00f3n, Kashmir, India',quote:'Realmente necesitamos esto. Vemos el valor de la app: accesibilidad en campo, ahorro de tiempo, independencia de equipos.'},
 {role:'30 a\u00f1os en la industria CASA, Fabricante de Equipos',quote:'Los que pueden comprar CASA - compran CASA. Los que no - compran Avare. No est\u00e1s compitiendo con laboratorios top, vas por la adopci\u00f3n masiva y el segmento desatendido.'}
 ]};
-if(typeof avSiteLang!=="function"||avSiteLang()){
-var ti=testI18n[typeof lang!=='undefined'?lang:'en']||testI18n.en;
+if((typeof naydaLang!=="function")||naydaLang()==="en"){
+var ti=testI18n[(typeof naydaLang==='function')?naydaLang():(typeof lang!=='undefined'?lang:'en')]||testI18n.en;
 document.querySelectorAll('.av-test__card').forEach(function(card,idx){if(ti[idx]){var role=card.querySelector('.av-test__role');if(role)role.textContent=ti[idx].role;var quote=card.querySelector('.av-test__quote');if(quote)quote.textContent='"'+ti[idx].quote+'"';}});
 if(typeof lang !== 'undefined' && lang !== 'en') window.avUpdateTestimonialsLang(lang);
 }
@@ -1763,7 +1764,7 @@ setTimeout(function(){
 <div class="av-dark-section">
 <div class="mk mk--maksa" id="maksa">
   <div class="av-section-header" style="margin-bottom:60px;">
-    <h2 class="av__title av__title--gradient" style="margin-bottom:0;"><span style="color:inherit;">Mobile Assisted Key</span><span style="color:inherit;">Semen Analysis <span style="font-weight:700">&mdash; MAKSA</span></span></h2>
+    <h2 class="av__title av__title--gradient" style="margin-bottom:0;"><span>Mobile Assisted Key</span><span>Semen Analysis &mdash; MAKSA</span></h2>
     <p class="av-section-desc">In many breeding operations, semen samples must be transported to laboratories, which introduces time delays and additional costs before insemination decisions can be made. <strong style="color:rgba(246,246,246,0.45);font-weight:700;">MAKSA</strong> enables rapid on-site evaluation using only a microscope and a smartphone</p>
   </div>
   <div class="mk__outer">
