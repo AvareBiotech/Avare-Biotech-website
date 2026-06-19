@@ -126,20 +126,12 @@
 <body>
 
 <nav class="pp-nav">
-  <a href="https://avareit.com/" class="pp-nav__logo">
+  <a href="./" class="pp-nav__logo">
     <img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/49.png" alt="Avare Biotech">
   </a>
   <div style="display:flex;align-items:center;gap:16px;">
-    <div class="pp-lang" id="ppLangWrap">
-      <button class="pp-lang__btn" id="ppLangBtn" onclick="toggleLangMenu(event)">EN <span style="font-size:9px;opacity:.5;">▼</span></button>
-      <div class="pp-lang__menu" id="ppLangMenu">
-        <button class="pp-lang__opt" onclick="setLang('en')">EN</button>
-        <button class="pp-lang__opt muted" onclick="setLang('pt')">PT</button>
-        <button class="pp-lang__opt muted" onclick="setLang('es')">ES</button>
-        <button class="pp-lang__opt muted" onclick="window.open('https://avareit.com/terms-of-use-ar','_blank')">AR</button>
-      </div>
-    </div>
-    <a href="https://avareit.com/" class="pp-nav__back">← Back to Home</a>
+    <div class="nayda-lang" data-ar="/terms-of-use-ar"></div>
+    <a href="./" class="pp-nav__back">← Back to Home</a>
   </div>
 </nav>
 
@@ -231,7 +223,7 @@
     <h2 class="pp-section__title">Data Processing &amp; Privacy</h2>
     <div class="pp-section__text">
       <ul>
-        <li>Your use is subject to our <a href="https://avareit.com/privacy-policy">Privacy Policy</a>.</li>
+        <li>Your use is subject to our <a href="privacy-policy">Privacy Policy</a>.</li>
         <li>We comply with GDPR, UAE PDPL, CCPA, LGPD, and other global data laws.</li>
         <li>Data may be processed in secure locations (e.g., AWS UAE/Germany).</li>
       </ul>
@@ -333,7 +325,7 @@ var ppContent = {
       { num:'05', title:'User Eligibility', html:'<p>You warrant that:</p><ul><li>You are not a minor (under 18, or 16 in the EU).</li><li>If acting for an entity, you have authority to bind it.</li></ul>' },
       { num:'06', title:'User Obligations', html:'<p>You agree to:</p><ul><li>Provide accurate, lawful information.</li><li>Not upload harmful, infringing, or illegal content.</li><li>Comply with all applicable laws (e.g., UAE PDPL, GDPR, CCPA).</li><li>Maintain confidentiality of login credentials.</li></ul>' },
       { num:'07', title:'Intellectual Property', html:'<p>All content (text, logos, code, etc.) is owned by Avare IT or licensors. Unauthorized use is prohibited.</p>' },
-      { num:'08', title:'Data Processing & Privacy', html:'<ul><li>Your use is subject to our <a href="https://avareit.com/privacy-policy">Privacy Policy</a>.</li><li>We comply with GDPR, UAE PDPL, CCPA, LGPD, and other global data laws.</li><li>Data may be processed in secure locations (e.g., AWS UAE/Germany).</li></ul>' },
+      { num:'08', title:'Data Processing & Privacy', html:'<ul><li>Your use is subject to our <a href="privacy-policy">Privacy Policy</a>.</li><li>We comply with GDPR, UAE PDPL, CCPA, LGPD, and other global data laws.</li><li>Data may be processed in secure locations (e.g., AWS UAE/Germany).</li></ul>' },
       { num:'09', title:'Cookies & Tracking', html:'<p>We use cookies for functionality and analytics. Manage preferences via Cookie Settings.</p>' },
       { num:'10', title:'Third-Party Services', html:'<p>We may integrate with tools like Google Analytics. Their use is governed by their own terms.</p>' },
       { num:'11', title:'Warranties & Disclaimers', html:'<p>The website is provided “as is.” We disclaim warranties for uninterrupted or error-free operation.</p>' },
@@ -356,7 +348,7 @@ var ppContent = {
       { num:'05', title:'Elegibilidade do Usuário', html:'<p>Você garante que:</p><ul><li>Não é menor de idade (menos de 18 anos, ou 16 na UE).</li><li>Se agindo em nome de uma entidade, tem autoridade para obrigá-la.</li></ul>' },
       { num:'06', title:'Obrigações do Usuário', html:'<p>Você concorda em:</p><ul><li>Fornecer informações precisas e legais.</li><li>Não carregar conteúdo prejudicial, infrator ou ilegal.</li><li>Cumprir todas as leis aplicáveis (ex.: PDPL dos EAU, GDPR, CCPA).</li><li>Manter a confidencialidade das credenciais de acesso.</li></ul>' },
       { num:'07', title:'Propriedade Intelectual', html:'<p>Todo o conteúdo (texto, logotipos, código, etc.) é de propriedade da Avare IT ou de seus licenciadores. O uso não autorizado é proibido.</p>' },
-      { num:'08', title:'Processamento de Dados e Privacidade', html:'<ul><li>Seu uso está sujeito à nossa <a href="https://avareit.com/privacy-policy">Política de Privacidade</a>.</li><li>Cumprimos o GDPR, PDPL dos EAU, CCPA, LGPD e outras leis globais de proteção de dados.</li><li>Os dados podem ser processados em locais seguros (ex.: AWS EAU/Alemanha).</li></ul>' },
+      { num:'08', title:'Processamento de Dados e Privacidade', html:'<ul><li>Seu uso está sujeito à nossa <a href="privacy-policy">Política de Privacidade</a>.</li><li>Cumprimos o GDPR, PDPL dos EAU, CCPA, LGPD e outras leis globais de proteção de dados.</li><li>Os dados podem ser processados em locais seguros (ex.: AWS EAU/Alemanha).</li></ul>' },
       { num:'09', title:'Cookies e Rastreamento', html:'<p>Usamos cookies para funcionalidade e análises. Gerencie preferências nas Configurações de Cookies.</p>' },
       { num:'10', title:'Serviços de Terceiros', html:'<p>Podemos integrar ferramentas como Google Analytics. Seu uso é regido pelos próprios termos dessas ferramentas.</p>' },
       { num:'11', title:'Garantias e Isenções de Responsabilidade', html:'<p>O site é fornecido “no estado em que se encontra”. Não garantimos operação ininterrupta ou sem erros.</p>' },
@@ -379,7 +371,7 @@ var ppContent = {
       { num:'05', title:'Elegibilidad del Usuario', html:'<p>Usted garantiza que:</p><ul><li>No es menor de edad (menor de 18 años, o 16 en la UE).</li><li>Si actúa en nombre de una entidad, tiene autoridad para obligarla.</li></ul>' },
       { num:'06', title:'Obligaciones del Usuario', html:'<p>Usted acepta:</p><ul><li>Proporcionar información precisa y legal.</li><li>No cargar contenido dañino, infractor o ilegal.</li><li>Cumplir con todas las leyes aplicables (ej.: PDPL de EAU, GDPR, CCPA).</li><li>Mantener la confidencialidad de las credenciales de acceso.</li></ul>' },
       { num:'07', title:'Propiedad Intelectual', html:'<p>Todo el contenido (texto, logotipos, código, etc.) es propiedad de Avare IT o sus licenciantes. El uso no autorizado está prohibido.</p>' },
-      { num:'08', title:'Procesamiento de Datos y Privacidad', html:'<ul><li>Su uso está sujeto a nuestra <a href="https://avareit.com/privacy-policy">Política de Privacidad</a>.</li><li>Cumplimos con GDPR, PDPL de EAU, CCPA, LGPD y otras leyes globales de datos.</li><li>Los datos pueden procesarse en ubicaciones seguras (ej.: AWS EAU/Alemania).</li></ul>' },
+      { num:'08', title:'Procesamiento de Datos y Privacidad', html:'<ul><li>Su uso está sujeto a nuestra <a href="privacy-policy">Política de Privacidad</a>.</li><li>Cumplimos con GDPR, PDPL de EAU, CCPA, LGPD y otras leyes globales de datos.</li><li>Los datos pueden procesarse en ubicaciones seguras (ej.: AWS EAU/Alemania).</li></ul>' },
       { num:'09', title:'Cookies y Seguimiento', html:'<p>Usamos cookies para funcionalidad y análisis. Administre sus preferencias en la Configuración de Cookies.</p>' },
       { num:'10', title:'Servicios de Terceros', html:'<p>Podemos integrarnos con herramientas como Google Analytics. Su uso se rige por sus propios términos.</p>' },
       { num:'11', title:'Garantías y Descargos de Responsabilidad', html:'<p>El sitio web se proporciona “tal cual”. Renunciamos a garantías de operación ininterrumpida o sin errores.</p>' },
@@ -435,8 +427,9 @@ function setLang(lang) {
   var hash = window.location.hash.replace('#','');
   var saved = localStorage.getItem('pp_lang') || 'en';
   var lang = (hash === 'pt' || hash === 'es') ? hash : saved;
-  if (lang !== 'en') setLang(lang);
+  /* перевод делает Nayda (переход на /xx/) */
 })();
 </script>
+<script src="/assets/nayda-lang.js" defer></script>
 </body>
 </html>

@@ -565,31 +565,19 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 
 
 <nav class="nav">
-  <a href="https://avareit.com" class="nav-logo">
+  <a href="./" class="nav-logo">
     <img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/49.png" alt="Avare Biotech"/>
   </a>
   <button class="burger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav-pill" id="navPill">
-    <a href="https://avareit.com" target="_blank" data-i18n="nav.home">
+    <a href="./" target="_blank" data-i18n="nav.home">
       <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2.1L1 12h3v9h7v-6h2v6h7v-9h3L12 2.1z"/></svg>
       Home
     </a>
     <a href="#" class="nav-kb" data-i18n="nav.kb">Knowledge Base</a>
-    <a href="https://avareit.com/#contacts" target="_blank" data-i18n="nav.contacts">Contacts</a>
+    <a href="./#contacts" target="_blank" data-i18n="nav.contacts">Contacts</a>
     <span class="sep"></span>
-    <div class="av-lang" id="avLang">
-      <button class="av-lang__toggle" id="avLangToggle">EN <span class="av-lang__arrow">&#9660;</span></button>
-      <div class="av-lang__dropdown">
-        <button class="av-lang__opt active" data-lang="en">EN</button>
-        <button class="av-lang__opt" data-lang="pt">PT</button>
-        <button class="av-lang__opt" data-lang="es">ES</button>
-      </div>
-    </div>
-    <div class="nav-lang-mob">
-      <button data-lang="en" onclick="pickLang('en')">EN</button>
-      <button data-lang="pt" onclick="pickLang('pt')">PT</button>
-      <button data-lang="es" onclick="pickLang('es')">ES</button>
-    </div>
+    <div class="nayda-lang" data-ar="/ar"></div>
   </div>
 </nav>
 
@@ -1003,8 +991,8 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
     <div class="av-footer-main__map"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/premium_dotted_world_map_avare%203.svg" alt=""></div>
     <div class="av-footer-main__grid">
       <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.download">Download the App</div><div class="av-footer-main__stores"><a href="https://apps.apple.com/ae/app/avare-biotech/id6744607449" target="_blank" rel="noopener" class="av-footer-main__store-btn"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/apple-white.svg" alt=""> App Store</a><a href="https://play.google.com/store/apps/details?id=com.biotech.app.android&hl=en" target="_blank" rel="noopener" class="av-footer-main__store-btn"><img src="https://www.logo.wine/a/logo/Google_Play/Google_Play-Icon-Logo.wine.svg" alt="" style="width:18px;height:18px;"> Google Play</a></div></div>
-      <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.product">Product</div><div class="av-footer-main__links"><a href="https://avareit.com/#maksa" class="av-footer-main__link">MAKSA</a><a href="https://avareit.com/learn" target="_blank" rel="noopener" class="av-footer-main__link">Blog</a><a href="https://avareit.com/#pricing" data-i18n="footer.pricing" class="av-footer-main__link">Pricing</a><a href="https://avareit.com/" target="_blank" rel="noopener" data-i18n="footer.cases" class="av-footer-main__link">Case Studies</a><a href="#" onclick="pOpenVideo();return false;" data-i18n="footer.video" class="av-footer-main__link">Video Instruction</a><a href="#" onclick="pOpenProtocol();return false;" data-i18n="footer.protocol" class="av-footer-main__link">Protocol</a><a href="#" onclick="pFaqOpen();return false;" data-i18n="footer.faq" class="av-footer-main__link">FAQ</a></div></div>
-      <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.legal">Legal</div><div class="av-footer-main__links"><a href="https://avareit.com/privacy-policy" target="_blank" data-i18n="footer.privacy" class="av-footer-main__link">Privacy Policy</a><a href="https://avareit.com/terms-of-use" target="_blank" data-i18n="footer.terms" class="av-footer-main__link">Terms of Use</a></div></div>
+      <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.product">Product</div><div class="av-footer-main__links"><a href="./#maksa" class="av-footer-main__link">MAKSA</a><a href="learn" target="_blank" rel="noopener" class="av-footer-main__link">Blog</a><a href="./#pricing" data-i18n="footer.pricing" class="av-footer-main__link">Pricing</a><a href="./" target="_blank" rel="noopener" data-i18n="footer.cases" class="av-footer-main__link">Case Studies</a><a href="#" onclick="pOpenVideo();return false;" data-i18n="footer.video" class="av-footer-main__link">Video Instruction</a><a href="#" onclick="pOpenProtocol();return false;" data-i18n="footer.protocol" class="av-footer-main__link">Protocol</a><a href="#" onclick="pFaqOpen();return false;" data-i18n="footer.faq" class="av-footer-main__link">FAQ</a></div></div>
+      <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.legal">Legal</div><div class="av-footer-main__links"><a href="privacy-policy" target="_blank" data-i18n="footer.privacy" class="av-footer-main__link">Privacy Policy</a><a href="terms-of-use" target="_blank" data-i18n="footer.terms" class="av-footer-main__link">Terms of Use</a></div></div>
       <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.support">Support</div><div class="av-footer-main__links"><a href="https://api.whatsapp.com/send/?phone=971506412775&text&type=phone_number&app_absent=0" target="_blank" data-i18n="footer.contact" class="av-footer-main__link">Contact Support</a></div></div>
     </div>
   </div>
@@ -1256,17 +1244,7 @@ document.addEventListener('click',function(e){
   if(opt){learnSetLang(opt.getAttribute('data-lang')); return;}
   if(!wrap.contains(e.target)) wrap.classList.remove('open');
 });
-(function(){
-  var sup=['en','pt','es'];
-  var h=location.hash.replace('#','').toLowerCase();
-  var lang=(sup.indexOf(h)!==-1?h:null)||(localStorage.getItem('av_lang')||'en');
-  if(!LEARN_I18N[lang]) lang='en';
-  localStorage.setItem('av_lang',lang);
-  learnApplyLang(lang);
-  try{history.replaceState(null,'',lang==='en'?location.pathname+location.search:'#'+lang);}catch(e){}
-  var last=lang;
-  setInterval(function(){var l=_learnLang(); if(l!==last){last=l; learnApplyLang(l);}},400);
-})();
+/* learn: автозапуск перевода и опрос отключены — переводит Nayda */
 </script>
 
 <div class="av-video-overlay" id="avVideoOverlay">
@@ -1343,5 +1321,6 @@ window.pFaqOpen=function(){ var o=document.getElementById('pFaqOverlay'); if(o) 
 </script>
 <div class="av-pdf-overlay" id="avPdfOverlay"><div class="av-pdf-wrap"><button class="av-pdf-close" id="avPdfClose">&#10005;</button><iframe id="avPdfFrame" src="" frameborder="0"></iframe></div></div>
 <script>(function(){var ov=document.getElementById('avPdfOverlay'),fr=document.getElementById('avPdfFrame'),cl=document.getElementById('avPdfClose');window.pOpenPdf=function(u){if(fr)fr.src=u;if(ov)ov.classList.add('open');};function c(){if(ov)ov.classList.remove('open');if(fr)fr.src='';}if(cl)cl.addEventListener('click',c);if(ov)ov.addEventListener('click',function(e){if(e.target===ov)c();});})();</script>
+<script src="/assets/nayda-lang.js" defer></script>
 </body>
 </html>

@@ -151,20 +151,12 @@
 <body>
 
 <nav class="pp-nav">
-  <a href="https://avareit.com/" class="pp-nav__logo">
+  <a href="./" class="pp-nav__logo">
     <img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/49.png" alt="Avare Biotech">
   </a>
   <div style="display:flex;align-items:center;gap:16px;">
-    <div class="pp-lang" id="ppLangWrap">
-      <button class="pp-lang__btn" id="ppLangBtn" onclick="toggleLangMenu(event)">EN <span style="font-size:9px;opacity:.5;">▼</span></button>
-      <div class="pp-lang__menu" id="ppLangMenu">
-        <button class="pp-lang__opt" onclick="setLang('en')">EN</button>
-        <button class="pp-lang__opt muted" onclick="setLang('pt')">PT</button>
-        <button class="pp-lang__opt muted" onclick="setLang('es')">ES</button>
-        <button class="pp-lang__opt muted" onclick="window.open('https://avareit.com/privacy-policy-ar','_blank')">AR</button>
-      </div>
-    </div>
-    <a href="https://avareit.com/" class="pp-nav__back">← Back to Home</a>
+    <div class="nayda-lang" data-ar="/privacy-policy-ar"></div>
+    <a href="./" class="pp-nav__back">← Back to Home</a>
   </div>
 </nav>
 
@@ -425,8 +417,9 @@ function setLang(lang) {
   var hash = window.location.hash.replace('#','');
   var saved = localStorage.getItem('pp_lang') || 'en';
   var lang = (hash === 'pt' || hash === 'es') ? hash : saved;
-  if (lang !== 'en') setLang(lang);
+  /* перевод делает Nayda (переход на /xx/) */
 })();
 </script>
+<script src="/assets/nayda-lang.js" defer></script>
 </body>
 </html>

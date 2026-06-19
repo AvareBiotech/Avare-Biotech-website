@@ -212,19 +212,10 @@
 <body>
 
 <nav class="nav">
-  <a href="https://avareit.com/" class="nav__logo">
+  <a href="./" class="nav__logo">
     <img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/49.png" alt="Avare Biotech">
   </a>
-  <div class="nav__lang" id="langWrap">
-    <button class="nav__lang-btn" id="langBtn" onclick="toggleLang(event)">
-      EN <span style="font-size:9px;opacity:.5;">▼</span>
-    </button>
-    <div class="nav__lang-menu" id="langMenu">
-      <button class="nav__lang-opt active" onclick="setLang('en')">EN</button>
-      <button class="nav__lang-opt" onclick="setLang('pt')">PT</button>
-      <button class="nav__lang-opt" onclick="setLang('es')">ES</button>
-    </div>
-  </div>
+  <div class="nayda-lang" data-ar="/ar"></div>
 </nav>
 
 <main class="main">
@@ -284,8 +275,8 @@
 
       <p class="form__note" id="formNote">
         By submitting, you agree to our
-        <a href="https://avareit.com/privacy-policy" target="_blank">Privacy Policy</a>
-        and <a href="https://avareit.com/terms-of-use" target="_blank">Terms of Use</a>.
+        <a href="privacy-policy" target="_blank">Privacy Policy</a>
+        and <a href="terms-of-use" target="_blank">Terms of Use</a>.
       </p>
     </form>
 
@@ -305,7 +296,7 @@
         </a>
       </div>
       <p class="success__site" id="successSite">
-        Visit our website <a href="https://avareit.com" target="_blank">www.avareit.com</a>
+        Visit our website <a href="./" target="_blank">www.avareit.com</a>
       </p>
       <button onclick="backToForm()" style="margin-top:24px;font-family:var(--font);font-size:15px;font-weight:500;color:rgba(246,246,246,0.5);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;margin-left:auto;margin-right:auto;transition:color .2s;" onmouseover="this.style.color='#F6F6F6'" onmouseout="this.style.color='rgba(246,246,246,0.5)'" id="backBtn">← Back to form</button>
     </div>
@@ -344,10 +335,10 @@ var T = {
     lbl_country: 'Country', lbl_company: 'Company', lbl_role: 'Role',
     lbl_linkedin: 'LinkedIn Profile', lbl_optional: '(optional)',
     submitBtn: 'Get Access',
-    formNote: 'By submitting, you agree to our <a href="https://avareit.com/privacy-policy" target="_blank">Privacy Policy</a> and <a href="https://avareit.com/terms-of-use" target="_blank">Terms of Use</a>.',
+    formNote: 'By submitting, you agree to our <a href="privacy-policy" target="_blank">Privacy Policy</a> and <a href="terms-of-use" target="_blank">Terms of Use</a>.',
     successTitle: 'You\'re in!',
     successText: 'Thank you! Download the app and start your free trial.',
-    successSite: 'Visit our website <a href="https://avareit.com" target="_blank">www.avareit.com</a>',
+    successSite: 'Visit our website <a href="./" target="_blank">www.avareit.com</a>',
     backBtn: '← Back to form',
     footerCopy: '© 2026 Avare Biotech. All rights reserved.',
     inp_name: 'Michelle Broughton', inp_email: 'michelle@example.com',
@@ -362,10 +353,10 @@ var T = {
     lbl_country: 'País', lbl_company: 'Empresa', lbl_role: 'Cargo',
     lbl_linkedin: 'Perfil no LinkedIn', lbl_optional: '(opcional)',
     submitBtn: 'Obter Acesso',
-    formNote: 'Ao enviar, você concorda com nossa <a href="https://avareit.com/privacy-policy" target="_blank">Política de Privacidade</a> e <a href="https://avareit.com/terms-of-use" target="_blank">Termos de Uso</a>.',
+    formNote: 'Ao enviar, você concorda com nossa <a href="privacy-policy" target="_blank">Política de Privacidade</a> e <a href="terms-of-use" target="_blank">Termos de Uso</a>.',
     successTitle: 'Tudo certo!',
     successText: 'Obrigado! Baixe o aplicativo e comece seu período de teste gratuito.',
-    successSite: 'Visite nosso site <a href="https://avareit.com" target="_blank">www.avareit.com</a>',
+    successSite: 'Visite nosso site <a href="./" target="_blank">www.avareit.com</a>',
     backBtn: '← Voltar ao formulário',
     footerCopy: '© 2026 Avare Biotech. Todos os direitos reservados.',
     inp_name: 'Maria Silva', inp_email: 'maria@exemplo.com',
@@ -380,10 +371,10 @@ var T = {
     lbl_country: 'País', lbl_company: 'Empresa', lbl_role: 'Cargo',
     lbl_linkedin: 'Perfil de LinkedIn', lbl_optional: '(opcional)',
     submitBtn: 'Obtener Acceso',
-    formNote: 'Al enviar, acepta nuestra <a href="https://avareit.com/privacy-policy" target="_blank">Política de Privacidad</a> y <a href="https://avareit.com/terms-of-use" target="_blank">Términos de Uso</a>.',
+    formNote: 'Al enviar, acepta nuestra <a href="privacy-policy" target="_blank">Política de Privacidad</a> y <a href="terms-of-use" target="_blank">Términos de Uso</a>.',
     successTitle: '¡Listo!',
     successText: 'Gracias. Descarga la app y comienza tu prueba gratuita.',
-    successSite: 'Visita nuestro sitio <a href="https://avareit.com" target="_blank">www.avareit.com</a>',
+    successSite: 'Visita nuestro sitio <a href="./" target="_blank">www.avareit.com</a>',
     backBtn: '← Volver al formulario',
     footerCopy: '© 2026 Avare Biotech. Todos los derechos reservados.',
     inp_name: 'María García', inp_email: 'maria@ejemplo.com',
@@ -487,9 +478,10 @@ function setLang(lang) {
   var hash = window.location.hash.replace('#', '');
   var saved = localStorage.getItem('access_lang') || 'en';
   var lang = (hash === 'pt' || hash === 'es') ? hash : saved;
-  if (lang !== 'en') setLang(lang);
+  /* перевод делает Nayda (переход на /xx/) */
 })();
 </script>
 
+<script src="/assets/nayda-lang.js" defer></script>
 </body>
 </html>

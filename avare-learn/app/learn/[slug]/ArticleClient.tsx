@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import type { Material } from "@/app/data/materials";
-import { useLang, useUI, useDateFmt, localize } from "./i18n";
+import { useLang, useUI, useDateFmt, localize, useNaydaPrefix } from "./i18n";
 import { DownloadModal } from "./DownloadModal";
 
 export function ArticleBody({
@@ -85,6 +85,7 @@ const PROTOCOLS = [
 
 export function LearnFooter() {
   const t = useUI();
+  const pre = useNaydaPrefix();
   const [faqOpen, setFaqOpen] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
   const [protocolOpen, setProtocolOpen] = useState(false);
@@ -113,10 +114,10 @@ export function LearnFooter() {
             <div className="av-footer-main__col">
               <div className="av-footer-main__title">{t("footerProduct")}</div>
               <div className="av-footer-main__links">
-                <a href="https://avareit.com/#maksa" className="av-footer-main__link">MAKSA</a>
-                <a href="https://avareit.com/learn" className="av-footer-main__link">Blog</a>
-                <a href="https://avareit.com/#pricing" className="av-footer-main__link">{t("footerPricing")}</a>
-                <a href="https://avareit.com/" target="_blank" rel="noopener" className="av-footer-main__link">{t("footerCases")}</a>
+                <a href={pre + "/#maksa"} className="av-footer-main__link">MAKSA</a>
+                <a href={pre + "/learn"} className="av-footer-main__link">Blog</a>
+                <a href={pre + "/#pricing"} className="av-footer-main__link">{t("footerPricing")}</a>
+                <a href={pre + "/"} target="_blank" rel="noopener" className="av-footer-main__link">{t("footerCases")}</a>
                 <a href="#" onClick={(e) => { e.preventDefault(); setVideoOpen(true); }} className="av-footer-main__link">{t("footerVideo")}</a>
                 <a href="#" onClick={(e) => { e.preventDefault(); setProtocolOpen(true); }} className="av-footer-main__link">{t("footerProtocol")}</a>
                 <a href="#" onClick={(e) => { e.preventDefault(); setFaqOpen(true); }} className="av-footer-main__link">{t("footerFaq")}</a>
@@ -125,8 +126,8 @@ export function LearnFooter() {
             <div className="av-footer-main__col">
               <div className="av-footer-main__title">{t("footerLegal")}</div>
               <div className="av-footer-main__links">
-                <a href="https://avareit.com/privacy-policy" target="_blank" rel="noopener" className="av-footer-main__link">{t("footerPrivacy")}</a>
-                <a href="https://avareit.com/terms-of-use" target="_blank" rel="noopener" className="av-footer-main__link">{t("footerTerms")}</a>
+                <a href={pre + "/privacy-policy"} target="_blank" rel="noopener" className="av-footer-main__link">{t("footerPrivacy")}</a>
+                <a href={pre + "/terms-of-use"} target="_blank" rel="noopener" className="av-footer-main__link">{t("footerTerms")}</a>
               </div>
             </div>
             <div className="av-footer-main__col">

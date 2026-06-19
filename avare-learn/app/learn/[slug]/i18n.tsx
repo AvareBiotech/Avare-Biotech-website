@@ -5,60 +5,62 @@ import React, {
   useContext,
   useEffect,
   useState,
-  useCallback,
 } from "react";
 import type { Material } from "@/app/data/materials";
 import { translations } from "@/app/data/translations";
 
 export type Lang = "en" | "pt" | "es";
-const SUPPORTED: Lang[] = ["en", "pt", "es"];
+/* ---------- Nayda: язык берётся из адреса /xx/ (перевод на сервере) ---------- */
+const NAYDA_LANGS: [string, string][] = [
+  ["en", "EN"], ["pt", "PT"], ["es", "ES"], ["ar", "AR"], ["af", "AF"],
+  ["ur", "UR"], ["tr", "TR"], ["de", "DE"], ["fr", "FR"], ["it", "IT"], ["ru", "RU"],
+];
+const NAYDA_CODES = ["en", "pt", "es", "af", "ur", "tr", "de", "fr", "it", "ru"];
 
-function readLang(): Lang {
+function naydaLangURL(code: string): string {
+  if (typeof window === "undefined") return "/";
+  const parts = window.location.pathname.split("/").filter(Boolean);
+  if (
+    parts.length &&
+    NAYDA_CODES.includes(parts[0].toLowerCase()) &&
+    parts[0].toLowerCase() !== "en"
+  ) {
+    parts.shift();
+  }
+  const base = parts.join("/");
+  if (code === "en") return base ? "/" + base : "/";
+  return base ? "/" + code + "/" + base : "/" + code + "/";
+}
+
+function currentNaydaLang(): string {
   if (typeof window === "undefined") return "en";
-  const h = window.location.hash.replace("#", "").toLowerCase();
-  if ((SUPPORTED as string[]).includes(h)) return h as Lang;
-  const s = (localStorage.getItem("av_lang") || "en").toLowerCase();
-  return (SUPPORTED as string[]).includes(s) ? (s as Lang) : "en";
+  const h = (document.documentElement.getAttribute("lang") || "")
+    .toLowerCase()
+    .slice(0, 2);
+  if (NAYDA_CODES.includes(h)) return h;
+  const seg = (window.location.pathname.split("/").filter(Boolean)[0] || "").toLowerCase();
+  if (NAYDA_CODES.includes(seg) && seg !== "en") return seg;
+  return "en";
+}
+
+/** Текущий языковой префикс ("/de", "/pt", ...) для относительных ссылок. "" для en. */
+export function useNaydaPrefix(): string {
+  const [p, setP] = useState("");
+  useEffect(() => {
+    const seg = (window.location.pathname.split("/").filter(Boolean)[0] || "").toLowerCase();
+    setP(NAYDA_CODES.includes(seg) && seg !== "en" ? "/" + seg : "");
+  }, []);
+  return p;
 }
 
 type Ctx = { lang: Lang; setLang: (l: Lang) => void };
 const LangContext = createContext<Ctx>({ lang: "en", setLang: () => {} });
 
 export function LangProvider({ children }: { children: React.ReactNode }) {
-  // SSR-safe default = "en" (matches statically rendered HTML), then sync on client
-  const [lang, setLangState] = useState<Lang>("en");
-
-  useEffect(() => {
-    setLangState(readLang());
-    const id = setInterval(() => {
-      const l = readLang();
-      setLangState((cur) => (l !== cur ? l : cur));
-    }, 400);
-    const onHash = () => setLangState(readLang());
-    window.addEventListener("hashchange", onHash);
-    return () => {
-      clearInterval(id);
-      window.removeEventListener("hashchange", onHash);
-    };
-  }, []);
-
-  const setLang = useCallback((l: Lang) => {
-    if (!(SUPPORTED as string[]).includes(l)) return;
-    localStorage.setItem("av_lang", l);
-    try {
-      history.replaceState(
-        null,
-        "",
-        l === "en" ? location.pathname + location.search : "#" + l
-      );
-    } catch {
-      // ignore
-    }
-    setLangState(l);
-  }, []);
-
+  // Перевод делает Nayda на сервере: всегда отдаём английский источник,
+  // клиентский перевод/опрос отключены, чтобы не конфликтовать с прокси.
   return (
-    <LangContext.Provider value={{ lang, setLang }}>
+    <LangContext.Provider value={{ lang: "en", setLang: () => {} }}>
       {children}
     </LangContext.Provider>
   );
@@ -287,10 +289,14 @@ export function localize(m: Material, lang: Lang): Material {
   };
 }
 
-/* ---------- language switcher ---------- */
+/* ---------- language switcher (Nayda, 11 языков, переход по адресу) ---------- */
 export function LangSwitcher() {
-  const { lang, setLang } = useLang();
   const [open, setOpen] = useState(false);
+  const [cur, setCur] = useState("en");
+
+  useEffect(() => {
+    setCur(currentNaydaLang());
+  }, []);
 
   useEffect(() => {
     function onDoc(e: MouseEvent) {
@@ -300,6 +306,14 @@ export function LangSwitcher() {
     document.addEventListener("click", onDoc);
     return () => document.removeEventListener("click", onDoc);
   }, []);
+
+  function go(code: string) {
+    if (code === "ar") {
+      window.open("/ar", "_blank"); // арабская версия — отдельная ручная страница
+      return;
+    }
+    window.location.href = naydaLangURL(code);
+  }
 
   return (
     <>
@@ -312,34 +326,33 @@ export function LangSwitcher() {
             setOpen((o) => !o);
           }}
         >
-          {lang.toUpperCase()} <span className="av-lang__arrow">&#9660;</span>
+          {cur.toUpperCase()} <span className="av-lang__arrow">&#9660;</span>
         </button>
         {open && (
           <div className="av-lang__dropdown" style={{ display: "block" }}>
-            {(["en", "pt", "es"] as Lang[]).map((l) => (
+            {NAYDA_LANGS.map(([code, label]) => (
               <button
-                key={l}
-                className={`av-lang__opt${l === lang ? " active" : ""}`}
+                key={code}
+                className={`av-lang__opt${code === cur ? " active" : ""}`}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setLang(l);
-                  setOpen(false);
+                  go(code);
                 }}
               >
-                {l.toUpperCase()}
+                {label}
               </button>
             ))}
           </div>
         )}
       </div>
-      <div className="nav-lang-mob">
-        {(["en", "pt", "es"] as Lang[]).map((l) => (
+      <div className="nav-lang-mob" style={{ flexWrap: "wrap" }}>
+        {NAYDA_LANGS.map(([code, label]) => (
           <button
-            key={l}
-            className={l === lang ? "active" : ""}
-            onClick={() => setLang(l)}
+            key={code}
+            className={code === cur ? "active" : ""}
+            onClick={() => go(code)}
           >
-            {l.toUpperCase()}
+            {label}
           </button>
         ))}
       </div>

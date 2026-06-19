@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import type { Material } from "@/app/data/materials";
 import { DownloadModalDialog, useSubscribed } from "./DownloadModal";
-import { useLang, useUI, localize } from "./i18n";
+import { useLang, useUI, localize, useNaydaPrefix } from "./i18n";
 
 export function Carousel({ items }: { items: Material[] }) {
   const [page, setPage] = useState(0);
@@ -12,6 +12,7 @@ export function Carousel({ items }: { items: Material[] }) {
   const subscribed = useSubscribed();
   const { lang } = useLang();
   const t = useUI();
+  const pre = useNaydaPrefix();
   const totalPages = items.length;
 
   const dl = dlMaterial ? localize(dlMaterial, lang) : null;
@@ -39,7 +40,7 @@ export function Carousel({ items }: { items: Material[] }) {
               const m = localize(base, lang);
               return (
                 <div key={m.slug} className="learn-card">
-                  <a href={`/learn/${m.slug}`} className="learn-card-link">
+                  <a href={`${pre}/learn/${m.slug}`} className="learn-card-link">
                     <div className="learn-card-img" style={m.coverImage ? { padding: 0 } : undefined}>
                       {m.coverImage ? (
                         <img
@@ -60,7 +61,7 @@ export function Carousel({ items }: { items: Material[] }) {
                     </div>
                   </a>
                   <div className="learn-card-actions">
-                    <a href={`/learn/${m.slug}`} className="learn-card-read">{t("read")}</a>
+                    <a href={`${pre}/learn/${m.slug}`} className="learn-card-read">{t("read")}</a>
                     <button
                       className="learn-card-dl"
                       onClick={() => setDlMaterial(base)}

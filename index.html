@@ -1100,8 +1100,8 @@ function avFetchRates(cb){fetch('https://api.exchangerate-api.com/v4/latest/USD'
       <a href="#" data-cases="1">Case Studies</a>
       <a href="#articles">Articles</a>
       <a href="#team">Team</a>
-      <a href="https://avareit.com/learn" target="_blank" rel="noopener">Blog</a>
-      <a href="https://avareit.com/partner" target="_blank" rel="noopener">Partner Program</a>
+      <a href="learn" target="_blank" rel="noopener">Blog</a>
+      <a href="partner" target="_blank" rel="noopener">Partner Program</a>
       <a href="#contacts">Contacts</a>
       <span style="width:1px;height:20px;background:rgba(255,255,255,0.15);margin:0 6px;flex-shrink:0;display:inline-block;"></span>
       <div class="av-lang" id="avLang">
@@ -1149,15 +1149,15 @@ function avFetchRates(cb){fetch('https://api.exchangerate-api.com/v4/latest/USD'
     <a href="#" data-cases="1">Case Studies</a>
     <a href="#articles">Articles</a>
     <a href="#team">Team</a>
-    <a href="https://avareit.com/learn" target="_blank" rel="noopener">Blog</a>
-    <a href="https://avareit.com/partner" target="_blank" rel="noopener">Partner Program</a>
+    <a href="learn" target="_blank" rel="noopener">Blog</a>
+    <a href="partner" target="_blank" rel="noopener">Partner Program</a>
     <a href="#contacts">Contacts</a>
     <a href="https://calendly.com/maxmershiev/avareusa" target="_blank" class="av-book av-mob__book">Book a call <span class="av-book__icon">↗</span></a>
     <div class="av-mob__lang">
       <button class="av-mob__lang-btn" data-l="en" onclick="avLangGo('en')">EN</button>
       <button class="av-mob__lang-btn" data-l="pt" onclick="avLangGo('pt')">PT</button>
       <button class="av-mob__lang-btn" data-l="es" onclick="avLangGo('es')">ES</button>
-      <button class="av-mob__lang-btn" data-l="ar" onclick="window.location.href='/ar';">AR</button>
+      <button class="av-mob__lang-btn" data-l="ar" onclick="window.open('/ar','_blank')">AR</button>
       <button class="av-mob__lang-btn" data-l="af" onclick="avLangGo('af')">AF</button>
       <button class="av-mob__lang-btn" data-l="ur" onclick="avLangGo('ur')">UR</button>
       <button class="av-mob__lang-btn" data-l="tr" onclick="avLangGo('tr')">TR</button>
@@ -1196,7 +1196,7 @@ function avFetchRates(cb){fetch('https://api.exchangerate-api.com/v4/latest/USD'
 function naydaLang(){var h=(document.documentElement.getAttribute('lang')||'').toLowerCase().split('-')[0];if(!h){var s=window.location.pathname.split('/').filter(Boolean)[0];h=s?s.toLowerCase():'en';}return h;}
 try{localStorage.setItem('av_lang',naydaLang());}catch(e){}
 function avLangURL(code){var L=['af','ur','tr','de','fr','it','ru','pt','es'];if(code==='ar')return '/ar';var p=window.location.pathname.split('/').filter(Boolean);if(p.length&&L.indexOf(p[0].toLowerCase())!==-1)p.shift();var base=p.join('/');return code==='en'?('/'+base):('/'+code+'/'+base);}
-function avLangGo(code){window.location.href=avLangURL(code);}
+function avLangGo(code){if(code==='ar'){window.open('/ar','_blank');return;}window.location.href=avLangURL(code);}
 function avLangSetup(){var cur=naydaLang();var t=document.getElementById('avLangToggle');if(t)t.innerHTML=cur.toUpperCase()+' <span class="av-lang__arrow">&#9660;</span>';document.querySelectorAll('.av-lang__opt,.av-mob__lang-btn').forEach(function(b){var l=b.getAttribute('data-l');if(l)b.classList.toggle('active',l===cur);});}
 if(document.readyState!=='loading')avLangSetup();else document.addEventListener('DOMContentLoaded',avLangSetup);
   var b = document.getElementById('avB'), m = document.getElementById('avM');
@@ -1930,8 +1930,8 @@ setTimeout(function(){
         <input type="text" id="av-c-website" name="website" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;z-index:-1;" tabindex="-1" autocomplete="off">
         <button class="av-contacts__btn" type="submit">Get a personalized offer</button>
         <div class="av-contacts__checkboxes">
-          <label class="av-contacts__checkbox"><input type="checkbox" checked> <span id="av-agree-privacy">I agree with</span> <a href="https://avareit.com/privacy-policy" target="_blank" id="av-privacy-link">Privacy Policy</a></label>
-          <label class="av-contacts__checkbox"><input type="checkbox" checked> <span id="av-agree-terms">I agree with</span> <a href="https://avareit.com/terms-of-use" target="_blank" id="av-terms-link">Terms of Use</a></label>
+          <label class="av-contacts__checkbox"><input type="checkbox" checked> <span id="av-agree-privacy">I agree with</span> <a href="privacy-policy" target="_blank" id="av-privacy-link">Privacy Policy</a></label>
+          <label class="av-contacts__checkbox"><input type="checkbox" checked> <span id="av-agree-terms">I agree with</span> <a href="terms-of-use" target="_blank" id="av-terms-link">Terms of Use</a></label>
         </div>
       </form>
     </div>
@@ -1951,8 +1951,8 @@ setTimeout(function(){
   <div class="av-footer-main__map"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/premium_dotted_world_map_avare%203.svg" alt=""></div>
   <div class="av-footer-main__grid">
     <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.download">Download the App</div><div class="av-footer-main__stores"><a href="https://apps.apple.com/ae/app/avare-biotech/id6744607449" target="_blank" rel="noopener" class="av-footer-main__store-btn"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/apple-white.svg" alt=""> App Store</a><a href="https://play.google.com/store/apps/details?id=com.biotech.app.android&hl=en" target="_blank" rel="noopener" class="av-footer-main__store-btn"><img src="https://www.logo.wine/a/logo/Google_Play/Google_Play-Icon-Logo.wine.svg" alt="" style="width:18px;height:18px;"> Google Play</a></div></div>
-    <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.product">Product</div><div class="av-footer-main__links"><a href="#maksa" class="av-footer-main__link">MAKSA</a><a href="https://avareit.com/learn" target="_blank" rel="noopener" class="av-footer-main__link">Blog</a><a href="#pricing" class="av-footer-main__link" data-i18n="footer.pricing">Pricing</a><a href="#" data-cases="1" class="av-footer-main__link" data-i18n="footer.cases">Case Studies</a><a href="#" id="avFooterVideoBtn" class="av-footer-main__link" data-i18n="footer.video">Video Instruction</a><a href="#" id="avFooterProtocolBtn" class="av-footer-main__link" data-i18n="footer.protocol">Protocol</a><a href="#" id="avFooterFaqBtn" class="av-footer-main__link" data-i18n="footer.faq">FAQ</a></div></div>
-    <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.legal">Legal</div><div class="av-footer-main__links"><a href="https://avareit.com/privacy-policy" target="_blank" class="av-footer-main__link" data-i18n="footer.privacy">Privacy Policy</a><a href="https://avareit.com/terms-of-use" target="_blank" class="av-footer-main__link" data-i18n="footer.terms">Terms of Use</a></div></div>
+    <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.product">Product</div><div class="av-footer-main__links"><a href="#maksa" class="av-footer-main__link">MAKSA</a><a href="learn" target="_blank" rel="noopener" class="av-footer-main__link">Blog</a><a href="#pricing" class="av-footer-main__link" data-i18n="footer.pricing">Pricing</a><a href="#" data-cases="1" class="av-footer-main__link" data-i18n="footer.cases">Case Studies</a><a href="#" id="avFooterVideoBtn" class="av-footer-main__link" data-i18n="footer.video">Video Instruction</a><a href="#" id="avFooterProtocolBtn" class="av-footer-main__link" data-i18n="footer.protocol">Protocol</a><a href="#" id="avFooterFaqBtn" class="av-footer-main__link" data-i18n="footer.faq">FAQ</a></div></div>
+    <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.legal">Legal</div><div class="av-footer-main__links"><a href="privacy-policy" target="_blank" class="av-footer-main__link" data-i18n="footer.privacy">Privacy Policy</a><a href="terms-of-use" target="_blank" class="av-footer-main__link" data-i18n="footer.terms">Terms of Use</a></div></div>
     <div class="av-footer-main__col"><div class="av-footer-main__title" data-i18n="footer.support">Support</div><div class="av-footer-main__links"><a href="https://api.whatsapp.com/send/?phone=971506412775&text&type=phone_number&app_absent=0" target="_blank" class="av-footer-main__link" data-i18n="footer.contact">Contact Support</a></div></div>
   </div>
 </div>
@@ -2201,7 +2201,7 @@ try{localStorage.setItem('av_lang',(typeof naydaLang==='function')?naydaLang():'
 })();
 </script>
 <div class="av-cookie" id="avCookieBanner">
-  <div class="av-cookie__text">We use cookies to improve your experience. By continuing to use this site, you agree to our <a href="https://avareit.com/privacy-policy" target="_blank">Privacy Policy</a>.</div>
+  <div class="av-cookie__text">We use cookies to improve your experience. By continuing to use this site, you agree to our <a href="privacy-policy" target="_blank">Privacy Policy</a>.</div>
   <button class="av-cookie__btn" id="avCookieAccept">Accept</button>
 </div>
 <script>
