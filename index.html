@@ -335,6 +335,11 @@ a { text-decoration: none; }
   .av-vtest__arrow:hover { background: rgba(255,255,255,0.15); }
   .av-vtest__arrow:disabled { opacity: 0.3; cursor: default; }
   .av-vtest__arrow svg { width: 16px; height: 16px; stroke: #F6F6F6; stroke-width: 2; fill: none; }
+/* CSS-нарисованные стрелки (Nayda не вырезает, в отличие от inline-SVG) */
+.av-test__arrow svg, .av-vtest__arrow svg { display: none !important; }
+.av-test__arrow::before, .av-vtest__arrow::before { content: ""; display: block; width: 8px; height: 8px; border-top: 2px solid #F6F6F6; border-right: 2px solid #F6F6F6; box-sizing: border-box; }
+#avTestPrev::before, #avVTestPrev::before { transform: rotate(-135deg); margin-left: 3px; }
+#avTestNext::before, #avVTestNext::before { transform: rotate(45deg); margin-right: 3px; }
   .av-vtest__viewport { overflow: hidden !important; flex: 1; }
   .av-vtest__track { display: flex; gap: 16px; transition: transform 0.4s ease; min-width: 0; }
   .av-vtest__card { flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; cursor: pointer; }
