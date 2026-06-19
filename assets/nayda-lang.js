@@ -42,14 +42,14 @@
     var st = document.createElement('style');
     st.id = 'nl-css';
     st.textContent =
-      '.nl{position:relative;display:inline-block;font-family:inherit;line-height:1;}' +
-      '.nl-btn{font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:7px 12px;border-radius:8px;background:rgba(127,127,127,.14);border:1px solid rgba(127,127,127,.30);color:inherit;}' +
-      '.nl-arr{font-size:9px;opacity:.55;}' +
-      '.nl-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;min-width:66px;max-height:62vh;overflow:auto;background:#1e1e1e;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:4px;box-shadow:0 8px 28px rgba(0,0,0,.45);z-index:2147483647;}' +
+      '.nl{position:relative;display:inline-block;flex-shrink:0;}' +
+      '.nl-btn{font-family:"Satoshi",sans-serif;font-size:clamp(14px,1.1vw,18px);font-weight:500;color:#fff;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:6px 10px;cursor:pointer;display:flex;align-items:center;gap:6px;}' +
+      '.nl-arr{font-size:13px;color:rgba(255,255,255,0.5);transition:transform .2s;line-height:1;}' +
+      '.nl.nl-open .nl-arr{transform:rotate(180deg);}' +
+      '.nl-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);border-radius:8px;overflow:hidden;overflow-y:auto;min-width:80px;max-height:62vh;z-index:10000;}' +
       '.nl.nl-open .nl-menu{display:block;}' +
-      '.nl-opt{font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;width:100%;text-align:center;padding:8px 14px;border:none;background:none;color:rgba(255,255,255,.6);border-radius:6px;display:block;white-space:nowrap;}' +
-      '.nl-opt:hover{background:rgba(255,255,255,.08);color:#fff;}' +
-      '.nl-opt.nl-active{color:#fff;font-weight:800;}';
+      '.nl-opt{font-family:"Satoshi",sans-serif;font-size:clamp(12px,0.9vw,15px);font-weight:500;color:#888;background:none;border:none;padding:8px 14px;width:100%;text-align:left;cursor:pointer;white-space:nowrap;display:block;}' +
+      '.nl-opt:hover,.nl-opt.nl-active{color:#fff;background:rgba(255,255,255,0.06);}';
     document.head.appendChild(st);
   }
 
@@ -58,7 +58,7 @@
     var cur = currentLang();
     el.classList.add('nl');
     var html = '<button type="button" class="nl-btn">' + cur.toUpperCase() +
-      ' <span class="nl-arr">&#9662;</span></button><div class="nl-menu">';
+      ' <span class="nl-arr">&#9660;</span></button><div class="nl-menu">';
     for (var i = 0; i < LANGS.length; i++) {
       html += '<button type="button" class="nl-opt' + (LANGS[i][0] === cur ? ' nl-active' : '') +
         '" data-code="' + LANGS[i][0] + '">' + LANGS[i][1] + '</button>';
