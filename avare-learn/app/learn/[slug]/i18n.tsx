@@ -14,8 +14,9 @@ export type Lang = "en" | "pt" | "es";
 const NAYDA_LANGS: [string, string][] = [
   ["en", "EN"], ["pt", "PT"], ["es", "ES"], ["ar", "AR"], ["af", "AF"],
   ["ur", "UR"], ["tr", "TR"], ["de", "DE"], ["fr", "FR"], ["it", "IT"], ["ru", "RU"],
+  ["hi", "HI"], ["ja", "JA"], ["zh", "ZH"], ["el", "EL"],
 ];
-const NAYDA_CODES = ["en", "pt", "es", "af", "ur", "tr", "de", "fr", "it", "ru"];
+const NAYDA_CODES = ["en", "pt", "es", "af", "ur", "tr", "de", "fr", "it", "ru", "hi", "ja", "zh", "el"];
 
 function naydaLangURL(code: string): string {
   if (typeof window === "undefined") return "/";
@@ -329,7 +330,7 @@ export function LangSwitcher() {
           {cur.toUpperCase()} <span className="av-lang__arrow">&#9660;</span>
         </button>
         {open && (
-          <div className="av-lang__dropdown" style={{ display: "block" }}>
+          <div className="av-lang__dropdown" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minWidth: 132 }}>
             {NAYDA_LANGS.map(([code, label]) => (
               <button
                 key={code}
