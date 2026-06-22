@@ -8,9 +8,10 @@
   var LANGS = [
     ['en', 'EN'], ['pt', 'PT'], ['es', 'ES'], ['ar', 'AR'],
     ['af', 'AF'], ['ur', 'UR'], ['tr', 'TR'], ['de', 'DE'],
-    ['fr', 'FR'], ['it', 'IT'], ['ru', 'RU']
+    ['fr', 'FR'], ['it', 'IT'], ['ru', 'RU'],
+    ['hi', 'HI'], ['ja', 'JA'], ['zh', 'ZH'], ['el', 'EL']
   ];
-  var NAYDA = ['en', 'pt', 'es', 'af', 'ur', 'tr', 'de', 'fr', 'it', 'ru']; // языки, которые даёт Nayda (без AR)
+  var NAYDA = ['en', 'pt', 'es', 'af', 'ur', 'tr', 'de', 'fr', 'it', 'ru', 'hi', 'ja', 'zh', 'el']; // языки, которые даёт Nayda (без AR)
 
   function currentLang() {
     var h = (document.documentElement.getAttribute('lang') || '').toLowerCase().slice(0, 2);
@@ -46,8 +47,8 @@
       '.nl-btn{font-family:"Satoshi",sans-serif;font-size:clamp(14px,1.1vw,18px);font-weight:500;color:#fff;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:6px 10px;cursor:pointer;display:flex;align-items:center;gap:6px;}' +
       '.nl-arr{font-size:13px;color:rgba(255,255,255,0.5);transition:transform .2s;line-height:1;}' +
       '.nl.nl-open .nl-arr{transform:rotate(180deg);}' +
-      '.nl-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);border-radius:8px;overflow:hidden;overflow-y:auto;min-width:80px;max-height:62vh;z-index:10000;}' +
-      '.nl.nl-open .nl-menu{display:block;}' +
+      '.nl-menu{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);border-radius:8px;overflow:hidden;overflow-y:auto;min-width:132px;max-height:62vh;z-index:10000;}' +
+      '.nl.nl-open .nl-menu{display:grid;grid-template-columns:1fr 1fr;}' +
       '.nl-opt{font-family:"Satoshi",sans-serif;font-size:clamp(12px,0.9vw,15px);font-weight:500;color:#888;background:none;border:none;padding:8px 14px;width:100%;text-align:left;cursor:pointer;white-space:nowrap;display:block;}' +
       '.nl-opt:hover,.nl-opt.nl-active{color:#fff;background:rgba(255,255,255,0.06);}';
     document.head.appendChild(st);
