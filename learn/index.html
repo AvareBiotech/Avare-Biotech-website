@@ -236,6 +236,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 .card-tags{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center;}
 .tag{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;padding:4px 10px;border-radius:4px;}
 .tag-guide,.tag-case,.tag-protocol{background:rgba(162,168,132,0.12);color:var(--accent);}
+.tag-articles{background:rgba(162,168,132,0.22);color:var(--accent);}
 .tag-free{background:transparent;color:var(--accent);border:1px solid var(--accent2);font-size:10px;}
 .tag-locked{background:transparent;color:var(--muted);border:1px solid var(--border);font-size:10px;}
 
@@ -598,6 +599,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 
 <div class="filters-wrap">
   <button class="filter-btn active" onclick="filterCards('all',this)" data-i18n="filter.all">All materials</button>
+  <button class="filter-btn" onclick="filterCards('articles',this)" data-i18n="filter.articles">Articles</button>
   <button class="filter-btn" onclick="filterCards('guide',this)" data-i18n="filter.guides">Guides</button>
   <button class="filter-btn" onclick="filterCards('protocol',this)" data-i18n="filter.protocols">Protocols</button>
 </div>
