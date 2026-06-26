@@ -11,8 +11,51 @@ function formatDate(iso: string): string {
   });
 }
 
-// Серверный компонент: тело статьи рендерится на сервере (в исходном HTML),
-// поэтому Nayda переводит его и клиентская гидрация не затирает перевод.
+function esc(s: string): string {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+/*
+  Тело статьи рендерится как «сырой» HTML через dangerouslySetInnerHTML.
+  React не реконсилит содержимое такого блока при гидрации, поэтому перевод,
+  который Nayda вставляет в серверный HTML, НЕ затирается английским из данных гидрации.
+  Структура DOM 1:1 с прежней вёрсткой (CSS на классах/потомках — не ломается).
+*/
+function heroCoverHtml(m: Material, published: string): string {
+  const cover = m.coverImage
+    ? `<img src="${esc(m.coverImage)}" alt="${esc(m.title)}" style="width:100%;height:100%;object-fit:cover;border-radius:12px" />`
+    : esc(m.emoji || "");
+  return (
+    `<section class="learn-hero"><div class="learn-hero-inner">` +
+    `<span class="tag">${esc(m.categoryLabel)}</span>` +
+    `<h1>${esc(m.title)}</h1>` +
+    `<div class="learn-date">${esc(formatDate(published))}</div>` +
+    `</div></section>` +
+    `<div class="learn-cover"><div class="learn-cover-img">${cover}</div></div>`
+  );
+}
+
+function sectionsHtml(m: Material): string {
+  return m.content
+    .map((section) => {
+      let inner = "";
+      if (section.heading) inner += `<h2>${esc(section.heading)}</h2>`;
+      if (section.items) {
+        inner +=
+          `<ul>` +
+          section.items.map((it) => `<li>${esc(it)}</li>`).join("") +
+          `</ul>`;
+      }
+      if (section.paragraph) inner += `<p>${esc(section.paragraph)}</p>`;
+      return `<div>${inner}</div>`;
+    })
+    .join("");
+}
+
 export function ArticleBody({
   material: m,
   published,
@@ -22,48 +65,9 @@ export function ArticleBody({
 }) {
   return (
     <>
-      <section className="learn-hero">
-        <div className="learn-hero-inner">
-          <span className="tag">{m.categoryLabel}</span>
-          <h1>{m.title}</h1>
-          <div className="learn-date">{formatDate(published)}</div>
-        </div>
-      </section>
-
-      <div className="learn-cover">
-        <div className="learn-cover-img">
-          {m.coverImage ? (
-            <img
-              src={m.coverImage}
-              alt={m.title}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                borderRadius: "12px",
-              }}
-            />
-          ) : (
-            m.emoji
-          )}
-        </div>
-      </div>
-
+      <div dangerouslySetInnerHTML={{ __html: heroCoverHtml(m, published) }} />
       <article className="learn-content">
-        {m.content.map((section, i) => (
-          <div key={i}>
-            {section.heading && <h2>{section.heading}</h2>}
-            {section.items && (
-              <ul>
-                {section.items.map((item, j) => (
-                  <li key={j}>{item}</li>
-                ))}
-              </ul>
-            )}
-            {section.paragraph && <p>{section.paragraph}</p>}
-          </div>
-        ))}
-
+        <div dangerouslySetInnerHTML={{ __html: sectionsHtml(m) }} />
         <DownloadModal
           title={m.downloadTitle}
           description={m.downloadDescription}
