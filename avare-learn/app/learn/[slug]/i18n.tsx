@@ -71,6 +71,14 @@ export function useLang() {
   return useContext(LangContext);
 }
 
+/* Текст, «непрозрачный» для React: Nayda переводит его в серверном HTML,
+   а React при гидрации не перезаписывает (innerHTML не реконсилится).
+   Так меню/футер переводятся Nayda и не откатываются в английский. */
+export function T({ k }: { k: string }) {
+  const t = useUI();
+  return <span dangerouslySetInnerHTML={{ __html: t(k) }} />;
+}
+
 /* ---------- UI strings (chrome) ---------- */
 export const UI: Record<Lang, Record<string, string>> = {
   en: {

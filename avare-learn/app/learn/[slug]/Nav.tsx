@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useUI, LangSwitcher, useNaydaPrefix } from "./i18n";
+import { LangSwitcher, useNaydaPrefix, T } from "./i18n";
 
 export function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const t = useUI();
   const pre = useNaydaPrefix();
 
   return (
@@ -35,17 +34,17 @@ export function Nav() {
           <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
             <path d="M12 2.1L1 12h3v9h7v-6h2v6h7v-9h3L12 2.1z" />
           </svg>
-          {t("navHome")}
+          <T k="navHome" />
         </a>
         <a href={pre + "/learn"} className="nav-kb">
-          {t("navKb")}
+          <T k="navKb" />
         </a>
         <a
           href={pre + "/#contacts"}
           target="_blank"
           rel="noopener noreferrer"
         >
-          {t("navContacts")}
+          <T k="navContacts" />
         </a>
         <LangSwitcher />
       </div>
