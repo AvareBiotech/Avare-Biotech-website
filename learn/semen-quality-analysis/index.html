@@ -768,6 +768,11 @@ html, body { margin: 0; padding: 0; background: #020202; }
 }
 #casesOverlay.open { display: flex !important; }
 .av-case-card:hover { background: rgba(162,168,132,0.1) !important; border-color: rgba(162,168,132,0.3) !important; }
+.learn-crumbs { display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-family:'Satoshi',sans-serif; font-size:13px; margin-bottom:18px; }
+.learn-crumbs a { color:rgba(246,246,246,0.55); text-decoration:none; transition:color .2s; }
+.learn-crumbs a:hover { color:var(--accent); }
+.learn-crumbs__sep { color:rgba(246,246,246,0.3); }
+.learn-crumbs__cur { color:rgba(246,246,246,0.75); }
 @media (max-width: 640px) { #casesOverlay [data-cases-grid] { grid-template-columns: 1fr !important; } }
 </style>
 </head>
@@ -789,6 +794,7 @@ html, body { margin: 0; padding: 0; background: #020202; }
     </div>
   </nav>
   <section class="learn-hero"><div class="learn-hero-inner">
+    <nav class="learn-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="learn-crumbs__sep">&rsaquo;</span><a href="/learn">Knowledge Base</a><span class="learn-crumbs__sep">&rsaquo;</span><span class="learn-crumbs__cur">Check Avare App for Yourself: A Field QA Protocol vs CASA and Manual Count</span></nav>
     <span class="tag tag-protocol">Protocol</span>
     <h1>Check Avare App for Yourself: A Field QA Protocol vs CASA and Manual Count</h1>
     <div class="learn-date">June 4, 2026</div>

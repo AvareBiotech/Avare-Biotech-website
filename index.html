@@ -2243,3 +2243,18 @@ try{localStorage.setItem('av_lang',(typeof naydaLang==='function')?naydaLang():'
 })();
 </script>
 <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
+
+<style>
+.av-pill a.active { background: rgba(255,255,255,0.1) !important; color: #F6F6F6 !important; font-weight: 600 !important; }
+</style>
+<script>
+(function(){
+  function init(){
+    var pill=document.querySelector('.av-pill'); if(!pill) return;
+    var map=[{id:null,link:pill.querySelector('.av-pill__home')},{id:'maksa',link:pill.querySelector('a[href="#maksa"]')},{id:'pricing',link:pill.querySelector('a[href="#pricing"]')},{id:'articles',link:pill.querySelector('a[href="#articles"]')},{id:'team',link:pill.querySelector('a[href="#team"]')},{id:'contacts',link:pill.querySelector('a[href="#contacts"]')}];
+    function spy(){var y=window.scrollY||window.pageYOffset||0;var line=y+window.innerHeight*0.3;var cur=map[0];for(var i=1;i<map.length;i++){var el=document.getElementById(map[i].id);if(el){var top=el.getBoundingClientRect().top+y;if(top<=line)cur=map[i];}}for(var j=0;j<map.length;j++){if(map[j].link)map[j].link.classList.toggle('active',map[j]===cur);}}
+    window.addEventListener('scroll',spy,{passive:true});window.addEventListener('resize',spy);spy();setTimeout(spy,1700);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
