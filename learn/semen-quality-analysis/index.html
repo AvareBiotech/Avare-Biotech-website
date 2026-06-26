@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Check Avare App for Yourself: A Field QA Protocol vs CASA and Manual Count — Avare Biotech</title>
+<meta name="description" content="This protocol confirms that Avare App reads motility and concentration as accurately as CASA and manual count — and works where no lab system is within reach."/>
+<link rel="canonical" href="https://avareit.com/learn/semen-quality-analysis"/>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/fav.png"/>
+<link rel="preconnect" href="https://api.fontshare.com"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap" rel="stylesheet"/>
+<style>:root {
+  --bg: #020202;
+  --surface: #1e1e1e;
+  --surface2: #2a2a2a;
+  --border: #3a3a3a;
+  --accent: #a2a884;
+  --accent2: #57624a;
+  --text: #f6f6f6;
+  --muted: #888;
+  --muted2: #555;
+}
+
+.learn-page {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Satoshi", sans-serif;
+}
+
+/* NAV */
+.learn-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0 48px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(2, 2, 2, 0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.learn-nav-logo img {
+  height: 56px;
+  width: auto;
+  display: block;
+}
+.learn-nav-pill {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.learn-nav-pill a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(246, 246, 246, 0.75);
+  text-decoration: none;
+  padding: 6px 11px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.learn-nav-pill a:hover {
+  color: #f6f6f6;
+  background: rgba(255, 255, 255, 0.1);
+}
+.learn-nav-pill .nav-kb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-weight: 600;
+  color: #f6f6f6;
+}
+.learn-nav-pill .sep {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+/* BURGER */
+.learn-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+}
+.learn-burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.learn-burger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.learn-burger.open span:nth-child(2) {
+  opacity: 0;
+}
+.learn-burger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* HERO */
+.learn-hero {
+  padding: 130px 24px 50px;
+  text-align: center;
+  background: radial-gradient(
+    ellipse 65% 100% at 50% 0%,
+    rgba(87, 98, 74, 0.55) 0%,
+    rgba(87, 98, 74, 0.15) 55%,
+    transparent 80%
+  );
+}
+.learn-hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.learn-hero .tag {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(162, 168, 132, 0.12);
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.learn-hero h1 {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin: 0;
+}
+
+/* COVER IMAGE */
+.learn-cover {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+  margin-top: -8px;
+}
+.learn-cover-img {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 96px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #111 0%, #1e1e1e 100%);
+  overflow: hidden;
+}
+.learn-cover-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* CONTENT */
+.learn-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 24px 0;
+}
+.learn-content h2 {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 40px 0 12px;
+}
+.learn-content h2:first-child {
+  margin-top: 0;
+}
+.learn-content p {
+  font-size: 18px;
+  color: var(--muted);
+  line-height: 1.85;
+  margin: 0 0 14px;
+}
+.learn-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.learn-content ul li {
+  font-size: 18px;
+  color: var(--muted);
+  line-height: 1.6;
+  padding-left: 20px;
+  position: relative;
+}
+.learn-content ul li::before {
+  content: "\2713";
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+  font-size: 12px;
+  top: 2px;
+  font-weight: 700;
+}
+
+/* DOWNLOAD BUTTON */
+.learn-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: "Satoshi", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 20px;
+  transition: opacity 0.2s;
+}
+.learn-download-btn:hover {
+  opacity: 0.85;
+}
+
+/* MODAL */
+.learn-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+.learn-modal-overlay.open {
+  display: flex;
+}
+.learn-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+}
+.learn-modal-header {
+  padding: 24px 28px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.learn-modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+}
+.learn-modal-close {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+.learn-modal-close:hover {
+  color: var(--text);
+  background: #333;
+}
+.learn-modal-body {
+  padding: 24px 28px 28px;
+}
+.learn-lock-form {
+  background: var(--surface2);
+  border-radius: 10px;
+  padding: 20px;
+}
+.learn-lock-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.learn-lock-form p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+.learn-lock-form input {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: "Satoshi", sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+  margin-bottom: 12px;
+}
+.learn-lock-form input:focus {
+  border-color: #555;
+}
+.learn-lock-form input::placeholder {
+  color: var(--muted2);
+}
+.learn-lock-submit {
+  width: 100%;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: "Satoshi", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  transition: opacity 0.2s;
+}
+.learn-lock-submit:hover {
+  opacity: 0.85;
+}
+.learn-success-msg {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.learn-success-detail {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* DIVIDER */
+.learn-divider {
+  max-width: 800px;
+  margin: 48px auto 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* OTHER MATERIALS */
+.learn-others {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 48px 0;
+}
+.learn-others-title {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted2);
+  margin: 0;
+}
+
+/* CAROUSEL */
+.carousel-stage {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.carousel-arrow:hover:not(:disabled) {
+  background: var(--surface2);
+  border-color: #555;
+}
+.carousel-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.carousel-viewport {
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+}
+.carousel-track {
+  display: flex;
+  gap: 16px;
+  transition: transform 0.4s ease;
+}
+.carousel-track .learn-card {
+  flex: 0 0 calc((100% - 32px) / 3);
+  min-width: 0;
+}
+
+/* CARD */
+.learn-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.25s;
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+}
+.learn-card:hover {
+  border-color: #555;
+}
+.learn-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.learn-card-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52px;
+  background: linear-gradient(135deg, #111 0%, #1e1e1e 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.learn-card-body {
+  padding: 20px 20px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.learn-card-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.learn-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  line-height: 1.3;
+  color: var(--text);
+}
+.learn-card-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+  flex: 1;
+}
+.learn-card-actions {
+  display: flex;
+  gap: 8px;
+  padding: 0 20px 20px;
+  margin-top: 20px;
+}
+.learn-card-read,
+.learn-card-dl {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-family: "Satoshi", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  min-width: 0;
+}
+.learn-card-read {
+  background: var(--text);
+  color: var(--bg);
+}
+.learn-card-read:hover {
+  opacity: 0.85;
+}
+.learn-card-dl {
+  background: var(--surface2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+.learn-card-dl:hover {
+  background: #2a2a2a;
+}
+
+/* FOOTER */
+.learn-footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 48px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--muted2);
+  margin-top: 48px;
+}
+
+/* RESPONSIVE — TABLET */
+@media (max-width: 960px) {
+  .learn-nav {
+    padding: 0 24px;
+  }
+  .learn-nav-pill {
+    position: static;
+    transform: none;
+  }
+  .learn-hero {
+    padding: 100px 32px 40px;
+  }
+  .learn-cover {
+    padding: 0 24px;
+  }
+  .learn-others {
+    padding: 48px 24px 0;
+  }
+  .carousel-stage {
+    gap: 8px;
+  }
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
+  }
+  .carousel-track .learn-card {
+    flex: 0 0 calc((100% - 16px) / 2);
+  }
+  .learn-footer {
+    padding: 24px 24px;
+  }
+}
+
+/* RESPONSIVE — MOBILE */
+@media (max-width: 640px) {
+  .learn-nav {
+    padding: 0 16px;
+    height: 60px;
+  }
+  .learn-nav-logo img {
+    height: 36px;
+  }
+  .learn-burger {
+    display: flex;
+  }
+  .learn-nav-pill {
+    display: none;
+  }
+  .learn-nav-pill.mobile-open {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: rgba(2, 2, 2, 0.98);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 20px;
+    gap: 4px;
+    z-index: 99;
+  }
+  .learn-nav-pill.mobile-open a {
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    width: 100%;
+  }
+  .learn-hero {
+    padding: 80px 16px 28px;
+  }
+  .learn-hero h1 {
+    font-size: clamp(24px, 7vw, 36px);
+    letter-spacing: -0.5px;
+  }
+  .learn-cover {
+    padding: 0 16px;
+  }
+  .learn-cover-img {
+    height: 200px;
+    font-size: 64px;
+  }
+  .learn-content {
+    padding: 32px 16px 0;
+  }
+  .learn-others {
+    padding: 32px 16px 0;
+  }
+  .carousel-arrow {
+    width: 32px;
+    height: 32px;
+  }
+  .carousel-arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+  .carousel-track .learn-card {
+    flex: 0 0 100%;
+  }
+  .learn-card-title {
+    font-size: 16px;
+  }
+  .learn-footer {
+    padding: 24px 16px;
+  }
+}
+/* Дата публикации статьи */
+.learn-date {
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* LANG SWITCHER (article) */
+.av-lang { position: relative; flex-shrink: 0; }
+.av-lang__toggle { font-family: inherit; font-size: 15px; font-weight: 500; color: #fff; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.av-lang__arrow { font-size: 11px; color: rgba(255,255,255,0.5); }
+.av-lang__dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden; min-width: 80px; z-index: 10000; }
+.av-lang__opt { font-family: inherit; font-size: 14px; font-weight: 500; color: #888; background: none; border: none; padding: 8px 14px; width: 100%; text-align: left; cursor: pointer; white-space: nowrap; }
+.av-lang__opt:hover, .av-lang__opt.active { color: #fff; background: rgba(255,255,255,0.06); }
+.nav-lang-mob { display: none; gap: 8px; width: 100%; margin-top: 4px; }
+.nav-lang-mob button { flex: 1; font-family: inherit; font-size: 15px; font-weight: 600; color: #aaa; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 10px 0; cursor: pointer; }
+.nav-lang-mob button.active { color: #020202; background: #fff; border-color: #fff; }
+@media (max-width: 640px) {
+  .learn-nav-pill.mobile-open .av-lang { display: none; }
+  .learn-nav-pill.mobile-open .nav-lang-mob { display: flex; }
+  .learn-nav-pill.mobile-open .sep { display: none; }
+}
+
+
+/* ===== FOOTER + POPUPS (FAQ / Video / Protocol) — ported from main site ===== */
+  /* ── FOOTER (перенесён с основного сайта) ── */
+  .av-footer-main { font-family: 'Satoshi', sans-serif; background:var(--bg); padding: clamp(30px, 4vw, 60px) clamp(16px, 5vw, 80px) 40px; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+  .av-footer-main__grid { display: flex; justify-content: flex-start; gap: clamp(22px, 2vw, 34px) clamp(20px, 2.4vw, 40px); max-width: 50%; align-items: flex-start; position: relative; z-index: 1; }
+  .av-footer-main__map { position: absolute; left: 50%; right: 0; top: 0; bottom: 0; pointer-events: none; display: flex; align-items: center; justify-content: center; }
+  .av-footer-main__map img { width: 100%; height: 100%; display: block; max-height: none; object-fit: contain; object-position: center center; }
+  .av-footer-main__col { display: flex; flex-direction: column; gap: 12px; }
+  .av-footer-main__stores { display: flex; flex-direction: column; gap: 8px; }
+  .av-footer-main__store-btn { display: inline-flex; align-items: center; gap: 6px; font-family: 'Satoshi', sans-serif; font-size: clamp(13px, 0.4vw + 12px, 15px); font-weight: 500; color: #F6F6F6 !important; background: rgba(246,246,246,0.08); border: 1px solid rgba(246,246,246,0.15); border-radius: 8px; padding: 10px 18px; text-decoration: none !important; transition: background .2s; white-space: nowrap; justify-content: center; }
+  .av-footer-main__store-btn:hover { background: rgba(246,246,246,0.12); }
+  .av-footer-main__store-btn img { width: 18px; height: 18px; object-fit: contain; flex-shrink: 0; }
+  .av-footer-main__title { font-size: clamp(14px, 1.2vw, 16px); font-weight: 600; color: #F6F6F6; margin-bottom: 4px; white-space: nowrap; }
+  .av-footer-main__links { display: flex; flex-direction: column; gap: 10px; }
+  .av-footer-main__link { font-size: clamp(13px, 0.4vw + 12px, 15px); color: rgba(246,246,246,0.5) !important; text-decoration: none !important; transition: color .2s; white-space: nowrap; }
+  .av-footer-main__link:hover { color: rgba(246,246,246,0.8) !important; }
+  .av-footer { font-family: 'Satoshi', sans-serif; background:var(--bg); padding: 24px clamp(16px, 5vw, 80px); border-top: 1px solid rgba(255,255,255,0.06); text-align: center; }
+  .av-footer__copy { font-size: clamp(13px, 0.4vw + 12px, 15px); color: rgba(246,246,246,0.35); }
+  @media (max-width: 1200px){ .av-footer-main__map{ display:none; } .av-footer-main__grid{ max-width:100%; flex-wrap:wrap; } }
+  @media (max-width: 600px){ .av-footer-main__grid{ flex-direction:column; gap:28px; } }
+
+  /* ── FAQ popup (перенесён с основного) ── */
+  .av-faq-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 99999; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+  .av-faq-overlay.open { display: flex; }
+  .av-faq-popup { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: clamp(16px, 2vw, 32px); position: relative; max-width: 1000px; width: 92%; max-height: 88vh; overflow-y: auto; overscroll-behavior: contain; }
+  .av-faq-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.08); border: none; color: #fff; font-size: clamp(13px, 0.4vw + 12px, 15px); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .av-faq-title { font-family: 'Satoshi', sans-serif; font-size: clamp(15px, 1.3vw, 18px); font-weight: 600; color: #F6F6F6; margin-bottom: 24px; }
+  .av-faq-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+  .av-faq-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; }
+  .av-faq-question { font-family: 'Satoshi', sans-serif; font-size: clamp(13px, 0.4vw + 12px, 15px); font-weight: 500; color: #F6F6F6; padding: 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .av-faq-question:hover { background: rgba(255,255,255,0.06); }
+  .av-faq-arrow { font-size: clamp(13px, 0.4vw + 12px, 15px); color: rgba(246,246,246,0.5); transition: transform .2s; flex-shrink: 0; }
+  .av-faq-item.open .av-faq-arrow { transform: rotate(180deg); }
+  .av-faq-answer { font-family: 'Satoshi', sans-serif; font-size: clamp(13px, 0.4vw + 12px, 15px); color: rgba(246,246,246,0.6); line-height: 1.6; padding: 0 16px 16px; display: none; }
+  .av-faq-item.open .av-faq-answer { display: block; }
+  @media (max-width: 768px){ .av-faq-list{ grid-template-columns: 1fr; } }
+
+  /* ── VIDEO / PROTOCOL popups (перенесены) ── */
+  .av-video-overlay, .av-protocol-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:99999; align-items:center; justify-content:center; backdrop-filter:blur(8px); }
+  .av-video-overlay.open, .av-protocol-overlay.open { display:flex; }
+  .av-video-popup, .av-protocol-popup { background:#1a1a1a; border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:clamp(16px,2vw,32px); position:relative; max-width:500px; width:92%; max-height:88vh; overflow-y:auto; }
+  .av-video-close, .av-protocol-close { position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:8px; background:rgba(255,255,255,0.08); border:none; color:#fff; font-size:clamp(13px, 0.4vw + 12px, 15px); cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2; }
+  .av-video-title, .av-protocol-title { font-family:'Satoshi', sans-serif; font-size:clamp(15px,1.3vw,18px); font-weight:600; color:#F6F6F6; margin-bottom:24px; }
+  .av-protocol-popup { max-width: 650px; width: 92%; }
+  .av-video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .av-video-item { display: flex; flex-direction: column; gap: 10px; }
+  .av-video-label { font-family: 'Satoshi', sans-serif; font-size: clamp(13px, 0.4vw + 12px, 15px); font-weight: 500; color: #F6F6F6; text-align: center; }
+  .av-video-thumb { position: relative; border-radius: 8px; overflow: hidden; cursor: pointer; aspect-ratio: 9/16; }
+  .av-video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .2s; }
+  .av-video-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); }
+  .av-video-play svg { width: 48px; height: 48px; color: #fff; }
+  .av-video-player-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 999999; align-items: center; justify-content: center; }
+  .av-video-player-overlay.open { display: flex; }
+  .av-video-player-wrap { position: relative; width: 340px; max-width: 90%; aspect-ratio: 9/16; }
+  .av-video-player-wrap iframe { width: 100%; height: 100%; border-radius: 12px; }
+  .av-protocol-files { display: flex; flex-direction: column; gap: 12px; }
+  .av-protocol-file { display: flex; flex-direction: column; gap: 8px; padding: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; transition: background .2s, border-color .2s; }
+  .av-protocol-file-badge { display: inline-block; font-family: 'Satoshi', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; padding: 2px 8px; border-radius: 4px; width: fit-content; background: #D32F2F; }
+  .av-protocol-file-name { font-family: 'Satoshi', sans-serif; font-size: 13px; color: rgba(246,246,246,0.7); line-height: 1.4; }
+  .av-protocol-file-actions { display: flex; gap: 8px; margin-top: 4px; }
+  .av-protocol-file-btn { display: inline-flex; align-items: center; gap: 6px; font-family: 'Satoshi', sans-serif; font-size: clamp(13px, 0.4vw + 12px, 15px); font-weight: 500; color: rgba(246,246,246,0.7) !important; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 12px; text-decoration: none !important; cursor: pointer; transition: background .2s; }
+
+
+  /* ===== PDF preview (встроенный просмотрщик протокола) ===== */
+  .av-pdf-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:1000000; align-items:center; justify-content:center; backdrop-filter:blur(6px); }
+  .av-pdf-overlay.open { display:flex; }
+  .av-pdf-wrap { position:relative; width:760px; max-width:calc(100vw - 24px); height:80vh; max-height:calc(100vh - 56px); background:#1a1a1a; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; }
+  .av-pdf-wrap iframe { width:100%; height:100%; border:0; display:block; }
+  .av-pdf-close { position:absolute; top:8px; right:8px; width:34px; height:34px; border-radius:8px; background:rgba(0,0,0,0.6); border:none; color:#fff; font-size:16px; cursor:pointer; z-index:2; display:flex; align-items:center; justify-content:center; }
+  @media (max-width:640px){ .av-pdf-wrap{ width:calc(100vw - 14px); height:calc(100vh - 64px); } }
+
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #020202; }
+.av-lang__dropdown { display: none; }
+.av-lang.open .av-lang__dropdown { display: grid; grid-template-columns: 1fr 1fr; }
+.nav-lang-mob button { flex: none; }
+@media (max-width: 640px) {
+  .learn-nav-pill.mobile-open .nav-lang-mob { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+}
+</style>
+</head>
+<body>
+<div class="learn-page">
+  <nav class="learn-nav">
+    <a href="/" class="learn-nav-logo"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/49.png" alt="Avare Biotech"/></a>
+    <button class="learn-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="learn-nav-pill" id="navPill">
+      <a href="/"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2.1L1 12h3v9h7v-6h2v6h7v-9h3L12 2.1z"></path></svg>Home</a>
+      <a href="/learn" class="nav-kb">Knowledge Base</a>
+      <a href="/#contacts">Contacts</a>
+      <span class="sep"></span>
+      <div class="av-lang" id="avLang">
+        <button class="av-lang__toggle" id="langToggle">EN <span class="av-lang__arrow">&#9660;</span></button>
+        <div class="av-lang__dropdown" id="langDropdown" style="grid-template-columns:1fr 1fr;min-width:132px"><button class="av-lang__opt" data-code="en">EN</button><button class="av-lang__opt" data-code="pt">PT</button><button class="av-lang__opt" data-code="es">ES</button><button class="av-lang__opt" data-code="ar">AR</button><button class="av-lang__opt" data-code="af">AF</button><button class="av-lang__opt" data-code="ur">UR</button><button class="av-lang__opt" data-code="tr">TR</button><button class="av-lang__opt" data-code="de">DE</button><button class="av-lang__opt" data-code="fr">FR</button><button class="av-lang__opt" data-code="it">IT</button><button class="av-lang__opt" data-code="ru">RU</button><button class="av-lang__opt" data-code="hi">HI</button><button class="av-lang__opt" data-code="ja">JA</button><button class="av-lang__opt" data-code="zh">ZH</button><button class="av-lang__opt" data-code="el">EL</button></div>
+      </div>
+      <div class="nav-lang-mob" style="flex-wrap:wrap"><button data-code="en">EN</button><button data-code="pt">PT</button><button data-code="es">ES</button><button data-code="ar">AR</button><button data-code="af">AF</button><button data-code="ur">UR</button><button data-code="tr">TR</button><button data-code="de">DE</button><button data-code="fr">FR</button><button data-code="it">IT</button><button data-code="ru">RU</button><button data-code="hi">HI</button><button data-code="ja">JA</button><button data-code="zh">ZH</button><button data-code="el">EL</button></div>
+    </div>
+  </nav>
+  <section class="learn-hero"><div class="learn-hero-inner">
+    <span class="tag tag-protocol">Protocol</span>
+    <h1>Check Avare App for Yourself: A Field QA Protocol vs CASA and Manual Count</h1>
+    <div class="learn-date">June 4, 2026</div>
+  </div></section>
+  <div class="learn-cover"><div class="learn-cover-img">
+    <img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/Article-semen-quality-analysis.png" alt="Check Avare App for Yourself: A Field QA Protocol vs CASA and Manual Count" style="width:100%;height:100%;object-fit:cover;border-radius:12px"/>
+  </div></div>
+  <article class="learn-content">
+    <div><h2>A wrong number does not look wrong</h2><p>Every insemination starts with three numbers: total motility, progressive motility, concentration. Those numbers decide whether a straw goes into a cow or into the bin. They decide whether a bull stays in the catalog. They decide how a dose is split. And here is the uncomfortable part — when one of those numbers is wrong, nothing on your screen tells you so. A motility reading that is 20% too high looks exactly like a motility reading that is correct. You do not find out at the microscope. You find out 35 days later, as an empty uterus on ultrasound, and by then it is written off as a bad cycle, stress, or the weather.</p></div><div><p>You put enormous effort into handling semen correctly — pulling three straws at a time, keeping the thaw bath in range, using the dose within minutes. Then you hand the final judgment to a measurement method and assume it is right. That assumption is worth checking. This is exactly what a QA protocol is for: to confirm that Avare App puts a number you can trust behind every insemination — especially where no lab system is within reach.</p></div><div><h2>Avare App works where CASA can&#x27;t reach</h2><p>Avare App (MAKSA technology) puts semen analysis in your smartphone: total motility, progressive motility, and concentration — next to every inseminator, in the field, with no tie to a lab bench. This is not an attempt to replace CASA. CASA is an excellent reference where it exists: precise, repeatable, a deserved gold standard. But it is expensive, fixed to the lab, and physically absent from most field stations and farms. That is exactly the gap Avare App fills — a reliable read at the point where insemination actually happens and where there is no CASA.</p></div><div><p>In studies, MAKSA correlates with CASA systems at r &gt; 0.90 — meaning results are statistically equivalent for field use. The QA protocol lets you see that on your own samples: cross-check Avare App&#x27;s readings against recognized references and confirm the numbers line up in your conditions. There are two references:</p></div><div><ul><li>CASA — a precise, repeatable reference where the system is available on site. The ideal second pair of eyes for the cross-check.</li><li>Manual counting — a reference available almost everywhere. But it is only as steady as the hand and eye behind it: an internal audit at one AI center found an 18-point conception gap between three technicians handling identical semen from the same bull on the same day. If technique varies that much on the floor, it varies at the counting chamber too.</li></ul></div><div><p>The point of the protocol is to make your semen analysis more accurate and more reliable. You compare Avare App&#x27;s readings against other systems on the same sample, on the same day, in your conditions, and confirm the numbers agree. Confirmed agreement means one thing: the app&#x27;s result can be trusted, and the quality of your analysis stays steady from straw to straw.</p></div><div><h2>How the protocol works: one sample, cross-checked</h2><p>You take 3–5 frozen–thawed straws from different animals. For each straw you take a reading in Avare App, then run the same sample through the references — CASA (if available on site) and a manual count under the microscope. You record total motility, progressive motility, and concentration for every method, side by side, and see how far the app&#x27;s readings sit from the references.</p></div><div><p>That is the entire logic. The discipline is in the execution: thaw the straw correctly (37 °C, 30–45 seconds), pre-warm the slide to 37–38 °C, and — this matters more than people expect — match the loaded volume to your cover-slip size. Too much or too little sample under the glass changes the depth of the field, and a wrong depth quietly biases concentration and motility for every method at once. The full protocol includes the cover-slip-to-volume table, the recording sheet, and the step-by-step so the comparison is fair.</p></div><div><h2>The number that tells you whether to trust the number</h2><p>This is where the validation protocol stops being a suggestion and becomes a standard. The acceptance criterion is simple:</p></div><div><ul><li>±10–15% difference between Avare App and the references = acceptable. The app agrees with CASA and the manual count. Trust the number.</li><li>More than 15% deviation = investigate. Attach photo or video evidence, and repeat with a fresh slide.</li></ul></div><div><p>A spread above 15% is not a rounding error — it is the method telling you something is off: loading volume, slide temperature, an air bubble, or a real discrepancy worth chasing before it reaches a cow. Most &quot;the app and CASA disagree&quot; complaints disappear the moment volume is matched to cover-slip size and the slide is properly warmed. The threshold turns a vague worry into a clear pass/fail you can put in a report.</p></div><div><h2>You don&#x27;t have to waste the straw</h2><p>The most common objection to validation is that it burns inventory. It doesn&#x27;t. Pulling 10 µL from a 0.25–0.5 mL straw does not prevent insemination if it is done immediately. Best practice at AI stations is to take a single drop from the straw for the Avare analysis and inseminate the remaining ~90% right away. You validate your method and breed the cow from the same straw. There is no trade-off to manage.</p></div><div><h2>Why a 15% error is not a 15% problem</h2><p>A measurement error does not stay inside the spreadsheet. It walks straight into your conception rate. Reject a good batch on a falsely low motility read and you have discarded paid-for genetics. Approve a weak batch on a falsely high read and you have inseminated cows that will come back open. The cost is the same one that runs through every article on this site: a cow that fails to conceive at first service costs roughly $622 in repeat treatment, management, and a stretched calving interval, and cows needing three or more services cost over $205 per head per year. Across a 500-cow herd, the gap between a 44% and a 56% conception rate is 60 open cows. A measurement you cannot trust is not cheaper than a good one — it is the most expensive instrument in the station, because it bills you 35 days after the mistake, with interest.</p></div><div><h2>What this means for practice</h2><p>Validating your analysis method is not a research exercise — it is a production control, the same way pre-cooling tweezers and timing the thaw are production controls. Run the QA protocol at the start of each season, after any equipment or software change, and any time a method gives you a result you would not have expected from that bull. Three to five straws and one afternoon buy you a season of numbers you can actually act on. Everything else you do — handling, storage, dose math — assumes the analysis is right. This is how you stop assuming and start knowing.</p></div><div><h2>Download the protocol</h2><p>Download the full Avare App QA Protocol PDF — the complete step-by-step, the cover-slip-to-volume table, the example recording sheet, and the ±15% validation thresholds. Run Avare App against CASA and manual count this season, confirm it for yourself, and put a trusted number behind every insemination.</p></div>
+    <button class="learn-download-btn" data-modal="dlMain"><span class="dl-lock">🔒</span> Download PDF</button>
+  </article>
+  <hr class="learn-divider"/>
+  <section class="learn-others"><div class="carousel">
+    <div class="learn-others-title">More from the Knowledge Base</div>
+    <div class="carousel-stage">
+      <button class="carousel-arrow carousel-arrow-left" disabled aria-label="Previous"></button>
+      <div class="carousel-viewport"><div class="carousel-track">
+        <div class="learn-card">
+          <a href="/learn/semen-storage-handling" class="learn-card-link">
+            <div class="learn-card-img" style="padding:0"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/semen-storage-handling.png" alt="Semen Storage &amp; Handling: 10 Critical Steps" style="width:100%;height:100%;object-fit:cover;display:block"/></div>
+            <div class="learn-card-body">
+              <div class="learn-card-tags"><span class="tag tag-guide">Guide</span></div>
+              <div class="learn-card-title">Semen Storage &amp; Handling: 10 Critical Steps</div>
+              <div class="learn-card-desc">Temperature errors during thawing cost more than any equipment failure. Here&#x27;s what actually matters.</div>
+            </div>
+          </a>
+          <div class="learn-card-actions">
+            <a href="/learn/semen-storage-handling" class="learn-card-read">Read</a>
+            <button class="learn-card-dl" data-modal="dlOther"><span class="dl-lock">🔒</span> Download</button>
+          </div>
+        </div>
+      </div></div>
+      <button class="carousel-arrow carousel-arrow-right" disabled aria-label="Next"></button>
+    </div>
+  </div></section>
+  <footer>
+    <div class="av-footer-main">
+      <div class="av-footer-main__map"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/premium_dotted_world_map_avare%203.svg" alt=""/></div>
+      <div class="av-footer-main__grid">
+        <div class="av-footer-main__col"><div class="av-footer-main__title">Download the App</div>
+          <div class="av-footer-main__stores">
+            <a href="https://apps.apple.com/ae/app/avare-biotech/id6744607449" target="_blank" rel="noopener" class="av-footer-main__store-btn"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/apple-white.svg" alt=""/> App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=com.biotech.app.android&hl=en" target="_blank" rel="noopener" class="av-footer-main__store-btn"><img src="https://www.logo.wine/a/logo/Google_Play/Google_Play-Icon-Logo.wine.svg" alt="" style="width:18px;height:18px"/> Google Play</a>
+          </div></div>
+        <div class="av-footer-main__col"><div class="av-footer-main__title">Product</div>
+          <div class="av-footer-main__links">
+            <a href="/#maksa" class="av-footer-main__link">MAKSA</a>
+            <a href="/learn" class="av-footer-main__link">Blog</a>
+            <a href="/#pricing" class="av-footer-main__link">Pricing</a>
+            <a href="/" target="_blank" rel="noopener" class="av-footer-main__link">Case Studies</a>
+            <a href="#" class="av-footer-main__link" id="openVideo">Video Instruction</a>
+            <a href="#" class="av-footer-main__link" id="openProtocol">Protocol</a>
+            <a href="#" class="av-footer-main__link" id="openFaq">FAQ</a>
+          </div></div>
+        <div class="av-footer-main__col"><div class="av-footer-main__title">Legal</div>
+          <div class="av-footer-main__links">
+            <a href="/privacy-policy" target="_blank" rel="noopener" class="av-footer-main__link">Privacy Policy</a>
+            <a href="/terms-of-use" target="_blank" rel="noopener" class="av-footer-main__link">Terms of Use</a>
+          </div></div>
+        <div class="av-footer-main__col"><div class="av-footer-main__title">Support</div>
+          <div class="av-footer-main__links">
+            <a href="https://api.whatsapp.com/send/?phone=971506412775&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="av-footer-main__link">Contact Support</a>
+          </div></div>
+      </div>
+    </div>
+    <div class="av-footer"><span class="av-footer__copy">© 2026 Avare Biotech. All rights reserved.</span></div>
+  </footer>
+
+  <div class="learn-modal-overlay" id="dlMainOverlay"><div class="learn-modal"><div class="learn-modal-header"><div class="learn-modal-title">Download: Avare App QA Protocol</div><button class="learn-modal-close" data-close="dlMainOverlay">&#10005;</button></div><div class="learn-modal-body"><div class="learn-lock-form"><div id="dlMainForm"><div class="learn-lock-label">&darr; Download — enter your email</div><p>Enter your email to download this protocol and get free access to new content with a subscription.</p><input type="email" id="dlMainEmail" placeholder="Email address"/><button class="learn-lock-submit" data-submit="dlMain">Download PDF</button></div><div id="dlMainSuccess" style="display:none"><p class="learn-success-msg">&#10003; Subscribed!</p><p class="learn-success-detail" style="margin-bottom:12px">Choose your language:</p><button class="learn-lock-submit" style="margin-bottom:8px" data-dl="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf">&darr; English</button><button class="learn-lock-submit" style="margin-bottom:8px" data-dl="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf">&darr; Português</button><button class="learn-lock-submit" style="margin-bottom:8px" data-dl="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/03_QA_Protocol_Avare_Biotech_ar.pdf">&darr; العربية</button></div></div></div></div></div>
+  <div class="learn-modal-overlay" id="dlOtherOverlay"><div class="learn-modal"><div class="learn-modal-header"><div class="learn-modal-title">Download: Semen Storage &amp; Handling Checklist</div><button class="learn-modal-close" data-close="dlOtherOverlay">&#10005;</button></div><div class="learn-modal-body"><div class="learn-lock-form"><div id="dlOtherForm"><div class="learn-lock-label">&darr; Download — enter your email</div><p>Enter your email to download this checklist and get free access to new content with a subscription.</p><input type="email" id="dlOtherEmail" placeholder="Email address"/><button class="learn-lock-submit" data-submit="dlOther">Download PDF</button></div><div id="dlOtherSuccess" data-single="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/learn-pdf/semen-storage-handling.pdf" style="display:none"><p class="learn-success-msg">&#10003; Subscribed!</p><p class="learn-success-detail" style="margin-bottom:16px">Your PDF is downloading. If it did not start, <a href="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/learn-pdf/semen-storage-handling.pdf" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline">click here</a>.</p><button class="learn-lock-submit" data-dl="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/learn-pdf/semen-storage-handling.pdf">Download PDF</button></div></div></div></div></div>
+
+  <div class="av-faq-overlay" id="faqOverlay"><div class="av-faq-popup"><button class="av-faq-close" data-close="faqOverlay">&#10005;</button>
+    <div class="av-faq-title">Frequently Asked Questions</div><div class="av-faq-list"><div class="av-faq-item"><div class="av-faq-question"><span>What is MAKSA?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">MAKSA (Mobile Assisted Key Semen Analysis) is a smartphone app that analyzes livestock semen quality using AI. It measures total motility, progressive motility, and concentration without expensive CASA equipment.</div></div><div class="av-faq-item"><div class="av-faq-question"><span>How accurate is MAKSA compared to CASA?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">MAKSA achieves a correlation of r &gt; 0.90 with traditional CASA systems, validated across 500K+ labeled cells over 3 years of R&amp;D.</div></div><div class="av-faq-item"><div class="av-faq-question"><span>What equipment do I need?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">You only need a smartphone and a basic microscope. No servers, no expensive hardware, no consumables required.</div></div><div class="av-faq-item"><div class="av-faq-question"><span>Which species are supported?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">MAKSA is validated for 5 species: cattle, horses, sheep, goats, and camels.</div></div><div class="av-faq-item"><div class="av-faq-question"><span>Is there a free trial?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">Yes, we offer 10 free tests to get started. Contact us for a demo and early adopter discounts of up to 50% off.</div></div><div class="av-faq-item"><div class="av-faq-question"><span>Which microscopes are compatible with MAKSA?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">Any standard bright-field microscope at 100-200x magnification. Phase contrast microscopes are not compatible.</div></div><div class="av-faq-item"><div class="av-faq-question"><span>What affects the accuracy of results?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">Video quality is the key factor. Unstable footage, incorrect magnification, or wrong dilution factor reduce accuracy.</div></div><div class="av-faq-item"><div class="av-faq-question"><span>Can MAKSA be used for post-thaw semen checks?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">Yes, MAKSA delivers results in 30-60 seconds right in the field.</div></div><div class="av-faq-item"><div class="av-faq-question"><span>I already evaluate semen under a microscope - why do I need MAKSA?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">Subjective evaluation is not reproducible. MAKSA generates a timestamped PDF report that protects you in any dispute.</div></div><div class="av-faq-item"><div class="av-faq-question"><span>How accurate is concentration measurement?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">Motility is the primary indicator - MAKSA measures it with r &gt; 0.90 correlation vs CASA.</div></div><div class="av-faq-item"><div class="av-faq-question"><span>We already have CASA - why would we need this?</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">MAKSA goes where CASA can&#x27;t - into the field, onto the farm, to technicians without lab infrastructure.</div></div></div></div></div>
+
+  <div class="av-video-overlay" id="videoOverlay"><div class="av-video-popup"><button class="av-video-close" data-close="videoOverlay">&#10005;</button>
+    <div class="av-video-title">Video Instruction</div>
+    <div class="av-video-grid">
+      <div class="av-video-item"><div class="av-video-thumb" data-yt="CdFFHB0CZUg"><img src="https://img.youtube.com/vi/CdFFHB0CZUg/hqdefault.jpg" alt="English"/><div class="av-video-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></div></div><span class="av-video-label">English</span></div>
+      <div class="av-video-item"><div class="av-video-thumb" data-yt="B8y8rR0Y4Xw"><img src="https://img.youtube.com/vi/B8y8rR0Y4Xw/hqdefault.jpg" alt="Portugu&ecirc;s"/><div class="av-video-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></div></div><span class="av-video-label">Portugu&ecirc;s</span></div>
+    </div></div></div>
+  <div class="av-video-player-overlay" id="playerOverlay"><div class="av-video-player-wrap"><button class="av-video-close" data-close="playerOverlay" data-clear="ytFrame">&#10005;</button><iframe id="ytFrame" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div></div>
+
+  <div class="av-protocol-overlay" id="protoOverlay"><div class="av-protocol-popup"><button class="av-protocol-close" data-close="protoOverlay">&#10005;</button>
+    <div class="av-protocol-title">Semen QA Protocol</div>
+    <div class="av-protocol-files">
+      <div class="av-protocol-file"><span class="av-protocol-file-badge">PDF</span><span class="av-protocol-file-name">Semen QA Protocol (English)</span><div class="av-protocol-file-actions"><button class="av-protocol-file-btn av-protocol-view-btn" data-view="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf">View</button><a href="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf" download class="av-protocol-file-btn av-protocol-download-btn">Download</a></div></div>
+      <div class="av-protocol-file"><span class="av-protocol-file-badge">PDF</span><span class="av-protocol-file-name">Protocolo QA Semen (Portugu&ecirc;s)</span><div class="av-protocol-file-actions"><button class="av-protocol-file-btn av-protocol-view-btn" data-view="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf">View</button><a href="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf" download class="av-protocol-file-btn av-protocol-download-btn">Download</a></div></div>
+    </div></div></div>
+  <div class="av-pdf-overlay" id="pdfOverlay"><div class="av-pdf-wrap"><button class="av-pdf-close" data-close="pdfOverlay" data-clear="pdfFrame">&#10005;</button><iframe id="pdfFrame" frameborder="0"></iframe></div></div>
+</div>
+<script>window.SCRIPT='https://script.google.com/macros/s/AKfycbwuKsYVg_3x3RbBnxY0RUlFjE4tldmErUWRddqPDXg4xQxsOqqT19wTeGsxRqcW5jyK/exec';window.SLUG='semen-quality-analysis';</script>
+<script>(function(){
+  var SCRIPT=window.SCRIPT, PDF_FALLBACK="";
+  function $(s){return document.querySelector(s);}
+  function $all(s){return Array.prototype.slice.call(document.querySelectorAll(s));}
+
+  /* burger */
+  var burger=$("#burger"), pill=$("#navPill");
+  if(burger) burger.addEventListener("click",function(){burger.classList.toggle("open");pill.classList.toggle("mobile-open");});
+
+  /* lang switcher */
+  var seg=(location.pathname.split("/").filter(Boolean)[0]||"").toLowerCase();
+  var codes=["en","pt","es","ar","af","ur","tr","de","fr","it","ru","hi","ja","zh","el"];
+  var cur=codes.indexOf(seg)>=0?seg:"en";
+  var tgl=$("#langToggle");
+  if(tgl) tgl.firstChild.nodeValue=cur.toUpperCase()+" ";
+  function langURL(c){ if(c==="ar")return "/ar"; if(c==="en")return "/learn/"+window.SLUG; return "/"+c+"/learn/"+window.SLUG; }
+  $all(".av-lang__opt,.nav-lang-mob button").forEach(function(b){
+    if(b.getAttribute("data-code")===cur)b.classList.add("active");
+    b.addEventListener("click",function(e){e.stopPropagation();var c=b.getAttribute("data-code");if(c==="ar"){window.open("/ar","_blank");}else{window.location.href=langURL(c);}});
+  });
+  if(tgl){
+    tgl.addEventListener("click",function(e){e.stopPropagation();$("#avLang").classList.toggle("open");});
+    document.addEventListener("click",function(){$("#avLang").classList.remove("open");});
+  }
+
+  /* modals generic open/close */
+  function open(id){var o=$("#"+id);if(o){o.classList.add("open");document.body.style.overflow="hidden";}}
+  function close(o){o.classList.remove("open");document.body.style.overflow="";}
+  $all("[data-close]").forEach(function(b){b.addEventListener("click",function(){close($("#"+b.getAttribute("data-close")));var clr=b.getAttribute("data-clear");if(clr&&$("#"+clr))$("#"+clr).src="";});});
+  $all(".learn-modal-overlay,.av-faq-overlay,.av-video-overlay,.av-video-player-overlay,.av-protocol-overlay,.av-pdf-overlay").forEach(function(o){
+    o.addEventListener("click",function(e){if(e.target===o){close(o);var fr=o.querySelector("iframe");if(fr)fr.src="";}});
+  });
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"){$all(".open").forEach(function(o){close(o);var fr=o.querySelector("iframe");if(fr)fr.src="";});}});
+
+  /* download flow (multiple modals via data-modal / data-submit / data-dl) */
+  var subscribed=localStorage.getItem("learn_subscribed")==="1";
+  function setLock(){$all(".dl-lock").forEach(function(s){s.textContent=subscribed?"↓":"🔒";});}
+  setLock();
+  function dl(url){if(!url)return;var a=document.createElement("a");a.href=url;a.download=url.split("/").pop()||"download.pdf";a.target="_blank";document.body.appendChild(a);a.click();document.body.removeChild(a);}
+  function showState(prefix){var f=$("#"+prefix+"Form"),s=$("#"+prefix+"Success");if(f)f.style.display=subscribed?"none":"";if(s)s.style.display=subscribed?"":"none";}
+  $all("[data-modal]").forEach(function(b){b.addEventListener("click",function(){var p=b.getAttribute("data-modal");showState(p);open(p+"Overlay");});});
+  $all("[data-dl]").forEach(function(b){b.addEventListener("click",function(){dl(b.getAttribute("data-dl"));});});
+  $all("[data-submit]").forEach(function(b){b.addEventListener("click",function(){submitEmail(b.getAttribute("data-submit"));});});
+  $all('input[type="email"]').forEach(function(inp){inp.addEventListener("keydown",function(e){if(e.key==="Enter")submitEmail(inp.id.replace("Email",""));});});
+  function submitEmail(prefix){
+    var inp=$("#"+prefix+"Email");var email=(inp.value||"").trim();
+    if(!email||email.indexOf("@")<0){alert("Please enter a valid email.");return;}
+    var btn=document.querySelector('[data-submit="'+prefix+'"]');if(btn)btn.disabled=true;
+    try{fetch(SCRIPT+"?"+new URLSearchParams({type:"learn_subscribe",email:email}).toString(),{method:"GET",mode:"no-cors"});}catch(e){}
+    setTimeout(function(){
+      localStorage.setItem("learn_subscribed","1");subscribed=true;setLock();showState(prefix);
+      var s=$("#"+prefix+"Success");var single=s?s.getAttribute("data-single"):"";
+      if(single)dl(single);
+    },700);
+  }
+
+  /* FAQ accordion + footer popups */
+  $all(".av-faq-question").forEach(function(q){q.addEventListener("click",function(){q.parentElement.classList.toggle("open");});});
+  if($("#openFaq"))$("#openFaq").addEventListener("click",function(e){e.preventDefault();open("faqOverlay");});
+  if($("#openVideo"))$("#openVideo").addEventListener("click",function(e){e.preventDefault();open("videoOverlay");});
+  if($("#openProtocol"))$("#openProtocol").addEventListener("click",function(e){e.preventDefault();open("protoOverlay");});
+  $all(".av-video-thumb").forEach(function(t){t.addEventListener("click",function(){$("#ytFrame").src="https://www.youtube.com/embed/"+t.getAttribute("data-yt")+"?autoplay=1";open("playerOverlay");});});
+  $all(".av-protocol-view-btn").forEach(function(b){b.addEventListener("click",function(){$("#pdfFrame").src="https://docs.google.com/gview?url="+b.getAttribute("data-view")+"&embedded=true";open("pdfOverlay");});});
+})();
+</script>
+</body>
+</html>

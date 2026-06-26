@@ -5,8 +5,8 @@
       "destination": "https://avare-biotech-website-6e3d.vercel.app/_next/:path*"
     },
     {
-      "source": "/learn/:slug*",
-      "destination": "https://avare-biotech-website-6e3d.vercel.app/learn/:slug*"
+      "source": "/learn/:slug",
+      "destination": "/learn/:slug/index.html"
     },
     {
       "source": "/partner",
