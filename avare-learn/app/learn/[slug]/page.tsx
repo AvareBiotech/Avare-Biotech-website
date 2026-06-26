@@ -8,7 +8,8 @@ import {
 import { Carousel } from "./Carousel";
 import { Nav } from "./Nav";
 import { LangProvider } from "./i18n";
-import { ArticleBody, LearnFooter } from "./ArticleClient";
+import { ArticleBody } from "./ArticleBody";
+import { LearnFooter } from "./ArticleClient";
 import "./learn.css";
 
 // Дата сборки (= день деплоя) как дефолт для статей без явной даты
