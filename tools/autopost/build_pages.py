@@ -18,6 +18,11 @@ html, body { margin: 0; padding: 0; background: #020202; }
 .learn-crumbs__sep { color:rgba(246,246,246,0.3); }
 .learn-crumbs__cur { color:rgba(246,246,246,0.75); }
 @media (max-width: 640px) { #casesOverlay [data-cases-grid] { grid-template-columns: 1fr !important; } }
+.carousel-arrow { border-radius: 50% !important; }
+.carousel-arrow svg { width: 18px; height: 18px; display: block; }
+.learn-card-tags .tag { margin-bottom: 0; }
+.tag-guide, .tag-case, .tag-protocol { background: rgba(162,168,132,0.12); color: var(--accent); }
+.tag-articles { background: rgba(162,168,132,0.22); color: var(--accent); }
 """
 CSS_ALL = CSS + "\n" + OVERRIDES
 
@@ -235,11 +240,11 @@ def build_page(a, others):
   <section class="learn-others"><div class="carousel">
     <div class="learn-others-title">More from the Knowledge Base</div>
     <div class="carousel-stage">
-      <button class="carousel-arrow carousel-arrow-left" disabled aria-label="Previous"></button>
+      <button class="carousel-arrow carousel-arrow-left" disabled aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
       <div class="carousel-viewport"><div class="carousel-track">
         {others_cards}
       </div></div>
-      <button class="carousel-arrow carousel-arrow-right" disabled aria-label="Next"></button>
+      <button class="carousel-arrow carousel-arrow-right" disabled aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
     </div>
   </div></section>
   <footer>
