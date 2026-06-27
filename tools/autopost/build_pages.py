@@ -1,0 +1,288 @@
+import html, json, datetime
+
+CSS = open('css_learn', encoding='utf-8').read()
+OVERRIDES = """
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #020202; }
+.av-lang__dropdown { display: none; }
+.av-lang.open .av-lang__dropdown { display: grid; grid-template-columns: 1fr 1fr; }
+.nav-lang-mob button { flex: none; }
+@media (max-width: 640px) {
+  .learn-nav-pill.mobile-open .nav-lang-mob { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+}
+#casesOverlay.open { display: flex !important; }
+.av-case-card:hover { background: rgba(162,168,132,0.1) !important; border-color: rgba(162,168,132,0.3) !important; }
+.learn-crumbs { display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-family:'Satoshi',sans-serif; font-size:13px; margin-bottom:18px; }
+.learn-crumbs a { color:rgba(246,246,246,0.55); text-decoration:none; transition:color .2s; }
+.learn-crumbs a:hover { color:var(--accent); }
+.learn-crumbs__sep { color:rgba(246,246,246,0.3); }
+.learn-crumbs__cur { color:rgba(246,246,246,0.75); }
+@media (max-width: 640px) { #casesOverlay [data-cases-grid] { grid-template-columns: 1fr !important; } }
+"""
+CSS_ALL = CSS + "\n" + OVERRIDES
+
+LEARN_SCRIPT = "https://script.google.com/macros/s/AKfycbwuKsYVg_3x3RbBnxY0RUlFjE4tldmErUWRddqPDXg4xQxsOqqT19wTeGsxRqcW5jyK/exec"
+RAW = "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media"
+LANGS = [("en","EN"),("pt","PT"),("es","ES"),("ar","AR"),("af","AF"),("ur","UR"),("tr","TR"),("de","DE"),("fr","FR"),("it","IT"),("ru","RU"),("hi","HI"),("ja","JA"),("zh","ZH"),("el","EL")]
+PROTO_EN = RAW+"/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf"
+PROTO_PT = RAW+"/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf"
+FAQ = [
+ ("What is MAKSA?","MAKSA (Mobile Assisted Key Semen Analysis) is a smartphone app that analyzes livestock semen quality using AI. It measures total motility, progressive motility, and concentration without expensive CASA equipment."),
+ ("How accurate is MAKSA compared to CASA?","MAKSA achieves a correlation of r > 0.90 with traditional CASA systems, validated across 500K+ labeled cells over 3 years of R&D."),
+ ("What equipment do I need?","You only need a smartphone and a basic microscope. No servers, no expensive hardware, no consumables required."),
+ ("Which species are supported?","MAKSA is validated for 5 species: cattle, horses, sheep, goats, and camels."),
+ ("Is there a free trial?","Yes, we offer 10 free tests to get started. Contact us for a demo and early adopter discounts of up to 50% off."),
+ ("Which microscopes are compatible with MAKSA?","Any standard bright-field microscope at 100-200x magnification. Phase contrast microscopes are not compatible."),
+ ("What affects the accuracy of results?","Video quality is the key factor. Unstable footage, incorrect magnification, or wrong dilution factor reduce accuracy."),
+ ("Can MAKSA be used for post-thaw semen checks?","Yes, MAKSA delivers results in 30-60 seconds right in the field."),
+ ("I already evaluate semen under a microscope - why do I need MAKSA?","Subjective evaluation is not reproducible. MAKSA generates a timestamped PDF report that protects you in any dispute."),
+ ("How accurate is concentration measurement?","Motility is the primary indicator - MAKSA measures it with r > 0.90 correlation vs CASA."),
+ ("We already have CASA - why would we need this?","MAKSA goes where CASA can't - into the field, onto the farm, to technicians without lab infrastructure."),
+]
+
+E = html.escape
+def fmt_date(iso):
+    try: d=datetime.date.fromisoformat(iso); return d.strftime("%B %-d, %Y")
+    except: return iso
+
+def lang_href(code, slug):
+    if code=="ar": return "/ar"
+    if code=="en": return "/learn/"+slug
+    return "/"+code+"/learn/"+slug
+
+def sec_html(s):
+    out="<div>"
+    if s.get("heading"): out+="<h2>"+E(s["heading"])+"</h2>"
+    if s.get("items"): out+="<ul>"+"".join("<li>"+E(i)+"</li>" for i in s["items"])+"</ul>"
+    if s.get("paragraph"): out+="<p>"+E(s["paragraph"])+"</p>"
+    return out+"</div>"
+
+def single_pdf(a):
+    return a.get("pdfUrl") or (RAW+"/learn-pdf/"+a["slug"]+".pdf")
+
+def modal_html(prefix, a):
+    pdfs=a.get("pdfs") or []
+    if pdfs:
+        succ='<p class="learn-success-detail" style="margin-bottom:12px">Choose your language:</p>'
+        for p in pdfs:
+            succ+='<button class="learn-lock-submit" style="margin-bottom:8px" data-dl="'+p["url"]+'">&darr; '+E(p["label"])+'</button>'
+        single_attr=""
+    else:
+        sp=single_pdf(a)
+        succ='<p class="learn-success-detail" style="margin-bottom:16px">Your PDF is downloading. If it did not start, <a href="'+sp+'" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline">click here</a>.</p><button class="learn-lock-submit" data-dl="'+sp+'">Download PDF</button>'
+        single_attr=' data-single="'+sp+'"'
+    return ('<div class="learn-modal-overlay" id="'+prefix+'Overlay"><div class="learn-modal">'
+      '<div class="learn-modal-header"><div class="learn-modal-title">'+E(a["downloadTitle"])+'</div>'
+      '<button class="learn-modal-close" data-close="'+prefix+'Overlay">&#10005;</button></div>'
+      '<div class="learn-modal-body"><div class="learn-lock-form">'
+      '<div id="'+prefix+'Form">'
+      '<div class="learn-lock-label">&darr; Download — enter your email</div>'
+      '<p>'+E(a["downloadDescription"])+'</p>'
+      '<input type="email" id="'+prefix+'Email" placeholder="Email address"/>'
+      '<button class="learn-lock-submit" data-submit="'+prefix+'">Download PDF</button>'
+      '</div>'
+      '<div id="'+prefix+'Success"'+single_attr+' style="display:none">'
+      '<p class="learn-success-msg">&#10003; Subscribed!</p>'+succ+'</div>'
+      '</div></div></div></div>')
+
+JS = open('page_js.js', encoding='utf-8').read()
+import json as _json
+CASES = _json.load(open('cases.json', encoding='utf-8'))
+def cases_popup_html():
+    OV='display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:99999;align-items:center;justify-content:center;backdrop-filter:blur(4px);'
+    BOX='background:linear-gradient(135deg,#1e1e1e,#2a2a2a);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:32px;width:1100px;max-width:calc(100vw - 80px);position:relative;font-family:Satoshi,sans-serif;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;'
+    CLOSE='position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.08);border:none;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;'
+    TTL='font-size:20px;font-weight:700;color:#F6F6F6;margin-bottom:24px;'
+    SCROLL='overflow-y:auto;overflow-x:hidden;flex:1;display:flex;flex-direction:column;gap:24px;'
+    LBL='font-size:15px;font-weight:600;color:#A2A884;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;'
+    GRID='display:grid;grid-template-columns:repeat(2,1fr);gap:8px;'
+    CARD='background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:8px 10px;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-width:0;overflow:hidden;'
+    BADGE='display:inline-block;font-size:13px;font-weight:700;color:#FFFFFF;padding:1px 6px;border-radius:3px;width:fit-content;background:#D32F2F;flex-shrink:0;'
+    NAME='font-size:13px;color:rgba(246,246,246,0.7);line-height:1.3;overflow:hidden;text-overflow:ellipsis;'
+    cards=""
+    for name, raw in CASES:
+        cards+=('<div class="av-case-card" data-view="'+raw+'" style="'+CARD+'">'
+                '<span style="'+BADGE+'">PDF</span>'
+                '<span style="'+NAME+'">'+E(name)+'</span></div>')
+    return ('<div id="casesOverlay" style="'+OV+'"><div style="'+BOX+'">'
+            '<button data-close="casesOverlay" style="'+CLOSE+'">&#10005;</button>'
+            '<div style="'+TTL+'">Case Studies</div>'
+            '<div style="'+SCROLL+'"><div>'
+            '<div style="'+LBL+'">Reports</div>'
+            '<div data-cases-grid style="'+GRID+'">'+cards+'</div>'
+            '</div></div></div></div>')
+
+def build_page(a, other):
+    slug=a["slug"]
+    _url="https://avareit.com/learn/"+slug
+    _logo={"@type":"ImageObject","url":RAW+"/images/fav.png"}
+    _org={"@type":"Organization","name":"Avare Biotech Inc.","url":"https://avareit.com","logo":_logo}
+    _schema=[
+      {"@context":"https://schema.org","@type":"TechArticle","headline":a["title"],
+       "description":a.get("description",""),"image":[a["coverImage"]],"inLanguage":"en",
+       "datePublished":a["datePublished"],"dateModified":a["datePublished"],
+       "author":_org,"publisher":_org,
+       "mainEntityOfPage":{"@type":"WebPage","@id":_url}},
+      {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+       {"@type":"ListItem","position":1,"name":"Home","item":"https://avareit.com"},
+       {"@type":"ListItem","position":2,"name":"Knowledge Base","item":"https://avareit.com/learn"},
+       {"@type":"ListItem","position":3,"name":a["title"],"item":_url}]}
+    ]
+    _ld=json.dumps(_schema, ensure_ascii=False).replace("<","\\u003c")
+    seo=(
+      '<meta property="og:title" content="'+E(a["title"])+'"/>'
+      '<meta property="og:description" content="'+E(a.get("description",""))+'"/>'
+      '<meta property="og:url" content="'+_url+'"/>'
+      '<meta property="og:image" content="'+a["coverImage"]+'"/>'
+      '<meta property="og:type" content="article"/>'
+      '<meta property="og:site_name" content="Avare Biotech"/>'
+      '<meta property="article:published_time" content="'+a["datePublished"]+'"/>'
+      '<meta name="twitter:card" content="summary_large_image"/>'
+      '<meta name="twitter:title" content="'+E(a["title"])+'"/>'
+      '<meta name="twitter:description" content="'+E(a.get("description",""))+'"/>'
+      '<meta name="twitter:image" content="'+a["coverImage"]+'"/>'
+      '<script type="application/ld+json">'+_ld+'</script>'
+    )
+    lang_opts="".join('<button class="av-lang__opt" data-code="'+c+'">'+l+'</button>' for c,l in LANGS)
+    lang_mob="".join('<button data-code="'+c+'">'+l+'</button>' for c,l in LANGS)
+    sections="".join(sec_html(s) for s in a["content"])
+    has_pdf=a.get("hasPdf", True)
+    other_has_pdf=other.get("hasPdf", True) if other else False
+    dl_button_main=('<button class="learn-download-btn" data-modal="dlMain"><span class="dl-lock">🔒</span> Download PDF</button>' if has_pdf else '')
+    dl_button_other=('<button class="learn-card-dl" data-modal="dlOther"><span class="dl-lock">🔒</span> Download</button>' if other_has_pdf else '')
+    modal_main=(modal_html("dlMain", a) if has_pdf else '')
+    modal_other=(modal_html("dlOther", other) if other_has_pdf else '')
+    faq="".join('<div class="av-faq-item"><div class="av-faq-question"><span>'+E(q)+'</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">'+E(ans)+'</div></div>' for q,ans in FAQ)
+    desc=a.get("description","")
+    page=f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>{E(a["title"])} — Avare Biotech</title>
+<meta name="description" content="{E(desc)}"/>
+<link rel="canonical" href="https://avareit.com/learn/{slug}"/>
+{seo}
+<link rel="icon" type="image/png" href="{RAW}/images/fav.png"/>
+<link rel="preconnect" href="https://api.fontshare.com"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap" rel="stylesheet"/>
+<style>{CSS_ALL}</style>
+</head>
+<body>
+<div class="learn-page">
+  <nav class="learn-nav">
+    <a href="/" class="learn-nav-logo"><img src="{RAW}/images/49.png" alt="Avare Biotech"/></a>
+    <button class="learn-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="learn-nav-pill" id="navPill">
+      <a href="/"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2.1L1 12h3v9h7v-6h2v6h7v-9h3L12 2.1z"></path></svg>Home</a>
+      <a href="/learn" class="nav-kb">Knowledge Base</a>
+      <a href="/#contacts">Contacts</a>
+      <span class="sep"></span>
+      <div class="av-lang" id="avLang">
+        <button class="av-lang__toggle" id="langToggle">EN <span class="av-lang__arrow">&#9660;</span></button>
+        <div class="av-lang__dropdown" id="langDropdown" style="grid-template-columns:1fr 1fr;min-width:132px">{lang_opts}</div>
+      </div>
+      <div class="nav-lang-mob" style="flex-wrap:wrap">{lang_mob}</div>
+    </div>
+  </nav>
+  <section class="learn-hero"><div class="learn-hero-inner">
+    <nav class="learn-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="learn-crumbs__sep">&rsaquo;</span><a href="/learn">Knowledge Base</a><span class="learn-crumbs__sep">&rsaquo;</span><span class="learn-crumbs__cur">{E(a["title"])}</span></nav>
+    <span class="tag {a["tagClass"]}">{E(a["categoryLabel"])}</span>
+    <h1>{E(a["title"])}</h1>
+    <div class="learn-date">{E(fmt_date(a["datePublished"]))}</div>
+  </div></section>
+  <div class="learn-cover"><div class="learn-cover-img">
+    <img src="{a["coverImage"]}" alt="{E(a["title"])}" style="width:100%;height:100%;object-fit:cover;border-radius:12px"/>
+  </div></div>
+  <article class="learn-content">
+    {sections}
+    {dl_button_main}
+  </article>
+  <hr class="learn-divider"/>
+  <section class="learn-others"><div class="carousel">
+    <div class="learn-others-title">More from the Knowledge Base</div>
+    <div class="carousel-stage">
+      <button class="carousel-arrow carousel-arrow-left" disabled aria-label="Previous"></button>
+      <div class="carousel-viewport"><div class="carousel-track">
+        <div class="learn-card">
+          <a href="/learn/{other["slug"]}" class="learn-card-link">
+            <div class="learn-card-img" style="padding:0"><img src="{other["coverImage"]}" alt="{E(other["title"])}" style="width:100%;height:100%;object-fit:cover;display:block"/></div>
+            <div class="learn-card-body">
+              <div class="learn-card-tags"><span class="tag {other["tagClass"]}">{E(other["categoryLabel"])}</span></div>
+              <div class="learn-card-title">{E(other["title"])}</div>
+              <div class="learn-card-desc">{E(other.get("description",""))}</div>
+            </div>
+          </a>
+          <div class="learn-card-actions">
+            <a href="/learn/{other["slug"]}" class="learn-card-read">Read</a>
+            {dl_button_other}
+          </div>
+        </div>
+      </div></div>
+      <button class="carousel-arrow carousel-arrow-right" disabled aria-label="Next"></button>
+    </div>
+  </div></section>
+  <footer>
+    <div class="av-footer-main">
+      <div class="av-footer-main__map"><img src="{RAW}/images/premium_dotted_world_map_avare%203.svg" alt=""/></div>
+      <div class="av-footer-main__grid">
+        <div class="av-footer-main__col"><div class="av-footer-main__title">Download the App</div>
+          <div class="av-footer-main__stores">
+            <a href="https://apps.apple.com/ae/app/avare-biotech/id6744607449" target="_blank" rel="noopener" class="av-footer-main__store-btn"><img src="{RAW}/images/apple-white.svg" alt=""/> App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=com.biotech.app.android&hl=en" target="_blank" rel="noopener" class="av-footer-main__store-btn"><img src="https://www.logo.wine/a/logo/Google_Play/Google_Play-Icon-Logo.wine.svg" alt="" style="width:18px;height:18px"/> Google Play</a>
+          </div></div>
+        <div class="av-footer-main__col"><div class="av-footer-main__title">Product</div>
+          <div class="av-footer-main__links">
+            <a href="/#maksa" target="_blank" rel="noopener" class="av-footer-main__link">MAKSA</a>
+            <a href="/learn" class="av-footer-main__link">Blog</a>
+            <a href="/#pricing" target="_blank" rel="noopener" class="av-footer-main__link">Pricing</a>
+            <a href="#" class="av-footer-main__link" id="openCases">Case Studies</a>
+            <a href="#" class="av-footer-main__link" id="openVideo">Video Instruction</a>
+            <a href="#" class="av-footer-main__link" id="openProtocol">Protocol</a>
+            <a href="#" class="av-footer-main__link" id="openFaq">FAQ</a>
+          </div></div>
+        <div class="av-footer-main__col"><div class="av-footer-main__title">Legal</div>
+          <div class="av-footer-main__links">
+            <a href="/privacy-policy" target="_blank" rel="noopener" class="av-footer-main__link">Privacy Policy</a>
+            <a href="/terms-of-use" target="_blank" rel="noopener" class="av-footer-main__link">Terms of Use</a>
+          </div></div>
+        <div class="av-footer-main__col"><div class="av-footer-main__title">Support</div>
+          <div class="av-footer-main__links">
+            <a href="https://api.whatsapp.com/send/?phone=971506412775&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="av-footer-main__link">Contact Support</a>
+          </div></div>
+      </div>
+    </div>
+    <div class="av-footer"><span class="av-footer__copy">© 2026 Avare Biotech. All rights reserved.</span></div>
+  </footer>
+
+  {modal_main}
+  {modal_other}
+  {cases_popup_html()}
+
+  <div class="av-faq-overlay" id="faqOverlay"><div class="av-faq-popup"><button class="av-faq-close" data-close="faqOverlay">&#10005;</button>
+    <div class="av-faq-title">Frequently Asked Questions</div><div class="av-faq-list">{faq}</div></div></div>
+
+  <div class="av-video-overlay" id="videoOverlay"><div class="av-video-popup"><button class="av-video-close" data-close="videoOverlay">&#10005;</button>
+    <div class="av-video-title">Video Instruction</div>
+    <div class="av-video-grid">
+      <div class="av-video-item"><div class="av-video-thumb" data-yt="CdFFHB0CZUg"><img src="https://img.youtube.com/vi/CdFFHB0CZUg/hqdefault.jpg" alt="English"/><div class="av-video-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></div></div><span class="av-video-label">English</span></div>
+      <div class="av-video-item"><div class="av-video-thumb" data-yt="B8y8rR0Y4Xw"><img src="https://img.youtube.com/vi/B8y8rR0Y4Xw/hqdefault.jpg" alt="Portugu&ecirc;s"/><div class="av-video-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg></div></div><span class="av-video-label">Portugu&ecirc;s</span></div>
+    </div></div></div>
+  <div class="av-video-player-overlay" id="playerOverlay"><div class="av-video-player-wrap"><button class="av-video-close" data-close="playerOverlay" data-clear="ytFrame">&#10005;</button><iframe id="ytFrame" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div></div>
+
+  <div class="av-protocol-overlay" id="protoOverlay"><div class="av-protocol-popup"><button class="av-protocol-close" data-close="protoOverlay">&#10005;</button>
+    <div class="av-protocol-title">Semen QA Protocol</div>
+    <div class="av-protocol-files">
+      <div class="av-protocol-file"><span class="av-protocol-file-badge">PDF</span><span class="av-protocol-file-name">Semen QA Protocol (English)</span><div class="av-protocol-file-actions"><button class="av-protocol-file-btn av-protocol-view-btn" data-view="{PROTO_EN}">View</button><a href="{PROTO_EN}" download class="av-protocol-file-btn av-protocol-download-btn">Download</a></div></div>
+      <div class="av-protocol-file"><span class="av-protocol-file-badge">PDF</span><span class="av-protocol-file-name">Protocolo QA Semen (Portugu&ecirc;s)</span><div class="av-protocol-file-actions"><button class="av-protocol-file-btn av-protocol-view-btn" data-view="{PROTO_PT}">View</button><a href="{PROTO_PT}" download class="av-protocol-file-btn av-protocol-download-btn">Download</a></div></div>
+    </div></div></div>
+  <div class="av-pdf-overlay" id="pdfOverlay"><div class="av-pdf-wrap"><button class="av-pdf-close" data-close="pdfOverlay" data-clear="pdfFrame">&#10005;</button><iframe id="pdfFrame" frameborder="0"></iframe></div></div>
+</div>
+<script>window.SCRIPT={LEARN_SCRIPT!r};window.SLUG={slug!r};</script>
+<script>{JS}</script>
+</body>
+</html>
+'''
+    return page
+
+print("генератор готов (build_page определён)")
