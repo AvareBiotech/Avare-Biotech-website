@@ -168,6 +168,29 @@ if __name__=='__main__':
     }
     for k,v in checks.items(): print(f"  {k}: {v}")
 
+
+import html as _htmlmod
+def parse_landing_cards(landing_html, exclude_slug):
+    cards=[]
+    blocks=re.split(r'(?=<div class="card" data-type=)', landing_html)
+    for b in blocks:
+        if not b.startswith('<div class="card" data-type='): continue
+        mslug=re.search(r'href="/learn/([^"#]+)"', b)
+        if not mslug: continue
+        slug=mslug.group(1)
+        if slug==exclude_slug: continue
+        mcov=re.search(r'card-img[^>]*>\s*<img src="([^"]+)"', b)
+        mtitle=re.search(r'card-title[^>]*>([^<]*)</div>', b)
+        mdesc=re.search(r'card-desc[^>]*>([^<]*)</div>', b)
+        mtag=re.search(r'<span class="tag (tag-[a-z]+)"[^>]*>([^<]*)</span>', b)
+        cards.append({'slug':slug,
+            'coverImage': mcov.group(1) if mcov else '',
+            'title': _htmlmod.unescape(mtitle.group(1)) if mtitle else slug,
+            'description': _htmlmod.unescape(mdesc.group(1)) if mdesc else '',
+            'tagClass': mtag.group(1) if mtag else 'tag-guide',
+            'categoryLabel': _htmlmod.unescape(mtag.group(2)) if mtag else 'Guide'})
+    return cards
+
 # ============ ЧАСТЬ 2: карточка на /learn + sitemap ============
 CARD_TAGMAP={'guide':'tag-guide','articles':'tag-articles','protocol':'tag-protocol'}
 
@@ -211,8 +234,6 @@ def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
     import os, shutil
     a=parse_md(os.path.join(content_dir,slug,'article.md'), slug, content_dir)
     a['hasPdf']=pdf_in_folder(slug, content_dir); a['pdfUrl']=RAW+'/learn/'+slug+'/download.pdf'
-    other=pick_other(slug)
-    if other: other['hasPdf']=True
     # перенести cover/imgN/download.pdf в assets/media/learn/<slug>/ (откуда их тянет сайт)
     src=os.path.join(content_dir,slug); dst=os.path.join(repo,'assets','media','learn',slug)
     os.makedirs(dst, exist_ok=True)
@@ -221,10 +242,11 @@ def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
         if low=='cover.jpg' or low=='cover.png' or low.startswith('img') or low=='download.pdf':
             if low=='download.pdf' and not pdf_in_folder(slug, content_dir): continue
             shutil.copy2(os.path.join(src,fn), os.path.join(dst,fn))
-    page=NS['build_page'](a, other)
+    land=open(repo+'/learn/index.html',encoding='utf-8').read()
+    others=parse_landing_cards(land, slug)[:8]
+    page=NS['build_page'](a, others)
     os.makedirs(repo+'/learn/'+slug, exist_ok=True)
     open(repo+'/learn/'+slug+'/index.html','w',encoding='utf-8').write(page)
-    land=open(repo+'/learn/index.html',encoding='utf-8').read()
     land2,added=insert_card(land,a); open(repo+'/learn/index.html','w',encoding='utf-8').write(land2)
     sm=open(repo+'/sitemap.xml',encoding='utf-8').read()
     sm2,smadded=update_sitemap(sm,slug); open(repo+'/sitemap.xml','w',encoding='utf-8').write(sm2)

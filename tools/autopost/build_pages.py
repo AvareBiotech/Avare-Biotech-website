@@ -112,7 +112,41 @@ def cases_popup_html():
             '<div data-cases-grid style="'+GRID+'">'+cards+'</div>'
             '</div></div></div></div>')
 
-def build_page(a, other):
+def carousel_cards_html(others):
+    out=""
+    for o in (others or []):
+        out+=('<div class="learn-card">'
+          '<a href="/learn/'+o["slug"]+'" class="learn-card-link">'
+          '<div class="learn-card-img" style="padding:0"><img src="'+o.get("coverImage","")+'" alt="'+E(o.get("title",""))+'" style="width:100%;height:100%;object-fit:cover;display:block"/></div>'
+          '<div class="learn-card-body">'
+          '<div class="learn-card-tags"><span class="tag '+o.get("tagClass","tag-guide")+'">'+E(o.get("categoryLabel","Guide"))+'</span></div>'
+          '<div class="learn-card-title">'+E(o.get("title",""))+'</div>'
+          '<div class="learn-card-desc">'+E(o.get("description",""))+'</div>'
+          '</div></a>'
+          '<div class="learn-card-actions"><a href="/learn/'+o["slug"]+'" class="learn-card-read">Read</a></div>'
+          '</div>')
+    if not out:
+        out='<div class="learn-card"><div class="learn-card-body"><div class="learn-card-desc" style="padding:24px">More articles coming soon.</div></div></div>'
+    return out
+
+CAROUSEL_JS = (
+ "(function(){"
+ "var vp=document.querySelector('.carousel-viewport');"
+ "var tr=document.querySelector('.carousel-track');"
+ "var L=document.querySelector('.carousel-arrow-left');"
+ "var R=document.querySelector('.carousel-arrow-right');"
+ "if(!vp||!tr)return;var pos=0;"
+ "function mx(){return Math.max(0,tr.scrollWidth-vp.clientWidth);}"
+ "function apply(){var m=mx();if(pos>m)pos=m;if(pos<0)pos=0;"
+ "tr.style.transform='translateX('+(-pos)+'px)';"
+ "if(L)L.disabled=pos<=0;if(R)R.disabled=pos>=m-1;}"
+ "if(L)L.addEventListener('click',function(){pos-=vp.clientWidth+16;apply();});"
+ "if(R)R.addEventListener('click',function(){pos+=vp.clientWidth+16;apply();});"
+ "window.addEventListener('resize',function(){pos=0;apply();});"
+ "setTimeout(apply,150);})();"
+)
+
+def build_page(a, others):
     slug=a["slug"]
     _url="https://avareit.com/learn/"+slug
     _logo={"@type":"ImageObject","url":RAW+"/images/fav.png"}
@@ -147,11 +181,10 @@ def build_page(a, other):
     lang_mob="".join('<button data-code="'+c+'">'+l+'</button>' for c,l in LANGS)
     sections="".join(sec_html(s) for s in a["content"])
     has_pdf=a.get("hasPdf", True)
-    other_has_pdf=other.get("hasPdf", True) if other else False
     dl_button_main=('<button class="learn-download-btn" data-modal="dlMain"><span class="dl-lock">🔒</span> Download PDF</button>' if has_pdf else '')
-    dl_button_other=('<button class="learn-card-dl" data-modal="dlOther"><span class="dl-lock">🔒</span> Download</button>' if other_has_pdf else '')
     modal_main=(modal_html("dlMain", a) if has_pdf else '')
-    modal_other=(modal_html("dlOther", other) if other_has_pdf else '')
+    modal_other=''
+    others_cards=carousel_cards_html(others)
     faq="".join('<div class="av-faq-item"><div class="av-faq-question"><span>'+E(q)+'</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">'+E(ans)+'</div></div>' for q,ans in FAQ)
     desc=a.get("description","")
     page=f'''<!DOCTYPE html>
@@ -204,20 +237,7 @@ def build_page(a, other):
     <div class="carousel-stage">
       <button class="carousel-arrow carousel-arrow-left" disabled aria-label="Previous"></button>
       <div class="carousel-viewport"><div class="carousel-track">
-        <div class="learn-card">
-          <a href="/learn/{other["slug"]}" class="learn-card-link">
-            <div class="learn-card-img" style="padding:0"><img src="{other["coverImage"]}" alt="{E(other["title"])}" style="width:100%;height:100%;object-fit:cover;display:block"/></div>
-            <div class="learn-card-body">
-              <div class="learn-card-tags"><span class="tag {other["tagClass"]}">{E(other["categoryLabel"])}</span></div>
-              <div class="learn-card-title">{E(other["title"])}</div>
-              <div class="learn-card-desc">{E(other.get("description",""))}</div>
-            </div>
-          </a>
-          <div class="learn-card-actions">
-            <a href="/learn/{other["slug"]}" class="learn-card-read">Read</a>
-            {dl_button_other}
-          </div>
-        </div>
+        {others_cards}
       </div></div>
       <button class="carousel-arrow carousel-arrow-right" disabled aria-label="Next"></button>
     </div>
@@ -280,6 +300,7 @@ def build_page(a, other):
 </div>
 <script>window.SCRIPT={LEARN_SCRIPT!r};window.SLUG={slug!r};</script>
 <script>{JS}</script>
+<script>{CAROUSEL_JS}</script>
 </body>
 </html>
 '''
