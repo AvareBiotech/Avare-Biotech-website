@@ -13,7 +13,21 @@ def inline(t):
     t=re.sub(r'(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)', r'<em>\1</em>', t)
     return t
 
-def parse_md(path, slug):
+def _ext_map(content_dir, slug):
+    import os, re as _re
+    m={}
+    if content_dir:
+        d=os.path.join(content_dir, slug)
+        if os.path.isdir(d):
+            for fn in os.listdir(d):
+                mm=_re.match(r'^(cover|img\d+)\.(jpg|jpeg|png)$', fn.lower())
+                if mm: m[mm.group(1)]=('jpg' if mm.group(2)=='jpeg' else mm.group(2))
+    return m
+
+def parse_md(path, slug, content_dir=None):
+    _ext=_ext_map(content_dir, slug)
+    def _imgsrc(name, base):
+        return f"{base}/{name}.{_ext.get(name,'jpg')}"
     raw=open(path,encoding='utf-8').read()
     fm={}
     m=re.match(r'^---\n(.*?)\n---\n(.*)$', raw, re.S)
@@ -23,6 +37,7 @@ def parse_md(path, slug):
             if ':' in line: k,v=line.split(':',1); fm[k.strip().lower()]=v.strip()
         body=m.group(2)
     img_base=f"{RAW}/learn/{slug}"
+    cover_src=_imgsrc('cover', img_base)
     lines=body.split('\n')
     sections=[]; cur={'heading':None,'level':2,'blocks':[]}
     ul=None; tbl=None
@@ -51,7 +66,7 @@ def parse_md(path, slug):
                 nx=lines[i+1].strip()
                 if nx.startswith('*') and nx.endswith('*') and not nx.startswith('**'):
                     cap=nx.strip('*'); i+=1
-            cur['blocks'].append(('img', f"{img_base}/img{n}.jpg", cap))
+            cur['blocks'].append(('img', _imgsrc(f'img{n}', img_base), cap))
         elif t.startswith('- '):
             flush_tbl()
             if ul is None: ul=[]
@@ -78,7 +93,7 @@ def parse_md(path, slug):
     return {
         'slug':slug,'title':fm.get('title',slug),'description':desc,
         'datePublished':fm.get('date','2026-01-01'),
-        'coverImage':f"{img_base}/cover.jpg",
+        'coverImage':cover_src,
         'categoryLabel':label,'tagClass':tagc,'content':sections,
         'downloadTitle':fm.get('title',slug),
         'downloadDescription':'Enter your email to get the full PDF version of this article.',
@@ -194,7 +209,7 @@ def update_sitemap(xml, slug):
 
 def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
     import os, shutil
-    a=parse_md(os.path.join(content_dir,slug,'article.md'), slug)
+    a=parse_md(os.path.join(content_dir,slug,'article.md'), slug, content_dir)
     a['hasPdf']=pdf_in_folder(slug, content_dir); a['pdfUrl']=RAW+'/learn/'+slug+'/download.pdf'
     other=pick_other(slug)
     if other: other['hasPdf']=True
