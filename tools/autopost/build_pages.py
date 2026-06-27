@@ -20,7 +20,7 @@ html, body { margin: 0; padding: 0; background: #020202; }
 @media (max-width: 640px) { #casesOverlay [data-cases-grid] { grid-template-columns: 1fr !important; } }
 .carousel-arrow { border-radius: 50% !important; }
 .carousel-arrow svg { width: 18px; height: 18px; display: block; }
-.learn-card-tags .tag { margin-bottom: 0; }
+.learn-card-tags .tag { display: inline-block; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 0; }
 .tag-guide, .tag-case, .tag-protocol { background: rgba(162,168,132,0.12); color: var(--accent); }
 .tag-articles { background: rgba(162,168,132,0.22); color: var(--accent); }
 """
