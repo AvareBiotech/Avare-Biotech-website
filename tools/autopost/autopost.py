@@ -13,21 +13,33 @@ def inline(t):
     t=re.sub(r'(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)', r'<em>\1</em>', t)
     return t
 
-def _ext_map(content_dir, slug):
+IMG_RE = r'^(cover|img\d+)([-_][a-z0-9_-]+)?\.(jpg|jpeg|png|webp|avif)$'
+
+def _file_map(content_dir, slug):
+    """ключ (cover/img1/...) -> РЕАЛЬНОЕ имя файла на диске (с SEO-словами).
+    Принимает и старое 'img1.png', и новое 'img1-artificial-insemination.jpg'."""
     import os, re as _re
     m={}
     if content_dir:
         d=os.path.join(content_dir, slug)
         if os.path.isdir(d):
             for fn in os.listdir(d):
-                mm=_re.match(r'^(cover|img\d+)\.(jpg|jpeg|png)$', fn.lower())
-                if mm: m[mm.group(1)]=('jpg' if mm.group(2)=='jpeg' else mm.group(2))
+                mm=_re.match(IMG_RE, fn.lower())
+                if mm: m[mm.group(1)]=fn   # храним настоящее имя файла
     return m
 
+def _alt_from_name(fn):
+    """запасной alt из имени файла: 'img1-artificial-insemination.jpg' -> 'artificial insemination'"""
+    import os, re as _re
+    base=os.path.splitext(fn or '')[0]
+    base=_re.sub(r'^(cover|img\d+)[-_]?', '', base)
+    return base.replace('-', ' ').replace('_', ' ').strip()
+
 def parse_md(path, slug, content_dir=None):
-    _ext=_ext_map(content_dir, slug)
+    _files=_file_map(content_dir, slug)
     def _imgsrc(name, base):
-        return f"{base}/{name}.{_ext.get(name,'jpg')}"
+        fn=_files.get(name)
+        return f"{base}/{fn}" if fn else f"{base}/{name}.jpg"
     raw=open(path,encoding='utf-8').read()
     fm={}
     m=re.match(r'^---\n(.*?)\n---\n(.*)$', raw, re.S)
@@ -66,7 +78,7 @@ def parse_md(path, slug, content_dir=None):
                 nx=lines[i+1].strip()
                 if nx.startswith('*') and nx.endswith('*') and not nx.startswith('**'):
                     cap=nx.strip('*'); i+=1
-            cur['blocks'].append(('img', _imgsrc(f'img{n}', img_base), cap))
+            cur['blocks'].append(('img', _imgsrc(f'img{n}', img_base), cap, (cap or _alt_from_name(_files.get(f'img{n}','')))))
         elif t.startswith('- '):
             flush_tbl()
             if ul is None: ul=[]
@@ -108,8 +120,8 @@ def sec_html2(s):
         if b[0]=='p': out+="<p>"+inline(b[1])+"</p>"
         elif b[0]=='ul': out+="<ul>"+"".join("<li>"+inline(x)+"</li>" for x in b[1])+"</ul>"
         elif b[0]=='img':
-            src,cap=b[1],b[2]
-            out+='<figure style="margin:24px 0"><img src="'+src+'" alt="'+E(cap)+'" style="width:100%;border-radius:12px;display:block"/>'
+            src,cap=b[1],b[2]; alt=b[3] if len(b)>3 else cap
+            out+='<figure style="margin:24px 0"><img src="'+src+'" alt="'+E(alt)+'" style="width:100%;border-radius:12px;display:block"/>'
             if cap: out+='<figcaption style="font-size:13px;color:rgba(246,246,246,0.5);margin-top:8px;text-align:center">'+E(cap)+'</figcaption>'
             out+='</figure>'
         elif b[0]=='table':
@@ -131,17 +143,25 @@ def pick_other(cur_slug):
                     'downloadDescription':'Enter your email to download.'}
     return None
 
-def pdf_in_folder(slug, content_dir='/tmp/content'):
+def pdf_name_in_folder(slug, content_dir='/tmp/content'):
+    """вернуть имя единственного настоящего PDF в папке (с SEO-именем) или None."""
     import os
-    p=os.path.join(content_dir, slug, 'download.pdf')
-    if not os.path.exists(p): return False
-    with open(p,'rb') as f: head=f.read(5)
-    return head.startswith(b'%PDF')   # реально PDF, а не переименованный файл
+    d=os.path.join(content_dir, slug)
+    if not os.path.isdir(d): return None
+    for fn in sorted(os.listdir(d)):
+        if fn.lower().endswith('.pdf'):
+            with open(os.path.join(d,fn),'rb') as f:
+                if f.read(5).startswith(b'%PDF'): return fn   # реально PDF, а не переименованный файл
+    return None
+
+def pdf_in_folder(slug, content_dir='/tmp/content'):
+    return pdf_name_in_folder(slug, content_dir) is not None
 
 def build(slug):
-    a=parse_md(f'/tmp/content/{slug}/article.md', slug)
-    a['hasPdf']=pdf_in_folder(slug)
-    a['pdfUrl']=f"{RAW}/learn/{slug}/download.pdf"
+    a=parse_md(f'/tmp/content/{slug}/article.md', slug, f'/tmp/content/{slug}'.rsplit('/',1)[0])
+    pdf_name=pdf_name_in_folder(slug)
+    a['hasPdf']=pdf_name is not None
+    a['pdfUrl']=f"{RAW}/learn/{slug}/{pdf_name or 'download.pdf'}"
     other=pick_other(slug)
     if other: other['hasPdf']=True  # существующие статьи из materials имеют PDF
     page=NS['build_page'](a, other)
@@ -231,16 +251,28 @@ def update_sitemap(xml, slug):
     return xml.replace('</urlset>', entry+'</urlset>', 1), True
 
 def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
-    import os, shutil
+    import os, shutil, re as _re
     a=parse_md(os.path.join(content_dir,slug,'article.md'), slug, content_dir)
-    a['hasPdf']=pdf_in_folder(slug, content_dir); a['pdfUrl']=RAW+'/learn/'+slug+'/download.pdf'
-    # перенести cover/imgN/download.pdf в assets/media/learn/<slug>/ (откуда их тянет сайт)
+    pdf_name=pdf_name_in_folder(slug, content_dir)
+    a['hasPdf']=pdf_name is not None
+    a['pdfUrl']=RAW+'/learn/'+slug+'/'+(pdf_name or 'download.pdf')
+    # если статья уже была опубликована — сохранить исходную дату публикации
+    existing=os.path.join(repo,'learn',slug,'index.html')
+    if os.path.exists(existing):
+        try:
+            old=open(existing,encoding='utf-8').read()
+            md=_re.search(r'article:published_time" content="(\d{4}-\d{2}-\d{2})"', old)
+            if md: a['datePublished']=md.group(1)
+        except Exception: pass
+    # перенести картинки/pdf в assets/media/learn/<slug>/ с их РЕАЛЬНЫМИ (SEO) именами,
+    # предварительно почистив старые/переименованные файлы
     src=os.path.join(content_dir,slug); dst=os.path.join(repo,'assets','media','learn',slug)
+    if os.path.isdir(dst): shutil.rmtree(dst)
     os.makedirs(dst, exist_ok=True)
     for fn in os.listdir(src):
-        low=fn.lower()
-        if low=='cover.jpg' or low=='cover.png' or low.startswith('img') or low=='download.pdf':
-            if low=='download.pdf' and not pdf_in_folder(slug, content_dir): continue
+        is_img=_re.match(IMG_RE, fn.lower())
+        is_pdf=(pdf_name and fn==pdf_name)
+        if is_img or is_pdf:
             shutil.copy2(os.path.join(src,fn), os.path.join(dst,fn))
     land=open(repo+'/learn/index.html',encoding='utf-8').read()
     others=parse_landing_cards(land, slug)[:8]
