@@ -162,6 +162,31 @@ CARD_CLICK_JS = (
  "window.location.href=href;});});})();"
 )
 
+# GA4 + Microsoft Clarity + тумблер «свой трафик» (?internal=1 ставит cookie -> аналитика не грузится).
+TRACKING = """<script>
+(function(){
+  try{
+    var qs=location.search;
+    if(qs.indexOf('internal=1')>-1){document.cookie='av_internal=1; path=/; max-age='+(60*60*24*365*2);}
+    else if(qs.indexOf('internal=0')>-1){document.cookie='av_internal=; path=/; max-age=0';}
+  }catch(e){}
+  if(document.cookie.indexOf('av_internal=1')>-1) return;
+  var s=document.createElement('script'); s.async=1;
+  s.src='https://www.googletagmanager.com/gtag/js?id=G-H6T6GPHFGS';
+  document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag=gtag;
+  gtag('js', new Date());
+  gtag('config', 'G-H6T6GPHFGS');
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "wi97i4lcbh");
+})();
+</script>"""
+
 def build_page(a, others):
     slug=a["slug"]
     _url="https://avareit.com/learn/"+slug
@@ -208,6 +233,7 @@ def build_page(a, others):
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+{TRACKING}
 <title>{E(a["title"])} — Avare Biotech</title>
 <meta name="description" content="{E(desc)}"/>
 <link rel="canonical" href="https://avareit.com/learn/{slug}"/>

@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Microsoft Clarity -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wi97i4lcbh");
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-H6T6GPHFGS"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
+(function(){
+  try{
+    var qs=location.search;
+    if(qs.indexOf('internal=1')>-1){document.cookie='av_internal=1; path=/; max-age='+(60*60*24*365*2);}
+    else if(qs.indexOf('internal=0')>-1){document.cookie='av_internal=; path=/; max-age=0';}
+  }catch(e){}
+  if(document.cookie.indexOf('av_internal=1')>-1) return;
+  var s=document.createElement('script'); s.async=1;
+  s.src='https://www.googletagmanager.com/gtag/js?id=G-H6T6GPHFGS';
+  document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
   function gtag(){dataLayer.push(arguments);}
+  window.gtag=gtag;
   gtag('js', new Date());
   gtag('config', 'G-H6T6GPHFGS');
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "wi97i4lcbh");
+})();
 </script>
-  <meta charset="UTF-8">
+<!-- Microsoft Clarity -->
+<!-- Google tag (gtag.js) -->
+<meta charset="UTF-8">
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/fav.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Get Access — Avare Biotech</title>
