@@ -28,7 +28,7 @@ CSS_ALL = CSS + "\n" + OVERRIDES
 
 LEARN_SCRIPT = "https://script.google.com/macros/s/AKfycbwuKsYVg_3x3RbBnxY0RUlFjE4tldmErUWRddqPDXg4xQxsOqqT19wTeGsxRqcW5jyK/exec"
 RAW = "https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media"
-LANGS = [("en","EN"),("pt","PT"),("es","ES"),("ar","AR"),("af","AF"),("ur","UR"),("tr","TR"),("de","DE"),("fr","FR"),("it","IT"),("ru","RU"),("hi","HI"),("ja","JA"),("zh","ZH"),("el","EL")]
+LANGS = [("en","EN"),("pt","PT"),("es","ES"),("ar","AR"),("af","AF"),("ur","UR"),("tr","TR"),("de","DE"),("fr","FR"),("it","IT"),("hi","HI"),("ja","JA"),("zh","ZH"),("el","EL")]
 PROTO_EN = RAW+"/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf"
 PROTO_PT = RAW+"/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf"
 FAQ = [

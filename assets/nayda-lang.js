@@ -8,10 +8,10 @@
   var LANGS = [
     ['en', 'EN'], ['pt', 'PT'], ['es', 'ES'], ['ar', 'AR'],
     ['af', 'AF'], ['ur', 'UR'], ['tr', 'TR'], ['de', 'DE'],
-    ['fr', 'FR'], ['it', 'IT'], ['ru', 'RU'],
+    ['fr', 'FR'], ['it', 'IT'], 
     ['hi', 'HI'], ['ja', 'JA'], ['zh', 'ZH'], ['el', 'EL']
   ];
-  var NAYDA = ['en', 'pt', 'es', 'af', 'ur', 'tr', 'de', 'fr', 'it', 'ru', 'hi', 'ja', 'zh', 'el']; // языки, которые даёт Nayda (без AR)
+  var NAYDA = ['en', 'pt', 'es', 'af', 'ur', 'tr', 'de', 'fr', 'it', 'hi', 'ja', 'zh', 'el']; // языки, которые даёт Nayda (без AR)
 
   function currentLang() {
     var h = (document.documentElement.getAttribute('lang') || '').toLowerCase().slice(0, 2);
