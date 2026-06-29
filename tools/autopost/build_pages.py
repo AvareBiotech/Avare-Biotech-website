@@ -151,6 +151,17 @@ CAROUSEL_JS = (
  "setTimeout(apply,150);})();"
 )
 
+CARD_CLICK_JS = (
+ "(function(){"
+ "document.querySelectorAll('.learn-card').forEach(function(card){"
+ "var link=card.querySelector('a.learn-card-link, a.learn-card-read');"
+ "if(!link)return;var href=link.getAttribute('href');"
+ "if(!href||href==='#')return;card.style.cursor='pointer';"
+ "card.addEventListener('click',function(e){"
+ "if(e.target.closest('a, button'))return;"
+ "window.location.href=href;});});})();"
+)
+
 def build_page(a, others):
     slug=a["slug"]
     _url="https://avareit.com/learn/"+slug
@@ -306,6 +317,7 @@ def build_page(a, others):
 <script>window.SCRIPT={LEARN_SCRIPT!r};window.SLUG={slug!r};</script>
 <script>{JS}</script>
 <script>{CAROUSEL_JS}</script>
+<script>{CARD_CLICK_JS}</script>
 </body>
 </html>
 '''
