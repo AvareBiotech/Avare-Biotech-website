@@ -492,5 +492,15 @@ function setLang(lang) {
 </script>
 
 <script src="/assets/nayda-lang.js" defer></script>
+<script>
+(function(){document.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;
+  var h=a.href||'';var s='';
+  if(h.indexOf('apps.apple.com')>-1)s='appstore';
+  else if(h.indexOf('play.google.com')>-1)s='googleplay';
+  if(!s)return;
+  if(typeof window.gtag==='function'){window.gtag('event','store_click',{store:s,link_url:h,page_path:location.pathname});}
+},true);})();
+</script>
 </body>
 </html>

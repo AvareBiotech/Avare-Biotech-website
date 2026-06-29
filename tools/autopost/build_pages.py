@@ -162,6 +162,20 @@ CARD_CLICK_JS = (
  "window.location.href=href;});});})();"
 )
 
+# Считает клики по кнопкам сторов (App Store / Google Play) как событие GA4 store_click.
+# Делегирование на document -> ловит и кнопки, появляющиеся позже (после формы/подписки).
+STORE_CLICK_JS = (
+ "(function(){document.addEventListener('click',function(e){"
+ "var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;"
+ "var h=a.href||'';var s='';"
+ "if(h.indexOf('apps.apple.com')>-1)s='appstore';"
+ "else if(h.indexOf('play.google.com')>-1)s='googleplay';"
+ "if(!s)return;"
+ "if(typeof window.gtag==='function'){window.gtag('event','store_click',"
+ "{store:s,link_url:h,page_path:location.pathname});}"
+ "},true);})();"
+)
+
 # GA4 + Microsoft Clarity + тумблер «свой трафик» (?internal=1 ставит cookie -> аналитика не грузится).
 TRACKING = """<script>
 (function(){
@@ -344,6 +358,7 @@ def build_page(a, others):
 <script>{JS}</script>
 <script>{CAROUSEL_JS}</script>
 <script>{CARD_CLICK_JS}</script>
+<script>{STORE_CLICK_JS}</script>
 </body>
 </html>
 '''
