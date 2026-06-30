@@ -151,7 +151,7 @@ a { text-decoration: none; }
 .av-hero__card-inner { position: relative; z-index: 2; max-width: 65%; }
 .av-hero__microscope {
   display: none;
-  position: absolute; right: 4%; top: 8%;
+  position: absolute; right: 2%; top: 8%;
   height: 93%; width: auto;
   max-width: 43%; pointer-events: none; z-index: 1;
   object-fit: contain; object-position: right top;
@@ -193,6 +193,30 @@ a { text-decoration: none; }
 }
 .av-store-btn:hover { background: rgba(246,246,246,0.16); }
 .av-store-btn img { width: clamp(18px, 1.5vw, 22px); height: clamp(18px, 1.5vw, 22px); flex-shrink: 0; }
+/* ===== HERO LEAD FORM ===== */
+.av-lead { margin-bottom: 48px; max-width: 560px; }
+.av-lead__row { display: flex; gap: 0; align-items: stretch; max-width: 560px; }
+.av-lead__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.av-lead__input { flex: 1; min-width: 0; font-family: 'Satoshi', sans-serif; font-size: clamp(15px, 1.2vw, 18px); color: #F6F6F6; background: rgba(246,246,246,0.08); border: 1px solid rgba(246,246,246,0.25); border-right: none; border-radius: 10px 0 0 10px; padding: clamp(14px, 1.5vw, 20px) clamp(16px, 1.6vw, 22px); outline: none; transition: border-color .2s; }
+.av-lead__input::placeholder { color: rgba(246,246,246,0.45); }
+.av-lead__input:focus { border-color: #A2A884; }
+.av-lead__input.av-error { border-color: #e0726b; }
+.av-lead__btn { font-family: 'Satoshi', sans-serif; font-size: clamp(15px, 1.2vw, 18px); font-weight: 700; color: #FFFFFF; cursor: pointer; white-space: nowrap; background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); border: none; border-radius: 0 10px 10px 0; padding: clamp(14px, 1.5vw, 20px) clamp(24px, 2.6vw, 40px); transition: filter .2s; }
+.av-lead__btn:hover { filter: brightness(1.08); }
+.av-lead__btn:disabled { opacity: .6; cursor: default; }
+.av-lead__err { color: #e0726b; font-size: 14px; margin-top: 8px; }
+.av-lead__done { animation: avLeadFade .4s ease; }
+@keyframes avLeadFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.av-lead__done-title { font-size: clamp(16px, 1.6vw, 20px); font-weight: 700; color: #F6F6F6; margin-bottom: 18px; }
+.av-lead__vidlabel { margin-top: 22px; font-family: 'Satoshi', sans-serif; font-size: clamp(14px, 1.1vw, 16px); font-weight: 600; color: #A2A884; margin-bottom: 12px; }
+.av-lead__videos { display: flex; flex-wrap: wrap; gap: 10px; }
+.av-lead__video { display: inline-flex; align-items: center; gap: 6px; font-family: 'Satoshi', sans-serif; font-size: 14px; font-weight: 600; color: #F6F6F6 !important; background: rgba(246,246,246,0.08); border: 1px solid rgba(246,246,246,0.2); border-radius: 8px; padding: 9px 14px; transition: background .2s; text-decoration: none; }
+.av-lead__video:hover { background: rgba(246,246,246,0.16); }
+@media (max-width: 768px) {
+  .av-lead { max-width: 100%; margin-bottom: 60px; }
+  .av-lead__row { max-width: 100%; }
+  .av-lead__btn { padding: 14px 18px; }
+}
 
 /* 3 — STATS */
 .av-stats {
@@ -202,6 +226,7 @@ a { text-decoration: none; }
   width: 100%;
 }
 .av-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; text-align: center; }
+.av-hero__card.av-form-sent .av-stats { margin-top: clamp(16px,2vw,32px); }
 
 .av-stat__n {
   font-size: clamp(40px, 5.5vw, 72px); font-weight: 100;
@@ -847,6 +872,8 @@ a { text-decoration: none; }
 .br-tablet { display: none !important; }
 /* Three-line title: 360–1499px */
 .br-range { display: inline; }
+/* ≥1200px: заголовок крупного героя меньше, чтобы влезал в 2 строки */
+@media (min-width: 1200px) and (max-width: 1500px) { .av-title { font-size: clamp(50px, 4.2vw, 66px); } }
 @media (min-width: 1200px) and (max-width: 1679px) {
   .av-pill a, .av-pill a:link, .av-pill a:visited { padding: 4px clamp(4px, 0.5vw, 8px) !important; }
   .av-pill { height: 50px; max-width: calc(100% - 420px); }
@@ -1196,12 +1223,30 @@ function avFetchRates(cb){fetch('https://api.exchangerate-api.com/v4/latest/USD'
     <div class="av-hero__card">
       <img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/New%20Project%201.png" alt="" class="av-hero__microscope">
       <div class="av-hero__card-inner">
-        <h1 class="av-title">Livestock Semen<br class="br-range"> Analysis<br class="br-desktop"> on Your<br class="br-range"> <span class="av-title__gradient">Smartphone.</span></h1>
-        <p class="av-sub">Approve or reject a $2,000 semen batch in 60 seconds.<br>On the farm. Without a $50K lab</p>
+        <h1 class="av-title">The first lab-grade semen<br class="br-range"> analysis on your <span class="av-title__gradient">smartphone</span></h1>
+        <p class="av-sub">Trust every semen sample before you breed.<br>Without a $50K lab</p>
         <p class="av-audience">For Veterinary Specialists | AI Centers | Breeders | Farmers</p>
-        <div class="av-hero__store-btns">
-          <a href="https://apps.apple.com/ae/app/avare-biotech/id6744607449" target="_blank" rel="noopener" class="av-store-btn" translate="no"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/apple-white.svg" alt=""> App Store</a>
-          <a href="https://play.google.com/store/apps/details?id=com.biotech.app.android&hl=en" target="_blank" rel="noopener" class="av-store-btn" translate="no"><img src="https://www.logo.wine/a/logo/Google_Play/Google_Play-Icon-Logo.wine.svg" alt="" style="width:20px;height:20px;"> Google Play</a>
+        <div class="av-lead" id="avLead">
+          <div class="av-lead__row" id="avLeadForm">
+            <input type="email" id="avLeadEmail" class="av-lead__input" placeholder="Enter your email" autocomplete="email" inputmode="email" required>
+            <input type="text" id="avLeadHp" class="av-lead__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button type="button" id="avLeadBtn" class="av-lead__btn" translate="no">Get 10 free tests</button>
+          </div>
+          <div class="av-lead__err" id="avLeadErr" hidden>Please enter a valid email.</div>
+          <div class="av-lead__done" id="avLeadDone" hidden>
+            <p class="av-lead__done-title">Download the app and run your 10 free tests</p>
+            <div class="av-hero__store-btns">
+              <a href="https://apps.apple.com/ae/app/avare-biotech/id6744607449" target="_blank" rel="noopener" class="av-store-btn" translate="no"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/apple-white.svg" alt=""> App Store</a>
+              <a href="https://play.google.com/store/apps/details?id=com.biotech.app.android&hl=en" target="_blank" rel="noopener" class="av-store-btn" translate="no"><img src="https://www.logo.wine/a/logo/Google_Play/Google_Play-Icon-Logo.wine.svg" alt="" style="width:20px;height:20px;"> Google Play</a>
+            </div>
+            <p class="av-lead__vidlabel">Download sample videos to demo test &#8595;</p>
+            <div class="av-lead__videos">
+              <a href="/assets/media/demo-test-video/IMG_0290.MOV" download class="av-lead__video"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="flex-shrink:0"><path d="M8 5v14l11-7z"/></svg>Sample 1</a>
+              <a href="/assets/media/demo-test-video/IMG_6355.MOV" download class="av-lead__video"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="flex-shrink:0"><path d="M8 5v14l11-7z"/></svg>Sample 2</a>
+              <a href="/assets/media/demo-test-video/IMG_9298.MOV" download class="av-lead__video"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="flex-shrink:0"><path d="M8 5v14l11-7z"/></svg>Sample 3</a>
+              <a href="/assets/media/demo-test-video/IMG_9327.MP4" download class="av-lead__video"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="flex-shrink:0"><path d="M8 5v14l11-7z"/></svg>Sample 4</a>
+            </div>
+          </div>
         </div>
       </div>
       <div class="av-stats">
@@ -1231,7 +1276,7 @@ if(document.readyState!=='loading')avLangSetup();else document.addEventListener(
 
 function avLangSelect(lang) {
   var heroLang = {
-    en: { nav: ['Home','MAKSA','Pricing','Case Studies','Articles','Team','Blog','Partner Program','Contacts'], h1: 'Livestock Semen<br class="br-range"> Analysis<br class="br-desktop"> on Your<br class="br-range"> <span class="av-title__gradient">Smartphone.</span>', sub: 'Approve or reject a $2,000 semen batch in 60 seconds.<br>On the farm. Without a $50K lab', audience: 'For Veterinary Specialists | AI Centers | Breeders | Farmers', stat1: 'CASA correlation', stat2: 'labeled cells (3yr R&D)', stat3: 'vets in 10+ countries', stat4: 'species validated', book: 'Book a call' },
+    en: { nav: ['Home','MAKSA','Pricing','Case Studies','Articles','Team','Blog','Partner Program','Contacts'], h1: 'The first lab-grade semen<br class="br-range"> analysis on your <span class="av-title__gradient">smartphone</span>', sub: 'Trust every semen sample before you breed.<br>Without a $50K lab', audience: 'For Veterinary Specialists | AI Centers | Breeders | Farmers', stat1: 'CASA correlation', stat2: 'labeled cells (3yr R&D)', stat3: 'vets in 10+ countries', stat4: 'species validated', book: 'Book a call' },
     pt: { nav: ['In\u00edcio','MAKSA','Pre\u00e7os','Estudos de Caso','Artigos','Equipe','Blog','Programa de Parceiros','Contatos'], h1: 'An\u00e1lise de S\u00eamen<br>Bovino no Seu <span class="av-title__gradient">Smartphone.</span>', sub: 'Aprove ou rejeite um lote de s\u00eamen de R$10.000 em 60 segundos.<br>Na fazenda. Sem um laborat\u00f3rio de R$250K', audience: 'Para Veterin\u00e1rios | Centros de IA | Criadores | Fazendeiros', stat1: 'correla\u00e7\u00e3o CASA', stat2: 'c\u00e9lulas rotuladas (3 anos P&D)', stat3: 'vets em 10+ pa\u00edses', stat4: 'esp\u00e9cies validadas', book: 'Agendar chamada' },
     es: { nav: ['Inicio','MAKSA','Precios','Casos de Estudio','Art\u00edculos','Equipo','Blog','Programa de Socios','Contactos'], h1: 'An\u00e1lisis de Semen<br>Bovino en Tu <span class="av-title__gradient">Smartphone.</span>', sub: 'Aprueba o rechaza un lote de semen de MX$34.000<br>en 60 segundos. En el campo. Sin un laboratorio de MX$850K', audience: 'Para Veterinarios | Centros de IA | Criadores | Ganaderos', stat1: 'correlaci\u00f3n CASA', stat2: 'c\u00e9lulas etiquetadas (3 a\u00f1os I+D)', stat3: 'vets en 10+ pa\u00edses', stat4: 'especies validadas', book: 'Reservar llamada' }
   };
@@ -2276,4 +2321,52 @@ try{localStorage.setItem('av_lang',(typeof naydaLang==='function')?naydaLang():'
   if(!s)return;
   if(typeof window.gtag==='function'){window.gtag('event','store_click',{store:s,link_url:h,page_path:location.pathname});}
 },true);})();
+</script>
+
+<script>
+(function(){
+  /* ============================================================
+     ВСТАВЬ СЮДА URL своего Apps Script Web App (см. lead-form-endpoint.gs):
+     ============================================================ */
+  var LEAD_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwuKsYVg_3x3RbBnxY0RUlFjE4tldmErUWRddqPDXg4xQxsOqqT19wTeGsxRqcW5jyK/exec';
+
+  var form  = document.getElementById('avLeadForm');
+  var input = document.getElementById('avLeadEmail');
+  var hp    = document.getElementById('avLeadHp');
+  var btn   = document.getElementById('avLeadBtn');
+  var err   = document.getElementById('avLeadErr');
+  var done  = document.getElementById('avLeadDone');
+  if(!form || !input || !btn || !done) return;
+
+  var loadTime = Date.now();
+  function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  function reveal(){
+    form.style.display = 'none';
+    if(err) err.hidden = true;
+    done.hidden = false;
+    var card = document.querySelector('.av-hero__card'); if(card) card.classList.add('av-form-sent');
+    // GA4: отправка лид-формы (воронка: form_submit -> store_click)
+    if(typeof window.gtag === 'function'){
+      window.gtag('event','form_submit',{form_id:'hero_lead', form_destination:'app_stores'});
+    }
+  }
+
+  function submit(){
+    var email = (input.value||'').trim();
+    input.classList.remove('av-error');
+    // honeypot / слишком быстрый сабмит -> тихо показать кнопки, не слать
+    if((hp && hp.value) || (Date.now()-loadTime < 1200)){ reveal(); return; }
+    if(!validEmail(email)){ input.classList.add('av-error'); if(err) err.hidden=false; input.focus(); return; }
+    if(err) err.hidden = true;
+    btn.disabled = true;
+    if(LEAD_FORM_ENDPOINT.indexOf('PASTE_') === 0){ reveal(); return; } // endpoint ещё не настроен
+    var url = LEAD_FORM_ENDPOINT + '?type=hero_email&email=' + encodeURIComponent(email) + '&t=' + Date.now();
+    fetch(url, {method:'GET', mode:'no-cors'}).then(reveal).catch(reveal);
+  }
+
+  btn.addEventListener('click', submit);
+  input.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); submit(); }});
+
+})();
 </script>
