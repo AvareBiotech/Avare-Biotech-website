@@ -901,6 +901,11 @@ a { text-decoration: none; }
 @media (max-width: 640px) {
   .av-sub { white-space: normal !important; }
 }
+/* ===== RTL (арабский, урду и др. — Найда отдаёт dir="rtl"): зеркалим раскладку ===== */
+[dir="rtl"] .av-hero__card-inner { margin-left: auto; margin-right: 0; }
+[dir="rtl"] .av-hero__microscope { right: auto; left: 2%; object-position: left top; }
+[dir="rtl"] .av-footer-main__grid { margin-left: auto; margin-right: 0; }
+[dir="rtl"] .av-footer-main__map { left: 0; right: 50%; }
 </style>
 <!-- AVAREUSA — FULL SITE: HEAD + HERO + MARQUEE + TESTIMONIALS + MAKSA + PRICING + ARTICLES + TEAM + CONTACTS -->
 
