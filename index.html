@@ -906,6 +906,9 @@ a { text-decoration: none; }
 [dir="rtl"] .av-hero__microscope { right: auto; left: 2%; object-position: left top; }
 [dir="rtl"] .av-footer-main__grid { margin-left: auto; margin-right: 0; }
 [dir="rtl"] .av-footer-main__map { left: 0; right: 50%; }
+/* RTL: форму целиком вправо, но инпут+кнопку НЕ менять местами (порядок и скругления как в LTR) */
+[dir="rtl"] .av-lead { margin-left: auto; margin-right: 0; }
+[dir="rtl"] .av-lead__row { direction: ltr; }
 </style>
 <!-- AVAREUSA — FULL SITE: HEAD + HERO + MARQUEE + TESTIMONIALS + MAKSA + PRICING + ARTICLES + TEAM + CONTACTS -->
 
