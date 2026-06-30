@@ -711,6 +711,13 @@ a { text-decoration: none; }
   .av-sub { margin-bottom: 40px !important; }
   .av-audience { margin-bottom: 40px !important; }
   .av-hero__store-btns { margin-bottom: 60px !important; }
+  /* моб: заголовок +5px, подзаголовок +2px */
+  .av-title { font-size: clamp(39px, 6.5vw, 44px) !important; }
+  .av-sub { font-size: clamp(20px, 3vw, 24px) !important; }
+  /* моб: форма вертикальная — кнопка под инпутом, прижата */
+  .av-lead__row { flex-direction: column; }
+  .av-lead__input { border-right: 1px solid rgba(246,246,246,0.25); border-bottom: none; border-radius: 10px 10px 0 0; }
+  .av-lead__btn { border-radius: 0 0 10px 10px; }
   .av-hero__store-btns { flex-direction: column; gap: 10px; }
   .av-store-btn { width: 100%; justify-content: center; font-size: var(--fs-body); }
   /* Stats: 2x2 grid, centered */
