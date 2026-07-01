@@ -112,7 +112,7 @@ a { text-decoration: none; }
 .av-book__icon {
   display: inline-flex; align-items: center; justify-content: center;
   width: 42px; height: 42px;
-  background: #1B1B1B; border-radius: 6px; color: #F6F6F6;
+  background: #1B1B1B url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F6F6F6' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7M7 7h10v10'/%3E%3C/svg%3E") center / 22px no-repeat; border-radius: 6px; color: #F6F6F6;
   font-size: 20px; font-weight: 300; flex-shrink: 0;
 }
 .av-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
@@ -481,7 +481,7 @@ a { text-decoration: none; }
   .mk__btn-primary-dark { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font); font-size: clamp(13px, 1vw, 15px); font-weight: 600; color: #F6F6F6 !important; background: #57624A; border-radius: 8px; padding: 12px 20px; text-decoration: none !important; white-space: nowrap; transition: box-shadow .2s, transform .2s; }
   .mk__btn-primary-dark:hover { transform: translateY(-2px); }
   .mk__btn-secondary-dark { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font); font-size: clamp(13px, 1vw, 15px); font-weight: 600; color: #444444 !important; background: #E6E6E6; border: 1.5px solid #444444; border-radius: 8px; padding: 6px 6px 6px 24px; text-decoration: none !important; white-space: nowrap; transition: box-shadow .2s, transform .2s; }
-  .mk__btn-secondary-dark::after { content: "\2197"; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #1B1B1B; border-radius: 4px; margin-left: 14px; color: #E6E6E6; font-size: 16px; font-weight: 300; }
+  .mk__btn-secondary-dark::after { content: ""; display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #1B1B1B url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F6F6F6' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7M7 7h10v10'/%3E%3C/svg%3E") center / 16px no-repeat; border-radius: 4px; margin-left: 14px; }
   .mk__right { background: linear-gradient(120deg, #262626 0%, #020202 100%); border-radius: 8px; padding: clamp(16px, 2vw, 28px); display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.375); overflow: hidden; }
   .mk__stats { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 1.5vw, 20px) clamp(10px, 1vw, 16px); }
   .mk__stat { display: flex; flex-direction: column; gap: 2px; }
@@ -531,6 +531,7 @@ a { text-decoration: none; }
   .av-articles__more { display: flex; justify-content: center; margin-top: 32px; }
   .av-articles__more-btn { font-family: var(--font); font-size: clamp(13px, 1.1vw, 15px); font-weight: 500; color: rgba(246,246,246,0.6); background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 14px 36px; cursor: pointer; transition: box-shadow 0.2s, transform .2s; display: flex; align-items: center; gap: 8px; }
   .av-articles__more-btn:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.13); transform: translateY(-2px); }
+.av-articles__more-btn::after { content: ""; width: 15px; height: 15px; flex-shrink: 0; background-color: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat; }
   .av-articles__more-btn.hidden { display: none; }
   .av-articles__skeleton { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
   .av-articles__skel-line { height: 14px; border-radius: 6px; background: linear-gradient(90deg, #2a2a2a 25%, #333 50%, #2a2a2a 75%); background-size: 200% 100%; animation: av-skel 1.4s infinite; }
@@ -578,7 +579,7 @@ a { text-decoration: none; }
   .av-contacts__input:focus { border-color: rgba(162,168,132,0.6); }
   .av-contacts__input.av-error { border-color: rgba(255,80,80,0.6); }
   .av-contacts__btn { font-family: var(--font); font-size: clamp(13px, 1.1vw, 15px); font-weight: 600; color: #F6F6F6; background: linear-gradient(90deg, #A2A884 0%, #57624A 100%); border: none; border-radius: 8px; padding: 14px 28px; cursor: pointer; transition: transform .2s, box-shadow .2s; text-align: center; display: block; position: relative; min-width: 280px; }
-  .av-contacts__btn::after { content: "\2197"; position: absolute; right: 7px; top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #1B1B1B; border-radius: 4px; color: #F6F6F6; font-size: 16px; font-weight: 300; }
+  .av-contacts__btn::after { content: ""; position: absolute; right: 7px; top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #1B1B1B url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F6F6F6' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7M7 7h10v10'/%3E%3C/svg%3E") center / 16px no-repeat; border-radius: 4px; }
   .av-contacts__btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
   .av-contacts__checkboxes { display: flex; flex-direction: column; gap: 10px; }
   .av-contacts__checkbox { display: flex; align-items: center; gap: 10px; font-size: var(--fs-body); color: rgba(246,246,246,0.45); cursor: pointer; }
@@ -1012,7 +1013,7 @@ en:{
 'pricing.desc':'Reduce your equipment costs by $30,000–$80,000 and save up to $26,000/year on consumables. No proprietary cassettes',
 'articles.title':'Articles',
 'articles.desc':'Real-world implementation cases, validation, research, and market insights from different countries: how mobile analysis is changing the game',
-'articles.read':'Read on Substack','articles.more':'Load more →',
+'articles.read':'Read on Substack','articles.more':'Load more',
 'team.title':'The Team','team.desc':'Proven Team. 7 years of collaboration. Backed by Al-Maktoum Family Office (UAE)',
 'contacts.title':'Contact us',
 'contacts.desc':"Contact us with any questions. We're ready to discuss collaboration, partnerships, and new opportunities, as well as offer a free consultation on our mobile solution",
@@ -1058,7 +1059,7 @@ pt:{
 'maksa.btn1':'Agendar demonstração de 15 min','maksa.btn2':'Ver dados de validação →',
 'pricing.desc':'Reduza os custos de equipamentos em R$150.000–R$400.000 e economize até R$130.000/ano. Sem cassetes proprietários',
 'articles.title':'Artigos','articles.desc':'Casos de implementação reais, validação, pesquisa e insights de mercado de diferentes países: como a análise móvel está mudando o jogo',
-'articles.read':'Ler no Substack','articles.more':'Carregar mais →',
+'articles.read':'Ler no Substack','articles.more':'Carregar mais',
 'team.title':'A Equipe','team.desc':'Equipe comprovada. 7 anos de colaboração. Apoiada pelo Family Office Al-Maktoum (EAU)',
 'contacts.title':'Contate-nos','contacts.desc':'Entre em contato com qualquer dúvida. Estamos prontos para discutir colaboração, parcerias e novas oportunidades, além de oferecer uma consultoria gratuita sobre nossa solução móvel',
 'contacts.form.title':'Até 50% de desconto para os primeiros',
@@ -1103,7 +1104,7 @@ es:{
 'maksa.btn1':'Programar demo de 15 min','maksa.btn2':'Ver datos de validación →',
 'pricing.desc':'Reduzca los costos de equipos en MX$600.000–MX$1.600.000 y ahorre hasta MX$520.000/año. Sin casetes propietarios',
 'articles.title':'Artículos','articles.desc':'Casos de implementación reales, validación, investigación e información del mercado de diferentes países: cómo el análisis móvil está cambiando el juego',
-'articles.read':'Leer en Substack','articles.more':'Cargar más →',
+'articles.read':'Leer en Substack','articles.more':'Cargar más',
 'team.title':'El Equipo','team.desc':'Equipo probado. 7 años de colaboración. Respaldado por Al-Maktoum Family Office (EAU)',
 'contacts.title':'Contáctenos','contacts.desc':'Contáctenos con cualquier pregunta. Estamos listos para discutir colaboración, asociaciones y nuevas oportunidades, además de ofrecer una consulta gratuita sobre nuestra solución móvil',
 'contacts.form.title':'Hasta 50% de descuento para los primeros',
@@ -1184,7 +1185,7 @@ function avFetchRates(cb){fetch('https://api.exchangerate-api.com/v4/latest/USD'
         </div>
       </div>
     </div>
-    <a href="https://calendly.com/maxmershiev/avareusa" target="_blank" rel="noopener" class="av-book">Book a call <span class="av-book__icon">↗</span></a>
+    <a href="https://calendly.com/maxmershiev/avareusa" target="_blank" rel="noopener" class="av-book">Book a call <span class="av-book__icon"></span></a>
     <div class="av-burger" id="avB"><span></span><span></span><span></span></div>
   </nav>
 <script>
@@ -1215,7 +1216,7 @@ function avFetchRates(cb){fetch('https://api.exchangerate-api.com/v4/latest/USD'
     <a href="learn" target="_blank" rel="noopener">Blog</a>
     <a href="partner" target="_blank" rel="noopener">Partner Program</a>
     <a href="#contacts">Contacts</a>
-    <a href="https://calendly.com/maxmershiev/avareusa" target="_blank" class="av-book av-mob__book">Book a call <span class="av-book__icon">↗</span></a>
+    <a href="https://calendly.com/maxmershiev/avareusa" target="_blank" class="av-book av-mob__book">Book a call <span class="av-book__icon"></span></a>
     <div class="av-mob__lang">
       <button class="av-mob__lang-btn" data-l="en" onclick="avLangGo('en')">EN</button>
       <button class="av-mob__lang-btn" data-l="pt" onclick="avLangGo('pt')">PT</button>
@@ -1254,7 +1255,7 @@ function avFetchRates(cb){fetch('https://api.exchangerate-api.com/v4/latest/USD'
               <a href="https://apps.apple.com/ae/app/avare-biotech/id6744607449" target="_blank" rel="noopener" class="av-store-btn" translate="no"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/apple-white.svg" alt=""> App Store</a>
               <a href="https://play.google.com/store/apps/details?id=com.biotech.app.android&hl=en" target="_blank" rel="noopener" class="av-store-btn" translate="no"><img src="https://www.logo.wine/a/logo/Google_Play/Google_Play-Icon-Logo.wine.svg" alt="" style="width:20px;height:20px;"> Google Play</a>
             </div>
-            <p class="av-lead__vidlabel">Download sample videos to demo test &#8595;</p>
+            <p class="av-lead__vidlabel">Download sample videos to demo test <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></p>
             <div class="av-lead__videos">
               <a href="/assets/media/demo-test-video/IMG_0290.MOV" download class="av-lead__video"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="flex-shrink:0"><path d="M8 5v14l11-7z"/></svg>Sample 1</a>
               <a href="/assets/media/demo-test-video/IMG_6355.MOV" download class="av-lead__video"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" style="flex-shrink:0"><path d="M8 5v14l11-7z"/></svg>Sample 2</a>
@@ -1970,7 +1971,7 @@ setTimeout(function(){
     <div class="av-articles__skeleton"><div class="av-articles__skel-line" style="width:40%"></div><div class="av-articles__skel-line" style="width:88%"></div><div class="av-articles__skel-line" style="width:65%"></div></div>
     <div class="av-articles__skeleton"><div class="av-articles__skel-line" style="width:35%"></div><div class="av-articles__skel-line" style="width:92%"></div><div class="av-articles__skel-line" style="width:70%"></div></div>
   </div>
-  <div class="av-articles__more"><button class="av-articles__more-btn" id="av-articles-more">Load more &rarr;</button></div>
+  <div class="av-articles__more"><button class="av-articles__more-btn" id="av-articles-more">Load more</button></div>
 </div>
 
 <div class="av-team" id="team">
