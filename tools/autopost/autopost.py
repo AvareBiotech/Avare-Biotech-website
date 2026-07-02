@@ -163,7 +163,7 @@ def build(slug):
     a['hasPdf']=pdf_name is not None
     a['pdfUrl']=f"{RAW}/learn/{slug}/{pdf_name or 'download.pdf'}"
     other=pick_other(slug)
-    if other: other['hasPdf']=True  # существующие статьи из materials имеют PDF
+    if other: other['hasPdf']=True; other['pdfUrl']=card_pdf_url(other['slug'])  # существующие статьи из materials имеют PDF
     page=NS['build_page'](a, other)
     out=f'/mnt/user-data/outputs/learn/{slug}'; os.makedirs(out,exist_ok=True)
     open(out+'/index.html','w',encoding='utf-8').write(page)
@@ -190,6 +190,14 @@ if __name__=='__main__':
 
 
 import html as _htmlmod
+SPECIAL_PDF={
+    "semen-storage-handling":"/assets/media/learn-pdf/semen-storage-handling.pdf",
+    "semen-quality-analysis":"/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf",
+}
+def card_pdf_url(slug):
+    # автопост кладёт PDF в assets/media/learn/<slug>/download.pdf; спец-случаи — в SPECIAL_PDF
+    return SPECIAL_PDF.get(slug, "/assets/media/learn/"+slug+"/download.pdf")
+
 def parse_landing_cards(landing_html, exclude_slug):
     cards=[]
     blocks=re.split(r'(?=<div class="card" data-type=)', landing_html)
@@ -209,7 +217,8 @@ def parse_landing_cards(landing_html, exclude_slug):
             'description': _htmlmod.unescape(mdesc.group(1)) if mdesc else '',
             'tagClass': mtag.group(1) if mtag else 'tag-guide',
             'categoryLabel': _htmlmod.unescape(mtag.group(2)) if mtag else 'Guide',
-            'hasPdf': ('btn-dl' in b)})
+            'hasPdf': ('btn-dl' in b),
+            'pdfUrl': (card_pdf_url(slug) if ('btn-dl' in b) else None)})
     return cards
 
 # ============ ЧАСТЬ 2: карточка на /learn + sitemap ============

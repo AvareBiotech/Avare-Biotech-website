@@ -245,7 +245,7 @@ def carousel_cards_html(others):
           '<div class="learn-card-title">'+E(o.get("title",""))+'</div>'
           '<div class="learn-card-desc">'+E(o.get("description",""))+'</div>'
           '</div></a>'
-          '<div class="learn-card-actions"><a href="/learn/'+o["slug"]+'" class="learn-card-read">Read</a>'+('<a href="/learn/'+o["slug"]+'" class="learn-card-dl">&darr; Download</a>' if o.get("hasPdf") else '')+'</div>'
+          '<div class="learn-card-actions"><a href="/learn/'+o["slug"]+'" class="learn-card-read">Read</a>'+('<a href="'+o.get("pdfUrl","")+'" download class="learn-card-dl">&darr; Download</a>' if o.get("pdfUrl") else '')+'</div>'
           '</div>')
     if not out:
         out='<div class="learn-card"><div class="learn-card-body"><div class="learn-card-desc" style="padding:24px">More articles coming soon.</div></div></div>'
