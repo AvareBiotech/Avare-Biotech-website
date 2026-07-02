@@ -104,6 +104,33 @@ html.light .av-faq-question{color:#1A1A1A !important}
 html.light .av-faq-question:hover{background:rgba(0,0,0,0.04) !important}
 html.light .av-faq-answer{color:#4A4A47 !important}
 html.light .av-faq-close,html.light .av-video-close,html.light .av-protocol-close,html.light .av-pdf-close{background:rgba(0,0,0,0.06) !important;color:#1A1A1A !important}
+/* светлая тема: читаемый текст в карточках карусели, модалках протокола/кейсов */
+html.light .carousel-track .learn-card{background:#FFFFFF !important;border-color:rgba(0,0,0,0.08) !important}
+html.light .learn-card:hover{border-color:rgba(0,0,0,0.22) !important}
+html.light .learn-card-meta,html.light .learn-card-date{color:#6B6B66 !important}
+html.light .av-protocol-file{background:rgba(0,0,0,0.03) !important;border-color:rgba(0,0,0,0.08) !important}
+html.light .av-protocol-file-name{color:#3A3A38 !important}
+html.light .av-protocol-file-btn{color:#1A1A1A !important;background:rgba(0,0,0,0.06) !important;border-color:rgba(0,0,0,0.12) !important}
+html.light .av-protocol-file-btn:hover{background:rgba(0,0,0,0.1) !important}
+html.light .av-case-card{background:rgba(0,0,0,0.03) !important;border-color:rgba(0,0,0,0.1) !important}
+html.light .av-case-card span:not([style*="D32F2F"]){color:#3A3A38 !important}
+html.light .learn-lock-label{color:#4A5340 !important}
+html.light .learn-download-btn{background:#1A1A1A !important;color:#FFFFFF !important}
+/* попап скачивания: светлая плашка, тёмная кнопка-крестик с белым крестиком, белый текст на кнопках */
+html.light .learn-modal{background:#FFFFFF !important;border-color:rgba(0,0,0,0.1) !important}
+html.light .learn-modal-header{border-bottom-color:rgba(0,0,0,0.08) !important}
+html.light .learn-modal-title{color:#141414 !important}
+html.light .learn-modal-close{background:#1A1A1A !important;color:#FFFFFF !important;border-color:rgba(0,0,0,0.2) !important}
+html.light .learn-modal-close:hover{background:#000000 !important;color:#FFFFFF !important}
+html.light .learn-lock-form{background:#EFEEEA !important}
+html.light .learn-lock-form p{color:#5F5F5A !important}
+html.light .learn-lock-form input{background:#FFFFFF !important;border-color:rgba(0,0,0,0.15) !important;color:#1A1A1A !important}
+html.light .learn-lock-submit{background:#1A1A1A !important;color:#FFFFFF !important}
+html.light .learn-success-msg{color:#141414 !important}
+html.light .learn-success-detail{color:#4A4A47 !important}
+/* кнопки в карточках карусели: Read — чёрная с белым текстом; Download — белая с тёмной рамкой */
+html.light .learn-card-read{background:#1A1A1A !important;color:#FFFFFF !important}
+html.light .learn-card-dl{background:#FFFFFF !important;color:#1A1A1A !important;border:1px solid rgba(0,0,0,0.25) !important}
 """
 
 THEME_JS = r"""(function(){var KEY='avare-theme';var root=document.documentElement;
