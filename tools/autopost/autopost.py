@@ -208,7 +208,8 @@ def parse_landing_cards(landing_html, exclude_slug):
             'title': _htmlmod.unescape(mtitle.group(1)) if mtitle else slug,
             'description': _htmlmod.unescape(mdesc.group(1)) if mdesc else '',
             'tagClass': mtag.group(1) if mtag else 'tag-guide',
-            'categoryLabel': _htmlmod.unescape(mtag.group(2)) if mtag else 'Guide'})
+            'categoryLabel': _htmlmod.unescape(mtag.group(2)) if mtag else 'Guide',
+            'hasPdf': ('btn-dl' in b)})
     return cards
 
 # ============ ЧАСТЬ 2: карточка на /learn + sitemap ============

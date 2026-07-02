@@ -23,6 +23,7 @@ html, body { margin: 0; padding: 0; background: #020202; }
 .learn-card-tags .tag { display: inline-block; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 0; }
 .tag-guide, .tag-case, .tag-protocol { background: rgba(162,168,132,0.12); color: var(--accent); }
 .tag-articles { background: rgba(162,168,132,0.22); color: var(--accent); }
+.learn-card-dl{background:transparent;color:var(--text);border:1px solid var(--border);}
 """
 LIGHT_THEME = r"""
 /* ===== THEME TOGGLE ===== */
@@ -244,7 +245,7 @@ def carousel_cards_html(others):
           '<div class="learn-card-title">'+E(o.get("title",""))+'</div>'
           '<div class="learn-card-desc">'+E(o.get("description",""))+'</div>'
           '</div></a>'
-          '<div class="learn-card-actions"><a href="/learn/'+o["slug"]+'" class="learn-card-read">Read</a></div>'
+          '<div class="learn-card-actions"><a href="/learn/'+o["slug"]+'" class="learn-card-read">Read</a>'+('<a href="/learn/'+o["slug"]+'" class="learn-card-dl">&darr; Download</a>' if o.get("hasPdf") else '')+'</div>'
           '</div>')
     if not out:
         out='<div class="learn-card"><div class="learn-card-body"><div class="learn-card-desc" style="padding:24px">More articles coming soon.</div></div></div>'
