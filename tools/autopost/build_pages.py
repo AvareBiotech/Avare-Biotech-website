@@ -123,7 +123,7 @@ html.light .learn-modal-header{border-bottom-color:rgba(0,0,0,0.08) !important}
 html.light .learn-modal-title{color:#141414 !important}
 html.light .learn-modal-close{background:#1A1A1A !important;color:#FFFFFF !important;border-color:rgba(0,0,0,0.2) !important}
 html.light .learn-modal-close:hover{background:#000000 !important;color:#FFFFFF !important}
-html.light .learn-lock-form{background:#EFEEEA !important}
+html.light .learn-lock-form{background:#F5F5F4 !important}
 html.light .learn-lock-form p{color:#5F5F5A !important}
 html.light .learn-lock-form input{background:#FFFFFF !important;border-color:rgba(0,0,0,0.15) !important;color:#1A1A1A !important}
 html.light .learn-lock-submit{background:#1A1A1A !important;color:#FFFFFF !important}
