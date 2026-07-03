@@ -19,7 +19,11 @@ html, body { margin: 0; padding: 0; background: #020202; }
 .learn-crumbs__cur { color:rgba(246,246,246,0.75); }
 @media (max-width: 640px) { #casesOverlay [data-cases-grid] { grid-template-columns: 1fr !important; } }
 .carousel-arrow { border-radius: 50% !important; }
-.carousel-arrow svg { width: 18px; height: 18px; display: block; }
+.carousel-arrow{position:relative}
+.carousel-arrow svg{display:none}
+.carousel-arrow::before{content:"";position:absolute;top:50%;left:50%;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;box-sizing:border-box}
+.carousel-arrow-left::before{transform:translate(-40%,-50%) rotate(135deg)}
+.carousel-arrow-right::before{transform:translate(-60%,-50%) rotate(-45deg)}
 .learn-card-tags .tag { display: inline-block; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 0; }
 .tag-guide, .tag-case, .tag-protocol { background: rgba(162,168,132,0.12); color: var(--accent); }
 .tag-articles { background: rgba(162,168,132,0.22); color: var(--accent); }
@@ -384,11 +388,11 @@ def build_page(a, others):
       <a href="/learn" class="nav-kb">Knowledge Base</a>
       <a href="/#contacts">Contacts</a>
       <span class="sep"></span>
-      <div class="av-lang" id="avLang">
-        <button class="av-lang__toggle" id="langToggle">EN <span class="av-lang__arrow">&#9660;</span></button>
+      <div class="av-lang" id="avLang" translate="no">
+        <button class="av-lang__toggle" id="langToggle"><span class="av-lang__code">EN</span> <span class="av-lang__arrow">&#9660;</span></button>
         <div class="av-lang__dropdown" id="langDropdown" style="grid-template-columns:1fr 1fr;min-width:132px">{lang_opts}</div>
       </div>
-      <div class="nav-lang-mob" style="flex-wrap:wrap">{lang_mob}</div>
+      <div class="nav-lang-mob" style="flex-wrap:wrap" translate="no">{lang_mob}</div>
     </div>
   </nav>
   <section class="learn-hero"><div class="learn-hero-inner">
@@ -408,11 +412,11 @@ def build_page(a, others):
   <section class="learn-others"><div class="carousel">
     <div class="learn-others-title">More from the Knowledge Base</div>
     <div class="carousel-stage">
-      <button class="carousel-arrow carousel-arrow-left" disabled aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      <button class="carousel-arrow carousel-arrow-left" disabled aria-label="Previous"></button>
       <div class="carousel-viewport"><div class="carousel-track">
         {others_cards}
       </div></div>
-      <button class="carousel-arrow carousel-arrow-right" disabled aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+      <button class="carousel-arrow carousel-arrow-right" disabled aria-label="Next"></button>
     </div>
   </div></section>
   <footer>

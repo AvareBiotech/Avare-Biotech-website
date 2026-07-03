@@ -1389,7 +1389,7 @@ window.pFaqOpen=function(){ var o=document.getElementById('pFaqOverlay'); if(o) 
 <div class="av-pdf-overlay" id="avPdfOverlay"><div class="av-pdf-wrap"><button class="av-pdf-close" id="avPdfClose">&#10005;</button><iframe id="avPdfFrame" src="" frameborder="0"></iframe></div></div>
 <script>(function(){var ov=document.getElementById('avPdfOverlay'),fr=document.getElementById('avPdfFrame'),cl=document.getElementById('avPdfClose');window.pOpenPdf=function(u){if(fr)fr.src=u;if(ov)ov.classList.add('open');};function c(){if(ov)ov.classList.remove('open');if(fr)fr.src='';}if(cl)cl.addEventListener('click',c);if(ov)ov.addEventListener('click',function(e){if(e.target===ov)c();});})();</script>
 <script>
-/* INLINE превью — только для локальной проверки; на проде оставь внешний файл */
+/* nayda-lang.js — вшит в страницу, чтобы переключатель работал и локально, и на сайте */
 /* Avare Biotech — единый переключатель языков для Nayda (server-side перевод).
    Подключается на всех страницах: <script src="/assets/nayda-lang.js" defer><\/script>
    Куда вставлять переключатель: <div class="nayda-lang" data-ar="/ar"></div>

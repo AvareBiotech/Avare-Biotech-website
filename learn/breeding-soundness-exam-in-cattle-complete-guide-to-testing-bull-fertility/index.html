@@ -798,7 +798,11 @@ html, body { margin: 0; padding: 0; background: #020202; }
 .learn-crumbs__cur { color:rgba(246,246,246,0.75); }
 @media (max-width: 640px) { #casesOverlay [data-cases-grid] { grid-template-columns: 1fr !important; } }
 .carousel-arrow { border-radius: 50% !important; }
-.carousel-arrow svg { width: 18px; height: 18px; display: block; }
+.carousel-arrow{position:relative}
+.carousel-arrow svg{display:none}
+.carousel-arrow::before{content:"";position:absolute;top:50%;left:50%;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;box-sizing:border-box}
+.carousel-arrow-left::before{transform:translate(-40%,-50%) rotate(135deg)}
+.carousel-arrow-right::before{transform:translate(-60%,-50%) rotate(-45deg)}
 .learn-card-tags .tag { display: inline-block; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 0; }
 .tag-guide, .tag-case, .tag-protocol { background: rgba(162,168,132,0.12); color: var(--accent); }
 .tag-articles { background: rgba(162,168,132,0.22); color: var(--accent); }
@@ -924,11 +928,11 @@ html.light .learn-card-dl{background:#FFFFFF !important;color:#1A1A1A !important
       <a href="/learn" class="nav-kb">Knowledge Base</a>
       <a href="/#contacts">Contacts</a>
       <span class="sep"></span>
-      <div class="av-lang" id="avLang">
-        <button class="av-lang__toggle" id="langToggle">EN <span class="av-lang__arrow">&#9660;</span></button>
+      <div class="av-lang" id="avLang" translate="no">
+        <button class="av-lang__toggle" id="langToggle"><span class="av-lang__code">EN</span> <span class="av-lang__arrow">&#9660;</span></button>
         <div class="av-lang__dropdown" id="langDropdown" style="grid-template-columns:1fr 1fr;min-width:132px"><button class="av-lang__opt" data-code="en">EN</button><button class="av-lang__opt" data-code="pt">PT</button><button class="av-lang__opt" data-code="es">ES</button><button class="av-lang__opt" data-code="ar">AR</button><button class="av-lang__opt" data-code="af">AF</button><button class="av-lang__opt" data-code="ur">UR</button><button class="av-lang__opt" data-code="tr">TR</button><button class="av-lang__opt" data-code="de">DE</button><button class="av-lang__opt" data-code="fr">FR</button><button class="av-lang__opt" data-code="it">IT</button><button class="av-lang__opt" data-code="hi">HI</button><button class="av-lang__opt" data-code="ja">JA</button><button class="av-lang__opt" data-code="zh">ZH</button><button class="av-lang__opt" data-code="el">EL</button></div>
       </div>
-      <div class="nav-lang-mob" style="flex-wrap:wrap"><button data-code="en">EN</button><button data-code="pt">PT</button><button data-code="es">ES</button><button data-code="ar">AR</button><button data-code="af">AF</button><button data-code="ur">UR</button><button data-code="tr">TR</button><button data-code="de">DE</button><button data-code="fr">FR</button><button data-code="it">IT</button><button data-code="hi">HI</button><button data-code="ja">JA</button><button data-code="zh">ZH</button><button data-code="el">EL</button></div>
+      <div class="nav-lang-mob" style="flex-wrap:wrap" translate="no"><button data-code="en">EN</button><button data-code="pt">PT</button><button data-code="es">ES</button><button data-code="ar">AR</button><button data-code="af">AF</button><button data-code="ur">UR</button><button data-code="tr">TR</button><button data-code="de">DE</button><button data-code="fr">FR</button><button data-code="it">IT</button><button data-code="hi">HI</button><button data-code="ja">JA</button><button data-code="zh">ZH</button><button data-code="el">EL</button></div>
     </div>
   </nav>
   <section class="learn-hero"><div class="learn-hero-inner">
@@ -948,11 +952,11 @@ html.light .learn-card-dl{background:#FFFFFF !important;color:#1A1A1A !important
   <section class="learn-others"><div class="carousel">
     <div class="learn-others-title">More from the Knowledge Base</div>
     <div class="carousel-stage">
-      <button class="carousel-arrow carousel-arrow-left" disabled aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      <button class="carousel-arrow carousel-arrow-left" disabled aria-label="Previous"></button>
       <div class="carousel-viewport"><div class="carousel-track">
         <div class="learn-card"><a href="/learn/10-artificial-insemination-mistakes-that-kill-your-conception-rate" class="learn-card-link"><div class="learn-card-img" style="padding:0"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/learn/10-artificial-insemination-mistakes-that-kill-your-conception-rate/cover.png" alt="10 Artificial Insemination Mistakes That Kill Your Conception Rate" style="width:100%;height:100%;object-fit:cover;display:block"/></div><div class="learn-card-body"><div class="learn-card-tags"><span class="tag tag-guide">Guide</span></div><div class="learn-card-title">10 Artificial Insemination Mistakes That Kill Your Conception Rate</div><div class="learn-card-desc">You did everything right. You bought good semen. You ran the protocol. And the cows still came up open. Most of the time, the problem is not the cow and no</div></div></a><div class="learn-card-actions"><a href="/learn/10-artificial-insemination-mistakes-that-kill-your-conception-rate" class="learn-card-read">Read</a><a href="/assets/media/learn/10-artificial-insemination-mistakes-that-kill-your-conception-rate/download.pdf" download class="learn-card-dl">&darr; Download</a></div></div><div class="learn-card"><a href="/learn/champion-genetics-customers-how-texas-ai-technicians-verify-semen-quality" class="learn-card-link"><div class="learn-card-img" style="padding:0"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/learn/champion-genetics-customers-how-texas-ai-technicians-verify-semen-quality/cover.png" alt="Champion Genetics Customers: How Texas AI Technicians Verify Semen Quality" style="width:100%;height:100%;object-fit:cover;display:block"/></div><div class="learn-card-body"><div class="learn-card-tags"><span class="tag tag-articles">Articles</span></div><div class="learn-card-title">Champion Genetics Customers: How Texas AI Technicians Verify Semen Quality</div><div class="learn-card-desc">Texas producers lose significant money every breeding season when high-quality semen from certified labs loses viability between the tank and the cow. Even</div></div></a><div class="learn-card-actions"><a href="/learn/champion-genetics-customers-how-texas-ai-technicians-verify-semen-quality" class="learn-card-read">Read</a></div></div><div class="learn-card"><a href="/learn/semen-storage-handling" class="learn-card-link"><div class="learn-card-img" style="padding:0"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/Semen%20Storage%20%26%20Handling.png" alt="Semen Storage &amp; Handling: 10 Critical Steps" style="width:100%;height:100%;object-fit:cover;display:block"/></div><div class="learn-card-body"><div class="learn-card-tags"><span class="tag tag-guide">Guide</span></div><div class="learn-card-title">Semen Storage &amp; Handling: 10 Critical Steps</div><div class="learn-card-desc">Temperature errors during thawing cost more than any equipment failure. Here&#x27;s what actually matters.</div></div></a><div class="learn-card-actions"><a href="/learn/semen-storage-handling" class="learn-card-read">Read</a><a href="/assets/media/learn-pdf/semen-storage-handling.pdf" download class="learn-card-dl">&darr; Download</a></div></div><div class="learn-card"><a href="/learn/semen-quality-analysis" class="learn-card-link"><div class="learn-card-img" style="padding:0"><img src="https://raw.githubusercontent.com/AvareBiotech/Avare-Biotech-website/main/assets/media/images/Cover-semen-quality-analysis.png" alt="Frozen-thawed/Fresh semen quality analysis (en/pt/ar)" style="width:100%;height:100%;object-fit:cover;display:block"/></div><div class="learn-card-body"><div class="learn-card-tags"><span class="tag tag-protocol">Protocol</span></div><div class="learn-card-title">Frozen-thawed/Fresh semen quality analysis (en/pt/ar)</div><div class="learn-card-desc">This protocol confirms that Avare App reads motility and concentration as accurately as CASA and manual count — and works where no lab system is within reach.</div></div></a><div class="learn-card-actions"><a href="/learn/semen-quality-analysis" class="learn-card-read">Read</a><a href="/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf" download class="learn-card-dl">&darr; Download</a></div></div>
       </div></div>
-      <button class="carousel-arrow carousel-arrow-right" disabled aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+      <button class="carousel-arrow carousel-arrow-right" disabled aria-label="Next"></button>
     </div>
   </div></section>
   <footer>
@@ -1026,11 +1030,11 @@ html.light .learn-card-dl{background:#FFFFFF !important;color:#1A1A1A !important
   var codes=["en","pt","es","ar","af","ur","tr","de","fr","it","ru","hi","ja","zh","el"];
   var cur=codes.indexOf(seg)>=0?seg:"en";
   var tgl=$("#langToggle");
-  if(tgl) tgl.firstChild.nodeValue=cur.toUpperCase()+" ";
-  function langURL(c){ if(c==="ar")return "/ar"; if(c==="en")return "/learn/"+window.SLUG; return "/"+c+"/learn/"+window.SLUG; }
+  if(tgl){var codeEl=tgl.querySelector(".av-lang__code"); if(codeEl){codeEl.textContent=cur.toUpperCase();} else if(tgl.firstChild){tgl.firstChild.nodeValue=cur.toUpperCase()+" ";}}
+  function langURL(c){ if(c==="en")return "/learn/"+window.SLUG; return "/"+c+"/learn/"+window.SLUG; }
   $all(".av-lang__opt,.nav-lang-mob button").forEach(function(b){
     if(b.getAttribute("data-code")===cur)b.classList.add("active");
-    b.addEventListener("click",function(e){e.stopPropagation();var c=b.getAttribute("data-code");if(c==="ar"){window.open("/ar","_blank");}else{window.location.href=langURL(c);}});
+    b.addEventListener("click",function(e){e.stopPropagation();var c=b.getAttribute("data-code");window.location.href=langURL(c);});
   });
   if(tgl){
     tgl.addEventListener("click",function(e){e.stopPropagation();$("#avLang").classList.toggle("open");});

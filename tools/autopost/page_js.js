@@ -12,7 +12,7 @@
   var codes=["en","pt","es","ar","af","ur","tr","de","fr","it","ru","hi","ja","zh","el"];
   var cur=codes.indexOf(seg)>=0?seg:"en";
   var tgl=$("#langToggle");
-  if(tgl) tgl.firstChild.nodeValue=cur.toUpperCase()+" ";
+  if(tgl){var codeEl=tgl.querySelector(".av-lang__code"); if(codeEl){codeEl.textContent=cur.toUpperCase();} else if(tgl.firstChild){tgl.firstChild.nodeValue=cur.toUpperCase()+" ";}}
   function langURL(c){ if(c==="en")return "/learn/"+window.SLUG; return "/"+c+"/learn/"+window.SLUG; }
   $all(".av-lang__opt,.nav-lang-mob button").forEach(function(b){
     if(b.getAttribute("data-code")===cur)b.classList.add("active");
