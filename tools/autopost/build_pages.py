@@ -32,8 +32,7 @@ html, body { margin: 0; padding: 0; background: #020202; }
 """
 LIGHT_THEME = r"""
 /* ===== THEME TOGGLE ===== */
-.learn-nav .learn-nav-logo{margin-right:auto}
-[dir="rtl"] .learn-nav{direction:ltr}
+.learn-nav .learn-nav-logo{margin-inline-end:auto}
 [dir="rtl"] .av-footer-main__grid{margin-left:auto;margin-right:0}
 [dir="rtl"] .av-footer-main__map{left:0;right:50%}
 .learn-nav .theme-toggle{margin-left:10px}

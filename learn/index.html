@@ -613,7 +613,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
   <div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
   <p class="hero-sub" style="margin:0;" data-i18n="hero.sub">Free articles, guides, and protocols — for vets, AI technicians, and farm managers.</p>
   <div class="subscribe">
-    <input type="email" placeholder="Your email" data-i18n-ph="form.email"/>
+    <input type="email" placeholder="Your email" data-i18n-ph="form.email" onkeydown="if(event.key==='Enter')handleSubscribe(this.nextElementSibling)"/>
     <button onclick="handleSubscribe(this)" data-i18n="btn.subscribe">Subscribe →</button>
   </div>
   <div class="subscribe-done" style="display:none;font-size:15px;font-weight:600;color:var(--accent);line-height:1.7;text-align:center;">&#10003; <span>Subscribed!</span> <span>We will be in touch at</span> <span class="sub-email"></span></div>
@@ -939,7 +939,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 <div class="bottom-subscribe">
   <p class="bottom-subscribe-text" data-i18n="cta.unlock">Unlock the rest of our helpful resources and get free access to new content with a subscription</p>
   <div class="subscribe">
-    <input type="email" id="bottom-email" placeholder="Your email" data-i18n-ph="form.email"/>
+    <input type="email" id="bottom-email" placeholder="Your email" data-i18n-ph="form.email" onkeydown="if(event.key==='Enter')handleSubscribeBottom(this.nextElementSibling)"/>
     <button onclick="handleSubscribeBottom(this)" data-i18n="btn.subscribe">Subscribe →</button>
   </div>
   <div class="bottom-subscribe-done" style="display:none;text-align:center;"><p style="font-size:15px;font-weight:600;color:var(--accent);margin:0;">&#10003; <span>Subscribed!</span></p><p style="font-size:14px;color:var(--muted);margin:8px 0 0;line-height:1.7;"><span>We will send new resources to</span> <strong class="sub-email" style="color:var(--text)"></strong></p></div>
@@ -1137,7 +1137,7 @@ function downloadPDF(modalId){
 function unlockAllDownloads(){
   document.querySelectorAll('.btn-dl.btn-locked').forEach(function(dlBtn){
     dlBtn.classList.remove('btn-locked');
-    dlBtn.textContent=learnT('btn.downloaded');
+    dlBtn.textContent=(dlBtn.textContent||'').replace('🔒','↓');
     var oc=dlBtn.getAttribute('onclick')||'';
     var match=oc.match(/modal\d+lock/);
     var mid=match?match[0]:'modal1lock';
@@ -1183,15 +1183,12 @@ function handleSubscribe(btn){
   if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
   input.value='';
   btn.disabled=true;
-  fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'})
-    .catch(function(){})
-    .finally(function(){
-      saveAndUnlock();
-      var subscribe=btn.closest('.subscribe');
-      if(subscribe){
-        var done=subscribe.nextElementSibling;subscribe.style.display='none';if(done&&done.classList.contains('subscribe-done')){var em=done.querySelector('.sub-email');if(em)em.textContent=email;done.style.display='';}
-      }
-    });
+  try{fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'});}catch(e){}
+  saveAndUnlock();
+  var subscribe=btn.closest('.subscribe');
+  if(subscribe){
+    var done=subscribe.nextElementSibling;subscribe.style.display='none';if(done&&done.classList.contains('subscribe-done')){var em=done.querySelector('.sub-email');if(em)em.textContent=email;done.style.display='';}
+  }
 }
 function handleSubscribeBottom(btn){
   var input=document.getElementById('bottom-email');
@@ -1199,15 +1196,12 @@ function handleSubscribeBottom(btn){
   if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
   input.value='';
   btn.disabled=true;
-  fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'})
-    .catch(function(){})
-    .finally(function(){
-      saveAndUnlock();
-      var section=btn.closest('.bottom-subscribe');
-      if(section){
-        var form=section.querySelector('.subscribe');var intro=section.querySelector('.bottom-subscribe-text');var done=section.querySelector('.bottom-subscribe-done');if(form)form.style.display='none';if(intro)intro.style.display='none';if(done){var em=done.querySelector('.sub-email');if(em)em.textContent=email;done.style.display='';}
-      }
-    });
+  try{fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'});}catch(e){}
+  saveAndUnlock();
+  var section=btn.closest('.bottom-subscribe');
+  if(section){
+    var form=section.querySelector('.subscribe');var intro=section.querySelector('.bottom-subscribe-text');var done=section.querySelector('.bottom-subscribe-done');if(form)form.style.display='none';if(intro)intro.style.display='none';if(done){var em=done.querySelector('.sub-email');if(em)em.textContent=email;done.style.display='';}
+  }
 }
 </script>
 
