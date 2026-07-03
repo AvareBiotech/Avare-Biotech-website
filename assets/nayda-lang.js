@@ -11,7 +11,7 @@
     ['fr', 'FR'], ['it', 'IT'], 
     ['hi', 'HI'], ['ja', 'JA'], ['zh', 'ZH'], ['el', 'EL']
   ];
-  var NAYDA = ['en', 'pt', 'es', 'af', 'ur', 'tr', 'de', 'fr', 'it', 'hi', 'ja', 'zh', 'el']; // языки, которые даёт Nayda (без AR)
+  var NAYDA = ['en', 'pt', 'es', 'ar', 'af', 'ur', 'tr', 'de', 'fr', 'it', 'hi', 'ja', 'zh', 'el']; // языки, которые переводит Nayda (теперь включая AR)
 
   function currentLang() {
     var h = (document.documentElement.getAttribute('lang') || '').toLowerCase().slice(0, 2);
@@ -33,7 +33,7 @@
   }
 
   function go(code, arUrl) {
-    if (code === 'ar') { window.open(arUrl || '/ar', '_blank'); return; } // AR — отдельная страница, новая вкладка
+    if (code === 'ar' && arUrl) { window.open(arUrl, '_blank'); return; } // AR с data-ar — ручная страница; иначе переводит Nayda
     window.location.href = langURL(code);
   }
   window.naydaGo = go; // можно дёргать из любых кнопок: onclick="naydaGo('de')"
@@ -55,7 +55,7 @@
   }
 
   function build(el) {
-    var arUrl = el.getAttribute('data-ar') || '/ar';
+    var arUrl = el.getAttribute('data-ar');  // нет data-ar -> арабский переводит Nayda
     var cur = currentLang();
     el.classList.add('nl');
     var html = '<button type="button" class="nl-btn">' + cur.toUpperCase() +

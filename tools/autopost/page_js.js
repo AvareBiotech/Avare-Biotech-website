@@ -13,10 +13,10 @@
   var cur=codes.indexOf(seg)>=0?seg:"en";
   var tgl=$("#langToggle");
   if(tgl) tgl.firstChild.nodeValue=cur.toUpperCase()+" ";
-  function langURL(c){ if(c==="ar")return "/ar"; if(c==="en")return "/learn/"+window.SLUG; return "/"+c+"/learn/"+window.SLUG; }
+  function langURL(c){ if(c==="en")return "/learn/"+window.SLUG; return "/"+c+"/learn/"+window.SLUG; }
   $all(".av-lang__opt,.nav-lang-mob button").forEach(function(b){
     if(b.getAttribute("data-code")===cur)b.classList.add("active");
-    b.addEventListener("click",function(e){e.stopPropagation();var c=b.getAttribute("data-code");if(c==="ar"){window.open("/ar","_blank");}else{window.location.href=langURL(c);}});
+    b.addEventListener("click",function(e){e.stopPropagation();var c=b.getAttribute("data-code");window.location.href=langURL(c);});
   });
   if(tgl){
     tgl.addEventListener("click",function(e){e.stopPropagation();$("#avLang").classList.toggle("open");});

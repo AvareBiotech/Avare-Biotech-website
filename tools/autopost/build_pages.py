@@ -168,7 +168,6 @@ def fmt_date(iso):
     except: return iso
 
 def lang_href(code, slug):
-    if code=="ar": return "/ar"
     if code=="en": return "/learn/"+slug
     return "/"+code+"/learn/"+slug
 
