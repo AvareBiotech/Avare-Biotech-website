@@ -455,6 +455,7 @@ textarea.p-field-input { resize: vertical; min-height: 124.8px; }
   .av-protocol-file-actions { display: flex; gap: 8px; margin-top: 4px; }
   .av-protocol-file-btn { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font); font-size: var(--fs-body); font-weight: 500; color: rgba(246,246,246,0.7) !important; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 6px 12px; text-decoration: none !important; cursor: pointer; transition: background .2s; }
 </style>
+<style>[dir="rtl"] .av-footer-main__grid{margin-left:auto;margin-right:0}[dir="rtl"] .av-footer-main__map{left:0;right:50%}</style>
 </head>
 <body>
 <div style="width:100%;overflow:hidden;max-width:100vw;">
@@ -928,12 +929,11 @@ document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#
 </script>
 </div>
 <script>
-/* nayda-lang.js — вшит в страницу, чтобы переключатель работал и локально, и на сайте */
+/* nayda-lang.js вшит: переключатель работает и локально, и на сайте */
 /* Avare Biotech — единый переключатель языков для Nayda (server-side перевод).
-   Подключается на всех страницах: <script src="/assets/nayda-lang.js" defer><\/script>
-   Куда вставлять переключатель: <div class="nayda-lang" data-ar="/ar"></div>
-   data-ar — адрес арабской версии этой страницы (отдельная ручная страница, открывается в новой вкладке).
-   Языки берутся из <html lang="xx">, который проставляет Nayda. Навигация — реальные переходы на /xx/<путь>. */
+   Подключается на всех страницах. Точка вставки — элемент с классом nayda-lang.
+   Если у элемента задан атрибут data-ar с URL ручной страницы — арабский открывает её; иначе арабский переводит Nayda.
+   Язык берётся из html lang, который проставляет Nayda. Навигация — реальные переходы на префикс языка. */
 (function () {
   // Языки Nayda + AR (AR — отдельная ручная страница). Порядок: EN, PT, ES, AR, затем остальные.
   var LANGS = [

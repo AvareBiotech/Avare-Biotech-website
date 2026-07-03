@@ -584,6 +584,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
   .av-pdf-close { position:absolute; top:8px; right:8px; width:34px; height:34px; border-radius:8px; background:rgba(0,0,0,0.6); border:none; color:#fff; font-size:16px; cursor:pointer; z-index:2; display:flex; align-items:center; justify-content:center; }
   @media (max-width:640px){ .av-pdf-wrap{ width:calc(100vw - 14px); height:calc(100vh - 64px); } }
 </style>
+<style>[dir="rtl"] .av-footer-main__grid{margin-left:auto;margin-right:0}[dir="rtl"] .av-footer-main__map{left:0;right:50%}</style>
 </head>
 <body>
 
@@ -615,6 +616,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
     <input type="email" placeholder="Your email" data-i18n-ph="form.email"/>
     <button onclick="handleSubscribe(this)" data-i18n="btn.subscribe">Subscribe →</button>
   </div>
+  <div class="subscribe-done" style="display:none;font-size:15px;font-weight:600;color:var(--accent);line-height:1.7;text-align:center;">&#10003; <span>Subscribed!</span> <span>We will be in touch at</span> <span class="sub-email"></span></div>
   <p style="font-size:15px;color:var(--muted);margin:0;line-height:1.7;max-width:480px;text-align:center;" data-i18n="cta.unlock">Unlock the rest of our helpful resources and get free access to new content with a subscription</p>
   </div>
 </div>
@@ -940,6 +942,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
     <input type="email" id="bottom-email" placeholder="Your email" data-i18n-ph="form.email"/>
     <button onclick="handleSubscribeBottom(this)" data-i18n="btn.subscribe">Subscribe →</button>
   </div>
+  <div class="bottom-subscribe-done" style="display:none;text-align:center;"><p style="font-size:15px;font-weight:600;color:var(--accent);margin:0;">&#10003; <span>Subscribed!</span></p><p style="font-size:14px;color:var(--muted);margin:8px 0 0;line-height:1.7;"><span>We will send new resources to</span> <strong class="sub-email" style="color:var(--text)"></strong></p></div>
 </div>
 
 
@@ -1155,7 +1158,7 @@ function unlockForm(formId,btn){
   var form=document.getElementById(formId);
   var email=form.querySelector('input[type="email"]').value.trim();
   if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
-  btn.textContent=learnT('toast.sending');btn.disabled=true;
+  btn.disabled=true;
   fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'}).catch(function(){});
   setTimeout(function(){
     saveAndUnlock();
@@ -1165,9 +1168,9 @@ function unlockForm(formId,btn){
     if(url){
       var a=document.createElement('a');a.href=url;a.download=url.split('/').pop();a.target='_blank';
       document.body.appendChild(a);a.click();document.body.removeChild(a);
-      form.innerHTML='<p style="color:var(--accent);font-weight:700;font-size:15px;margin-bottom:10px;">&#10003; <span data-i18n="toast.subscribed">Subscribed!</span></p><p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:16px;"><span data-i18n="toast.dling">Your PDF is downloading. If it did not start,</span> <a href="'+url+'" target="_blank" style="color:var(--accent);text-decoration:underline;"><span data-i18n="toast.clickhere">click here</span></a>.</p><button class="modal-dl-btn" data-i18n="btn.dlpdf" onclick="downloadPDF(&quot;'+mid+'&quot;)">Download PDF &rarr;</button>';learnApplyLang(_learnLang());
+      form.innerHTML='<p style="color:var(--accent);font-weight:700;font-size:15px;margin-bottom:10px;">&#10003; <span data-i18n="toast.subscribed">Subscribed!</span></p><p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:16px;"><span data-i18n="toast.dling">Your PDF is downloading. If it did not start,</span> <a href="'+url+'" target="_blank" style="color:var(--accent);text-decoration:underline;"><span data-i18n="toast.clickhere">click here</span></a>.</p><button class="modal-dl-btn" data-i18n="btn.dlpdf" onclick="downloadPDF(&quot;'+mid+'&quot;)">Download PDF &rarr;</button>';/*nayda-handles-i18n*/;
     }else{
-      form.innerHTML='<p style="color:var(--accent);font-weight:700;font-size:15px;margin-bottom:10px;">&#10003; <span data-i18n="toast.subscribed">Subscribed!</span></p><p style="color:var(--muted);font-size:14px;line-height:1.8;"><span data-i18n="toast.coming">PDF coming soon.</span></p>';learnApplyLang(_learnLang());
+      form.innerHTML='<p style="color:var(--accent);font-weight:700;font-size:15px;margin-bottom:10px;">&#10003; <span data-i18n="toast.subscribed">Subscribed!</span></p><p style="color:var(--muted);font-size:14px;line-height:1.8;"><span data-i18n="toast.coming">PDF coming soon.</span></p>';/*nayda-handles-i18n*/;
     }
     setTimeout(function(){
       document.querySelectorAll('.modal-overlay.open').forEach(function(m){closeModal(m.id);});
@@ -1179,14 +1182,14 @@ function handleSubscribe(btn){
   var email=input.value.trim();
   if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
   input.value='';
-  btn.textContent=learnT('toast.sending');btn.disabled=true;
+  btn.disabled=true;
   fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'})
     .catch(function(){})
     .finally(function(){
       saveAndUnlock();
       var subscribe=btn.closest('.subscribe');
       if(subscribe){
-        subscribe.innerHTML="<p style='font-size:15px;font-weight:600;color:var(--accent);padding:13px 20px;margin:0;'>&#10003; <span data-i18n='toast.subscribed'>Subscribed!</span> <span data-i18n='toast.intouch'>We will be in touch at</span> "+email+"</p>";learnApplyLang(_learnLang());
+        var done=subscribe.nextElementSibling;subscribe.style.display='none';if(done&&done.classList.contains('subscribe-done')){var em=done.querySelector('.sub-email');if(em)em.textContent=email;done.style.display='';}
       }
     });
 }
@@ -1195,14 +1198,14 @@ function handleSubscribeBottom(btn){
   var email=input.value.trim();
   if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
   input.value='';
-  btn.textContent=learnT('toast.sending');btn.disabled=true;
+  btn.disabled=true;
   fetch(LEARN_SCRIPT+'?'+new URLSearchParams({type:'learn_subscribe',email:email}).toString(),{method:'GET',mode:'no-cors'})
     .catch(function(){})
     .finally(function(){
       saveAndUnlock();
       var section=btn.closest('.bottom-subscribe');
       if(section){
-        section.innerHTML="<p style='font-size:15px;font-weight:600;color:var(--accent);margin:0;'>&#10003; <span data-i18n='toast.subscribed'>Subscribed!</span></p><p style='font-size:14px;color:var(--muted);margin:8px 0 0;line-height:1.7;'><span data-i18n='toast.newres'>We will send new resources to</span>  <strong style='color:var(--text)'>"+email+"</strong></p>";learnApplyLang(_learnLang());
+        var form=section.querySelector('.subscribe');var intro=section.querySelector('.bottom-subscribe-text');var done=section.querySelector('.bottom-subscribe-done');if(form)form.style.display='none';if(intro)intro.style.display='none';if(done){var em=done.querySelector('.sub-email');if(em)em.textContent=email;done.style.display='';}
       }
     });
 }
@@ -1389,12 +1392,11 @@ window.pFaqOpen=function(){ var o=document.getElementById('pFaqOverlay'); if(o) 
 <div class="av-pdf-overlay" id="avPdfOverlay"><div class="av-pdf-wrap"><button class="av-pdf-close" id="avPdfClose">&#10005;</button><iframe id="avPdfFrame" src="" frameborder="0"></iframe></div></div>
 <script>(function(){var ov=document.getElementById('avPdfOverlay'),fr=document.getElementById('avPdfFrame'),cl=document.getElementById('avPdfClose');window.pOpenPdf=function(u){if(fr)fr.src=u;if(ov)ov.classList.add('open');};function c(){if(ov)ov.classList.remove('open');if(fr)fr.src='';}if(cl)cl.addEventListener('click',c);if(ov)ov.addEventListener('click',function(e){if(e.target===ov)c();});})();</script>
 <script>
-/* nayda-lang.js — вшит в страницу, чтобы переключатель работал и локально, и на сайте */
+/* nayda-lang.js вшит: переключатель работает и локально, и на сайте */
 /* Avare Biotech — единый переключатель языков для Nayda (server-side перевод).
-   Подключается на всех страницах: <script src="/assets/nayda-lang.js" defer><\/script>
-   Куда вставлять переключатель: <div class="nayda-lang" data-ar="/ar"></div>
-   data-ar — адрес арабской версии этой страницы (отдельная ручная страница, открывается в новой вкладке).
-   Языки берутся из <html lang="xx">, который проставляет Nayda. Навигация — реальные переходы на /xx/<путь>. */
+   Подключается на всех страницах. Точка вставки — элемент с классом nayda-lang.
+   Если у элемента задан атрибут data-ar с URL ручной страницы — арабский открывает её; иначе арабский переводит Nayda.
+   Язык берётся из html lang, который проставляет Nayda. Навигация — реальные переходы на префикс языка. */
 (function () {
   // Языки Nayda + AR (AR — отдельная ручная страница). Порядок: EN, PT, ES, AR, затем остальные.
   var LANGS = [

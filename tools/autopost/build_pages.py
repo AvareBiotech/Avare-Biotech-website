@@ -21,9 +21,10 @@ html, body { margin: 0; padding: 0; background: #020202; }
 .carousel-arrow { border-radius: 50% !important; }
 .carousel-arrow{position:relative}
 .carousel-arrow svg{display:none}
-.carousel-arrow::before{content:"";position:absolute;top:50%;left:50%;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;box-sizing:border-box}
-.carousel-arrow-left::before{transform:translate(-40%,-50%) rotate(135deg)}
-.carousel-arrow-right::before{transform:translate(-60%,-50%) rotate(-45deg)}
+.carousel-stage{direction:ltr}
+.carousel-arrow::before{content:"";position:absolute;top:50%;left:50%;width:8px;height:8px;border-top:2px solid currentColor;border-right:2px solid currentColor;box-sizing:border-box}
+.carousel-arrow-left::before{transform:translate(-30%,-50%) rotate(-135deg)}
+.carousel-arrow-right::before{transform:translate(-70%,-50%) rotate(45deg)}
 .learn-card-tags .tag { display: inline-block; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 0; }
 .tag-guide, .tag-case, .tag-protocol { background: rgba(162,168,132,0.12); color: var(--accent); }
 .tag-articles { background: rgba(162,168,132,0.22); color: var(--accent); }
@@ -32,6 +33,9 @@ html, body { margin: 0; padding: 0; background: #020202; }
 LIGHT_THEME = r"""
 /* ===== THEME TOGGLE ===== */
 .learn-nav .learn-nav-logo{margin-right:auto}
+[dir="rtl"] .learn-nav{direction:ltr}
+[dir="rtl"] .av-footer-main__grid{margin-left:auto;margin-right:0}
+[dir="rtl"] .av-footer-main__map{left:0;right:50%}
 .learn-nav .theme-toggle{margin-left:10px}
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:9px;cursor:pointer;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#F6F6F6;flex-shrink:0;transition:background .2s,color .2s,border-color .2s;padding:0}
 .theme-toggle:hover{background:rgba(255,255,255,0.14)}
@@ -382,7 +386,7 @@ def build_page(a, others):
   <nav class="learn-nav">
     <a href="/" class="learn-nav-logo"><img class="logo-white" src="{RAW}/images/49.png" alt="Avare Biotech"/><img class="logo-dark" src="{RAW}/images/48.png" alt="Avare Biotech"/></a>
     <button class="learn-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Light / Dark"><svg class="tt-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="tt-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <button class="theme-toggle" id="themeToggle" translate="no" aria-label="Toggle theme" title="Light / Dark"><svg class="tt-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="tt-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
     <div class="learn-nav-pill" id="navPill">
       <a href="/"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2.1L1 12h3v9h7v-6h2v6h7v-9h3L12 2.1z"></path></svg>Home</a>
       <a href="/learn" class="nav-kb">Knowledge Base</a>

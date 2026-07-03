@@ -217,7 +217,8 @@
       .footer { padding: 20px; }
     }
   </style>
-</head>
+<style>[dir="rtl"] .av-footer-main__grid{margin-left:auto;margin-right:0}[dir="rtl"] .av-footer-main__map{left:0;right:50%}</style>
+<style>.nav .nayda-lang .nl-menu{right:10px !important;max-width:calc(100vw - 24px)}</style></head>
 <body>
 
 <nav class="nav">
@@ -492,12 +493,11 @@ function setLang(lang) {
 </script>
 
 <script>
-/* nayda-lang.js — вшит в страницу, чтобы переключатель работал и локально, и на сайте */
+/* nayda-lang.js вшит: переключатель работает и локально, и на сайте */
 /* Avare Biotech — единый переключатель языков для Nayda (server-side перевод).
-   Подключается на всех страницах: <script src="/assets/nayda-lang.js" defer><\/script>
-   Куда вставлять переключатель: <div class="nayda-lang" data-ar="/ar"></div>
-   data-ar — адрес арабской версии этой страницы (отдельная ручная страница, открывается в новой вкладке).
-   Языки берутся из <html lang="xx">, который проставляет Nayda. Навигация — реальные переходы на /xx/<путь>. */
+   Подключается на всех страницах. Точка вставки — элемент с классом nayda-lang.
+   Если у элемента задан атрибут data-ar с URL ручной страницы — арабский открывает её; иначе арабский переводит Nayda.
+   Язык берётся из html lang, который проставляет Nayda. Навигация — реальные переходы на префикс языка. */
 (function () {
   // Языки Nayda + AR (AR — отдельная ручная страница). Порядок: EN, PT, ES, AR, затем остальные.
   var LANGS = [
