@@ -1,4 +1,4 @@
-import re, os, html, json, glob
+import re, os, html, json, glob, urllib.parse
 E=html.escape
 NS={}
 exec(open('build_pages.py',encoding='utf-8').read(), NS)   # генератор + RAW, build_page, modal_html...
@@ -163,7 +163,7 @@ def build(slug):
     a['hasPdf']=pdf_name is not None
     a['pdfUrl']=f"{RAW}/learn/{slug}/{pdf_name or 'download.pdf'}"
     other=pick_other(slug)
-    if other: other['hasPdf']=True; other['pdfUrl']=card_pdf_url(other['slug'])  # существующие статьи из materials имеют PDF
+    if other: other['hasPdf']=True; other['pdfUrl']=card_pdf_url(other['slug'], '/tmp/content')  # ищем PDF по формату
     page=NS['build_page'](a, other)
     out=f'/mnt/user-data/outputs/learn/{slug}'; os.makedirs(out,exist_ok=True)
     open(out+'/index.html','w',encoding='utf-8').write(page)
@@ -194,11 +194,19 @@ SPECIAL_PDF={
     "semen-storage-handling":"/assets/media/learn-pdf/semen-storage-handling.pdf",
     "semen-quality-analysis":"/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf",
 }
-def card_pdf_url(slug):
-    # автопост кладёт PDF в assets/media/learn/<slug>/download.pdf; спец-случаи — в SPECIAL_PDF
-    return SPECIAL_PDF.get(slug, "/assets/media/learn/"+slug+"/download.pdf")
+def card_pdf_url(slug, content_dir=None):
+    # 1) ПО ФОРМАТУ: реальный PDF (по %PDF-байтам) в content/<slug>/ — как и на странице статьи
+    if content_dir:
+        name=pdf_name_in_folder(slug, content_dir)
+        if name:
+            return "/assets/media/learn/"+slug+"/"+urllib.parse.quote(name)
+    # 2) спец-случаи (старые статьи без content/*.md)
+    if slug in SPECIAL_PDF:
+        return SPECIAL_PDF[slug]
+    # 3) запасной вариант
+    return "/assets/media/learn/"+slug+"/download.pdf"
 
-def parse_landing_cards(landing_html, exclude_slug):
+def parse_landing_cards(landing_html, exclude_slug, content_dir=None):
     cards=[]
     blocks=re.split(r'(?=<div class="card" data-type=)', landing_html)
     for b in blocks:
@@ -218,7 +226,7 @@ def parse_landing_cards(landing_html, exclude_slug):
             'tagClass': mtag.group(1) if mtag else 'tag-guide',
             'categoryLabel': _htmlmod.unescape(mtag.group(2)) if mtag else 'Guide',
             'hasPdf': ('btn-dl' in b),
-            'pdfUrl': (card_pdf_url(slug) if ('btn-dl' in b) else None)})
+            'pdfUrl': (card_pdf_url(slug, content_dir) if ('btn-dl' in b) else None)})
     return cards
 
 # ============ ЧАСТЬ 2: карточка на /learn + sitemap ============
@@ -285,7 +293,7 @@ def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
         if is_img or is_pdf:
             shutil.copy2(os.path.join(src,fn), os.path.join(dst,fn))
     land=open(repo+'/learn/index.html',encoding='utf-8').read()
-    others=parse_landing_cards(land, slug)[:8]
+    others=parse_landing_cards(land, slug, content_dir)[:8]
     page=NS['build_page'](a, others)
     os.makedirs(repo+'/learn/'+slug, exist_ok=True)
     open(repo+'/learn/'+slug+'/index.html','w',encoding='utf-8').write(page)
