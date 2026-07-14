@@ -261,11 +261,32 @@ def insert_card(landing_html, a):
     card=build_card(a)
     return landing_html.replace(GRID_MARK, GRID_MARK+'\n  '+card, 1), True
 
+SITEMAP_LANGS=['en','pt','es','ar','af','ur','tr','de','fr','it','hi','ja','zh','el']
+def _sm_url(lang, path):
+    return 'https://avareit.com/'+path if lang=='en' else 'https://avareit.com/'+lang+'/'+path
 def update_sitemap(xml, slug):
-    loc='https://avareit.com/learn/'+slug
+    import datetime
+    path='learn/'+slug
+    loc='https://avareit.com/'+path
     if loc+'<' in xml or loc+'</loc>' in xml:
         return xml, False
-    entry='  <url>\n    <loc>'+loc+'</loc>\n    <changefreq>weekly</changefreq>\n  </url>\n'
+    # гарантируем namespace xhtml для hreflang-альтернатив (на случай старого sitemap)
+    if 'xmlns:xhtml' not in xml:
+        xml=xml.replace('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+                        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n        xmlns:xhtml="http://www.w3.org/1999/xhtml">', 1)
+    today=datetime.date.today().isoformat()
+    alts=''
+    for l in SITEMAP_LANGS:
+        alts+='    <xhtml:link rel="alternate" hreflang="'+l+'" href="'+_sm_url(l,path)+'"/>\n'
+    alts+='    <xhtml:link rel="alternate" hreflang="x-default" href="'+_sm_url('en',path)+'"/>\n'
+    entry=''
+    for l in SITEMAP_LANGS:
+        entry+=('  <url>\n    <loc>'+_sm_url(l,path)+'</loc>\n'
+                '    <lastmod>'+today+'</lastmod>\n'
+                '    <changefreq>monthly</changefreq>\n'
+                '    <priority>0.8</priority>\n'
+                +alts+
+                '  </url>\n')
     return xml.replace('</urlset>', entry+'</urlset>', 1), True
 
 def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):

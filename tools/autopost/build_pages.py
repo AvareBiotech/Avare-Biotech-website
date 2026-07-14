@@ -326,6 +326,9 @@ TRACKING = """<script>
 
 def build_page(a, others):
     slug=a["slug"]
+    _HL_LANGS=["en","pt","es","ar","af","ur","tr","de","fr","it","hi","ja","zh","el"]
+    def _hl_url(l): return "https://avareit.com/learn/"+slug if l=="en" else "https://avareit.com/"+l+"/learn/"+slug
+    hreflang_block="\n".join('<link rel="alternate" hreflang="'+l+'" href="'+_hl_url(l)+'"/>' for l in _HL_LANGS)+'\n<link rel="alternate" hreflang="x-default" href="https://avareit.com/learn/'+slug+'"/>'
     _url="https://avareit.com/learn/"+slug
     _logo={"@type":"ImageObject","url":RAW+"/images/fav.png"}
     _org={"@type":"Organization","name":"Avare Biotech Inc.","url":"https://avareit.com","logo":_logo}
@@ -374,6 +377,7 @@ def build_page(a, others):
 <title>{E(a["title"])} — Avare Biotech</title>
 <meta name="description" content="{E(desc)}"/>
 <link rel="canonical" href="https://avareit.com/learn/{slug}"/>
+{hreflang_block}
 {seo}
 <link rel="icon" type="image/png" href="{RAW}/images/fav.png"/>
 <link rel="preconnect" href="https://api.fontshare.com"/>
