@@ -189,16 +189,8 @@ def single_pdf(a):
     return a.get("pdfUrl") or (RAW+"/learn-pdf/"+a["slug"]+".pdf")
 
 def modal_html(prefix, a):
-    pdfs=a.get("pdfs") or []
-    if pdfs:
-        succ='<p class="learn-success-detail" style="margin-bottom:12px">Choose your language:</p>'
-        for p in pdfs:
-            succ+='<button class="learn-lock-submit" style="margin-bottom:8px" data-dl="'+p["url"]+'">&darr; '+E(p["label"])+'</button>'
-        single_attr=""
-    else:
-        sp=single_pdf(a)
-        succ='<p class="learn-success-detail" style="margin-bottom:16px">Your PDF is downloading. If it did not start, <a href="'+sp+'" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline">click here</a>.</p><button class="learn-lock-submit" data-dl="'+sp+'">Download PDF</button>'
-        single_attr=' data-single="'+sp+'"'
+    single_attr='' if (a.get("pdfs")) else (' data-single="'+single_pdf(a)+'"')
+    succ='<p class="learn-success-detail" style="margin-bottom:16px">Thanks! Your download will start now. If it did not, click the button again.</p>'
     return ('<div class="learn-modal-overlay" id="'+prefix+'Overlay"><div class="learn-modal">'
       '<div class="learn-modal-header"><div class="learn-modal-title">'+E(a["downloadTitle"])+'</div>'
       '<button class="learn-modal-close" data-close="'+prefix+'Overlay">&#10005;</button></div>'
@@ -251,7 +243,7 @@ def carousel_cards_html(others):
           '<div class="learn-card-title">'+E(o.get("title",""))+'</div>'
           '<div class="learn-card-desc">'+E(o.get("description",""))+'</div>'
           '</div></a>'
-          '<div class="learn-card-actions"><a href="/learn/'+o["slug"]+'" class="learn-card-read">Read</a>'+('<a href="'+o.get("pdfUrl","")+'" download class="learn-card-dl">&darr; Download</a>' if o.get("pdfUrl") else '')+'</div>'
+          '<div class="learn-card-actions"><a href="/learn/'+o["slug"]+'" class="learn-card-read">Read</a></div>'
           '</div>')
     if not out:
         out='<div class="learn-card"><div class="learn-card-body"><div class="learn-card-desc" style="padding:24px">More articles coming soon.</div></div></div>'
@@ -362,8 +354,17 @@ def build_page(a, others):
     lang_mob="".join('<button data-code="'+c+'">'+l+'</button>' for c,l in LANGS)
     sections="".join(sec_html(s) for s in a["content"])
     has_pdf=a.get("hasPdf", True)
-    dl_button_main=('<button class="learn-download-btn" data-modal="dlMain"><span class="dl-lock">🔒</span> Download PDF</button>' if has_pdf else '')
-    modal_main=(modal_html("dlMain", a) if has_pdf else '')
+    pdfs=a.get("pdfs") or []
+    if pdfs:
+        _btns="".join('<a class="learn-download-btn" style="margin-top:0;text-decoration:none;cursor:pointer;color:var(--bg) !important" data-dl="'+p["url"]+'"><span class="dl-lock">🔒</span> Download PDF — '+E(p["label"])+'</a>' for p in pdfs)
+        dl_button_main='<div class="learn-download-group" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:20px">'+_btns+'</div>'
+        modal_main=modal_html("dlMain", a)
+    elif has_pdf:
+        dl_button_main='<button class="learn-download-btn" data-modal="dlMain"><span class="dl-lock">🔒</span> Download PDF</button>'
+        modal_main=modal_html("dlMain", a)
+    else:
+        dl_button_main=''
+        modal_main=''
     modal_other=''
     others_cards=carousel_cards_html(others)
     faq="".join('<div class="av-faq-item"><div class="av-faq-question"><span>'+E(q)+'</span><span class="av-faq-arrow">&#9660;</span></div><div class="av-faq-answer">'+E(ans)+'</div></div>' for q,ans in FAQ)

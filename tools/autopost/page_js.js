@@ -39,7 +39,8 @@
   function dl(url){if(!url)return;var a=document.createElement("a");a.href=url;a.download=url.split("/").pop()||"download.pdf";a.target="_blank";document.body.appendChild(a);a.click();document.body.removeChild(a);}
   function showState(prefix){var f=$("#"+prefix+"Form"),s=$("#"+prefix+"Success");if(f)f.style.display=subscribed?"none":"";if(s)s.style.display=subscribed?"":"none";}
   $all("[data-modal]").forEach(function(b){b.addEventListener("click",function(){var p=b.getAttribute("data-modal");showState(p);open(p+"Overlay");});});
-  $all("[data-dl]").forEach(function(b){b.addEventListener("click",function(){dl(b.getAttribute("data-dl"));});});
+  var pendingDl=null;
+  $all("[data-dl]").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();var u=b.getAttribute("data-dl");if(subscribed){dl(u);}else{pendingDl=u;showState("dlMain");open("dlMainOverlay");}});});
   $all("[data-submit]").forEach(function(b){b.addEventListener("click",function(){submitEmail(b.getAttribute("data-submit"));});});
   $all('input[type="email"]').forEach(function(inp){inp.addEventListener("keydown",function(e){if(e.key==="Enter")submitEmail(inp.id.replace("Email",""));});});
   function submitEmail(prefix){
@@ -50,7 +51,7 @@
     setTimeout(function(){
       localStorage.setItem("learn_subscribed","1");subscribed=true;setLock();showState(prefix);
       var s=$("#"+prefix+"Success");var single=s?s.getAttribute("data-single"):"";
-      if(single)dl(single);
+      if(pendingDl){dl(pendingDl);pendingDl=null;}else if(single){dl(single);}
     },700);
   }
 

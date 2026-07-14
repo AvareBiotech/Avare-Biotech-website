@@ -157,6 +157,34 @@ def pdf_name_in_folder(slug, content_dir='/tmp/content'):
 def pdf_in_folder(slug, content_dir='/tmp/content'):
     return pdf_name_in_folder(slug, content_dir) is not None
 
+LANG_LABELS={'en':'English','pt':'Português','es':'Español','ar':'العربية','fr':'Français','de':'Deutsch','it':'Italiano','tr':'Türkçe','ur':'اردو','hi':'हिन्दी','ru':'Русский','af':'Afrikaans','ja':'日本語','zh':'中文','el':'Ελληνικά'}
+LANG_ORDER=['en','pt','es','ar','af','ur','tr','de','fr','it','hi','ja','zh','el']
+
+def pdfs_in_folder(slug, content_dir='/tmp/content'):
+    """PDF с языковым суффиксом (…-en.pdf, …-pt.pdf) -> [{'label','code','name','url'}] в порядке LANG_ORDER."""
+    import os, re as _re, urllib.parse as _up
+    d=os.path.join(content_dir, slug)
+    if not os.path.isdir(d): return []
+    found={}
+    for fn in os.listdir(d):
+        if not fn.lower().endswith('.pdf'): continue
+        m=_re.search(r'[-_]([a-z]{2})\.pdf$', fn.lower())
+        if not m: continue
+        code=m.group(1)
+        if code not in LANG_LABELS: continue
+        try:
+            with open(os.path.join(d,fn),'rb') as f:
+                if not f.read(5).startswith(b'%PDF'): continue
+        except Exception:
+            continue
+        found[code]=fn
+    out=[]
+    for code in LANG_ORDER:
+        if code in found:
+            out.append({'label':LANG_LABELS[code],'code':code,'name':found[code],
+                        'url':RAW+'/learn/'+slug+'/'+_up.quote(found[code])})
+    return out
+
 def build(slug):
     a=parse_md(f'/tmp/content/{slug}/article.md', slug, f'/tmp/content/{slug}'.rsplit('/',1)[0])
     pdf_name=pdf_name_in_folder(slug)
@@ -236,9 +264,7 @@ def build_card(a):
     cat=a.get('categoryLabel','Guide'); key=cat.lower()
     tagc=CARD_TAGMAP.get(key,'tag-guide')
     dt=a.get('datePublished','')
-    dl=''
-    if a.get('hasPdf'):
-        dl=('<a class="btn-dl btn-locked" href="/learn/'+a['slug']+'">\U0001F512 Download</a>')
+    dl=''  # download-кнопку с карточек убрали — только Read
     return ('<div class="card" data-type="'+key+'">\n'
       '    <div class="card-img" style="padding:0;"><img src="'+a['coverImage']+'" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>\n'
       '    <div class="card-body">\n'
@@ -295,6 +321,10 @@ def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
     pdf_name=pdf_name_in_folder(slug, content_dir)
     a['hasPdf']=pdf_name is not None
     a['pdfUrl']=RAW+'/learn/'+slug+'/'+(pdf_name or 'download.pdf')
+    _multi=pdfs_in_folder(slug, content_dir)
+    if len(_multi)>=2:
+        a['pdfs']=_multi
+        a['hasPdf']=True
     # если статья уже была опубликована — сохранить исходную дату публикации
     existing=os.path.join(repo,'learn',slug,'index.html')
     if os.path.exists(existing):
@@ -308,9 +338,10 @@ def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
     src=os.path.join(content_dir,slug); dst=os.path.join(repo,'assets','media','learn',slug)
     if os.path.isdir(dst): shutil.rmtree(dst)
     os.makedirs(dst, exist_ok=True)
+    _multi_names={p['name'] for p in _multi}
     for fn in os.listdir(src):
         is_img=_re.match(IMG_RE, fn.lower())
-        is_pdf=(pdf_name and fn==pdf_name)
+        is_pdf=(pdf_name and fn==pdf_name) or (fn in _multi_names)
         if is_img or is_pdf:
             shutil.copy2(os.path.join(src,fn), os.path.join(dst,fn))
     land=open(repo+'/learn/index.html',encoding='utf-8').read()
