@@ -189,7 +189,7 @@ def single_pdf(a):
     return a.get("pdfUrl") or (RAW+"/learn-pdf/"+a["slug"]+".pdf")
 
 def modal_html(prefix, a):
-    single_attr='' if (a.get("pdfs")) else (' data-single="'+single_pdf(a)+'"')
+    single_attr='' if (a.get("pdfs") or a.get("dlFiles")) else (' data-single="'+single_pdf(a)+'"')
     succ='<p class="learn-success-detail" style="margin-bottom:16px">Thanks! Your download will start now. If it did not, click the button again.</p>'
     return ('<div class="learn-modal-overlay" id="'+prefix+'Overlay"><div class="learn-modal">'
       '<div class="learn-modal-header"><div class="learn-modal-title">'+E(a["downloadTitle"])+'</div>'
@@ -355,8 +355,13 @@ def build_page(a, others):
     sections="".join(sec_html(s) for s in a["content"])
     has_pdf=a.get("hasPdf", True)
     pdfs=a.get("pdfs") or []
-    if pdfs:
-        _btns="".join('<a class="learn-download-btn" style="margin-top:0;text-decoration:none;cursor:pointer;color:var(--bg) !important" data-dl="'+p["url"]+'"><span class="dl-lock">🔒</span> Download PDF — '+E(p["label"])+'</a>' for p in pdfs)
+    # общий список кнопок: PDF и/или вложения-таблицы (XLSX). Для materials.json остаётся a["pdfs"].
+    items=a.get("dlFiles") or [{"kind":"PDF","label":p.get("label"),"url":p["url"]} for p in pdfs]
+    if items:
+        def _lbl(it):
+            t='Download '+(it.get("kind") or 'PDF')
+            return t+(' — '+E(it["label"]) if it.get("label") else '')
+        _btns="".join('<a class="learn-download-btn" style="margin-top:0;text-decoration:none;cursor:pointer;color:var(--bg) !important" data-dl="'+it["url"]+'"><span class="dl-lock">🔒</span> '+_lbl(it)+'</a>' for it in items)
         dl_button_main='<div class="learn-download-group" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:20px">'+_btns+'</div>'
         modal_main=modal_html("dlMain", a)
     elif has_pdf:

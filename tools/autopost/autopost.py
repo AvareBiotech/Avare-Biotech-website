@@ -159,24 +159,28 @@ def pdf_in_folder(slug, content_dir='/tmp/content'):
 
 LANG_LABELS={'en':'English','pt':'Português','es':'Español','ar':'العربية','fr':'Français','de':'Deutsch','it':'Italiano','tr':'Türkçe','ur':'اردو','hi':'हिन्दी','ru':'Русский','af':'Afrikaans','ja':'日本語','zh':'中文','el':'Ελληνικά'}
 LANG_ORDER=['en','pt','es','ar','af','ur','tr','de','fr','it','hi','ja','zh','el']
+ATTACH_PREFIX='attach-'   # так помечаются вложения-гугл-таблицы в папке «На публикацию»
 
-def pdfs_in_folder(slug, content_dir='/tmp/content'):
-    """PDF с языковым суффиксом (…-en.pdf, …-pt.pdf) -> [{'label','code','name','url'}] в порядке LANG_ORDER."""
+def _lang_files(slug, content_dir, ext, magic=None, prefix=None):
+    """Файлы <ext> с языковым суффиксом (…-en.pdf, …-pt.xlsx) -> список в порядке LANG_ORDER."""
     import os, re as _re, urllib.parse as _up
     d=os.path.join(content_dir, slug)
     if not os.path.isdir(d): return []
     found={}
     for fn in os.listdir(d):
-        if not fn.lower().endswith('.pdf'): continue
-        m=_re.search(r'[-_]([a-z]{2})\.pdf$', fn.lower())
+        low=fn.lower()
+        if not low.endswith(ext): continue
+        if prefix and not low.startswith(prefix): continue
+        m=_re.search(r'[-_]([a-z]{2})'+_re.escape(ext)+r'$', low)
         if not m: continue
         code=m.group(1)
         if code not in LANG_LABELS: continue
-        try:
-            with open(os.path.join(d,fn),'rb') as f:
-                if not f.read(5).startswith(b'%PDF'): continue
-        except Exception:
-            continue
+        if magic:
+            try:
+                with open(os.path.join(d,fn),'rb') as f:
+                    if not f.read(len(magic)).startswith(magic): continue
+            except Exception:
+                continue
         found[code]=fn
     out=[]
     for code in LANG_ORDER:
@@ -184,6 +188,31 @@ def pdfs_in_folder(slug, content_dir='/tmp/content'):
             out.append({'label':LANG_LABELS[code],'code':code,'name':found[code],
                         'url':RAW+'/learn/'+slug+'/'+_up.quote(found[code])})
     return out
+
+def pdfs_in_folder(slug, content_dir='/tmp/content'):
+    """PDF с языковым суффиксом (…-en.pdf, …-pt.pdf)."""
+    return _lang_files(slug, content_dir, '.pdf', magic=b'%PDF')
+
+def sheets_in_folder(slug, content_dir='/tmp/content'):
+    """Гугл-таблицы (экспорт .xlsx) с языковым суффиксом: attach-…-en.xlsx / attach-…-pt.xlsx."""
+    return _lang_files(slug, content_dir, '.xlsx', magic=b'PK', prefix=ATTACH_PREFIX)
+
+def sheet_name_in_folder(slug, content_dir='/tmp/content'):
+    """Одна гугл-таблица без языкового суффикса: attach-….xlsx -> имя файла или None."""
+    import os, re as _re
+    d=os.path.join(content_dir, slug)
+    if not os.path.isdir(d): return None
+    for fn in sorted(os.listdir(d)):
+        low=fn.lower()
+        if not (low.startswith(ATTACH_PREFIX) and low.endswith('.xlsx')): continue
+        if _re.search(r'[-_]([a-z]{2})\.xlsx$', low): continue   # это языковой вариант
+        try:
+            with open(os.path.join(d,fn),'rb') as f:
+                if not f.read(2).startswith(b'PK'): continue
+        except Exception:
+            continue
+        return fn
+    return None
 
 def build(slug):
     a=parse_md(f'/tmp/content/{slug}/article.md', slug, f'/tmp/content/{slug}'.rsplit('/',1)[0])
@@ -325,6 +354,23 @@ def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
     if len(_multi)>=2:
         a['pdfs']=_multi
         a['hasPdf']=True
+    # вложения-гугл-таблицы (экспортированы Apps Script в .xlsx)
+    _sheets=sheets_in_folder(slug, content_dir)
+    _sheet1=sheet_name_in_folder(slug, content_dir)
+    _files=[]
+    if len(_multi)>=2:
+        _files+= [{'kind':'PDF','label':p['label'],'url':p['url'],'name':p['name']} for p in _multi]
+    elif pdf_name and (_sheets or _sheet1):
+        _files.append({'kind':'PDF','label':None,'url':a['pdfUrl'],'name':pdf_name})
+    if _sheets:
+        _files+= [{'kind':'XLSX','label':x['label'],'url':x['url'],'name':x['name']} for x in _sheets]
+    elif _sheet1:
+        import urllib.parse as _up2
+        _files.append({'kind':'XLSX','label':None,'name':_sheet1,
+                       'url':RAW+'/learn/'+slug+'/'+_up2.quote(_sheet1)})
+    if _files and (len(_multi)>=2 or _sheets or _sheet1):
+        a['dlFiles']=_files
+        a['hasPdf']=True
     # если статья уже была опубликована — сохранить исходную дату публикации
     existing=os.path.join(repo,'learn',slug,'index.html')
     if os.path.exists(existing):
@@ -339,10 +385,12 @@ def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
     if os.path.isdir(dst): shutil.rmtree(dst)
     os.makedirs(dst, exist_ok=True)
     _multi_names={p['name'] for p in _multi}
+    _file_names={f['name'] for f in _files}
     for fn in os.listdir(src):
         is_img=_re.match(IMG_RE, fn.lower())
         is_pdf=(pdf_name and fn==pdf_name) or (fn in _multi_names)
-        if is_img or is_pdf:
+        is_att=(fn in _file_names)
+        if is_img or is_pdf or is_att:
             shutil.copy2(os.path.join(src,fn), os.path.join(dst,fn))
     land=open(repo+'/learn/index.html',encoding='utf-8').read()
     others=parse_landing_cards(land, slug, content_dir)[:8]
