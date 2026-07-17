@@ -315,12 +315,45 @@ def build_card(a):
       '  </div>\n  ')
 
 GRID_MARK='<div class="cards-grid" id="grid">'
+def _card_span(landing_html, slug):
+    """Границы блока <div class="card" ...> ... </div> нужной статьи, с учётом вложенности."""
+    import re as _re
+    marker='href="/learn/'+slug+'"'
+    i=landing_html.find(marker)
+    if i<0: return None
+    start=landing_html.rfind('<div class="card" data-type=', 0, i)
+    if start<0: return None
+    depth=1; j=start+len('<div class="card" data-type=')
+    while depth and j<len(landing_html):
+        nd=landing_html.find('<div', j); cd=landing_html.find('</div>', j)
+        if cd<0: return None
+        if nd!=-1 and nd<cd: depth+=1; j=nd+4
+        else:
+            depth-=1; j=cd+6
+    return (start, j)
+
 def insert_card(landing_html, a):
-    # идемпотентно: если карточка статьи уже есть — не дублируем
-    if 'href="/learn/'+a['slug']+'"' in landing_html:
-        return landing_html, False
+    """Добавить карточку статьи на /learn. Если карточка уже есть — ПЕРЕРИСОВАТЬ её.
+    Раньше здесь стоял ранний выход («уже есть — не трогаем»), из-за чего карточка
+    навсегда застывала в том виде, в каком её собрала первая публикация: если статья
+    вышла со сломанным заголовком, а потом её починили и перевыложили, страница
+    обновлялась, а карточка — нет.
+    Возвращает (html, 'added' | 'updated' | False)."""
+    import re as _re
+    span=_card_span(landing_html, a['slug'])
+    if span:
+        old_block=landing_html[span[0]:span[1]]
+        # дату карточки НЕ трогаем: она уже живёт на сайте и проиндексирована.
+        # Обновляем только заголовок, описание, обложку и категорию.
+        _od=_re.search(r'card-date" data-date="([^"]*)"', old_block)
+        a2=dict(a)
+        if _od: a2['datePublished']=_od.group(1)
+        new_block=build_card(a2).rstrip()
+        if old_block.strip()==new_block.strip():
+            return landing_html, False              # уже актуальна
+        return landing_html[:span[0]]+new_block+landing_html[span[1]:], 'updated'
     card=build_card(a)
-    return landing_html.replace(GRID_MARK, GRID_MARK+'\n  '+card, 1), True
+    return landing_html.replace(GRID_MARK, GRID_MARK+'\n  '+card, 1), 'added'
 
 SITEMAP_LANGS=['en','pt','es','ar','af','ur','tr','de','fr','it','hi','ja','zh','el']
 def _sm_url(lang, path):
