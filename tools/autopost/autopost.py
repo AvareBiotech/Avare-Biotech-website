@@ -383,6 +383,43 @@ def update_sitemap(xml, slug):
                 '  </url>\n')
     return xml.replace('</urlset>', entry+'</urlset>', 1), True
 
+CARD_AR = 16/9          # пропорции обложки в карточках
+_AR_TOL = 0.01          # если уже близко к 16:9 — не трогаем
+
+def fit_cover_16x9(path):
+    """Обрезать обложку по центру до 16:9 прямо в assets.
+    Карточки, карусель, og:image и шапка статьи и так показывают её через object-fit:cover,
+    поэтому визуально ничего не меняется — но высота карточек перестаёт зависеть от того,
+    в каких пропорциях обложку залили в папку.
+    Оригинал в content/ не трогаем. Если Pillow недоступен — просто пропускаем."""
+    try:
+        from PIL import Image
+    except Exception:
+        print('   ! Pillow недоступен — обложка оставлена как есть:', os.path.basename(path))
+        return None
+    try:
+        im = Image.open(path)
+        w, h = im.size
+        ar = w / h
+        if abs(ar - CARD_AR) <= _AR_TOL:
+            return None                              # уже 16:9
+        if ar > CARD_AR:                             # слишком широкая → режем бока
+            nw, nh = int(round(h * CARD_AR)), h
+        else:                                        # слишком высокая → режем верх/низ
+            nw, nh = w, int(round(w / CARD_AR))
+        left, top = (w - nw)//2, (h - nh)//2
+        im2 = im.crop((left, top, left + nw, top + nh))
+        fmt = (im.format or '').upper()
+        if fmt == 'WEBP':   im2.save(path, 'WEBP', quality=90, method=6)
+        elif fmt == 'PNG':  im2.save(path, 'PNG', optimize=True)
+        elif fmt in ('JPEG','JPG'): im2.save(path, 'JPEG', quality=90, subsampling=0)
+        else:               im2.save(path)
+        print('   ~ обложка обрезана до 16:9: %dx%d -> %dx%d  (%s)' % (w, h, nw, nh, os.path.basename(path)))
+        return (w, h, nw, nh)
+    except Exception as e:
+        print('   ! не удалось обрезать обложку %s: %s' % (os.path.basename(path), e))
+        return None
+
 def _track_span(html_):
     """Границы содержимого <div class="carousel-track"> ... </div> с учётом вложенности."""
     key='<div class="carousel-track">'
@@ -459,12 +496,19 @@ def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
     os.makedirs(dst, exist_ok=True)
     _multi_names={p['name'] for p in _multi}
     _file_names={f['name'] for f in _files}
+    _covers_fixed=[]
     for fn in os.listdir(src):
         is_img=_re.match(IMG_RE, fn.lower())
         is_pdf=(pdf_name and fn==pdf_name) or (fn in _multi_names)
         is_att=(fn in _file_names)
         if is_img or is_pdf or is_att:
-            shutil.copy2(os.path.join(src,fn), os.path.join(dst,fn))
+            _dstf=os.path.join(dst,fn)
+            shutil.copy2(os.path.join(src,fn), _dstf)
+            # обложку приводим к 16:9, чтобы карточки были одной высоты
+            # независимо от того, в каких пропорциях её залили в папку
+            if fn.lower().startswith('cover'):
+                r=fit_cover_16x9(_dstf)
+                if r: _covers_fixed.append(fn)
     land=open(repo+'/learn/index.html',encoding='utf-8').read()
     others=parse_landing_cards(land, slug, content_dir)   # без лимита: в карусель идут ВСЕ статьи
     page=NS['build_page'](a, others)
@@ -474,4 +518,4 @@ def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
     rebuilt=rebuild_carousels(repo, content_dir)   # чтобы новая статья появилась в каруселях СТАРЫХ страниц
     sm=open(repo+'/sitemap.xml',encoding='utf-8').read()
     sm2,smadded=update_sitemap(sm,slug); open(repo+'/sitemap.xml','w',encoding='utf-8').write(sm2)
-    return {'slug':slug,'hasPdf':a['hasPdf'],'card_added':added,'sitemap_added':smadded,'page_len':len(page),'carousels_rebuilt':rebuilt}
+    return {'slug':slug,'hasPdf':a['hasPdf'],'card_added':added,'sitemap_added':smadded,'page_len':len(page),'carousels_rebuilt':rebuilt,'covers_fixed':_covers_fixed}

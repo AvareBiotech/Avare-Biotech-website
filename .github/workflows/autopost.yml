@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install deps
+        run: pip install --quiet pillow
       - name: Build new articles
         run: python tools/autopost/autopost_runner.py
       - name: Commit results
