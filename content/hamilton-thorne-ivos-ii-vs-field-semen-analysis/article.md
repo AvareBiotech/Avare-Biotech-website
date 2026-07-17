@@ -1,12 +1,8 @@
 ---
-title: Untitled
+title: Hamilton Thorne IVOS II vs Field Semen Analysis: A Practical Comparison
 category: Guide
-date: 2026-07-16
+date: 2026-07-17
 ---
-
-Hamilton Thorne IVOS II vs Field Semen Analysis: A Practical Comparison
-
-By Olga Nayda, Business Development Lead, Avare BioTech
 
 If you run a bull stud, an AI center, or a field breeding program, you already know semen quality drives everything downstream. What most ROI conversations miss is where the error actually happens. It rarely happens in the lab. It happens in the field, after the straw leaves the CASA system, where nobody is measuring anything at all.
 
@@ -15,13 +11,13 @@ This is a guide to costing that gap. We compare manual field evaluation, a lab C
 ## Three ways to measure semen quality
 Most operations use one of three methods, and many use all three at different points.
 
-[картинка человек в поле с микроскопом]
+[img1]
 Manual field evaluation is a technician looking at a sample under a microscope on a heated stage. They estimate total and progressive motility by eye. They count concentration with a chamber. They score morphology by hand. It needs almost no equipment and it works anywhere. The problem is consistency. Published work documents intra-sample motility swings of 30 to 60 percent, plus large differences between one observer and the next. Temperature drift, tired eyes, and field conditions make it worse.
 
-[картинка хэмильтон]
+[img2]
 A lab CASA system like the Hamilton Thorne IVOS II fixes the consistency problem inside the lab. It is a benchtop unit with optics, a heated stage, a camera, and analysis software in one box. It tracks motility objectively, reads full kinematics, measures concentration, and scores morphology with species-specific modules. It produces reports, archives video, and holds temperature within half a degree. For a central lab certifying doses for sale or export, it is the standard for good reason.
 
-[картинка макса] 
+[img3] 
 The third method barely existed until recently: objective measurement in the field, using a microscope and a smartphone. That is where MAKSA sits. The setup is simple: a standard field microscope with a phone camera reading the sample. It is not trying to be a lab. It brings a motility number to the exact place where the manual guess used to be the only option.
 
 A phone mount that holds the camera steady against the eyepiece improves results. A steadier feed means cleaner footage for the app to track, so a basic adapter is worth the small extra cost over holding the phone by hand.
@@ -68,7 +64,7 @@ Want your own numbers instead of an illustrative example? The free ROI calculato
 For a lab, the IVOS II ROI story is about throughput and certification. For the field, the MAKSA ROI story is simpler: it turns your most frequent decision, made most often with no data, into a measured one.
 
 ## Where MAKSA stands today
- [картинка ветеринар с Maksa]
+ [img4]
 
 Straight facts, no inflation. MAKSA is a veterinary tool, built for animal reproduction, not for human use. It is early. We have run over 1,000 field tests across 10-plus countries, and the app updates roughly once a month based on what technicians report back.
 
@@ -84,6 +80,6 @@ If you certify doses, keep your lab CASA. Then add a field check where you curre
 
 We built a calculator that does the math for you. Put in your herd size, what you pay per dose, and your current conception rate. It shows you the loss from a small drop in conception, and the breakeven against a dollar-a-test field check with MAKSA.
 
-Calculate how much a 3% drop in conception rate costs your operation. Download the free ROI calculator at avateit.com.
+Calculate how much a 3% drop in conception rate costs your operation. Download the free ROI calculator below
 
-[документ лидмагнита]
+[pdf]
