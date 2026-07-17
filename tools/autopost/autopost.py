@@ -171,9 +171,15 @@ def _lang_files(slug, content_dir, ext, magic=None, prefix=None):
         low=fn.lower()
         if not low.endswith(ext): continue
         if prefix and not low.startswith(prefix): continue
+        # вариант 1: …-en.pdf / …_pt.xlsx   (дефис или подчёркивание, строчные)
         m=_re.search(r'[-_]([a-z]{2})'+_re.escape(ext)+r'$', low)
-        if not m: continue
-        code=m.group(1)
+        code=m.group(1) if m else None
+        # вариант 2: «… Avare Biotech EN.pdf» — пробел + ЗАГЛАВНЫЕ (человекочитаемые SEO-имена)
+        if not code:
+            m2=_re.search(r'[ ]([A-Z]{2})'+_re.escape(ext.upper())+r'$', fn) or \
+               _re.search(r'[ ]([A-Z]{2})'+_re.escape(ext)+r'$', fn)
+            if m2: code=m2.group(1).lower()
+        if not code: continue
         if code not in LANG_LABELS: continue
         if magic:
             try:
@@ -218,7 +224,7 @@ def build(slug):
     a=parse_md(f'/tmp/content/{slug}/article.md', slug, f'/tmp/content/{slug}'.rsplit('/',1)[0])
     pdf_name=pdf_name_in_folder(slug)
     a['hasPdf']=pdf_name is not None
-    a['pdfUrl']=f"{RAW}/learn/{slug}/{pdf_name or 'download.pdf'}"
+    a['pdfUrl']=f"{RAW}/learn/{slug}/{urllib.parse.quote(pdf_name or 'download.pdf')}"
     other=pick_other(slug)
     if other: other['hasPdf']=True; other['pdfUrl']=card_pdf_url(other['slug'], '/tmp/content')  # ищем PDF по формату
     page=NS['build_page'](a, other)
@@ -344,12 +350,46 @@ def update_sitemap(xml, slug):
                 '  </url>\n')
     return xml.replace('</urlset>', entry+'</urlset>', 1), True
 
+def _track_span(html_):
+    """Границы содержимого <div class="carousel-track"> ... </div> с учётом вложенности."""
+    key='<div class="carousel-track">'
+    i=html_.find(key)
+    if i<0: return None
+    start=i+len(key); depth=1; j=start
+    while depth and j<len(html_):
+        nd=html_.find('<div', j); cd=html_.find('</div>', j)
+        if cd<0: return None
+        if nd!=-1 and nd<cd: depth+=1; j=nd+4
+        else:
+            depth-=1; j=cd+6
+    return (start, j-6)
+
+def rebuild_carousels(repo, content_dir='/tmp/content'):
+    """Перерисовать блок «More from the Knowledge Base» на КАЖДОЙ странице статьи.
+    Без этого новая статья появляется только в карусели самой себя, а старые страницы
+    остаются с каруселью на момент их сборки."""
+    import glob as _glob, os as _os
+    land=open(repo+'/learn/index.html',encoding='utf-8').read()
+    done=[]
+    for path in sorted(_glob.glob(repo+'/learn/*/index.html')):
+        slug=_os.path.basename(_os.path.dirname(path))
+        html_=open(path,encoding='utf-8').read()
+        span=_track_span(html_)
+        if not span: continue
+        others=parse_landing_cards(land, slug, content_dir)
+        cards=NS['carousel_cards_html'](others)
+        new=html_[:span[0]]+cards+html_[span[1]:]
+        if new!=html_:
+            open(path,'w',encoding='utf-8').write(new)
+            done.append(slug)
+    return done
+
 def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
     import os, shutil, re as _re
     a=parse_md(os.path.join(content_dir,slug,'article.md'), slug, content_dir)
     pdf_name=pdf_name_in_folder(slug, content_dir)
     a['hasPdf']=pdf_name is not None
-    a['pdfUrl']=RAW+'/learn/'+slug+'/'+(pdf_name or 'download.pdf')
+    a['pdfUrl']=RAW+'/learn/'+slug+'/'+urllib.parse.quote(pdf_name or 'download.pdf')
     _multi=pdfs_in_folder(slug, content_dir)
     if len(_multi)>=2:
         a['pdfs']=_multi
@@ -393,11 +433,12 @@ def publish(slug, repo='/tmp/repo', content_dir='/tmp/content'):
         if is_img or is_pdf or is_att:
             shutil.copy2(os.path.join(src,fn), os.path.join(dst,fn))
     land=open(repo+'/learn/index.html',encoding='utf-8').read()
-    others=parse_landing_cards(land, slug, content_dir)[:8]
+    others=parse_landing_cards(land, slug, content_dir)   # без лимита: в карусель идут ВСЕ статьи
     page=NS['build_page'](a, others)
     os.makedirs(repo+'/learn/'+slug, exist_ok=True)
     open(repo+'/learn/'+slug+'/index.html','w',encoding='utf-8').write(page)
     land2,added=insert_card(land,a); open(repo+'/learn/index.html','w',encoding='utf-8').write(land2)
+    rebuilt=rebuild_carousels(repo, content_dir)   # чтобы новая статья появилась в каруселях СТАРЫХ страниц
     sm=open(repo+'/sitemap.xml',encoding='utf-8').read()
     sm2,smadded=update_sitemap(sm,slug); open(repo+'/sitemap.xml','w',encoding='utf-8').write(sm2)
-    return {'slug':slug,'hasPdf':a['hasPdf'],'card_added':added,'sitemap_added':smadded,'page_len':len(page)}
+    return {'slug':slug,'hasPdf':a['hasPdf'],'card_added':added,'sitemap_added':smadded,'page_len':len(page),'carousels_rebuilt':rebuilt}
