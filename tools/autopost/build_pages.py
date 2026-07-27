@@ -458,7 +458,7 @@ def build_page(a, others):
           </div></div>
         <div class="av-footer-main__col"><div class="av-footer-main__title">Support</div>
           <div class="av-footer-main__links">
-            <a href="https://api.whatsapp.com/send/?phone=971506412775&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="av-footer-main__link">Contact Support</a>
+            <a href="https://api.whatsapp.com/send/?phone=17135849584&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="av-footer-main__link">Contact Support</a>
           </div></div>
       </div>
     </div>
