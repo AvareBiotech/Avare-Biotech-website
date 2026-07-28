@@ -1,7 +1,7 @@
 ---
 title: 7 Reasons Your FTAI Conception Rate Is Low (and What to Do)
 category: Guide
-date: 2026-07-27
+date: 2026-07-28
 ---
 
 You ran the protocol by the book. The Nelore cows were synchronized. The semen came from a trusted central. Then the pregnancy check comes back and the number is lower than last season. Nobody changed anything obvious, and yet the rate dropped.
@@ -10,7 +10,7 @@ FTAI conception rate rarely fails for one big reason. It fails for several small
 
 Here are seven causes that quietly pull the number down, and what you can do about each one.
 
-[img1: nelore-rancher-checking-pregnancy-records-low-conception-avare-biotech.webp]
+[img1]
 ## 1. Heat stress you did not account for
 In Brazil, this is the first thing to rule out. Heat stress lowers conception, and the numbers are not small. Research shows conception rate in cattle drops by roughly 4.6 percent for every one-unit rise in the temperature-humidity index (THI) above 70, and most studies place the threshold where fertility starts to fall around a THI of 72 to 73. One study found that when mean THI was 73 or higher in the three weeks before breeding, conception fell from 31 percent to 12 percent.
 
@@ -42,8 +42,7 @@ The research is clear on how fast this happens. The optimal thaw is 37 degrees C
 
 Think about it the way a technician does. Bull 47 gave a low conception season. Was it bull 47, or was it the thaw water that ran cool that morning? Without a number at the point of use, you cannot tell the difference. You just blame the bull and move on, and the real problem repeats next season.
 
-[img5: technician-thawing-semen-straw-water-bath-brazil-field-avare-biotech.webp]
-
+[img5]
 What to do: standardize your thaw protocol and check it. 37 degrees, 30 seconds, used within 30 minutes. This is exactly the gap a field motility check closes. Reading motility on the farm, right before you load the gun, tells you whether the dose that is about to go into the cow is still good. It separates a bull problem from a handling problem, which are fixed in completely different ways. Sources: Animals (thawing and CASA motility), Animal review on semen handling.
 ## 5. Insemination technique and deposition site
 The best dose in the world fails if it is deposited in the wrong place. Deposition too far forward, trauma during passage, or rushing the last step all cost pregnancies. Technique varies between technicians and even for the same technician across a long, tiring day in the corral.
@@ -55,7 +54,7 @@ A certificate from the central tells you the dose was good when it was frozen. I
 
 What to do: verify motility at the point of use. This is where MAKSA fits. It reads motility and progressive motility from a microscope and a smartphone, right there on the farm, at about a dollar per test. It is validated at r greater than 0.90 against laboratory CASA equipment across five species: bovine, equine, ovine, caprine, and camel. A phone mount at the eyepiece gives steadier footage and better results than holding the phone by hand. It will not replace your lab, and it is honest about that. Concentration measurement is still in development, so it is not presented as a finished feature. What it does today is turn the field guess into a field number.
 
-[img6: maksa-app-smartphone-microscope-mount-semen-motility-avare-biotech.webp]
+[img6]
 ## 7. Recording gaps that hide the real cause
 When conception drops, the first question is why. If your records cannot link a result back to the bull, the batch, the technician, the day, and the conditions, you cannot answer that question. You are left guessing, and next season you make the same mistakes because you never isolated the cause.
 
