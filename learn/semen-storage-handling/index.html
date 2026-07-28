@@ -1024,7 +1024,7 @@ html.light .learn-card-dl{background:#FFFFFF !important;color:#1A1A1A !important
   setLock();
   function dl(url){if(!url)return;var a=document.createElement("a");a.href=url;a.download=url.split("/").pop()||"download.pdf";a.target="_blank";document.body.appendChild(a);a.click();document.body.removeChild(a);}
   function showState(prefix){var f=$("#"+prefix+"Form"),s=$("#"+prefix+"Success");if(f)f.style.display=subscribed?"none":"";if(s)s.style.display=subscribed?"":"none";}
-  $all("[data-modal]").forEach(function(b){b.addEventListener("click",function(){var p=b.getAttribute("data-modal");showState(p);open(p+"Overlay");});});
+  $all("[data-modal]").forEach(function(b){b.addEventListener("click",function(){var p=b.getAttribute("data-modal");if(subscribed){var s=$("#"+p+"Success");var single=s?s.getAttribute("data-single"):"";if(single){dl(single);return;}}showState(p);open(p+"Overlay");});});
   $all("[data-dl]").forEach(function(b){b.addEventListener("click",function(){dl(b.getAttribute("data-dl"));});});
   $all("[data-submit]").forEach(function(b){b.addEventListener("click",function(){submitEmail(b.getAttribute("data-submit"));});});
   $all('input[type="email"]').forEach(function(inp){inp.addEventListener("keydown",function(e){if(e.key==="Enter")submitEmail(inp.id.replace("Email",""));});});
