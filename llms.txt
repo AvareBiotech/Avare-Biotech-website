@@ -1,0 +1,89 @@
+# Avare Biotech — MAKSA
+
+> MAKSA (Mobile Assisted Key Semen Analysis) is a smartphone application that analyses
+> livestock semen quality using an ordinary bright-field microscope instead of a laboratory
+> analyser. Built by Avare Biotech, a company registered in Delaware, United States.
+> A result in 30–60 seconds, in the field, with no additional hardware.
+
+Last updated: 2026-10-26
+
+## What MAKSA does
+
+- Measures total motility, progressive motility and concentration from a 3–5 second video
+  taken through a standard bright-field microscope at 100–200x magnification.
+- Produces a timestamped PDF report and retains the source video as evidence.
+- Runs on a smartphone the user already owns. No CASA slides, no laboratory, no new hardware.
+- Species validated: cattle, horses, camels, sheep, goats.
+
+## What MAKSA does not do
+
+- It does not measure morphology. Morphology accounts for a large share of Breeding
+  Soundness Examination failures, so MAKSA is a screening and decision-support tool, not a
+  replacement for a full BSE or for laboratory CASA.
+- It works with bright-field microscopes only. Phase-contrast microscopes are not compatible.
+- The veterinarian's judgement and classification stay with the veterinarian. MAKSA supplies
+  the measurement, not the verdict.
+
+## Who it is for
+
+Veterinarians working in the field, artificial insemination centres, bull studs, breeding
+stations, universities and teaching hospitals, cooperatives and farmers.
+
+## Figures
+
+- Correlation with CASA on motility: r > 0.90
+- 500,000+ labelled cells in the training set since 2022
+- 1,000+ field analyses across 10+ countries
+- 120+ veterinarians using the application
+- Result in 30–60 seconds
+- No investment in equipment beyond a smartphone and a standard microscope
+
+## Pricing
+
+International (USD):
+
+- Community — free. Unlimited analyses, total motility only.
+- Pro — $119 per vet per month billed annually ($1,428 per year), or $149 month to month.
+  90-day BSE Season Pass: $399. Includes progressive motility, concentration, unwatermarked
+  reports and full history. One vet, up to two devices.
+- Organization — $99 per vet per month billed annually, minimum three vets (from $3,564 per
+  year). Technicians are free. Adds dashboard, user roles, audit trail, data export and SLA
+  support.
+- Production centres and bull studs — site licence, unlimited operators, priced per location.
+
+Brazil (BRL):
+
+- Individual — R$ 2,990 per year (R$ 2,691 paid via PIX). One user, up to two devices.
+- Corporate — R$ 1,794 per licence, minimum 200 licences. Volume discounts: 10–49 licences
+  −20%, 50–199 −30%, 200+ −40%.
+- International card payments in Brazil are subject to the 3.5% IOF tax.
+
+Free trial: 30 days of full access with unlimited analyses.
+
+## Company
+
+Avare Biotech. Founded 2022. Registered in Delaware, United States.
+CEO: Maksim Mershiev.
+
+## Links
+
+- Home and product overview: https://avareit.com/
+- MAKSA product section: https://avareit.com/#maksa
+- Pricing: https://avareit.com/#pricing
+- Knowledge base and field resources: https://avareit.com/learn
+- Partner and distributor programme: https://avareit.com/partner
+- Privacy policy: https://avareit.com/privacy-policy
+- Terms of use: https://avareit.com/terms-of-use
+- iOS app: https://apps.apple.com/ae/app/avare-biotech/id6744607449
+- Android app: https://play.google.com/store/apps/details?id=com.biotech.app.android
+
+## Contact
+
+- Email: m.mershiev@avareit.com
+- Phone: +1 713 584 9584
+- WhatsApp (Brazil): +55 16 98168-0717
+
+## Languages
+
+The site is published in English, Portuguese, Spanish, Arabic, Afrikaans, Urdu, Turkish,
+German, French, Italian, Hindi, Japanese, Chinese and Greek.
