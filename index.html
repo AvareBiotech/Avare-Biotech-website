@@ -1447,26 +1447,26 @@ pdfClose.onclick = function() { pdfOv.style.display='none'; pdfFrame.src=''; };
 pdfOv.onclick = function(e) { if(e.target===pdfOv){pdfOv.style.display='none'; pdfFrame.src='';} };
 
 var files = [
-  {n:'20_MAKSA Brazil CaseStudy Willian EN',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/20_MAKSA%20Brazil%20CaseStudy%20Willian%20EN.pdf&embedded=true'},
-  {n:'19_Awais Case study',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/19_Awais%20Case%20study..pdf&embedded=true'},
-  {n:'18_Field case study \u2014 Fresh bovine, Misbah',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/18_Field%20case%20study%20report%20for%20Fresh%20bovine%20Semen-3_Misbah.pdf&embedded=true'},
-  {n:'17_Revised report Validation \u2014 Dr. Ejaz',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/17_Revised%20report%20Validation%20of%20MAKSA%20by%20Dr.%20Ejaz.pdf&embedded=true'},
-  {n:'16_Validation MAKSA \u2014 Dr. Ejaz',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/16_Validation%20MAKSA%20Dr.%20Ejaz.pdf&embedded=true'},
-  {n:'15_Awais Case study',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/15_Awais%20Case%20study.pdf&embedded=true'},
-  {n:'14_Signed Field Case Study \u2014 Carlos, Spain',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/14_v0102%20signed%20Field%20Case%20Study%20of%20MAKSA%20by%20Carlos%20from%20Spain.pdf&embedded=true'},
-  {n:'13_Signed Field Case Study \u2014 Ameer Hamza, PK',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/13_v0202_signed_Field_Case_Study_of_MAKSA_by_M_Ameer_Hamza_from_Pakistan.pdf&embedded=true'},
-  {n:'12_MAKSA Field Case Studies \u2014 Canada, Dog',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/12_v2701%20MAKSA_Field_CASE_STUDIES_Canada_dog_Rasa_clean.pdf&embedded=true'},
-  {n:'11_MAKSA Case Studies \u2014 Okara, Pakistan',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/11_v1001_MAKSA_Case_Studies_Okara_Pakistan_made_by_Faseeh.pdf&embedded=true'},
-  {n:'10_Signed Field Case Study \u2014 Hussnain Raza, PK',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/10_Signed_v03101_Field_Case_Study_of_MAKSA_by_M_Hussnain_Raza_from.pdf&embedded=true'},
-  {n:'09_Case Study MAKSA \u2014 Umut, Turkey',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/09_v1111_Case_Study_MAKSA_with_Umut_Turkey%20signed.docx.pdf&embedded=true'},
-  {n:'08_MAKSA Performance Report \u2014 Kaustubh, India',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/08_signed_v2612_MAKSA_Perfomance_Report_1st__India_by_Kaustubh_.pdf&embedded=true'},
-  {n:'07_Signed \u2014 Abdulrauf, Nigeria',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/07_Signed_v1612_Abdulrauf_MAKSA_CASE_STUDIES_Sokoto_Nigeria_clean.pdf&embedded=true'},
-  {n:'06_Signed MAKSA Pilot \u2014 Equine, Australia',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/06_Signed%20MAKSA%20pilot%2C%20Equine%2C%20Australia%20Afshin%20Seifi-1.pdf&embedded=true'},
-  {n:'05_MAKSA Field Case Studies \u2014 Texas, Horses',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/05_v2711_MAKSA_Field_CASE_STUDIES_TEXAS_horses_Gregg_Kylee_clean.pdf&embedded=true'},
-  {n:'04_Case Study MAKSA \u2014 Andres, Fujairah',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/04_v1411%20Casy%20Study%20MAKSA%20with%20Andres%20Fujairah.docx.pdf&embedded=true'},
-  {n:'03_Signed Case Study MAKSA \u2014 Dr. Ammar, Nigeria',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/03_v1112_Case_Study_signed_MAKSA_with_Dr_Ammar_NAPRI_Nigeria_pdf.pdf&embedded=true'},
-  {n:'02_Signed Case Study \u2014 Camels, LULU',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/02_Complete_with_Docusign_v2011_Casy_Study_camels_LULU.pdf&embedded=true'},
-  {n:'01_Field Case Studies Texas \u2014 Russel, Cattle',t:'pdf',url:'https://docs.google.com/gview?url=/assets/media/casestudy/01_Field%20CASE%20STUDIES%20TEXAS%20Russel%20v%202910%20cattle%20draft.pdf&embedded=true'}
+  {n:'20_MAKSA Brazil CaseStudy Willian EN',t:'pdf',url:'/assets/media/casestudy/20_MAKSA%20Brazil%20CaseStudy%20Willian%20EN.pdf'},
+  {n:'19_Awais Case study',t:'pdf',url:'/assets/media/casestudy/19_Awais%20Case%20study..pdf'},
+  {n:'18_Field case study \u2014 Fresh bovine, Misbah',t:'pdf',url:'/assets/media/casestudy/18_Field%20case%20study%20report%20for%20Fresh%20bovine%20Semen-3_Misbah.pdf'},
+  {n:'17_Revised report Validation \u2014 Dr. Ejaz',t:'pdf',url:'/assets/media/casestudy/17_Revised%20report%20Validation%20of%20MAKSA%20by%20Dr.%20Ejaz.pdf'},
+  {n:'16_Validation MAKSA \u2014 Dr. Ejaz',t:'pdf',url:'/assets/media/casestudy/16_Validation%20MAKSA%20Dr.%20Ejaz.pdf'},
+  {n:'15_Awais Case study',t:'pdf',url:'/assets/media/casestudy/15_Awais%20Case%20study.pdf'},
+  {n:'14_Signed Field Case Study \u2014 Carlos, Spain',t:'pdf',url:'/assets/media/casestudy/14_v0102%20signed%20Field%20Case%20Study%20of%20MAKSA%20by%20Carlos%20from%20Spain.pdf'},
+  {n:'13_Signed Field Case Study \u2014 Ameer Hamza, PK',t:'pdf',url:'/assets/media/casestudy/13_v0202_signed_Field_Case_Study_of_MAKSA_by_M_Ameer_Hamza_from_Pakistan.pdf'},
+  {n:'12_MAKSA Field Case Studies \u2014 Canada, Dog',t:'pdf',url:'/assets/media/casestudy/12_v2701%20MAKSA_Field_CASE_STUDIES_Canada_dog_Rasa_clean.pdf'},
+  {n:'11_MAKSA Case Studies \u2014 Okara, Pakistan',t:'pdf',url:'/assets/media/casestudy/11_v1001_MAKSA_Case_Studies_Okara_Pakistan_made_by_Faseeh.pdf'},
+  {n:'10_Signed Field Case Study \u2014 Hussnain Raza, PK',t:'pdf',url:'/assets/media/casestudy/10_Signed_v03101_Field_Case_Study_of_MAKSA_by_M_Hussnain_Raza_from.pdf'},
+  {n:'09_Case Study MAKSA \u2014 Umut, Turkey',t:'pdf',url:'/assets/media/casestudy/09_v1111_Case_Study_MAKSA_with_Umut_Turkey%20signed.docx.pdf'},
+  {n:'08_MAKSA Performance Report \u2014 Kaustubh, India',t:'pdf',url:'/assets/media/casestudy/08_signed_v2612_MAKSA_Perfomance_Report_1st__India_by_Kaustubh_.pdf'},
+  {n:'07_Signed \u2014 Abdulrauf, Nigeria',t:'pdf',url:'/assets/media/casestudy/07_Signed_v1612_Abdulrauf_MAKSA_CASE_STUDIES_Sokoto_Nigeria_clean.pdf'},
+  {n:'06_Signed MAKSA Pilot \u2014 Equine, Australia',t:'pdf',url:'/assets/media/casestudy/06_Signed%20MAKSA%20pilot%2C%20Equine%2C%20Australia%20Afshin%20Seifi-1.pdf'},
+  {n:'05_MAKSA Field Case Studies \u2014 Texas, Horses',t:'pdf',url:'/assets/media/casestudy/05_v2711_MAKSA_Field_CASE_STUDIES_TEXAS_horses_Gregg_Kylee_clean.pdf'},
+  {n:'04_Case Study MAKSA \u2014 Andres, Fujairah',t:'pdf',url:'/assets/media/casestudy/04_v1411%20Casy%20Study%20MAKSA%20with%20Andres%20Fujairah.docx.pdf'},
+  {n:'03_Signed Case Study MAKSA \u2014 Dr. Ammar, Nigeria',t:'pdf',url:'/assets/media/casestudy/03_v1112_Case_Study_signed_MAKSA_with_Dr_Ammar_NAPRI_Nigeria_pdf.pdf'},
+  {n:'02_Signed Case Study \u2014 Camels, LULU',t:'pdf',url:'/assets/media/casestudy/02_Complete_with_Docusign_v2011_Casy_Study_camels_LULU.pdf'},
+  {n:'01_Field Case Studies Texas \u2014 Russel, Cattle',t:'pdf',url:'/assets/media/casestudy/01_Field%20CASE%20STUDIES%20TEXAS%20Russel%20v%202910%20cattle%20draft.pdf'}
 ];
 
 var ov = document.createElement('div');
@@ -1971,8 +1971,8 @@ setTimeout(function(){
     <button class="av-protocol-close" id="avProtocolClose">&#10005;</button>
     <div class="av-protocol-title" id="avProtocolTitle">Semen QA Protocol</div>
     <div class="av-protocol-files">
-      <div class="av-protocol-file"><span class="av-protocol-file-badge">PDF</span><span class="av-protocol-file-name">Semen QA Protocol (English)</span><div class="av-protocol-file-actions"><button class="av-protocol-file-btn av-protocol-view-btn" data-view="https://docs.google.com/gview?url=/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf&embedded=true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> <span>View</span></button><a href="/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf" download class="av-protocol-file-btn av-protocol-download-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span>Download</span></a></div></div>
-      <div class="av-protocol-file"><span class="av-protocol-file-badge">PDF</span><span class="av-protocol-file-name">Protocolo QA Semen (Portugu&ecirc;s)</span><div class="av-protocol-file-actions"><button class="av-protocol-file-btn av-protocol-view-btn" data-view="https://docs.google.com/gview?url=/assets/media/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf&embedded=true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> <span>View</span></button><a href="/assets/media/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf" download class="av-protocol-file-btn av-protocol-download-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span>Download</span></a></div></div>
+      <div class="av-protocol-file"><span class="av-protocol-file-badge">PDF</span><span class="av-protocol-file-name">Semen QA Protocol (English)</span><div class="av-protocol-file-actions"><button class="av-protocol-file-btn av-protocol-view-btn" data-view="/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> <span>View</span></button><a href="/assets/media/qa-protocols/02_Semen_QA_Protocol_Avare_Biotech_en.pdf" download class="av-protocol-file-btn av-protocol-download-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span>Download</span></a></div></div>
+      <div class="av-protocol-file"><span class="av-protocol-file-badge">PDF</span><span class="av-protocol-file-name">Protocolo QA Semen (Portugu&ecirc;s)</span><div class="av-protocol-file-actions"><button class="av-protocol-file-btn av-protocol-view-btn" data-view="/assets/media/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> <span>View</span></button><a href="/assets/media/qa-protocols/01_Protocolo_QA_semen_Avare_Biotech_pt.pdf" download class="av-protocol-file-btn av-protocol-download-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span>Download</span></a></div></div>
     </div>
   </div>
 </div>
